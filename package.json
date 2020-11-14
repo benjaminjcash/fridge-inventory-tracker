@@ -1,0 +1,18 @@
+{
+  "name": "fridge-inventory-tracker",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminjcash/fridge-inventory-tracker.git"
+  },
+  "author": "Benjamin Cash",
+  "license": "ISC",
+  "homepage": "https://github.com/benjaminjcash/fridge-inventory-tracker#readme",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}
