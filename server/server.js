@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const itemRoutes = require("./routes/item.routes");
+const authRoutes = require("./routes/auth.routes");
+const userRoutes = require("./routes/user.routes");
+const middleware = require("./middleware/errors.middleware");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -25,9 +29,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes
-app.get('/api', (req, res) => {
-    res.json({ message: "Hello World" });
-});
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/item", itemRoutes);
+
+app.use(middleware.error404);
 
 // Start server
 app.listen(PORT, () => {
