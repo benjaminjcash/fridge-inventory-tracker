@@ -9,7 +9,10 @@ const middleware = require("./middleware/errors.middleware");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-app.use(cors());
+const options = {
+    exposedHeaders: 'auth-token'
+}
+app.use(cors(options));
 
 // Connect to database
 mongoose.Promise = global.Promise;

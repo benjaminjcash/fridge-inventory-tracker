@@ -1,22 +1,47 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchItem } from '../src/actions/item';
-import Card from './components/Card';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Fridge from './pages/Fridge';
+import { requestLogin } from '../src/actions/auth';
 
-function App({ fetchItem }) {
+function App({ auth, requestLogin }) {
+  const [loggedIn, setLoggedIn] = React.useState(auth?.token?.length > 0);
 
-React.useEffect(() => {
-  fetchItem("5fb0c6b0fec2dd075ccc7f20");
-}, []);
+  React.useEffect(() => {
+    setLoggedIn( auth?.token?.length > 0)
+  }, [auth]);
 
   return (
-    <Card />
+    <Router>
+        <Switch>
+          <Route exact path="/">
+            {loggedIn ? <Redirect to="/my/fridge" /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/login">
+            {loggedIn ? <Redirect to="/my/fridge" /> : <Redirect to="/login" />}
+            <Login requestLogin={requestLogin} />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/my/fridge">
+            {loggedIn ? <Redirect to="/my/fridge" /> : <Redirect to="/login" />}
+            <Fridge />
+          </Route>
+        </Switch>
+    </Router>
   );
 }
 
 const ConnectedApp = connect(
-  null, 
-  { fetchItem }
+  (state) => {
+    return {
+      auth: state.auth
+    }
+  }, 
+  { requestLogin }
 )(App);
 
 export default ConnectedApp;
