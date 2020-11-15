@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchItem } from '../src/actions/item';
+import Card from './components/Card';
 
 function App({ fetchItem }) {
 
@@ -9,8 +10,7 @@ React.useEffect(() => {
 }, []);
 
   return (
-    <div className="App">
-    </div>
+    <Card />
   );
 }
 

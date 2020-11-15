@@ -2,9 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { Client as Styletron } from 'styletron-engine-atomic';
+import { Provider as StyletronProvider } from 'styletron-react';
+import { DarkTheme, BaseProvider, styled } from 'baseui';
 import reducer from './reducers';
-
 import ConnectedApp from './App';
+
+const engine = new Styletron();
+const Centered = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100%',
+});
 
 const logger = store => next => action => {
   console.log('dispatching', action);
@@ -13,7 +23,6 @@ const logger = store => next => action => {
   return result;
 }
 
-// const store = createStore(reducer, applyMiddleware(thunk, logger));
 const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>  getDefaultMiddleware().concat(logger)
@@ -22,7 +31,13 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ConnectedApp />
+      <StyletronProvider value={engine}>
+        <BaseProvider theme={DarkTheme}>
+          <Centered>
+            <ConnectedApp />
+          </Centered>
+        </BaseProvider>
+      </StyletronProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -12,7 +12,6 @@ exports.createItem = function(req, res) {
 }
 
 exports.getItem = function(req, res, next) {
-    console.log('getItem request received');
     Item.findById(req.params.itemId, function(err, data) {
         if(err) res.send(err);
         if(data == null) {
