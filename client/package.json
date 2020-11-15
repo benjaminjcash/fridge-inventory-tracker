@@ -14,8 +14,12 @@
     "styletron-engine-atomic": "^1.4.6",
     "styletron-react": "^5.2.7"
   },
+  "devDependencies": {
+    "@testing-library/react": "^11.1.2"
+  },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "proxy": "http://localhost:3001",
   "secure": false,

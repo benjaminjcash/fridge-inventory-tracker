@@ -31,7 +31,8 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
 - The application will use the MERN stack:
     - web server built with Node.js and Express
     - database built with MongoDB
-    - dynamic frontend built with React
+    - dynamic frontend built with React, Redux, BaseWeb
+    - front-end tests with Jest, React Testing Library
 
 ## Installation Instructions
 0. You must have *Node* installed, as well as *MongoDB* and *Mongo Shell*
