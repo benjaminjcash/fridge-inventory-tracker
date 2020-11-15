@@ -1,7 +1,7 @@
 # Fridge Inventory Tracker
 
 ## About
-The **Fridge Inventory Tracker*** provides an “inventory dashboard” that displays all the food items in the fridge, their quantities, and the current “expiration health” of each item. Determining what you need to buy at the grocery store becomes as easy as checking boxes off a list. “At risk” items can be easily identified so that they can be used sooner rather than later. 
+The **Fridge Inventory Tracker** provides an “inventory dashboard” that displays all the food items in the fridge, their quantities, and the current “expiration health” of each item. Determining what you need to buy at the grocery store becomes as easy as checking boxes off a list. “At risk” items can be easily identified so that they can be used sooner rather than later. 
 
 ## MVP Features
 - ### Users
