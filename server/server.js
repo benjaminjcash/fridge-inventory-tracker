@@ -16,6 +16,7 @@ app.use(cors(options));
 
 // Connect to database
 mongoose.Promise = global.Promise;
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://localhost/fridge-inventory-tracker', {
     useNewUrlParser: true,
     useUnifiedTopology: true
