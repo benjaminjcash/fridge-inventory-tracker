@@ -41,7 +41,9 @@ const ConnectedApp = connect(
       auth: state.auth
     }
   }, 
-  { requestLogin }
+  { 
+    requestLogin
+  }
 )(App);
 
 export default ConnectedApp;

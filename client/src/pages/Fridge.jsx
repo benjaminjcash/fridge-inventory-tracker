@@ -1,6 +1,10 @@
+import { Card } from 'baseui/card';
+
 const Fridge = () => {
     return (
-        <p>Fridge</p>
+        <Card>
+            <h1>Fridge</h1>
+        </Card>
     )
 }
 
