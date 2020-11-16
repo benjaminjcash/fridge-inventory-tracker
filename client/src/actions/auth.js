@@ -1,4 +1,4 @@
-import { REQUEST_LOGIN, REQUEST_REGISTER } from '../constants';
+import { REQUEST_LOGIN, DISPATCH_ERROR } from '../constants';
 import axios from 'axios';
 
 export const requestLogin = (credentials) => {
@@ -14,7 +14,11 @@ export const requestLogin = (credentials) => {
                 });
             }
         }).catch((err) => {
-            console.error(err);
+            let errorMessage = err.response?.data?.error;
+            dispatch({
+                type: DISPATCH_ERROR,
+                message: errorMessage
+            });
         });
     }
 }

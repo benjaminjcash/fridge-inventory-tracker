@@ -1,13 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Card } from 'baseui/card';
 import { Input } from 'baseui/input';
 import { Button } from 'baseui/button';
+import { requestLogin } from '../actions/auth';
+import Error from '../components/Error';
 
-const Login = ({ requestLogin }) => {
+const Login = ({ error, requestLogin }) => {
     const [usernameValue, setUsernameValue] = React.useState('');
     const [passwordValue, setPasswordValue] = React.useState('');
     const [navigateToRegister, setNavigateToRegister] = React.useState(false);
+
+    React.useEffect(() => {
+        if(!error.error) {
+            setUsernameValue('');
+            setPasswordValue('');
+        }
+    }, [error]);
 
     const login = () => {
         return requestLogin({
@@ -39,8 +49,21 @@ const Login = ({ requestLogin }) => {
                     <Button onClick={() => setNavigateToRegister(true)}>Signup</Button>
                 </Card>
             }
+            <Error />
         </>
     )
 }
 
-export default Login;
+const ConnectedLogin = connect(
+    (state) => {
+      return {
+        error: state.error
+      }
+    }, 
+    {
+        requestLogin,
+
+    }
+  )(Login);
+
+export default ConnectedLogin;

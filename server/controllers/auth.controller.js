@@ -24,8 +24,6 @@ exports.registerUser = function(req, res) {
 }
 
 exports.login = function(req, res) {
-    console.log('login request received');
-    console.log(req.body);
     User.findOne({ username: req.body.username }, '+password', function(err, data) {
         if(err) res.send({
             success: false,

@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import Login from './pages/Login';
+import ConnectedLogin from './pages/Login';
 import Register from './pages/Register';
 import Fridge from './pages/Fridge';
-import { requestLogin } from '../src/actions/auth';
 
-function App({ auth, requestLogin }) {
+function App({ auth }) {
   const [loggedIn, setLoggedIn] = React.useState(auth?.token?.length > 0);
 
   React.useEffect(() => {
-    setLoggedIn( auth?.token?.length > 0)
+    setLoggedIn(auth?.token?.length > 0)
   }, [auth]);
 
   return (
@@ -21,7 +20,7 @@ function App({ auth, requestLogin }) {
           </Route>
           <Route path="/login">
             {loggedIn ? <Redirect to="/my/fridge" /> : <Redirect to="/login" />}
-            <Login requestLogin={requestLogin} />
+            <ConnectedLogin />
           </Route>
           <Route path="/register">
             <Register />
@@ -40,9 +39,6 @@ const ConnectedApp = connect(
     return {
       auth: state.auth
     }
-  }, 
-  { 
-    requestLogin
   }
 )(App);
 
