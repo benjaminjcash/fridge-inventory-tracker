@@ -1,4 +1,4 @@
-import { CLEAR_ERROR } from '../constants';
+import { CLEAR_ERROR, DISPATCH_ERROR } from '../constants';
 
 export const clearError = () => {
     return function(dispatch) {
@@ -8,3 +8,11 @@ export const clearError = () => {
     }
 }
 
+export const dispatchError = (message) => {
+    return function(dispatch) {
+        dispatch({
+            type: DISPATCH_ERROR,
+            message
+        });
+    }
+}

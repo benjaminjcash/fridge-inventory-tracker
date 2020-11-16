@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import ConnectedLogin from './pages/Login';
-import Register from './pages/Register';
-import Fridge from './pages/Fridge';
+import ConnectedLogin from './components/Login';
+import Register from './components/Register';
+import Fridge from './components/Fridge';
 
 function App({ auth }) {
   const [loggedIn, setLoggedIn] = React.useState(auth?.token?.length > 0);

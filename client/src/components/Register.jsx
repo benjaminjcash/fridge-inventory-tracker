@@ -1,20 +1,40 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Card } from 'baseui/card';
 import { Input } from 'baseui/input';
-import { Button } from 'baseui/button';
+import { Button, KIND } from 'baseui/button';
+import { FormControl } from 'baseui/form-control';
 import { Redirect } from 'react-router-dom';
 import { StyledSpinnerNext } from 'baseui/spinner';
+import { dispatchError } from '../actions/error';
 import axios from 'axios';
 
 const Register = () => {
+    const [formValues, setFormValues] = React.useState({
+        name: '',
+        email: '',
+        username: '',
+        password: ''
+    });
+    const [formErrors, setFormErrors] = React.useState({
+        name: false,
+        email: false,
+        username: false,
+        password: false
+    });
+    const [navigateToLogin, setNavigateToLogin] = React.useState(false);
+    const [registering, setRegistering] = React.useState(false);
+
     const [nameValue, setNameValue] = React.useState('');
     const [emailValue, setEmailValue] = React.useState('');
     const [usernameValue, setUsernameValue] = React.useState('');
     const [passwordValue, setPasswordValue] = React.useState('');
-    const [navigateToLogin, setNavigateToLogin] = React.useState(false);
-    const [registering, setRegistering] = React.useState(false);
+    
 
     const submitRegister = () => {
+
+
+
         setRegistering(true);
         const data = {
             username: usernameValue,
@@ -41,9 +61,28 @@ const Register = () => {
                 <StyledSpinnerNext />
                 :
                 <>
-                    <Input 
-                        value={nameValue}
-                        onChange={e => setNameValue(e.target.value)}
+                    {Object.keys(formValues).map((value) => {
+                        return (
+                            <FormControl key={value} label={value}>
+                                <Input 
+                                key={value}
+                                value={value}
+                                onChange={e => setFormValues({
+                                    ...formValues,
+                                    value: e.target.value
+                                })}
+                                placeholder={value}
+                                clearOnEscape
+                                />
+                            </FormControl>
+                        );
+                    })}
+                    {/* <Input 
+                        value={formValues.name}
+                        onChange={e => setFormValues({
+                            ...formValues,
+                            name: e.target.value
+                        })}
                         placeholder="Name"
                         clearOnEscape
                     />
@@ -64,13 +103,27 @@ const Register = () => {
                         onChange={e => setPasswordValue(e.target.value)}
                         placeholder="Password"
                         clearOnEscape
-                    />
+                    /> */}
                     <Button onClick={submitRegister}>Register</Button>
-                    <Button onClick={() => setNavigateToLogin(true)}>Login</Button>
+                    <Button 
+                        onClick={() => setNavigateToLogin(true)}
+                        kind={KIND.secondary}
+                    >Login</Button>
                 </>
             }
         </Card>
     );
 }
 
-export default Register;
+const ConnectedRegister = connect(
+    (state) => {
+      return {
+        error: state.error
+      }
+    }, 
+    {
+        dispatchError
+    }
+  )(Register);
+
+export default ConnectedRegister;
