@@ -1,22 +1,33 @@
 const Item = require("../models/item.model");
-const { doGetItem, doGetAllItems, doUpdateItem } = require("../utils/db-helpers");
+const { doGetItem, doGetAllItems, doUpdateItem, doCreateItem } = require("../data/item.dal");
 
-exports.createItem = (req, res) => {
-    const newItem = new Item({
-        name: req.body.name,
-        type: req.body.type
-    });
-    newItem.save()
-        .then((data) => {
-            res.json(data);
-        }).catch(err => {
-            res.send(err);
-        })
+exports.createItem = async (req, res) => {
+    try {
+        const item = await doCreateItem(req);
+        if(!item) {
+            return res.json({
+                success: false,
+                error: "item not created"
+            });
+        } else {
+            res.json({
+                sucess: true,
+                data: item
+            });
+        }
+    }
+    catch(err) {
+        console.log(err);
+        res.send({
+            success: false,
+            error: err
+        });
+    }
 }
 
 exports.getAllItems = async (req, res) => {
     try {
-        const items = await doGetAllItems();
+        const items = await doGetAllItems(req);
         if(items.length == 0) {
             return res.json({
                 success: false,
@@ -40,7 +51,7 @@ exports.getAllItems = async (req, res) => {
 
 exports.getItem = async (req, res)  => {
     try {
-        const item = await doGetItem(req.params.itemId);
+        const item = await doGetItem(req);
         if(item == null) {
             return res.json({
                 success: false,

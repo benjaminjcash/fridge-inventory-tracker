@@ -1,15 +1,17 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { BASE_URL, TEST_ITEM_GET_ID, TEST_ITEM_UPDATE_ID } = require('../config');
+const { BASE_URL, TEST_ITEM_GET_ID, TEST_ITEM_UPDATE_ID, TEST_USER_ID } = require('../config');
 chai.use(chaiHttp);
 const expect = chai.expect;
 
 describe('Item API service', () => {
     /**
-        "_id": "5fb9fd86afda9a050644a01f",
-        "name": "Test Item",
-        "type": "READ",
-        "created_date": "2020-11-22T05:56:22.589Z",
+        "_id": "5fbaec457ed60f0c05f70da1",
+        "name": "test",
+        "type": "read",
+        "owner": "5fb9fe19f50e130570589732",
+        "expiration_date": "2000-01-01T07:00:00.000Z",
+        "created_date": "2020-11-22T22:55:01.389Z",
         "__v": 0
      */
     it('should get an item', (done) => {
@@ -18,16 +20,18 @@ describe('Item API service', () => {
             .end((err, res) => {
                 expect(res.status).to.be.equal(200);
                 expect(res.body.data._id).to.be.equal(TEST_ITEM_GET_ID);
-                expect(res.body.data.name).to.be.equal("Test Item");
-                expect(res.body.data.type).to.be.equal("READ");
+                expect(res.body.data.name).to.be.equal("test");
+                expect(res.body.data.type).to.be.equal("read");
+                expect(res.body.data.owner).to.be.equal(TEST_USER_ID)
                 done();
             });
     });
 
     /**
         "_id": "5fb5e1ef78e6311241f641fc",
-        "name": "Test Item",
-        "type": "CREATE",
+        "name": "test",
+        "type": "create",
+        "expiration_date": '01/01/2020'
         "created_date": "2020-11-19T03:09:35.229Z",
         "__v": 0
      */
@@ -35,8 +39,9 @@ describe('Item API service', () => {
         chai.request(BASE_URL)
             .post('/api/item')
             .send({
-                name: "Test Item",
-                type: "CREATE"
+                name: "test",
+                type: "create",
+                expiration_date: '01/01/2020'
             })
             .end((err, res) => {
                 expect(res.status).to.be.equal(200);
@@ -48,7 +53,7 @@ describe('Item API service', () => {
         "_id": "5fb9fdbaf174eb0540a47001",
         "name": "0",
         "type": "UPDATE",
-        "created_date": "2020-11-22T05:57:14.546Z",
+        "created_date": "01/01/2000",
         "__v": 0
      */
     it('should update an item', (done) => {
@@ -85,8 +90,9 @@ describe('Item API service', () => {
         chai.request(BASE_URL)
             .post('/api/item')
             .send({
-                name: "Test Item",
-                type: "DELETE"
+                name: "test",
+                type: "delete",
+                expiration_date: "01/01/2020"
             })
             .end((err, res) => {
                 const itemId = res.body._id;

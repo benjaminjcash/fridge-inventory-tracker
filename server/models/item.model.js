@@ -7,13 +7,22 @@ const ItemSchema = new Schema({
         type: String,
         required: "An item name is required to create a new item."
     },
-    created_date: {
-        type: Date,
-        default: Date.now
-    },
     type: {
         type: String,
         required: "A type is required to create an item."
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    expiration_date: {
+        type: Date,
+        required: true
+    },
+    created_date: {
+        type: Date,
+        default: Date.now
     }
 });
 

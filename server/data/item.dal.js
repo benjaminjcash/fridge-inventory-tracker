@@ -1,50 +1,19 @@
-const User = require("../models/user.model");
 const Item = require("../models/item.model");
 
-// Auth
-exports.doRegisterUser = async (newUser) => {
-    return newUser
-            .save()
-            .then((data) => {
-                return data;
-            }).catch((err) => {
-                throw err;
-            });
-}
-
-// User
-exports.doGetUser = async (username) => {
-    return User
-            .findOne({ username })
-            .then((data) => {
-                return data;
-            }).catch((err) => {
-                throw err;
-            });
-}
-exports.doGetUserWithPassword = async (username) => {
-    return User
-            .findOne({ username }, '+password')
-            .then((data) => {
-                return data;
-            }).catch((err) => {
-                throw err;
-            });
-}
-
-// Item
 exports.doCreateItem = async (req) => {
     const newItem = new Item({
         name: req.body.name,
         type: req.body.type,
-        owner: req.auth.id
+        owner: req.auth.id,
+        expiration_date: new Date(req.body.expiration_date)
     });
-    newItem.save()
+    return newItem.save()
         .then((data) => {
             return data;
         }).catch(err => {
+            console.log(err);
             throw err;
-        })
+        });
 }
 exports.doGetItem = async (req) => {
     return Item
@@ -56,10 +25,12 @@ exports.doGetItem = async (req) => {
             });
 }
 exports.doGetAllItems = async (req) => {
+    const { orderby, direction } = req.query;
     return Item
             .find({
                 owner: req.auth.id
             })
+            .sort({[orderby]: direction})
             .then((data) => {
                 return data;
             }).catch((err) => {
