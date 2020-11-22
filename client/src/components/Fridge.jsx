@@ -1,11 +1,9 @@
-import { Card } from 'baseui/card';
+import React from 'react';
 
-const Fridge = () => {
+function Fridge() {
     return (
-        <Card>
-            <h1>Fridge</h1>
-        </Card>
-    )
+        <h1>Fridge</h1>
+    );
 }
 
 export default Fridge;
