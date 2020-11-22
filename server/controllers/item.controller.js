@@ -1,45 +1,96 @@
 const Item = require("../models/item.model");
+const { doGetItem, doGetAllItems, doUpdateItem } = require("../utils/db-helpers");
 
-exports.createItem = function(req, res) {
+exports.createItem = (req, res) => {
     const newItem = new Item({
         name: req.body.name,
         type: req.body.type
     });
-    newItem.save(function(err, data) {
-        if(err) res.send(err);
-        res.json(data);
-    });
+    newItem.save()
+        .then((data) => {
+            res.json(data);
+        }).catch(err => {
+            res.send(err);
+        })
 }
 
-exports.getItem = function(req, res, next) {
-    Item.findById(req.params.itemId, function(err, data) {
-        if(err) res.send(err);
-        if(data == null) {
-            next("no record found");
+exports.getAllItems = async (req, res) => {
+    try {
+        const items = await doGetAllItems();
+        if(items.length == 0) {
+            return res.json({
+                success: false,
+                error: "no records found"
+            });
         } else {
-            res.json(data);
+            res.json({
+                success: true,
+                data: items
+            });
         }
-    });
+    }
+    catch(err) {
+        console.log(err);
+        res.send({
+            success: false,
+            error: err
+        });
+    }
 }
 
-exports.updateItem = function(req, res) {
-    Item.findOneAndUpdate(
-        { _id: req.params.itemId }, 
-        req.body, 
-        { new: true }, 
-        function(err, data) {
-            if(err) res.send(err);
-            res.json(data);
+exports.getItem = async (req, res)  => {
+    try {
+        const item = await doGetItem(req.params.itemId);
+        if(item == null) {
+            return res.json({
+                success: false,
+                error: "no record found"
+            });
+        } else {
+            res.json({
+                success: true,
+                data: item
+            });
         }
-    );
+    }
+    catch(err) {
+        console.log(err);
+        res.send({
+            success: false,
+            error: err
+        });
+    }
 }
 
-exports.deleteItem = function(req, res) {
-    Item.deleteOne(
-        { _id: req.params.itemId },
-        function(err) {
-            if(err) res.send(err);
+exports.updateItem = async (req, res) => {
+    try {
+        const item = await doUpdateItem(req.params.itemId, req.body);
+        if(item == null) {
+            return res.json({
+                success: false,
+                error: "no record found"
+            });
+        } else {
+            res.json({
+                success: true,
+                data: item
+            });
+        }
+    }
+    catch(err) {
+        console.log(err);
+        res.send({
+            success: false,
+            error: err
+        });
+    }
+}
+
+exports.deleteItem = (req, res) => {
+    Item.findByIdAndDelete( req.params.itemId )
+        .then(() => {
             res.json({ msg: "Deleted Successfully." });
-        }
-    );
+        }).catch(err => {
+            res.send(err);
+        });
 }

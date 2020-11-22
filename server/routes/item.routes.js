@@ -1,13 +1,14 @@
-const itemController = require("../controllers/item.controller");
 const express = require("express");
-const validateMiddleware = require('../middleware/validate.token.middleware');
+const { createItem, getAllItems, getItem, updateItem, deleteItem } = require("../controllers/item.controller");
+const validateToken = require('../middleware/auth.middleware');
 
 const itemRoutes = express.Router();
 
 itemRoutes
-    .post("/", validateMiddleware.validateToken, itemController.createItem)
-    .get("/:itemId", validateMiddleware.validateToken, itemController.getItem)
-    .put("/:itemId", validateMiddleware.validateToken, itemController.updateItem)
-    .delete("/:itemId", validateMiddleware.validateToken, itemController.deleteItem);
+    .post("/", validateToken, createItem)
+    .get("/", validateToken, getAllItems)
+    .get("/:itemId", validateToken, getItem)
+    .put("/:itemId", validateToken, updateItem)
+    .delete("/:itemId", validateToken, deleteItem);
 
 module.exports = itemRoutes;

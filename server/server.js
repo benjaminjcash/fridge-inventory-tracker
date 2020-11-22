@@ -1,48 +1,43 @@
-const express = require('express');
-const bodyParser = require("body-parser");
+const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
+const bodyParser = require("body-parser");
+const cors = require('cors');
 const itemRoutes = require("./routes/item.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
-const middleware = require("./middleware/errors.middleware");
-
+const { error404 } = require("./middleware/errors.middleware");
 const PORT = process.env.PORT || 3001;
+const DB_URL = process.env.__TEST__ ? 'mongodb://localhost/fridge-inventory-tracker-test' : 'mongodb://localhost/fridge-inventory-tracker';
 const app = express();
-const options = {
-    exposedHeaders: 'auth-token'
-}
-app.use(cors(options));
+app.use(cors());
 
-// Connect to database
 mongoose.Promise = global.Promise;
-mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost/fridge-inventory-tracker', {
+mongoose.connect(DB_URL, {
+    useFindAndModify: false,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 });
+
 const db = mongoose.connection;
-db.on(('error'), (err) => {
-    console.error('Unable to connect to Mongo..');
+db.on('error', function(err) {
+    console.error("Unable to connect to Mongo..");
     console.error(err);
     db.close();
 });
-db.once('open', () => {
-    console.log('Connection to Mongo was successful!')
+db.once('open', function() {
+    console.log(`Connection to Mongo was successful!`);
 });
 
-// Parse request body
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/item", itemRoutes);
 
-app.use(middleware.error404);
+app.use(error404);
 
-// Start server
-app.listen(PORT, () => {
+app.listen(PORT, function() {
     console.log(`Server listening on PORT ${PORT}...`);
 });

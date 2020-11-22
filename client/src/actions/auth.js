@@ -6,7 +6,7 @@ export const requestLogin = (credentials) => {
         axios.post('http://localhost:3001/api/auth/login', credentials).then((res) => {
             if(res.data.success) {
                 const data = {
-                    token: res.headers['auth-token']
+                    token: res.data.access_token
                 }
                 dispatch({
                     type: REQUEST_LOGIN,
