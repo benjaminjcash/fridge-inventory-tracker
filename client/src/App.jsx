@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { checkLoggedIn } from './actions/auth';
 import ConnectedLogin from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main';
 
-function App({ auth }) {
-    const [loggedIn, setLoggedIn] = React.useState(auth?.token?.length > 0);
+function App({ auth, checkLoggedIn }) {
+    const [loggedIn, setLoggedIn] = React.useState(auth?.loggedIn);
     React.useEffect(() => {
-      setLoggedIn(auth?.token?.length > 0)
+      checkLoggedIn();
+    }, []);
+    React.useEffect(() => {
+        setLoggedIn(auth?.loggedIn);
     }, [auth]);
 
     return (
@@ -38,6 +42,8 @@ const ConnectedApp = connect(
         return {
           auth: state.auth
         }
+    }, {
+      checkLoggedIn
     }
 )(App);
 

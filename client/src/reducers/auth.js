@@ -1,9 +1,9 @@
-import { REQUEST_LOGIN } from '../constants';
+import { LOGGED_IN } from '../utils/constants';
 
-const auth = (state={}, action) => {
+const auth = (state={ loggedIn: false }, action) => {
     switch(action.type) {
-            case REQUEST_LOGIN:
-                return {...state, token: action.data.token};
+            case LOGGED_IN:
+                return {...state, loggedIn: action.data.loggedIn};
             default:
                 return state;
     }

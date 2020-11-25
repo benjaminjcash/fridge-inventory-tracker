@@ -1,4 +1,4 @@
-import { FETCH_ITEM } from '../constants';
+import { FETCH_ITEM } from '../utils/constants';
 
 const item = (state = [], action) => {
     switch(action.type) {

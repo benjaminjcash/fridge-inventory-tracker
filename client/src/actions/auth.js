@@ -1,16 +1,19 @@
-import { REQUEST_LOGIN, DISPATCH_ERROR } from '../constants';
 import axios from 'axios';
+import { LOGGED_IN, DISPATCH_ERROR } from '../utils/constants';
+import { setStorage, getStorage, storageHasData } from '../utils/storage';
 
 export const requestLogin = (credentials) => {
-    return function(dispatch) {
+    return (dispatch) => {
         axios.post('http://localhost:3001/api/auth/login', credentials).then((res) => {
             if(res.data.success) {
-                const data = {
-                    token: res.data.access_token
-                }
+                setStorage('loggedIn', true);
+                setStorage('access_token', res.data.access_token);
+                setStorage('refresh_token', res.data.refresh_token);
                 dispatch({
-                    type: REQUEST_LOGIN,
-                    data
+                    type: LOGGED_IN,
+                    data: {
+                        loggedIn: true
+                    }
                 });
             }
         }).catch((err) => {
@@ -19,6 +22,18 @@ export const requestLogin = (credentials) => {
                 type: DISPATCH_ERROR,
                 message: errorMessage
             });
+        });
+    }
+}
+
+export const checkLoggedIn = () => {
+    return (dispatch) => {
+        const loggedIn = storageHasData() ? getStorage('loggedIn') : false;
+        dispatch({
+            type: LOGGED_IN,
+            data: {
+                loggedIn
+            }
         });
     }
 }

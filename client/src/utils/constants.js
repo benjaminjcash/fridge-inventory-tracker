@@ -1,5 +1,5 @@
 /** Auth */
-export const REQUEST_LOGIN = 'request_login';
+export const LOGGED_IN = 'logged_in';
 
 /** Error */
 export const DISPATCH_ERROR = 'dispatch_error';

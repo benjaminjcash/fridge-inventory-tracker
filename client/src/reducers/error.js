@@ -1,4 +1,4 @@
-import { DISPATCH_ERROR, CLEAR_ERROR } from '../constants';
+import { DISPATCH_ERROR, CLEAR_ERROR } from '../utils/constants';
 
 const error = (state={ error: false }, action) => {
     switch(action.type) {

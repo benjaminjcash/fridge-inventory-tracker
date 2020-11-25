@@ -32,8 +32,6 @@ const Fridge = () => {
         >
             <FlexGridItem {...narrowItemProps}>
                 <Controls/>
-                
-                
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
                 <ItemList />
