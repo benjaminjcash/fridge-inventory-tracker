@@ -25,12 +25,25 @@ exports.doGetItem = async (req) => {
             });
 }
 exports.doGetAllItems = async (req) => {
-    const { orderby, direction } = req.query;
+    const { sortby, direction, filterbyname, filterbytype } = req.query;
+    let query = {
+        owner: req.auth.id
+    };
+    if(filterbyname) {
+        query.name = {
+            $regex: filterbyname,
+            $options: "i"
+        }
+    }
+    if(filterbytype) {
+        query.type = {
+            $regex: filterbytype,
+            $options: "i"
+        }
+    }
     return Item
-            .find({
-                owner: req.auth.id
-            })
-            .sort({[orderby]: direction})
+            .find(query)
+            .sort({[sortby]: direction})
             .then((data) => {
                 return data;
             }).catch((err) => {
