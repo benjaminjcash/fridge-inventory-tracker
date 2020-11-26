@@ -5,13 +5,23 @@ import { RadioGroup, Radio } from "baseui/radio";
 import {Select } from 'baseui/select';
 import {Input} from 'baseui/input';
 
-const Controls = () => {
+const Controls = ({ allTypes, buildList }) => {
     const [css, theme] = useStyletron();
-    
     const [valueType, setValueType] = React.useState([]);
     const [valueName, setValueName] = React.useState([]);
-    const [valueAttribute, setValueAttribute] = React.useState();
-    const [valueOrder, setValueOrder] = React.useState();
+    const [valueAttribute, setValueAttribute] = React.useState("expiration_date");
+    const [valueOrder, setValueOrder] = React.useState("1");
+
+    React.useEffect(() => {
+        const options = {
+            types: valueType,
+            name: valueName,
+            attribute: valueAttribute,
+            order: valueOrder
+        }
+        buildList(options);
+    }, [valueType, valueName, valueAttribute, valueOrder]);
+
     return (
         <Card title="Controls" className={ css({ height: 'auto', width: '100%' })} >
             <StyledBody>
@@ -22,14 +32,12 @@ const Controls = () => {
                         <Select
                             creatable
                             multi
-                            options={[
-                                {id: 'Portland', label: 'Portland'},
-                                {id: 'NYC', label: 'New York City'},
-                                {id: 'LosAngeles', label: 'Los Angeles'},
-                                {id: 'Boston', label: 'Boston'},
-                                {id: 'Atlanta', label: 'Atlanta'},
-                                {id: 'SanFrancisco', label: 'San Francisco'},
-                            ]}
+                            options={allTypes?.map(type => {
+                                return {
+                                    id: type,
+                                    label: type
+                                }
+                            })}
                             labelKey="label"
                             valueKey="id"
                             onChange={({value}) => setValueType(value)}
@@ -52,8 +60,8 @@ const Controls = () => {
                             onChange={e => setValueAttribute(e.target.value)}
                             value={valueAttribute}
                         >
-                            <Radio value="oldestFirst">Expiration Date</Radio>
-                            <Radio value="newestFirst">Purchase Date</Radio>
+                            <Radio value="expiration_date">Expiration Date</Radio>
+                            <Radio value="created_date">Purchase Date</Radio>
                         </RadioGroup>
                         <h4>Order:</h4>
                         <RadioGroup
@@ -62,8 +70,8 @@ const Controls = () => {
                             onChange={e => setValueOrder(e.target.value)}
                             value={valueOrder}
                         >
-                            <Radio value="oldestFirst">Ascending</Radio>
-                            <Radio value="newestFirst">Decending</Radio>
+                            <Radio value="1">Ascending</Radio>
+                            <Radio value="-1">Decending</Radio>
                         </RadioGroup>
                     </StyledBody>
                 </Card>

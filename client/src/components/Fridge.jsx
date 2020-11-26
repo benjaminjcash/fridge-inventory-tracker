@@ -6,9 +6,9 @@ import Controls from './Controls';
 import ItemList from './ItemList';
 import { fetchAllItems } from '../actions/item';
 
-const Fridge = ({ items, fetchAllItems }) => {
+const Fridge = ({ items, types, fetchAllItems }) => {
     const [css, theme] = useStyletron();
-    const [doFetchItems, setDoFetchItems] = React.useState(true)
+
     const itemProps = {
         display: 'flex',
         flexDirection: 'row',
@@ -27,12 +27,19 @@ const Fridge = ({ items, fetchAllItems }) => {
         },
     };
 
+    const buildList = (options) => {
+        fetchAllItems(options, 'build_list');
+    }
+
     React.useEffect(() => {
-        if(doFetchItems) {
-            fetchAllItems();
-            setDoFetchItems(false);
+        const options = {
+            types: null,
+            name: null,
+            attribute: "expiration_date",
+            order: "1"
         }
-    });
+        fetchAllItems(options, 'get_all_types');
+    }, []);
 
     return (
         <FlexGrid
@@ -41,7 +48,10 @@ const Fridge = ({ items, fetchAllItems }) => {
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem {...narrowItemProps}>
-                <Controls/>
+                <Controls 
+                    allTypes={types}
+                    buildList={buildList}
+                />
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
                 <ItemList items={items} />
@@ -53,7 +63,8 @@ const Fridge = ({ items, fetchAllItems }) => {
 const ConnectedFridge = connect(
     (state) => {
         return {
-        items: state.items
+            items: state.items,
+            types: state.types
         }
     }, {
         fetchAllItems

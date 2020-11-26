@@ -4,9 +4,11 @@ import auth from './auth';
 import error from './error';
 import user from './user';
 import data from './data';
+import types from './types';
 
 const reducer = combineReducers({
     items: item,
+    types,
     auth,
     error,
     user,

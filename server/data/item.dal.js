@@ -28,19 +28,28 @@ exports.doGetItem = async (req) => {
 exports.doGetAllItems = async (req) => {
     const { sortby, direction, filterbyname, filterbytype } = req.query;
     let query = {
-        owner: req.auth.id
+        $and: [
+            {owner: req.auth.id}
+        ]
     };
     if(filterbyname) {
-        query.name = {
-            $regex: filterbyname,
-            $options: "i"
-        }
+        query.$and.push({
+            name: {
+                $regex: filterbyname,
+                $options: "i"
+            }
+        });
     }
-    if(filterbytype) {
-        query.type = {
-            $regex: filterbytype,
-            $options: "i"
+    if(filterbytype?.length > 0) {
+        let typeFilter = {
+            $or: []
         }
+        filterbytype.forEach(element => {
+            typeFilter.$or.push({
+                type: element.id
+            });
+        });
+        query.$and.push(typeFilter);
     }
     return Item
             .find(query)
