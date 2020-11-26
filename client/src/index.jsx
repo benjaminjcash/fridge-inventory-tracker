@@ -29,16 +29,14 @@ const store = configureStore({
 });
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <StyletronProvider value={engine}>
-        <BaseProvider theme={DarkTheme}>
-          <Centered>
-            <ConnectedApp />
-          </Centered>
-        </BaseProvider>
-      </StyletronProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <StyletronProvider value={engine}>
+      <BaseProvider theme={DarkTheme}>
+        <Centered>
+          <ConnectedApp />
+        </Centered>
+      </BaseProvider>
+    </StyletronProvider>
+  </Provider>,
   document.getElementById('root')
 );

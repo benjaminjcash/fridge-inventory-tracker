@@ -53,8 +53,8 @@ const ConnectedApp = connect(
           user: state.user
         }
     }, {
-      checkLoggedIn,
-      fetchUser
+        checkLoggedIn,
+        fetchUser
     }
 )(App);
 

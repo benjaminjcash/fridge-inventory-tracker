@@ -9,7 +9,6 @@ module.exports = (req, res, next) => {
         }
         return next();
     }
-    
     const authHeader = req.headers['auth-token'] || req.headers['authorization'];
     const accessToken = authHeader?.split(' ')[1];
     if(!accessToken) return res.status(401).send({

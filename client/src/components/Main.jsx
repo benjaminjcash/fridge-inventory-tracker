@@ -2,10 +2,9 @@ import React from 'react';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
 import { AppNavBar, setItemActive } from "baseui/app-nav-bar";
-import { Redirect } from "react-router-dom";
 import { clearStorage } from '../utils/storage';
 import Fridge from './Fridge';
-import Add from './Add';
+import Manage from './Manage';
 
 function Main({ currentUser }) {
     const [css, theme] = useStyletron();
@@ -16,8 +15,8 @@ function Main({ currentUser }) {
             active: true
         },
         {
-            label: "Add",
-            value: "addItem"
+            label: "Manage",
+            value: "manage"
         }
     ]);
     const userItems = [
@@ -28,7 +27,7 @@ function Main({ currentUser }) {
         const active = mainItems.filter(item => item.active);
         const activeValue = active[0].value;
         if(activeValue == 'myFridge') return <Fridge />
-        if(activeValue == 'addItem') return <Add />
+        if(activeValue == 'manage') return <Manage />
     }
 
     const handleUserItemSelect = (item) => {

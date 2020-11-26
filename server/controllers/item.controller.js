@@ -11,7 +11,7 @@ exports.createItem = async (req, res) => {
             });
         } else {
             res.json({
-                sucess: true,
+                success: true,
                 data: item
             });
         }
