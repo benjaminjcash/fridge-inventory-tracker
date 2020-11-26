@@ -1,9 +1,9 @@
-import { FETCH_ITEM } from '../utils/constants';
+import { FETCHED_ITEMS } from '../utils/constants';
 
 const item = (state = [], action) => {
     switch(action.type) {
-            case FETCH_ITEM:
-                return [...state, action.data];
+            case FETCHED_ITEMS:
+                return [...action.data];
             default:
                 return state;
     }

@@ -2,6 +2,7 @@ export const BASE_URL = 'http://localhost:3001/api/';
 
 /** Auth */
 export const LOGGED_IN = 'logged_in';
+export const CHECK_LOGGED_IN = 'check_logged_in';
 
 /** User */
 export const FETCHED_USER = 'fetched_user';
@@ -11,7 +12,7 @@ export const DISPATCH_ERROR = 'dispatch_error';
 export const CLEAR_ERROR = 'clear_error';
 
 /** Item */
-export const FETCH_ITEM = 'fetch_item';
+export const FETCHED_ITEMS = 'fetched_items';
 
 /** Data */
 export const ADDED_DATA = 'added_data';

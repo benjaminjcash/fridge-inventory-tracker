@@ -1,17 +1,24 @@
 import axios from 'axios';
-import { BASE_URL, FETCH_ITEM, ADDED_DATA } from '../utils/constants';
+import { BASE_URL, ADDED_DATA, FETCHED_ITEMS } from '../utils/constants';
 import { getStorage } from '../utils/storage';
 const ITEM_ENDPOINT = `${BASE_URL}item`;
 
-export const fetchItem = (id) => {
+export const fetchAllItems = (options) => {
+    const accessToken = getStorage('access_token');
     return (dispatch) => {
-        axios.get(`${ITEM_ENDPOINT}${id}`, {
-            headers: { 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBjNWI3ODQwMGJmMDcxZWM4OTU5MSIsImlhdCI6MTYwNTQ2NDg0NCwiZXhwIjoxNjA1NDY4NDQ0fQ.BVKaUBv-FW2FYHhsa6hgH_O8rYk_dHKEg_XeaK30nX4' }
+        axios.get(`${ITEM_ENDPOINT}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
         }).then((res) => {
-            dispatch({
-                type: FETCH_ITEM,
-                data: res.data
-            })
+            if(!res.data.success) {
+                console.error(res.data.message);
+            } else {
+                dispatch({
+                    type: FETCHED_ITEMS,
+                    data: res.data.data
+                });
+            }
         }).catch((err) => {
             console.error(err);
         });

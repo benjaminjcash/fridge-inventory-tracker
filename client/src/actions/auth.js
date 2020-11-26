@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGGED_IN, DISPATCH_ERROR } from '../utils/constants';
+import { LOGGED_IN, CHECK_LOGGED_IN, DISPATCH_ERROR } from '../utils/constants';
 import { setStorage, getStorage, storageHasData } from '../utils/storage';
 
 export const requestLogin = (credentials) => {
@@ -30,7 +30,7 @@ export const checkLoggedIn = () => {
     return (dispatch) => {
         const loggedIn = storageHasData() ? getStorage('loggedIn') : false;
         dispatch({
-            type: LOGGED_IN,
+            type: CHECK_LOGGED_IN,
             data: {
                 loggedIn
             }
