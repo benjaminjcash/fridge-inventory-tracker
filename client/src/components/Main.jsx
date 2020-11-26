@@ -7,7 +7,7 @@ import { clearStorage } from '../utils/storage';
 import Fridge from './Fridge';
 import Add from './Add';
 
-function Main() {
+function Main({ currentUser }) {
     const [css, theme] = useStyletron();
     const [mainItems, setMainItems] = React.useState([
         { 
@@ -50,8 +50,8 @@ function Main() {
                         setMainItems(prev => setItemActive(prev, item));
                     }}
                     userItems={userItems}
-                    username="Username"
-                    usernameSubtitle="Real Name"
+                    username={currentUser.username}
+                    usernameSubtitle={currentUser.name}
                     onUserItemSelect={handleUserItemSelect}
                 />
             </FlexGridItem>

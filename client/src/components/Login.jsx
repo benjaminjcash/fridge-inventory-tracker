@@ -100,6 +100,7 @@ const Login = ({ error, requestLogin, dispatchError }) => {
                                 password: e.target.value
                             })}
                             placeholder="Password"
+                            type="password"
                             clearOnEscape
                             error={formErrors.password}
                         />

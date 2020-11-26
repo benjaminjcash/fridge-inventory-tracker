@@ -8,16 +8,14 @@ const generateAccessToken = (id, expiresIn) => jwt.sign({ id }, jwtConfig.access
 const generateRefreshToken = (id, expiresIn) => jwt.sign({ id }, jwtConfig.refreshSecret, expiresIn);
 
 const verifyToken = (token, secret, req, res) => {
+    let verified = false;
     try {
-        return jwt.verify(token, secret);
+        verified = jwt.verify(token, secret);
     }
     catch(err) {
-        console.error(err);
-        res.status(500).send({ 
-            success: false, 
-            message: 'failed to authenticate token'
-        });
+        throw err;
     }
+    return verified;
 }
 
 const logout = (req, res) => {

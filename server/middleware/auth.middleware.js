@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     }
     
     const authHeader = req.headers['auth-token'] || req.headers['authorization'];
-    const accessToken = authHeader.split(' ')[1];
+    const accessToken = authHeader?.split(' ')[1];
     if(!accessToken) return res.status(401).send({
         success: false,
         error: 'no token provided'
@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
         next();
     }
     catch(err) {
-        res.status(403).send({
+        res.status(200).send({
             success: false,
             message: 'invalid token'
         });
