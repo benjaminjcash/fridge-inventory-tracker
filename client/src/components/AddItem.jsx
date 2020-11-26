@@ -11,12 +11,14 @@ const AddItem = ({ addItem, clearAddItem }) => {
     const [valueType, setValueType] = React.useState([]);
     const [valueName, setValueName] = React.useState([]);
     const [valueExpirationDate, setValueExpirationDate] = React.useState([]);
+    const [valueImageUrl, setValueImageUrl] = React.useState([]);
 
     const handleAddItem = () => {
         const item =  {
             name: valueName,
             type: valueType,
-            expiration_date: valueExpirationDate
+            expiration_date: valueExpirationDate,
+            image_url: valueImageUrl
         }
         addItem(item);
     }
@@ -26,6 +28,7 @@ const AddItem = ({ addItem, clearAddItem }) => {
             setValueType([]);
             setValueName([]);
             setValueExpirationDate([]);
+            setValueImageUrl([]);
         }
     }, [clearAddItem])
 
@@ -52,6 +55,12 @@ const AddItem = ({ addItem, clearAddItem }) => {
                         }
                         formatString="MM/dd/yyyy"
                         placeholder="mm/dd/yyyy"
+                    />
+                </FormControl>
+                <FormControl label={() => "Image URL"}>
+                    <Input
+                        value={valueImageUrl}
+                        onChange={event => setValueImageUrl(event.currentTarget.value)}
                     />
                 </FormControl>
                 <Button onClick={() => handleAddItem()}>Add</Button>

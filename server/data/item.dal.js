@@ -5,7 +5,8 @@ exports.doCreateItem = async (req) => {
         name: req.body.name,
         type: req.body.type,
         owner: req.auth.id,
-        expiration_date: new Date(req.body.expiration_date)
+        expiration_date: new Date(req.body.expiration_date),
+        image_url: req.body.image_url
     });
     return newItem.save()
         .then((data) => {

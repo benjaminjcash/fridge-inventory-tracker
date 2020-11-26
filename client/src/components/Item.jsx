@@ -1,5 +1,5 @@
 import {useStyletron} from 'baseui';
-import {Card, StyledBody} from 'baseui/card';
+import { Card, StyledBody, StyledThumbnail } from 'baseui/card';
 
 const Item = ({ item }) => {
     const [css, theme] = useStyletron();
@@ -12,13 +12,20 @@ const Item = ({ item }) => {
     return (
         <Card
             className={ css({ height: '100%', width: '100%', borderTopWidth: '0px' })}
-            headerImage={'https://source.unsplash.com/user/erondu/700x400'}
+            headerImage={item.image_url}
             title={item.name}
+            overrides={{
+                HeaderImage: {
+                  style: ({ $theme }) => ({
+                    width: 'max'
+                  })
+                }
+            }}
         >
         <StyledBody>
-            <p>{item.type}</p>
-            <p>Expiration: {formatDate(item.expiration_date)}</p>
-            <p>Purchase: {formatDate(item.created_date)}</p>
+            <p className={css({ lineHeight: '1px'})}>{item.type}  </p>
+            <h3 className={css({ lineHeight: '1px', float: 'right'})}>exp. {formatDate(item.expiration_date)}</h3>
+            <p className={css({ lineHeight: '1px', float: 'right'})}>purchased {formatDate(item.created_date)}</p>
         </StyledBody>
       </Card>
     )

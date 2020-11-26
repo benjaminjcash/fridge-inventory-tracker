@@ -9,7 +9,7 @@ const ItemList = ({ items }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '250px'
+        height: 'auto'
     };
     return (
         <FlexGrid

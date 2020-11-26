@@ -39,11 +39,16 @@ function Main({ currentUser }) {
         }
     }
 
+    const getTodaysDate = () => {
+        let now = new Date();
+        return now.toLocaleDateString("en-US");
+    }
+
     return (
         <FlexGrid className={css({width: '100%'})}>
             <FlexGridItem>
                 <AppNavBar
-                    title="Fridge Inventory Tracker"
+                    title={`Fridge Inventory Tracker ${getTodaysDate()}`}
                     mainItems={mainItems}
                     onMainItemSelect={item => {
                         setMainItems(prev => setItemActive(prev, item));
