@@ -64,3 +64,25 @@ export const createItem = (item) => {
         })
     }
 }
+
+// export const createItem = (item) => {
+//     const accessToken = getStorage('access_token');
+//     return (dispatch) => {
+//         axios.post(`${ITEM_ENDPOINT}`, item, {
+//             headers: {
+//                 Authorization: `Bearer ${accessToken}`
+//             }
+//         }).then((res) => {
+//             if(!res.data.success) {
+//                 console.error(res.data.message);
+//             } else {
+//                 dispatch({
+//                     type: ADDED_DATA,
+//                     data: res.data.data
+//                 });
+//             }
+//         }).catch((err) => {
+//             console.error(err);
+//         })
+//     }
+// }

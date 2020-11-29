@@ -4,6 +4,8 @@ import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
 import { Modal, ModalHeader, ModalBody, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
 import AddItem from './AddItem';
+import UpdateItem from './UpdateItem';
+import DeleteItem from './DeleteItem';
 import { createItem } from '../actions/item';
 import { clearData } from '../actions/data';
 
@@ -18,17 +20,6 @@ const Manage = ({ data, createItem, clearData }) => {
         flexDirection: 'row',
         alignItems: 'top',
         height: 'min-content'
-    };
-    const narrowItemProps = {
-        ...itemProps,
-        overrides: {
-            Block: {
-                style: () => ({
-                    width: theme.sizing.scale1000,
-                    flexGrow: 0.4,
-                }),
-            },
-        },
     };
 
     const addItem = (item) => {
@@ -52,14 +43,18 @@ const Manage = ({ data, createItem, clearData }) => {
     return (
         <> 
         <FlexGrid
-            flexGridColumnCount={2}
+            flexGridColumnCount={3}
             flexGridColumnGap={theme.sizing.scale300}
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
-            <FlexGridItem {...narrowItemProps}>
+            <FlexGridItem {...itemProps}>
                 <AddItem addItem={addItem} clearAddItem={clearAddItem}/>
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
+                <UpdateItem/>
+            </FlexGridItem>
+            <FlexGridItem {...itemProps}>
+                <DeleteItem/>
             </FlexGridItem>
         </FlexGrid>
 

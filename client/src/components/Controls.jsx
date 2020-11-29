@@ -1,12 +1,14 @@
 import React from 'react';
-import {useStyletron} from 'baseui';
+import { useStyletron } from 'baseui';
 import { Card, StyledBody } from "baseui/card";
 import { RadioGroup, Radio } from "baseui/radio";
-import {Select } from 'baseui/select';
-import {Input} from 'baseui/input';
+import { FormControl } from "baseui/form-control";
+import { Block } from "baseui/block";
+import { Select, SIZE as selectSize } from 'baseui/select';
+import { Input, SIZE as inputSize } from 'baseui/input';
 
 const Controls = ({ allTypes, buildList }) => {
-    const [css, theme] = useStyletron();
+    const [css, $theme] = useStyletron();
     const [valueType, setValueType] = React.useState([]);
     const [valueName, setValueName] = React.useState([]);
     const [valueAttribute, setValueAttribute] = React.useState("expiration_date");
@@ -21,60 +23,134 @@ const Controls = ({ allTypes, buildList }) => {
         }
         buildList(options);
     }, [valueType, valueName, valueAttribute, valueOrder]);
-
     return (
-        <Card title="Controls" className={ css({ height: 'auto', width: '100%' })} >
+        <Card className={css({ height: 'auto', width: '100%' })} >
             <StyledBody>
-                <Card>
-                    <StyledBody>
-                        <h3>Filter by...</h3>
-                        <h4>Type:</h4>
-                        <Select
-                            creatable
-                            multi
-                            options={allTypes?.map(type => {
-                                return {
-                                    id: type,
-                                    label: type
+                <Block className={css({
+                    marginBottom: '-10px',
+                    marginTop: '-10px'
+                })}><h4>Filter by...</h4></Block>
+                <FormControl label={'Type'}>
+                    <Select
+                        creatable
+                        multi
+                        options={allTypes?.map(type => {
+                            return {
+                                id: type,
+                                label: type
+                            }
+                        })}
+                        labelKey="label"
+                        valueKey="id"
+                        onChange={({ value }) => setValueType(value)}
+                        value={valueType}
+                        size={selectSize.mini}
+                        overrides={{
+                            DropdownListItem: {
+                                style: ({ $theme }) => ({
+                                    fontSize: $theme.sizing.scale400
+                                })
+                            },
+                            Tag: {
+                                props: {
+                                    overrides: {
+                                        ActionIcon: {
+                                            style: ({ $theme }) => ({
+                                                height: $theme.sizing.scale400
+                                            })
+                                        },
+                                        Text: {
+                                            style: ({ $theme }) => ({
+                                                fontSize: $theme.sizing.scale400
+                                            })
+                                        }
+                                    }
                                 }
-                            })}
-                            labelKey="label"
-                            valueKey="id"
-                            onChange={({value}) => setValueType(value)}
-                            value={valueType}
-                        />
-                        <h4>Name:</h4>
-                        <Input
-                            value={valueName}
-                            onChange={event => setValueName(event.currentTarget.value)}
-                        />
-                    </StyledBody>
-                </Card>
-                <Card>
-                    <StyledBody>
-                        <h3>Sort by...</h3>
-                        <h4>Attribute:</h4>
-                        <RadioGroup
-                            align="horizontal"
-                            name="horizontal"
-                            onChange={e => setValueAttribute(e.target.value)}
-                            value={valueAttribute}
+                            }
+                        }}
+                    />
+                </FormControl>
+                <FormControl label={'Name'}>
+                    <Input
+                        value={valueName}
+                        onChange={event => setValueName(event.currentTarget.value)}
+                        size={inputSize.mini}
+                    />
+                </FormControl>
+                <Block className={css({
+                    marginBottom: '-10px',
+                    marginTop: '20px'
+                })}><h4>Order by...</h4></Block>
+                <FormControl label={'Attribute'}>
+                    <RadioGroup
+                        align="vertical"
+                        name="vertical"
+                        onChange={e => setValueAttribute(e.target.value)}
+                        value={valueAttribute}
+                    >
+                        <Radio
+                            value="expiration_date"
+                            overrides={{
+                                RadioMarkOuter: {
+                                    style: ({ $theme }) => ({
+                                        height: $theme.sizing.scale600,
+                                        width: $theme.sizing.scale600
+                                    }),
+                                },
+                            }}
                         >
-                            <Radio value="expiration_date">Expiration Date</Radio>
-                            <Radio value="created_date">Purchase Date</Radio>
-                        </RadioGroup>
-                        <h4>Order:</h4>
-                        <RadioGroup
-                            align="horizontal"
-                            name="horizontal"
-                            onChange={e => setValueOrder(e.target.value)}
-                            value={valueOrder}
+                            <Block className={css({ fontSize: $theme.sizing.scale500 })}>Expiration Date</Block>
+                        </Radio>
+                        <Radio
+                            value="created_date"
+                            overrides={{
+                                RadioMarkOuter: {
+                                    style: ({ $theme }) => ({
+                                        height: $theme.sizing.scale600,
+                                        width: $theme.sizing.scale600
+                                    }),
+                                },
+                            }}
                         >
-                            <Radio value="1">Ascending</Radio>
-                            <Radio value="-1">Decending</Radio>
-                        </RadioGroup>
-                    </StyledBody>
-                </Card>
+                            <Block className={css({ fontSize: $theme.sizing.scale500 })}>Created Date</Block>
+                        </Radio>
+                    </RadioGroup>
+                </FormControl>
+                <FormControl label={'Direction'}>
+                    <RadioGroup
+                        align="vertical"
+                        name="vertical"
+                        onChange={e => setValueOrder(e.target.value)}
+                        value={valueOrder}
+                    >
+                        <Radio
+                            value="1"
+                            overrides={{
+                                RadioMarkOuter: {
+                                    style: ({ $theme }) => ({
+                                        height: $theme.sizing.scale600,
+                                        width: $theme.sizing.scale600
+                                    }),
+                                },
+                            }}
+                        >
+                            <Block className={css({ fontSize: $theme.sizing.scale500 })}>Ascending</Block>
+                        </Radio>
+                        <Radio
+                            value="-1"
+                            overrides={{
+                                RadioMarkOuter: {
+                                    style: ({ $theme }) => ({
+                                        height: $theme.sizing.scale600,
+                                        width: $theme.sizing.scale600
+                                    }),
+                                },
+                            }}
+                        >
+                            <Block className={css({ fontSize: $theme.sizing.scale500 })}>Decending</Block>
+                        </Radio>
+                    </RadioGroup>
+                </FormControl>
             </StyledBody>
         </Card>
     );

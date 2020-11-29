@@ -6,33 +6,16 @@ import { Input, SIZE as inputSize } from 'baseui/input';
 import { DatePicker } from "baseui/datepicker";
 import { Button, SIZE as buttonSize } from "baseui/button";
 import { Block } from "baseui/block";
+import { Select, SIZE as selectSize } from 'baseui/select';
 
 
-const AddItem = ({ addItem, clearAddItem }) => {
+const UpdateItem = ({ addItem, clearAddItem }) => {
     const [css, theme] = useStyletron();
     const [valueType, setValueType] = React.useState([]);
     const [valueName, setValueName] = React.useState([]);
     const [valueExpirationDate, setValueExpirationDate] = React.useState([]);
     const [valueImageUrl, setValueImageUrl] = React.useState([]);
-
-    const handleAddItem = () => {
-        const item = {
-            name: valueName,
-            type: valueType,
-            expiration_date: valueExpirationDate,
-            image_url: valueImageUrl
-        }
-        addItem(item);
-    }
-
-    React.useEffect(() => {
-        if (clearAddItem) {
-            setValueType([]);
-            setValueName([]);
-            setValueExpirationDate([]);
-            setValueImageUrl([]);
-        }
-    }, [clearAddItem])
+    const [valueItemSelect, setValueItemSelect] = React.useState([]);
 
     return (
         <Card className={css({ height: 'auto', width: '100%' })} >
@@ -40,7 +23,17 @@ const AddItem = ({ addItem, clearAddItem }) => {
                 <Block className={css({
                     marginBottom: '-10px',
                     marginTop: '-10px'
-                })}><h4>Add Item</h4></Block>
+                })}><h4>Update Item</h4></Block>
+                <FormControl label={() => "Choose an item to update"}>
+                    <Select
+                        options={['one', 'two']}
+                        labelKey="label"
+                        valueKey="id"
+                        onChange={({ value }) => setValueItemSelect(value)}
+                        value={valueItemSelect}
+                        size={selectSize.mini}
+                    />
+                </FormControl>
                 <FormControl label={() => "Name"}>
                     <Input
                         value={valueName}
@@ -76,10 +69,10 @@ const AddItem = ({ addItem, clearAddItem }) => {
                 <Button 
                     onClick={() => handleAddItem()}
                     size={buttonSize.mini}
-                >Add</Button>
+                >Update</Button>
             </StyledBody>
         </Card>
     );
 }
 
-export default AddItem;
+export default UpdateItem;
