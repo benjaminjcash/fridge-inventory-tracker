@@ -1,6 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
-import { BASE_URL, ADDED_DATA, FETCHED_ITEMS, FETCHED_ALL_TYPES } from '../utils/constants';
+import { BASE_URL, ADDED_DATA, DELETED_DATA, FETCHED_ITEMS, 
+    FETCHED_ALL_TYPES, DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 import { getStorage } from '../utils/storage';
 const ITEM_ENDPOINT = `${BASE_URL}item`;
 
@@ -22,7 +23,7 @@ export const fetchAllItems = (options, context) => {
             }
         }).then((res) => {
             if(!res.data.success) {
-                console.error(res.data.message);
+                // console.error(res.data.error);
             } else {
                 if(context == 'build_list') {
                     dispatch({
@@ -65,24 +66,24 @@ export const createItem = (item) => {
     }
 }
 
-// export const createItem = (item) => {
-//     const accessToken = getStorage('access_token');
-//     return (dispatch) => {
-//         axios.post(`${ITEM_ENDPOINT}`, item, {
-//             headers: {
-//                 Authorization: `Bearer ${accessToken}`
-//             }
-//         }).then((res) => {
-//             if(!res.data.success) {
-//                 console.error(res.data.message);
-//             } else {
-//                 dispatch({
-//                     type: ADDED_DATA,
-//                     data: res.data.data
-//                 });
-//             }
-//         }).catch((err) => {
-//             console.error(err);
-//         })
-//     }
-// }
+export const deleteItem = (item) => {
+    const accessToken = getStorage('access_token');
+    return (dispatch) => {
+        axios.delete(`${ITEM_ENDPOINT}/${item.id}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((res) => {
+            if(!res.data.success) {
+                console.error(res.data.message);
+            } else {
+                dispatch({
+                    type: DELETED_DATA,
+                    data: item
+                });
+            }
+        }).catch((err) => {
+            console.error(err);
+        })
+    }
+}

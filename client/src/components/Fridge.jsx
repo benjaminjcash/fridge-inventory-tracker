@@ -5,6 +5,7 @@ import {useStyletron} from 'baseui';
 import Controls from './Controls';
 import ItemList from './ItemList';
 import { fetchAllItems } from '../actions/item';
+import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
 const Fridge = ({ items, types, fetchAllItems }) => {
     const [css, theme] = useStyletron();
@@ -32,13 +33,7 @@ const Fridge = ({ items, types, fetchAllItems }) => {
     }
 
     React.useEffect(() => {
-        const options = {
-            types: null,
-            name: null,
-            attribute: "expiration_date",
-            order: "1"
-        }
-        fetchAllItems(options, 'get_all_types');
+        fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'get_all_types');
     }, []);
 
     return (

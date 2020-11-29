@@ -2,18 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
-import { Modal, ModalHeader, ModalBody, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
+import { Modal, ModalHeader, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
 import AddItem from './AddItem';
 import UpdateItem from './UpdateItem';
 import DeleteItem from './DeleteItem';
-import { createItem } from '../actions/item';
+import { createItem, deleteItem, fetchAllItems } from '../actions/item';
 import { clearData } from '../actions/data';
+import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS, BASE_URL_APP } from '../utils/constants';
 
-const Manage = ({ data, createItem, clearData }) => {
+const Manage = ({ data, items, createItem, deleteItem, fetchAllItems, clearData }) => {
     const [css, theme] = useStyletron();
-    const [response, setResponse] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(false);
     const [clearAddItem, setClearAddItem] = React.useState(false);
+    const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
 
     const itemProps = {
         display: 'flex',
@@ -27,16 +28,23 @@ const Manage = ({ data, createItem, clearData }) => {
         createItem(item);
     }
 
+    const removeItem = (item) => {
+        setClearDeleteItem(false);
+        deleteItem(item);
+    }
+
     const closeModal = () => {
+        setClearAddItem(true);
+        setClearDeleteItem(true);
         clearData();
         setIsOpen(false);
-      }
+    }
 
     React.useEffect(() => {
         if(data.success) {
-            setResponse(data.data);
             setIsOpen(true);
-            setClearAddItem(true);
+        } else {
+            fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'build_list');
         }
     }, [data])
 
@@ -54,7 +62,7 @@ const Manage = ({ data, createItem, clearData }) => {
                 <UpdateItem/>
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
-                <DeleteItem/>
+                <DeleteItem removeItem={removeItem} items={items} clearDeleteItem={clearDeleteItem} />
             </FlexGridItem>
         </FlexGrid>
 
@@ -69,7 +77,6 @@ const Manage = ({ data, createItem, clearData }) => {
             unstable_ModalBackdropScroll={true}
         >
             <ModalHeader>Success</ModalHeader>
-                <ModalBody>{response?.name ? `added ${response.name} to your fridge` : null}</ModalBody>
             <ModalFooter>
                 <ModalButton onClick={closeModal}>Okay</ModalButton>
             </ModalFooter>
@@ -81,10 +88,13 @@ const Manage = ({ data, createItem, clearData }) => {
 const ConnectedManage = connect(
     (state) => {
         return {
-        data: state.data
+        data: state.data,
+        items: state.items
         }
     }, {
+        fetchAllItems,
         createItem,
+        deleteItem,
         clearData
     }
 )(Manage);
