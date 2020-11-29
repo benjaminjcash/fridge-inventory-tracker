@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useStyletron } from 'baseui';
 import { Card } from 'baseui/card';
-import { Input } from 'baseui/input';
+import { Input, SIZE as inputSize } from 'baseui/input';
 import axios from 'axios';
-import { Button, KIND } from 'baseui/button';
+import { Button, KIND, SIZE as buttonSize } from 'baseui/button';
 import { FormControl } from 'baseui/form-control';
-import { Redirect } from 'react-router-dom';
-import { StyledSpinnerNext } from 'baseui/spinner';
+import { Modal, ModalHeader, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
 import { dispatchError } from '../actions/error';
 import Error from './Error';
 
 const Register = ({ error, dispatchError }) => {
+    const [css, theme] = useStyletron();
+
+    const [isOpen, setIsOpen] = React.useState(false);
     const [formValues, setFormValues] = React.useState({
         name: '',
         email: '',
@@ -23,47 +26,34 @@ const Register = ({ error, dispatchError }) => {
         username: false,
         password: false
     });
-    const [navigateToLogin, setNavigateToLogin] = React.useState(false);
-    const [registering, setRegistering] = React.useState(false);
 
-    React.useEffect(() => {
-        if(error.message == "account already exists") {
-            setFormValues({
-                name: '',
-                email: '',
-                username: '',
-                password: ''
-            });
-            setRegistering(false);
-        }
-        if(!error.error) {
-            setFormErrors({
-                name: false,
-                email: false,
-                password: false,
-                username: false
-            });
-        }
-    }, [error]);
-    
+    const closeModal = () => {
+        setIsOpen(false);
+    }
+
     const submitRegister = () => {
         let fields = Object.keys(formValues);
         let errors = {};
         let hasErrors = false;
-        for(const field of fields) {
-            if(formValues[field].length == 0) {
+        for (const field of fields) {
+            if (formValues[field].length == 0) {
                 errors[field] = true;
                 hasErrors = true;
             }
         }
-        if(hasErrors) {
+        if (hasErrors) {
             setFormErrors({
                 ...formErrors,
                 ...errors
             });
             dispatchError("empty fields");
         } else {
-            setRegistering(true);
+            setFormValues({
+                name: '',
+                email: '',
+                username: '',
+                password: ''
+            });
             const data = {
                 username: formValues.username,
                 password: formValues.password,
@@ -71,9 +61,8 @@ const Register = ({ error, dispatchError }) => {
                 email: formValues.email
             }
             axios.post('http://localhost:3001/api/auth/register', data).then((res) => {
-                if(res?.data?.success) {
-                    setRegistering(false);
-                    setNavigateToLogin(true);
+                if (res?.data?.success) {
+                    setIsOpen(true);
                 } else {
                     dispatchError("account already exists");
                 }
@@ -83,87 +72,120 @@ const Register = ({ error, dispatchError }) => {
         }
     }
 
+    React.useEffect(() => {
+        if (error.message == "account already exists") {
+            setFormValues({
+                name: '',
+                email: '',
+                username: '',
+                password: ''
+            });
+        }
+        if (!error.error) {
+            setFormErrors({
+                name: false,
+                email: false,
+                password: false,
+                username: false
+            });
+        }
+    }, [error]);
+
     return (
         <>
-        <Card>
-            {
-                navigateToLogin ?
-                    <Redirect to="/login" />
-                :
-                registering ?
-                    <StyledSpinnerNext />
-                :
+            <Card
+                className={css({ width: '50%' })}
+            >
+                {
                     <>
-                    <FormControl label="Name">
-                        <Input 
-                            value={formValues.name}
-                            onChange={e => setFormValues({
-                                ...formValues,
-                                name: e.target.value
-                            })}
-                            placeholder="Name"
-                            clearOnEscape
-                            error={formErrors.name}
-                        />
-                    </FormControl>
-                    <FormControl label="Email">
-                        <Input 
-                            value={formValues.email}
-                            onChange={e => setFormValues({
-                                ...formValues,
-                                email: e.target.value
-                            })}
-                            placeholder="Email"
-                            clearOnEscape
-                            error={formErrors.email}
-                        />
-                    </FormControl>
-                    <FormControl label="Username">
-                        <Input 
-                            value={formValues.username}
-                            onChange={e => setFormValues({
-                                ...formValues,
-                                username: e.target.value
-                            })}
-                            placeholder="Username"
-                            clearOnEscape
-                            error={formErrors.username}
-                        />
-                    </FormControl>
-                    <FormControl label="Password">
-                        <Input 
-                            value={formValues.password}
-                            onChange={e => setFormValues({
-                                ...formValues,
-                                password: e.target.value
-                            })}
-                            placeholder="Password"
-                            clearOnEscape
-                            error={formErrors.password}
-                        />
-                    </FormControl>
-                    <Button onClick={submitRegister}>Register</Button>
-                    <Button 
-                        onClick={() => setNavigateToLogin(true)}
-                        kind={KIND.secondary}
-                    >Login</Button>
+                        <FormControl label="Name">
+                            <Input
+                                value={formValues.name}
+                                onChange={e => setFormValues({
+                                    ...formValues,
+                                    name: e.target.value
+                                })}
+                                placeholder="Name"
+                                clearOnEscape
+                                error={formErrors.name}
+                                size={inputSize.mini}
+                            />
+                        </FormControl>
+                        <FormControl label="Email">
+                            <Input
+                                value={formValues.email}
+                                onChange={e => setFormValues({
+                                    ...formValues,
+                                    email: e.target.value
+                                })}
+                                placeholder="Email"
+                                clearOnEscape
+                                error={formErrors.email}
+                                size={inputSize.mini}
+                            />
+                        </FormControl>
+                        <FormControl label="Username">
+                            <Input
+                                value={formValues.username}
+                                onChange={e => setFormValues({
+                                    ...formValues,
+                                    username: e.target.value
+                                })}
+                                placeholder="Username"
+                                clearOnEscape
+                                error={formErrors.username}
+                                size={inputSize.mini}
+                            />
+                        </FormControl>
+                        <FormControl label="Password">
+                            <Input
+                                value={formValues.password}
+                                onChange={e => setFormValues({
+                                    ...formValues,
+                                    password: e.target.value
+                                })}
+                                placeholder="Password"
+                                clearOnEscape
+                                error={formErrors.password}
+                                size={inputSize.mini}
+                            />
+                        </FormControl>
+                        <Button
+                            onClick={submitRegister}
+                            size={buttonSize.mini}
+                        >Register</Button>
                     </>
-            }
-        </Card>
-        <Error/>
+                }
+            </Card>
+            <Error />
+            <Modal
+                onClose={closeModal}
+                closeable
+                isOpen={isOpen}
+                animate
+                autoFocus
+                size={SIZE.default}
+                role={ROLE.dialog}
+                unstable_ModalBackdropScroll={true}
+            >
+                <ModalHeader>Success</ModalHeader>
+                <ModalFooter>
+                    <ModalButton onClick={closeModal}>Okay</ModalButton>
+                </ModalFooter>
+            </Modal>
         </>
     );
 }
 
 const ConnectedRegister = connect(
     (state) => {
-      return {
-        error: state.error
-      }
-    }, 
+        return {
+            error: state.error
+        }
+    },
     {
         dispatchError
     }
-  )(Register);
+)(Register);
 
 export default ConnectedRegister;

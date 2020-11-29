@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useStyletron } from 'baseui';
 import { Card } from 'baseui/card';
-import { Input } from 'baseui/input';
+import { Input, SIZE as inputSize } from 'baseui/input';
 import { FormControl } from 'baseui/form-control';
-import { Button, KIND } from 'baseui/button';
+import { Button, SIZE as buttonSize } from 'baseui/button';
 import { requestLogin } from '../actions/auth';
 import { dispatchError } from '../actions/error';
 import Error from './Error';
 
 const Login = ({ error, requestLogin, dispatchError }) => {
+    const [css, theme] = useStyletron();
+
     const [formValues, setFormValues] = React.useState({
         username: '',
         password: ''
@@ -18,48 +20,18 @@ const Login = ({ error, requestLogin, dispatchError }) => {
         username: false,
         password: false
     });
-    const [navigateToRegister, setNavigateToRegister] = React.useState(false);
-
-    React.useEffect(() => {
-        if(error.message == "wrong password") {
-            setFormValues({
-                ...formValues,
-                password: ''
-            });
-            setFormErrors({
-                ...formErrors,
-                password: true
-            });
-        }
-        if(error.message == "no user found") {
-            setFormValues({
-                username: '',
-                password: ''
-            });
-            setFormErrors({
-                ...formErrors,
-                username: true
-            });
-        }
-        if(!error.error) {
-            setFormErrors({
-                password: false,
-                username: false
-            });
-        }
-    }, [error]);
 
     const submitLogin = () => {
         let fields = Object.keys(formValues);
         let errors = {};
         let hasErrors = false;
-        for(const field of fields) {
-            if(formValues[field].length == 0) {
+        for (const field of fields) {
+            if (formValues[field].length == 0) {
                 errors[field] = true;
                 hasErrors = true;
             }
         }
-        if(hasErrors) {
+        if (hasErrors) {
             setFormErrors({
                 ...formErrors,
                 ...errors
@@ -73,15 +45,43 @@ const Login = ({ error, requestLogin, dispatchError }) => {
         }
     }
 
+    React.useEffect(() => {
+        if (error.message == "wrong password") {
+            setFormValues({
+                ...formValues,
+                password: ''
+            });
+            setFormErrors({
+                ...formErrors,
+                password: true
+            });
+        }
+        if (error.message == "no user found") {
+            setFormValues({
+                username: '',
+                password: ''
+            });
+            setFormErrors({
+                ...formErrors,
+                username: true
+            });
+        }
+        if (!error.error) {
+            setFormErrors({
+                password: false,
+                username: false
+            });
+        }
+    }, [error]);
+
     return (
         <>
             {
-                navigateToRegister ?
-                <Redirect to="/register" />
-                :
-                <Card>
+                <Card
+                    className={css({ width: '50%' })}
+                >
                     <FormControl label="Username">
-                        <Input 
+                        <Input
                             value={formValues.username}
                             onChange={e => setFormValues({
                                 ...formValues,
@@ -90,10 +90,11 @@ const Login = ({ error, requestLogin, dispatchError }) => {
                             placeholder="Username"
                             clearOnEscape
                             error={formErrors.username}
+                            size={inputSize.mini}
                         />
                     </FormControl>
                     <FormControl label="Password">
-                        <Input 
+                        <Input
                             value={formValues.password}
                             onChange={e => setFormValues({
                                 ...formValues,
@@ -103,13 +104,13 @@ const Login = ({ error, requestLogin, dispatchError }) => {
                             type="password"
                             clearOnEscape
                             error={formErrors.password}
+                            size={inputSize.mini}
                         />
                     </FormControl>
-                    <Button onClick={() => submitLogin()}>Login</Button>
-                    <Button 
-                        onClick={() => setNavigateToRegister(true)}
-                        kind={KIND.secondary}
-                    >Signup</Button>
+                    <Button
+                        onClick={() => submitLogin()}
+                        size={buttonSize.mini}
+                    >Login</Button>
                 </Card>
             }
             <Error />
@@ -119,14 +120,14 @@ const Login = ({ error, requestLogin, dispatchError }) => {
 
 const ConnectedLogin = connect(
     (state) => {
-      return {
-        error: state.error
-      }
-    }, 
+        return {
+            error: state.error
+        }
+    },
     {
         requestLogin,
         dispatchError
     }
-  )(Login);
+)(Login);
 
 export default ConnectedLogin;

@@ -6,14 +6,14 @@ import { clearError } from '../actions/error';
 const Error = ({ error, clearError }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    setIsOpen(error.error);
-  }, [error]);
-
   const closeError = () => {
     setIsOpen(false);
     return clearError();
   }
+
+  React.useEffect(() => {
+    setIsOpen(error.error);
+  }, [error]);
 
   return (
     <Modal
@@ -27,7 +27,7 @@ const Error = ({ error, clearError }) => {
       unstable_ModalBackdropScroll={true}
     >
       <ModalHeader>Error</ModalHeader>
-        <ModalBody>{error.message}</ModalBody>
+      <ModalBody>{error.message}</ModalBody>
       <ModalFooter>
         <ModalButton onClick={closeError}>Okay</ModalButton>
       </ModalFooter>
@@ -40,7 +40,7 @@ const ConnectedError = connect(
     return {
       error: state.error
     }
-  }, 
+  },
   {
     clearError
   }

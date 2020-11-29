@@ -4,6 +4,7 @@ import {useStyletron} from 'baseui';
 import Item from './Item';
 const ItemList = ({ items }) => {
     const [css, theme] = useStyletron();
+    
     const itemProps = {
         backgroundColor: 'mono400',
         display: 'flex',
@@ -11,6 +12,7 @@ const ItemList = ({ items }) => {
         justifyContent: 'center',
         height: 'auto'
     };
+
     return (
         <FlexGrid
             flexGridColumnCount={10}

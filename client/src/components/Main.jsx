@@ -9,6 +9,7 @@ import Manage from './Manage';
 
 function Main({ currentUser }) {
     const [css, $theme] = useStyletron();
+    
     const [mainItems, setMainItems] = React.useState([
         { 
             label: "My Fridge",
@@ -42,14 +43,24 @@ function Main({ currentUser }) {
 
     const getTodaysDate = () => {
         let now = new Date();
-        return now.toLocaleDateString("en-US");
+        return now.toLocaleDateString("en-US", { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
     }
 
     return (
         <FlexGrid className={css({width: '100%'})}>
             <FlexGridItem>
                 <AppNavBar
-                    title={<Block className={css({fontSize: $theme.sizing.scale700})}>Fridge Inventory Tracker</Block>}
+                    title={
+                        <>
+                        <Block className={css({fontSize: $theme.sizing.scale700})}>Fridge Inventory Tracker</Block>
+                        <Block className={css({fontSize: $theme.sizing.scale600})}>{getTodaysDate()}</Block>
+                        </>
+                    }
                     mainItems={mainItems}
                     onMainItemSelect={item => {
                         setMainItems(prev => setItemActive(prev, item));
@@ -61,12 +72,12 @@ function Main({ currentUser }) {
                     overrides={{
                         AppName: {
                           style: ({ $theme }) => ({
-                            width: '500px'
+                            width: '800px'
                           })
                         },
                         MainMenuItem: {
                             style: ({ $theme }) => ({
-                              fontSize: $theme.sizing.scale500
+                              fontSize: $theme.sizing.scale550
                             })
                         }
                     }}

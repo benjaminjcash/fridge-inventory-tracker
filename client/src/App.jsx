@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { checkLoggedIn } from './actions/auth';
 import { fetchUser } from './actions/user';
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import ConnectedLogin from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main';
@@ -10,6 +11,12 @@ import Main from './components/Main';
 function App({ auth, checkLoggedIn, user, fetchUser }) {
     const [loggedIn, setLoggedIn] = React.useState(auth?.loggedIn);
     const [currentUser, setCurrentUser] = React.useState(user);
+    
+    const itemProps = {
+      display: 'flex',
+      justifyContent: 'center',
+      alignSelf: 'center'
+    };
 
     React.useEffect(() => {
       checkLoggedIn();
@@ -32,10 +39,12 @@ function App({ auth, checkLoggedIn, user, fetchUser }) {
             </Route>
             <Route path="/login">
               {loggedIn ? <Redirect to="/my/fridge" /> : <Redirect to="/login" />}
-              <ConnectedLogin />
-            </Route>
-            <Route path="/register">
-              <Register />
+              <FlexGrid>
+                <FlexGridItem {...itemProps}>
+                  <ConnectedLogin />
+                  <Register />
+                </FlexGridItem>
+              </FlexGrid>
             </Route>
             <Route path="/my/fridge">
               {loggedIn ? <Redirect to="/my/fridge" /> : <Redirect to="/login" />}

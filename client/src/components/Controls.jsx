@@ -23,6 +23,7 @@ const Controls = ({ allTypes, buildList }) => {
         }
         buildList(options);
     }, [valueType, valueName, valueAttribute, valueOrder]);
+    
     return (
         <Card className={css({ height: 'auto', width: '100%' })} >
             <StyledBody>

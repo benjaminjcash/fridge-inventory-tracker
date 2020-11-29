@@ -100,7 +100,10 @@ exports.updateItem = async (req, res) => {
 exports.deleteItem = (req, res) => {
     Item.findByIdAndDelete( req.params.itemId )
         .then(() => {
-            res.json({ msg: "Deleted Successfully." });
+            res.json({
+                success: true,
+                message: "deleted successfully"
+            });
         }).catch(err => {
             res.send(err);
         });

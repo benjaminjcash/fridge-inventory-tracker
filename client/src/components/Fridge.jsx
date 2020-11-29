@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
-import {useStyletron} from 'baseui';
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { useStyletron } from 'baseui';
 import Controls from './Controls';
 import ItemList from './ItemList';
 import { fetchAllItems } from '../actions/item';
@@ -43,7 +43,7 @@ const Fridge = ({ items, types, fetchAllItems }) => {
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem {...narrowItemProps}>
-                <Controls 
+                <Controls
                     allTypes={types}
                     buildList={buildList}
                 />
@@ -62,8 +62,8 @@ const ConnectedFridge = connect(
             types: state.types
         }
     }, {
-        fetchAllItems
-    }
+    fetchAllItems
+}
 )(Fridge);
 
 export default ConnectedFridge;
