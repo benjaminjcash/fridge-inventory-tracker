@@ -13,7 +13,7 @@ const ItemList = ({ items }) => {
     };
     return (
         <FlexGrid
-            flexGridColumnCount={6}
+            flexGridColumnCount={10}
             flexGridColumnGap={theme.sizing.scale300}
             flexGridRowGap={theme.sizing.scale400}
             width='100%'
