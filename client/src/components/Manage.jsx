@@ -6,14 +6,15 @@ import { Modal, ModalHeader, ModalFooter, ModalButton, SIZE, ROLE } from "baseui
 import AddItem from './AddItem';
 import UpdateItem from './UpdateItem';
 import DeleteItem from './DeleteItem';
-import { createItem, deleteItem, fetchAllItems } from '../actions/item';
+import { createItem, updateItem, deleteItem, fetchAllItems } from '../actions/item';
 import { clearData } from '../actions/data';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS, BASE_URL_APP } from '../utils/constants';
 
-const Manage = ({ data, items, createItem, deleteItem, fetchAllItems, clearData }) => {
+const Manage = ({ data, items, createItem, updateItem, deleteItem, fetchAllItems, clearData }) => {
     const [css, theme] = useStyletron();
     const [isOpen, setIsOpen] = React.useState(false);
     const [clearAddItem, setClearAddItem] = React.useState(false);
+    const [clearUpdateItem, setClearUpdateItem] = React.useState(false);
     const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
 
     const itemProps = {
@@ -28,6 +29,11 @@ const Manage = ({ data, items, createItem, deleteItem, fetchAllItems, clearData 
         createItem(item);
     }
 
+    const modifyItem = (item) => {
+        setClearUpdateItem(false);
+        updateItem(item);
+    }
+
     const removeItem = (item) => {
         setClearDeleteItem(false);
         deleteItem(item);
@@ -36,6 +42,7 @@ const Manage = ({ data, items, createItem, deleteItem, fetchAllItems, clearData 
     const closeModal = () => {
         setClearAddItem(true);
         setClearDeleteItem(true);
+        setClearUpdateItem(true);
         clearData();
         setIsOpen(false);
     }
@@ -59,7 +66,7 @@ const Manage = ({ data, items, createItem, deleteItem, fetchAllItems, clearData 
                 <AddItem addItem={addItem} clearAddItem={clearAddItem}/>
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
-                <UpdateItem/>
+                <UpdateItem modifyItem={modifyItem} items={items} clearUpdateItem={clearUpdateItem}/>
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
                 <DeleteItem removeItem={removeItem} items={items} clearDeleteItem={clearDeleteItem} />
@@ -94,6 +101,7 @@ const ConnectedManage = connect(
     }, {
         fetchAllItems,
         createItem,
+        updateItem,
         deleteItem,
         clearData
     }
