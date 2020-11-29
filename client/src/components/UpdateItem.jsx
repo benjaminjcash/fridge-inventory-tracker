@@ -9,8 +9,7 @@ import { Block } from "baseui/block";
 import { Select, SIZE as selectSize } from 'baseui/select';
 import parseISO from 'date-fns/parseISO'
 
-
-const UpdateItem = ({ items, modifyItem, clearUpdateItem }) => {
+const UpdateItem = ({ items, doUpdateItem, clearUpdateItem }) => {
     const [css, theme] = useStyletron();
     const [itemList, setItemList] = React.useState([]);
     const [valueItemSelect, setValueItemSelect] = React.useState([]);
@@ -35,7 +34,7 @@ const UpdateItem = ({ items, modifyItem, clearUpdateItem }) => {
             expiration_date: valueExpirationDate,
             image_url: valueImageUrl
         }
-        modifyItem(item);
+        doUpdateItem(item);
     }
 
     React.useEffect(() => {
@@ -105,7 +104,7 @@ const UpdateItem = ({ items, modifyItem, clearUpdateItem }) => {
                         size={inputSize.mini}
                     />
                 </FormControl>
-                <FormControl label={() => "Image URL"}>
+                <FormControl label={() => "Image URL"}  caption={() => "use a square image"}>
                     <Input
                         value={valueImageUrl}
                         onChange={event => setValueImageUrl(event.currentTarget.value)}

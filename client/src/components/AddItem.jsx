@@ -8,7 +8,7 @@ import { Button, SIZE as buttonSize } from "baseui/button";
 import { Block } from "baseui/block";
 
 
-const AddItem = ({ addItem, clearAddItem }) => {
+const AddItem = ({ doCreateItem, clearAddItem }) => {
     const [css, theme] = useStyletron();
     const [valueType, setValueType] = React.useState([]);
     const [valueName, setValueName] = React.useState([]);
@@ -22,7 +22,7 @@ const AddItem = ({ addItem, clearAddItem }) => {
             expiration_date: valueExpirationDate,
             image_url: valueImageUrl
         }
-        addItem(item);
+        doCreateItem(item);
     }
 
     React.useEffect(() => {
@@ -66,7 +66,7 @@ const AddItem = ({ addItem, clearAddItem }) => {
                         size={inputSize.mini}
                     />
                 </FormControl>
-                <FormControl label={() => "Image URL"}>
+                <FormControl label={() => "Image URL"} caption={() => "use a square image"}>
                     <Input
                         value={valueImageUrl}
                         onChange={event => setValueImageUrl(event.currentTarget.value)}

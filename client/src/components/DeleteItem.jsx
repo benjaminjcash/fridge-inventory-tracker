@@ -6,29 +6,29 @@ import { Button, SIZE as buttonSize } from "baseui/button";
 import { Block } from "baseui/block";
 import { Select, SIZE as selectSize } from 'baseui/select';
 
-const DeleteItem = ({ removeItem, items, clearDeleteItem }) => {
+const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
     const [css, theme] = useStyletron();
     const [itemList, setItemList] = React.useState([]);
     const [valueItemSelect, setValueItemSelect] = React.useState([]);
 
-    const handleRemoveItem = () => {
+    const handleDeleteItem = () => {
         if(!valueItemSelect.length > 0) {
             console.error("unable to delete item");
             return;
         }
         const item = valueItemSelect[0];
-        removeItem(item);
+        doDeleteItem(item);
     }
 
     React.useEffect(() => {
-        if(items) setItemList(items);
-    }, [items])
+        setItemList(items);
+    }, [items]);
 
     React.useEffect(() => {
         if (clearDeleteItem) {
             setValueItemSelect([]);
         }
-    }, [clearDeleteItem])
+    }, [clearDeleteItem]);
 
     return (
         <Card className={css({ height: 'auto', width: '100%' })} >
@@ -53,7 +53,7 @@ const DeleteItem = ({ removeItem, items, clearDeleteItem }) => {
                     />
                 </FormControl>
                 <Button 
-                    onClick={() => handleRemoveItem()}
+                    onClick={() => handleDeleteItem()}
                     size={buttonSize.mini}
                 >Delete</Button>
             </StyledBody>

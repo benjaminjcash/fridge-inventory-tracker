@@ -7,6 +7,7 @@ import { Provider as StyletronProvider } from 'styletron-react';
 import { DarkTheme, LightTheme, BaseProvider, styled } from 'baseui';
 import reducer from './reducers';
 import ConnectedApp from './App';
+const useLogger = true;
 
 const engine = new Styletron();
 const Centered = styled('div', {
@@ -25,7 +26,7 @@ const logger = store => next => action => {
 
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) =>  getDefaultMiddleware().concat(logger)
+  middleware: (getDefaultMiddleware) =>  useLogger ? getDefaultMiddleware().concat(logger) : getDefaultMiddleware()
 });
 
 ReactDOM.render(

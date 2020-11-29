@@ -22,7 +22,10 @@ export const fetchAllItems = (options, context) => {
             }
         }).then((res) => {
             if(!res.data.success) {
-                // console.error(res.data.error);
+                dispatch({
+                    type: FETCHED_ITEMS,
+                    data: []
+                });
             } else {
                 if(context == 'build_list') {
                     dispatch({
@@ -52,11 +55,10 @@ export const createItem = (item) => {
             }
         }).then((res) => {
             if(!res.data.success) {
-                console.error(res.data.message);
+                console.error(res.data.error);
             } else {
                 dispatch({
-                    type: ADDED_DATA,
-                    data: res.data.data
+                    type: ADDED_DATA
                 });
             }
         }).catch((err) => {
@@ -74,11 +76,10 @@ export const updateItem = (item) => {
             }
         }).then((res) => {
             if(!res.data.success) {
-                console.error(res.data.message);
+                console.error(res.data.error);
             } else {
                 dispatch({
-                    type: UPDATED_DATA,
-                    data: JSON.stringify(item)
+                    type: UPDATED_DATA
                 });
             }
         }).catch((err) => {
@@ -99,8 +100,7 @@ export const deleteItem = (item) => {
                 console.error(res.data.message);
             } else {
                 dispatch({
-                    type: DELETED_DATA,
-                    data: item
+                    type: DELETED_DATA
                 });
             }
         }).catch((err) => {
