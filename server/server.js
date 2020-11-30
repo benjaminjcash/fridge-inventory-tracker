@@ -7,6 +7,7 @@ const commonItemRoutes = require("./routes/commonItem.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const { error404 } = require("./middleware/errors.middleware");
+const { hydrateCommonItems } = require("./utils/hydrateDb");
 const PORT = process.env.PORT || 3001;
 const DB_URL = process.env.__TEST__ ? 'mongodb://localhost/fridge-inventory-tracker-test' : 'mongodb://localhost/fridge-inventory-tracker';
 const app = express();
@@ -30,6 +31,7 @@ db.on('error', function(err) {
 });
 db.once('open', function() {
     console.log(`Connection to Mongo was successful!`);
+    hydrateCommonItems();
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
