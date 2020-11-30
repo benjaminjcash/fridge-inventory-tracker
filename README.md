@@ -12,6 +12,9 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
     - Once logged in, a user can add *items* to their ***fridge***
     - When adding an *item* they specify details about the *item* such as the *name*, *type*, and *expiration date*
     - A user can delete and update *items* in their ***fridge***
+    - For common items without expiration dates listed, the user can search for them and the expiration date will automatically be calculated.
+        - Common item shlef life data taken from *http://www.eatbydate.com/*
+        
 - ### Inventory
     - The SPA will display the inventory in the users ***fridge*** after they have logged in.
     - The inventory will be...
