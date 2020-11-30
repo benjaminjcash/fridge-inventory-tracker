@@ -39,17 +39,18 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
     - back-end tests with Mocha and Chai
 
 ## Installation Instructions
-0. You must have *Node* installed, as well as *MongoDB* and *Mongo Shell*
-1. Naviagate to root folder and run `npm install`
-2. Navigate to the `client` folder and run `npm install`
-3. Start mongo shell by running `mongo` then run `use fridge-inventory-tracker` to create database
-4. Create a file called `jwt.config.js` in the `config` directory to hold the secret, shown below.
+1. You must have the *latest* version of *Node* installed, as well as *MongoDB* and *Mongo Shell*
+2. Naviagate to root folder and run `npm install`
+3. Navigate to the `client` folder and run `npm install`
+4. Create a file called `jwt.config.js` in the `server/config/` directory to hold the  access secret and the refresh secret, shown below.
 ```
 module.exports = {
-    secret: 'yoursecret'
+    accessSecret: 'accesssecret',
+    refreshSecret: 'refreshsecret'
 }
 ```
-5. Start database server at port `27017` by running `mongod` (should be standard port chosen at installation)
-6. Start express server by running `npm start` in root folder
-7. Start react dev server by running `npm start` in client folder
-8. Navtigate to `localhost:3000` in your browser to view the app
+5. Start mongo shell by running `mongo` then run `use fridge-inventory-tracker` to create database 
+6. Start database server at port `27017` by running `mongod` (should be standard port chosen at installation)
+7. Start express server by running `npm start` in root folder
+8. Start react dev server by running `npm start` in client folder
+9. Navtigate to `localhost:3000` in your browser to view the app

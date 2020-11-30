@@ -62,6 +62,7 @@ const Item = ({ item }) => {
                         overrides={{
                             Root: {
                                 style: ({ $theme }) => ({
+                                    backgroundColor: 'white',
                                     borderBottomColor: calculateBorderColor(item),
                                     borderBottomWidth: '5px',
                                     borderBottomStyle: 'solid',
@@ -74,6 +75,7 @@ const Item = ({ item }) => {
                             },
                             Body: {
                                 style: ({ $theme }) => ({
+                                    backgroundColor: 'white',
                                     marginTop: '0px',
                                     marginBottom: '0px',
                                     marginLeft: '0px',
