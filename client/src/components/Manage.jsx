@@ -9,10 +9,11 @@ import AddItem from './AddItem';
 import UpdateItem from './UpdateItem';
 import DeleteItem from './DeleteItem';
 import { createItem, updateItem, deleteItem, fetchAllItems } from '../actions/item';
+import { searchCommonItems, clearCommonItems } from '../actions/commonItem';
 import { clearData } from '../actions/data';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
-const Manage = ({ data, items, createItem, updateItem, deleteItem, fetchAllItems, clearData }) => {
+const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updateItem, deleteItem, fetchAllItems, clearData, clearCommonItems }) => {
     const [css, theme] = useStyletron();
     const [isOpen, setIsOpen] = React.useState(false);
     const [clearAddItem, setClearAddItem] = React.useState(false);
@@ -29,6 +30,14 @@ const Manage = ({ data, items, createItem, updateItem, deleteItem, fetchAllItems
     const doCreateItem = (item) => {
         setClearAddItem(false);
         createItem(item);
+    }
+
+    const doSearchCommonItems = (query) => {
+        searchCommonItems(query);
+    }
+
+    const doClearCommonItems = () => {
+        clearCommonItems();
     }
 
     const doUpdateItem = (item) => {
@@ -65,7 +74,7 @@ const Manage = ({ data, items, createItem, updateItem, deleteItem, fetchAllItems
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem {...itemProps}>
-                <AddItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
+                <AddItem doCreateItem={doCreateItem} commonItems={commonItems} doSearchCommonItems={doSearchCommonItems} doClearCommonItems={doClearCommonItems} clearAddItem={clearAddItem}/>
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
                 <UpdateItem doUpdateItem={doUpdateItem} items={items} clearUpdateItem={clearUpdateItem}/>
@@ -103,11 +112,14 @@ const ConnectedManage = connect(
     (state) => {
         return {
         data: state.data,
-        items: state.items
+        items: state.items,
+        commonItems: state.commonItems
         }
     }, {
         fetchAllItems,
         createItem,
+        searchCommonItems,
+        clearCommonItems,
         updateItem,
         deleteItem,
         clearData

@@ -21,6 +21,10 @@ export const CLEAR_ERROR = 'clear_error';
 /** Item */
 export const FETCHED_ITEMS = 'fetched_items';
 
+/** Common Item */
+export const FETCHED_COMMON_ITEMS = 'fetched_common_items';
+export const CLEARED_COMMON_ITEMS = 'cleared_common_items';
+
 /** Type */
 export const FETCHED_ALL_TYPES = 'fetched_all_types';
 

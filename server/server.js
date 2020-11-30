@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const itemRoutes = require("./routes/item.routes");
+const commonItemRoutes = require("./routes/commonItem.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const { error404 } = require("./middleware/errors.middleware");
@@ -37,6 +38,7 @@ app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/item", itemRoutes);
+app.use("/api/commonitem", commonItemRoutes);
 
 app.use(error404);
 
