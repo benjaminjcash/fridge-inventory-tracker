@@ -67,7 +67,8 @@ const UpdateItem = ({ items, doUpdateItem, clearUpdateItem }) => {
             <StyledBody>
                 <Block className={css({
                     marginBottom: '-10px',
-                    marginTop: '-10px'
+                    marginTop: '-10px',
+                    color: 'yellow'
                 })}><h4>Update Item</h4></Block>
                 <FormControl label={() => "Choose an item to update"}>
                     <Select
@@ -114,6 +115,7 @@ const UpdateItem = ({ items, doUpdateItem, clearUpdateItem }) => {
                 <Button 
                     onClick={() => handleUpdateItem()}
                     size={buttonSize.mini}
+                    className={css({ backgroundColor: 'yellow' })}
                 >Update</Button>
                 <Button 
                     onClick={() => clearUpdateForm()}

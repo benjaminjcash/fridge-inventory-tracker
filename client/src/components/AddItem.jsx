@@ -61,7 +61,8 @@ const AddItem = ({ doCreateItem, doSearchCommonItems, clearAddItem, commonItems,
             <StyledBody>
                 <Block className={css({
                     marginBottom: '-10px',
-                    marginTop: '-10px'
+                    marginTop: '-10px',
+                    color: 'green'
                 })}><h4>Add Item</h4></Block>
                 <FormControl label={() => "Name"}>
                     <Input
@@ -159,6 +160,8 @@ const AddItem = ({ doCreateItem, doSearchCommonItems, clearAddItem, commonItems,
                 <Button 
                     onClick={() => handleAddItem()}
                     size={buttonSize.mini}
+                    className={css({ backgroundColor: 'green', color: 'white' })}
+                    
                 >Add</Button>
             </StyledBody>
         </Card>

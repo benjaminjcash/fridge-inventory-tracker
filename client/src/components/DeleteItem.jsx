@@ -35,7 +35,8 @@ const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
             <StyledBody>
                 <Block className={css({
                     marginBottom: '-10px',
-                    marginTop: '-10px'
+                    marginTop: '-10px',
+                    color: 'red'
                 })}><h4>Delete Item</h4></Block>
                 <FormControl label={() => "Choose an item to delete"}>
                     <Select
@@ -55,6 +56,7 @@ const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
                 <Button 
                     onClick={() => handleDeleteItem()}
                     size={buttonSize.mini}
+                    className={css({ backgroundColor: 'red', color: 'white' })}
                 >Delete</Button>
             </StyledBody>
         </Card>

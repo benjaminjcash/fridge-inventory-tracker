@@ -28,9 +28,16 @@ export const fetchAllItems = (options, context) => {
                 });
             } else {
                 if(context == 'build_list') {
+                    const populatedData = res.data.data.map((item) => {
+                        const expirationHealth = calculateExpirationHealth(item);
+                        return {
+                            ...item,
+                            expiration_health: expirationHealth
+                        }
+                    })
                     dispatch({
                         type: FETCHED_ITEMS,
-                        data: res.data.data
+                        data: populatedData
                     });
                 } else if(context == 'get_all_types') {
                     dispatch({
@@ -108,3 +115,21 @@ export const deleteItem = (item) => {
         })
     }
 }
+
+const calculateExpirationHealth = (item) => {
+    let health = "";
+    const expDate = new Date(item.expiration_date);
+    const now = new Date();
+    const twoDaysFromNow = new Date(now.getFullYear(),now.getMonth(),now.getDate() + 2);
+    const sevenDaysFromNow = new Date(now.getFullYear(),now.getMonth(),now.getDate() + 7);
+    if(expDate <= now) {
+        health = "bad";
+    } else if(expDate <= twoDaysFromNow) {
+        health = "close";
+    } else if(expDate <= sevenDaysFromNow) {
+        health = "fine";
+    } else {
+        health = "fresh";
+    }
+    return health;
+};

@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
+import {Tag, VARIANT} from 'baseui/tag';
 import { AppNavBar, setItemActive } from "baseui/app-nav-bar";
 import { Block } from 'baseui/block';
 import { clearStorage } from '../utils/storage';
@@ -40,27 +41,12 @@ function Main({ currentUser }) {
             window.location.href = '/';
         }
     }
-
-    const getTodaysDate = () => {
-        let now = new Date();
-        return now.toLocaleDateString("en-US", { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        });
-    }
-
+    
     return (
         <FlexGrid className={css({width: '100%'})}>
             <FlexGridItem>
                 <AppNavBar
-                    title={
-                        <>
-                        <Block className={css({fontSize: $theme.sizing.scale700})}>Fridge Inventory Tracker</Block>
-                        <Block className={css({fontSize: $theme.sizing.scale600})}>{getTodaysDate()}</Block>
-                        </>
-                    }
+                    title={<Block className={css({ fontSize: $theme.sizing.scale700 })}>Fridge Inventory Tracker</Block>}
                     mainItems={mainItems}
                     onMainItemSelect={item => {
                         setMainItems(prev => setItemActive(prev, item));
@@ -70,18 +56,12 @@ function Main({ currentUser }) {
                     usernameSubtitle={currentUser.name}
                     onUserItemSelect={handleUserItemSelect}
                     overrides={{
-                        AppName: {
-                          style: ({ $theme }) => ({
-                            width: '800px'
-                          })
-                        },
                         MainMenuItem: {
                             style: ({ $theme }) => ({
                               fontSize: $theme.sizing.scale550
                             })
                         }
                     }}
-                        
                 />
             </FlexGridItem>
             <FlexGridItem className={css({ justifyContent: 'center'})}>

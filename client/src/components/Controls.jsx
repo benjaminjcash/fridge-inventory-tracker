@@ -113,7 +113,7 @@ const Controls = ({ allTypes, buildList }) => {
                                 },
                             }}
                         >
-                            <Block className={css({ fontSize: $theme.sizing.scale500 })}>Created Date</Block>
+                            <Block className={css({ fontSize: $theme.sizing.scale500 })}>Purchased Date</Block>
                         </Radio>
                     </RadioGroup>
                 </FormControl>

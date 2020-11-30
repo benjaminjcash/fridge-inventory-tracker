@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { useStyletron } from 'baseui';
 import Controls from './Controls';
+import Dashboard from './Dashboard';
 import ItemList from './ItemList';
 import { fetchAllItems } from '../actions/item';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
@@ -43,10 +44,17 @@ const Fridge = ({ items, types, fetchAllItems }) => {
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem {...narrowItemProps}>
-                <Controls
-                    allTypes={types}
-                    buildList={buildList}
-                />
+                <FlexGrid>
+                    <FlexGridItem>
+                        <Dashboard items={items}/>
+                    </FlexGridItem>
+                    <FlexGridItem>
+                        <Controls
+                            allTypes={types}
+                            buildList={buildList}
+                        />
+                    </FlexGridItem>
+                </FlexGrid>
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
                 <ItemList items={items} />
