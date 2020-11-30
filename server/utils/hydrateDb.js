@@ -1,5 +1,5 @@
 const CommonItem = require("../models/commonItem.model");
-const commonItems = require("../commonItems.config");
+const commonItems = require("../config/commonItems.config");
 
 exports.hydrateCommonItems = async () => {
     CommonItem.deleteMany({}).then((res) => {

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const jwtConfig = require("../jwt-config");
+const jwtConfig = require("../config/jwt.config");
 
 // store for refresh tokens
 let refreshTokens = [];

@@ -1,4 +1,4 @@
-const { accessSecret } = require('../jwt-config');
+const { accessSecret } = require('../config/jwt.config');
 const { verifyToken } = require('../utils/jwt-helpers');
 const isTest = process.env.__TEST__;
 

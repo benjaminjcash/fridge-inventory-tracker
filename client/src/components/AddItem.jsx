@@ -114,7 +114,8 @@ const AddItem = ({ doCreateItem, doSearchCommonItems, clearAddItem, commonItems,
                             size={buttonSize.mini}
                         >Search</Button>
                         {
-                            commonItems.length > 0 &&
+                            commonItems.length > 0 
+                            ?
                             commonItems.map((commonItem) => {
                                 return (
                                     <ListItem
@@ -137,6 +138,10 @@ const AddItem = ({ doCreateItem, doSearchCommonItems, clearAddItem, commonItems,
                                     </ListItem>
                                 );
                             })
+                            :
+                            <Block className={css({ fontSize: '14px', marginTop: '10px' })}>
+                                Sorry, no common items were found. Try broadening your search.
+                            </Block>
                         }
                     </Card>
                 }

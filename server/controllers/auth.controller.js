@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { doRegisterUser, doGetUser, doGetUserWithPassword } = require("../utils/db-helpers");
 const { refreshTokens, generateAccessToken, generateRefreshToken, verifyToken } = require('../utils/jwt-helpers');
-const { accessSecret, refreshSecret } = require('../jwt-config');
+const { accessSecret, refreshSecret } = require('../config/jwt.config');
 const User = require('../models/user.model');
 
 exports.registerUser = async (req, res) => {

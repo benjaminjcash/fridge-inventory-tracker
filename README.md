@@ -40,7 +40,7 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
 1. Naviagate to root folder and run `npm install`
 2. Navigate to the `client` folder and run `npm install`
 3. Start mongo shell by running `mongo` then run `use fridge-inventory-tracker` to create database
-4. Create a file called `jwt-config.js` in the `server` directory to hold the secret, shown below.
+4. Create a file called `jwt.config.js` in the `config` directory to hold the secret, shown below.
 ```
 module.exports = {
     secret: 'yoursecret'
