@@ -16,9 +16,11 @@ const AddItem = ({ doCreateItem, doSearchCommonItems, clearAddItem, commonItems,
     const [valueExpirationDate, setValueExpirationDate] = React.useState([]);
     const [valueImageUrl, setValueImageUrl] = React.useState([]);
     const [commonItemMode, setCommonItemMode] = React.useState(false);
-    const [valueCommonItemSearch, setValueCommonItemSearch] = React.useState([]);
+    const [valueCommonItemSearch, setValueCommonItemSearch] = React.useState("");
+    const [searchedForCommonItems, setSearchedForCommonItems] = React.useState(false);
 
     const handleSearchCommonItem = () => {
+        setSearchedForCommonItems(true);
         doSearchCommonItems(valueCommonItemSearch);
     }
 
@@ -138,10 +140,12 @@ const AddItem = ({ doCreateItem, doSearchCommonItems, clearAddItem, commonItems,
                                     </ListItem>
                                 );
                             })
-                            :
+                            : searchedForCommonItems ?
                             <Block className={css({ fontSize: '14px', marginTop: '10px' })}>
                                 Sorry, no common items were found. Try broadening your search.
                             </Block>
+                            :
+                            <></>
                         }
                     </Card>
                 }
