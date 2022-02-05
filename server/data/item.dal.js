@@ -40,7 +40,7 @@ exports.doGetAllItems = async (req) => {
             }
         });
     }
-    if(filterbytype?.length > 0) {
+    if(filterbytype && filterbytype.length > 0) {
         let typeFilter = {
             $or: []
         }

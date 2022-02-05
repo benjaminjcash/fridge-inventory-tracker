@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
         return next();
     }
     const authHeader = req.headers['auth-token'] || req.headers['authorization'];
-    const accessToken = authHeader?.split(' ')[1];
+    const accessToken = authHeader ? authHeader.split(' ')[1] : false;
     if(!accessToken) return res.status(401).send({
         success: false,
         error: 'no token provided'
