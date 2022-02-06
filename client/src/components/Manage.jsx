@@ -8,15 +8,18 @@ import { Block } from "baseui/block";
 import AddItem from './AddItem';
 import UpdateItem from './UpdateItem';
 import DeleteItem from './DeleteItem';
+import ScanItem from './ScanItem';
 import { createItem, updateItem, deleteItem, fetchAllItems } from '../actions/item';
+import { searchUPC } from '../actions/upc';
 import { searchCommonItems, clearCommonItems } from '../actions/commonItem';
 import { clearData } from '../actions/data';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
-const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updateItem, deleteItem, fetchAllItems, clearData, clearCommonItems }) => {
+const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updateItem, deleteItem, fetchAllItems, clearData, clearCommonItems, searchUPC }) => {
     const [css, theme] = useStyletron();
     const [isOpen, setIsOpen] = React.useState(false);
     const [clearAddItem, setClearAddItem] = React.useState(false);
+    const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
     const [clearUpdateItem, setClearUpdateItem] = React.useState(false);
     const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
 
@@ -30,6 +33,11 @@ const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updat
     const doCreateItem = (item) => {
         setClearAddItem(false);
         createItem(item);
+    }
+
+    const doSearchUPC = (barcode) => {
+        setClearSearchUPC(false);
+        searchUPC(barcode);
     }
 
     const doSearchCommonItems = (query) => {
@@ -82,6 +90,9 @@ const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updat
             <FlexGridItem {...itemProps}>
                 <DeleteItem doDeleteItem={doDeleteItem} items={items} clearDeleteItem={clearDeleteItem} />
             </FlexGridItem>
+            <FlexGridItem {...itemProps}>
+                <ScanItem doSearchUPC={doSearchUPC} clearSearchUPC={clearSearchUPC} />
+            </FlexGridItem>
         </FlexGrid>
 
         <Modal
@@ -122,7 +133,8 @@ const ConnectedManage = connect(
         clearCommonItems,
         updateItem,
         deleteItem,
-        clearData
+        clearData,
+        searchUPC
     }
 )(Manage);
 
