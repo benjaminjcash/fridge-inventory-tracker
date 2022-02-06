@@ -6,11 +6,13 @@ import error from './error';
 import user from './user';
 import data from './data';
 import types from './types';
+import upc from './upc';
 
 const reducer = combineReducers({
     items: item,
     commonItems: commonItem,
     types,
+    upc,
     auth,
     error,
     user,

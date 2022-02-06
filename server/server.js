@@ -6,6 +6,7 @@ const itemRoutes = require("./routes/item.routes");
 const commonItemRoutes = require("./routes/commonItem.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
+const upcRoutes = require("./routes/upc.routes");
 const { error404 } = require("./middleware/errors.middleware");
 const { hydrateCommonItems } = require("./utils/hydrateDb");
 const PORT = process.env.PORT || 3001;
@@ -41,6 +42,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/item", itemRoutes);
 app.use("/api/commonitem", commonItemRoutes);
+app.use("/api/upc", upcRoutes);
 
 app.use(error404);
 

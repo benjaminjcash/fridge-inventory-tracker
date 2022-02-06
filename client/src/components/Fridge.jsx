@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { Button } from 'baseui/button';
 import { useStyletron } from 'baseui';
 import Controls from './Controls';
 import Dashboard from './Dashboard';
 import ItemList from './ItemList';
 import { fetchAllItems } from '../actions/item';
+import { search } from '../actions/upc';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
-const Fridge = ({ items, types, fetchAllItems }) => {
+const Fridge = ({ items, types, fetchAllItems, search }) => {
     const [css, theme] = useStyletron();
 
     const itemProps = {
@@ -44,6 +46,7 @@ const Fridge = ({ items, types, fetchAllItems }) => {
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem {...narrowItemProps}>
+                <Button onClick={() => search()}>GO</Button>
                 <FlexGrid>
                     <FlexGridItem>
                         <Dashboard items={items}/>
@@ -70,7 +73,8 @@ const ConnectedFridge = connect(
             types: state.types
         }
     }, {
-    fetchAllItems
+    fetchAllItems,
+    search
 }
 )(Fridge);
 
