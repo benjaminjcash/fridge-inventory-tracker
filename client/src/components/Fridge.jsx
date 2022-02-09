@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { Button } from 'baseui/button';
 import { useStyletron } from 'baseui';
 import Controls from './Controls';
 import Dashboard from './Dashboard';
