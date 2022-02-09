@@ -7,10 +7,9 @@ import Controls from './Controls';
 import Dashboard from './Dashboard';
 import ItemList from './ItemList';
 import { fetchAllItems } from '../actions/item';
-import { searchUPC } from '../actions/upc';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
-const Fridge = ({ items, types, fetchAllItems, searchUPC }) => {
+const Fridge = ({ items, types, fetchAllItems }) => {
     const [css, theme] = useStyletron();
 
     const itemProps = {
@@ -46,7 +45,6 @@ const Fridge = ({ items, types, fetchAllItems, searchUPC }) => {
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem {...narrowItemProps}>
-                <Button onClick={() => searchUPC()}>GO</Button>
                 <FlexGrid>
                     <FlexGridItem>
                         <Dashboard items={items}/>
@@ -73,8 +71,7 @@ const ConnectedFridge = connect(
             types: state.types
         }
     }, {
-    fetchAllItems,
-    searchUPC
+    fetchAllItems
 }
 )(Fridge);
 
