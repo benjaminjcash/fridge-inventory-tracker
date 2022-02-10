@@ -12,11 +12,10 @@ import ScanItem from './ScanItem';
 import CreateProduct from './CreateProduct';
 import { createItem, updateItem, deleteItem, fetchAllItems } from '../actions/item';
 import { searchUPC, createProduct } from '../actions/product';
-import { searchCommonItems, clearCommonItems } from '../actions/commonItem';
 import { clearData } from '../actions/data';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
-const Manage = ({ data, items, commonItems, upcData, createItem, searchCommonItems, updateItem, deleteItem, fetchAllItems, clearData, clearCommonItems, searchUPC, createProduct }) => {
+const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetchAllItems, clearData, searchUPC, createProduct }) => {
     const [css, theme] = useStyletron();
     const [isOpen, setIsOpen] = React.useState(false);
     const [clearAddItem, setClearAddItem] = React.useState(false);
@@ -40,14 +39,6 @@ const Manage = ({ data, items, commonItems, upcData, createItem, searchCommonIte
     const doSearchUPC = (barcode) => {
         setClearSearchUPC(false);
         searchUPC(barcode);
-    }
-
-    const doSearchCommonItems = (query) => {
-        searchCommonItems(query);
-    }
-
-    const doClearCommonItems = () => {
-        clearCommonItems();
     }
 
     const doUpdateItem = (item) => {
@@ -91,7 +82,7 @@ const Manage = ({ data, items, commonItems, upcData, createItem, searchCommonIte
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem {...itemProps}>
-                <AddItem doCreateItem={doCreateItem} commonItems={commonItems} doSearchCommonItems={doSearchCommonItems} doClearCommonItems={doClearCommonItems} clearAddItem={clearAddItem}/>
+                <AddItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
             </FlexGridItem>
             <FlexGridItem {...itemProps}>
                 <UpdateItem doUpdateItem={doUpdateItem} items={items} clearUpdateItem={clearUpdateItem}/>
@@ -136,14 +127,11 @@ const ConnectedManage = connect(
         return {
             data: state.data,
             items: state.items,
-            commonItems: state.commonItems,
             upcData: state.upc
         }
     }, {
         fetchAllItems,
         createItem,
-        searchCommonItems,
-        clearCommonItems,
         updateItem,
         deleteItem,
         clearData,
