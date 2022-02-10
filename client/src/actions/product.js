@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getStorage } from '../utils/storage';
-import { BASE_URL, UPC_RESPONSE } from '../utils/constants';
+import { BASE_URL, UPC_RESPONSE, ADDED_DATA } from '../utils/constants';
 // const BARCODE = '049000011340';
 // const UPC_ENDPOINT = `${BASE_URL}upc/${BARCODE}`;
 
@@ -26,7 +26,7 @@ export const searchUPC = (barcode) => {
 export const createProduct = (product) => {
     const accessToken = getStorage('access_token');
     return (dispatch) => {
-        const PRODUCT_ENDPOINT = `${BASE_URL}product}`;
+        const PRODUCT_ENDPOINT = `${BASE_URL}product`;
         axios.post(`${PRODUCT_ENDPOINT}`, product, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -35,10 +35,10 @@ export const createProduct = (product) => {
             if(!res.data.success) {
                 console.error(res.data.error);
             } else {
-                // dispatch({
-                //     type: UPC_RESPONSE,
-                //     data: res.data
-                // });
+                dispatch({
+                    type: ADDED_DATA,
+                    data: res.data
+                });
             }
         }).catch((err) => {
             console.error(err);

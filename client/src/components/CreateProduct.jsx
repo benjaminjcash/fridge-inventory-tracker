@@ -45,7 +45,6 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
             const type = res.substring(2, res.length)
             setValueType(type);
             const images = upcData[UPC_RESPONSE_KEY_IMAGES];
-            console.log(images.length);
             if(images.length > 0) {
                 setValueImageUrl(images[0]);
             }

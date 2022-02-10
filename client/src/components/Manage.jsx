@@ -69,6 +69,8 @@ const Manage = ({ data, items, commonItems, upcData, createItem, searchCommonIte
         setClearAddItem(true);
         setClearDeleteItem(true);
         setClearUpdateItem(true);
+        setClearCreateProduct(true);
+        setClearSearchUPC(true);
         clearData();
         setIsOpen(false);
     }

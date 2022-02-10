@@ -10,7 +10,7 @@ exports.doCreateItem = async (req) => {
         .then((data) => {
             return data;
         }).catch(err => {
-            console.log(err);
+            console.error(err);
             throw err;
         });
 }

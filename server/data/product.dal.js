@@ -1,19 +1,18 @@
 const Product = require("../models/product.model");
 
 exports.doCreateProduct = async (req) => {
-    console.log(req.body);
     const newProduct = new Product({
-        name: '',
-        type: '',
-        image_url: '',
-        shelf_life : '',
-        upc_data: '',
+        name: req.body.name,
+        type: req.body.type,
+        image_url: req.body.image_url,
+        shelf_life : 0,
+        upc_data: req.body.image_url,
     });
     return newProduct.save()
         .then((data) => {
             return data;
         }).catch(err => {
-            console.log(err);
+            console.error(err);
             throw err;
         });
 }
