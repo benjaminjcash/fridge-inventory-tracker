@@ -33,3 +33,10 @@ export const ADDED_DATA = 'added_data';
 export const UPDATED_DATA = 'updated_data';
 export const DELETED_DATA = 'deleted_data';
 export const CLEARED_DATA = 'cleared_data';
+
+/** Upc */
+export const UPC_RESPONSE = 'upc_response';
+export const UPC_RESPONSE_KEY_TITLE = 'title';
+export const UPC_RESPONSE_KEY_BRAND = 'brand';
+export const UPC_RESPONSE_KEY_CATEGORY = 'category';
+export const UPC_RESPONSE_KEY_IMAGES = 'images';

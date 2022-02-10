@@ -1,8 +1,11 @@
+import { UPC_RESPONSE } from '../utils/constants';
 
 const upc = (state = [], action) => {
     switch(action.type) {
-            default:
-                return state;
+        case UPC_RESPONSE:
+            return action.data
+        default:
+            return state;
     }
 }
 

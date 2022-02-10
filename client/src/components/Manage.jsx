@@ -9,19 +9,21 @@ import AddItem from './AddItem';
 import UpdateItem from './UpdateItem';
 import DeleteItem from './DeleteItem';
 import ScanItem from './ScanItem';
+import CreateProduct from './CreateProduct';
 import { createItem, updateItem, deleteItem, fetchAllItems } from '../actions/item';
-import { searchUPC } from '../actions/upc';
+import { searchUPC, createProduct } from '../actions/product';
 import { searchCommonItems, clearCommonItems } from '../actions/commonItem';
 import { clearData } from '../actions/data';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
-const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updateItem, deleteItem, fetchAllItems, clearData, clearCommonItems, searchUPC }) => {
+const Manage = ({ data, items, commonItems, upcData, createItem, searchCommonItems, updateItem, deleteItem, fetchAllItems, clearData, clearCommonItems, searchUPC, createProduct }) => {
     const [css, theme] = useStyletron();
     const [isOpen, setIsOpen] = React.useState(false);
     const [clearAddItem, setClearAddItem] = React.useState(false);
     const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
     const [clearUpdateItem, setClearUpdateItem] = React.useState(false);
     const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
+    const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
 
     const itemProps = {
         display: 'flex',
@@ -56,6 +58,11 @@ const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updat
     const doDeleteItem = (item) => {
         setClearDeleteItem(false);
         deleteItem(item);
+    }
+
+    const doCreateProduct = (product) => {
+        setClearCreateProduct(false);
+        createProduct(product);
     }
 
     const closeModal = () => {
@@ -93,6 +100,9 @@ const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updat
             <FlexGridItem {...itemProps}>
                 <ScanItem doSearchUPC={doSearchUPC} clearSearchUPC={clearSearchUPC} />
             </FlexGridItem>
+            <FlexGridItem {...itemProps}>
+                <CreateProduct doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
+            </FlexGridItem>
         </FlexGrid>
 
         <Modal
@@ -122,9 +132,10 @@ const Manage = ({ data, items, commonItems, createItem, searchCommonItems, updat
 const ConnectedManage = connect(
     (state) => {
         return {
-        data: state.data,
-        items: state.items,
-        commonItems: state.commonItems
+            data: state.data,
+            items: state.items,
+            commonItems: state.commonItems,
+            upcData: state.upc
         }
     }, {
         fetchAllItems,
@@ -134,7 +145,8 @@ const ConnectedManage = connect(
         updateItem,
         deleteItem,
         clearData,
-        searchUPC
+        searchUPC,
+        createProduct
     }
 )(Manage);
 
