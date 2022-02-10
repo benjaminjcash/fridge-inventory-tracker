@@ -17,7 +17,7 @@ exports.createItem = async (req, res) => {
         }
     }
     catch(err) {
-        console.log(err);
+        console.error(err);
         res.send({
             success: false,
             error: err
@@ -41,7 +41,7 @@ exports.getAllItems = async (req, res) => {
         }
     }
     catch(err) {
-        console.log(err);
+        console.error(err);
         res.send({
             success: false,
             error: err
@@ -65,7 +65,7 @@ exports.getItem = async (req, res)  => {
         }
     }
     catch(err) {
-        console.log(err);
+        console.error(err);
         res.send({
             success: false,
             error: err
@@ -89,7 +89,7 @@ exports.updateItem = async (req, res) => {
         }
     }
     catch(err) {
-        console.log(err);
+        console.error(err);
         res.send({
             success: false,
             error: err

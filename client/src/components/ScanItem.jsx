@@ -21,7 +21,7 @@ const ScanItem = ({ doSearchUPC, clearSearchUPC }) => {
     }, [clearSearchUPC]);
 
     return (
-        <Card className={css({ height: 'auto', width: '100%' })} >
+        <Card className={css({ height: 'auto', width: '100%', marginTop: '-8px' })} >
             <StyledBody>
                 <Block className={css({
                     marginBottom: '-10px',
