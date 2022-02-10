@@ -3,12 +3,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const itemRoutes = require("./routes/item.routes");
-const commonItemRoutes = require("./routes/commonItem.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
-const upcRoutes = require("./routes/upc.routes");
+const productRoutes = require("./routes/product.routes");
 const { error404 } = require("./middleware/errors.middleware");
-const { hydrateCommonItems } = require("./utils/hydrateDb");
 const PORT = process.env.PORT || 3001;
 const DB_URL = process.env.__TEST__ ? 'mongodb://localhost/fridge-inventory-tracker-test' : 'mongodb://localhost/fridge-inventory-tracker';
 const app = express();
@@ -32,7 +30,6 @@ db.on('error', function(err) {
 });
 db.once('open', function() {
     console.log(`Connection to Mongo was successful!`);
-    hydrateCommonItems();
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -41,8 +38,7 @@ app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/item", itemRoutes);
-app.use("/api/commonitem", commonItemRoutes);
-app.use("/api/upc", upcRoutes);
+app.use("/api/product", productRoutes);
 
 app.use(error404);
 
