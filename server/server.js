@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 const DB_URL = process.env.__TEST__ ? 'mongodb://localhost/fridge-inventory-tracker-test' : 'mongodb://localhost/fridge-inventory-tracker';
 const app = express();
 app.use(cors());
+//test
 
 mongoose.Promise = global.Promise;
 mongoose.connect(DB_URL, {
