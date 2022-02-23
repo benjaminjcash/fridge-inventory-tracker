@@ -11,9 +11,8 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
 - ### Fridge
     - Once logged in, a user can add *items* to their ***fridge***
     - When adding an *item* they specify details about the *item* such as the *name*, *type*, and *expiration date*
+    - In order to expidite the process, users can use the *barcode scanner* to scan their items. They then only have to enter just a few details and the item will be added automatically.
     - A user can delete and update *items* in their ***fridge***
-    - For common items without expiration dates listed, the user can search for them and the expiration date will automatically be calculated.
-        - Common item shlef life data taken from *http://www.eatbydate.com/*
         
 - ### Inventory
     - The SPA will display the inventory in the users ***fridge*** after they have logged in.
@@ -33,6 +32,8 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
 ## Technologies
 - The application will use the MERN stack:
     - web server built with Node.js and Express
+    - Barcode Scanner: Quagga
+    - UPC API: UPC Item Database
     - database built with MongoDB
     - dynamic frontend built with React, Redux, BaseWeb
     - front-end tests with Jest, React Testing Library
@@ -42,15 +43,8 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
 1. You must have the *latest* version of *Node* installed, as well as *MongoDB* and *Mongo Shell*
 2. Naviagate to root folder and run `npm install`
 3. Navigate to the `client` folder and run `npm install`
-4. Create a file called `jwt.config.js` in the `server/config/` directory to hold the  access secret and the refresh secret, shown below.
-```
-module.exports = {
-    accessSecret: 'accesssecret',
-    refreshSecret: 'refreshsecret'
-}
-```
-5. Start mongo shell by running `mongo` then run `use fridge-inventory-tracker` to create database 
-6. Start database server at port `27017` by running `mongod` (should be standard port chosen at installation)
-7. Start express server by running `npm start` in root folder
-8. Start react dev server by running `npm start` in client folder
-9. Navtigate to `localhost:3000` in your browser to view the app
+4. Start mongo shell by running `mongo` then run `use fridge-inventory-tracker` to create database 
+5. Start database server at port `27017` by running `mongod` (should be standard port chosen at installation)
+6. Start express server by running `npm start` in root folder
+7. Start react dev server by running `npm start` in client folder
+8. Navtigate to `localhost:3000` in your browser to view the app
