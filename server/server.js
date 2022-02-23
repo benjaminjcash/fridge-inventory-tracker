@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require('cors');
@@ -46,3 +47,5 @@ app.use(error404);
 app.listen(PORT, function() {
     console.log(`Server listening on PORT ${PORT}...`);
 });
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
