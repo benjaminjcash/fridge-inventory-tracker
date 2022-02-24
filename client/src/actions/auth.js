@@ -4,7 +4,7 @@ import { setStorage, getStorage, storageHasData } from '../utils/storage';
 
 export const requestLogin = (credentials) => {
     return (dispatch) => {
-        axios.post('http://localhost:3001/api/auth/login', credentials).then((res) => {
+        axios.post('/api/auth/login', credentials).then((res) => {
             if(res.data.success) {
                 setStorage('loggedIn', true);
                 setStorage('access_token', res.data.access_token);

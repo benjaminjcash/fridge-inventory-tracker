@@ -5,7 +5,7 @@ import { getStorage } from '../utils/storage';
 export const fetchUser = () => {
     const accessToken = getStorage('access_token');
     return (dispatch) => {
-        axios.get('http://localhost:3001/api/user/me', { 
+        axios.get('/api/user/me', { 
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }

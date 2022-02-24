@@ -7,7 +7,7 @@ import { BASE_URL, UPC_RESPONSE, ADDED_DATA } from '../utils/constants';
 export const searchUPC = (barcode) => {
     const accessToken = getStorage('access_token');
     return (dispatch) => {
-        const PRODUCT_ENDPOINT = `${BASE_URL}product/${barcode}`;
+        const PRODUCT_ENDPOINT = `/api/product/${barcode}`;
         axios.get(`${PRODUCT_ENDPOINT}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -26,7 +26,7 @@ export const searchUPC = (barcode) => {
 export const createProduct = (product) => {
     const accessToken = getStorage('access_token');
     return (dispatch) => {
-        const PRODUCT_ENDPOINT = `${BASE_URL}product`;
+        const PRODUCT_ENDPOINT = `/api/product`;
         axios.post(`${PRODUCT_ENDPOINT}`, product, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
