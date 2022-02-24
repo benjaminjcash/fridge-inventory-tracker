@@ -9,10 +9,10 @@ const userRoutes = require("./routes/user.routes");
 const productRoutes = require("./routes/product.routes");
 const { error404 } = require("./middleware/errors.middleware");
 const PORT = process.env.PORT || 3001;
-const DB_URL = process.env.__TEST__ ? 'mongodb://localhost/fridge-inventory-tracker-test' : 'mongodb://localhost/fridge-inventory-tracker';
+const dbUrls = require("./config/mongo.config");
+const DB_URL = dbUrls.cloud || dbUrls.local;
 const app = express();
 app.use(cors());
-//test
 
 mongoose.Promise = global.Promise;
 mongoose.connect(DB_URL, {

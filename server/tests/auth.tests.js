@@ -1,6 +1,5 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { BASE_URL } = require('../config');
 chai.use(chaiHttp);
 const expect = chai.expect;
 
@@ -13,7 +12,7 @@ describe('Auth API service', () => {
      */
     it('should register a user', (done) => {
         const random = Math.floor(Math.random() * 1000).toString();
-        chai.request(BASE_URL)
+        chai.request()
             .post('/api/auth/register')
             .send({
                 "username": random,

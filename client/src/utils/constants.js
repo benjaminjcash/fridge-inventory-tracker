@@ -1,5 +1,3 @@
-export const BASE_URL = 'http://localhost:3001/api/';
-export const BASE_URL_APP = 'http://localhost:3000/';
 export const DEFAULT_FETCH_ALL_ITEMS_OPTIONS = {
     types: null,
     name: null,

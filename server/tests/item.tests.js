@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { BASE_URL, TEST_ITEM_GET_ID, TEST_ITEM_UPDATE_ID, TEST_USER_ID } = require('../config');
+const { TEST_ITEM_GET_ID, TEST_ITEM_UPDATE_ID, TEST_USER_ID } = require('../config');
 chai.use(chaiHttp);
 const expect = chai.expect;
 
@@ -15,7 +15,7 @@ describe('Item API service', () => {
         "__v": 0
      */
     it('should get an item', (done) => {
-        chai.request(BASE_URL)
+        chai.request()
             .get(`/api/item/${TEST_ITEM_GET_ID}`)
             .end((err, res) => {
                 expect(res.status).to.be.equal(200);
@@ -36,7 +36,7 @@ describe('Item API service', () => {
         "__v": 0
      */
     it('should create an item', (done) => {
-        chai.request(BASE_URL)
+        chai.request()
             .post('/api/item')
             .send({
                 name: "test",
@@ -57,7 +57,7 @@ describe('Item API service', () => {
         "__v": 0
      */
     it('should update an item', (done) => {
-        chai.request(BASE_URL)
+        chai.request()
             .get(`/api/item/${TEST_ITEM_UPDATE_ID}`)
             .end((err, res) => {
                 expect(res.status).to.be.equal(200);
@@ -66,7 +66,7 @@ describe('Item API service', () => {
                 const update = {
                     "name": `${next}`
                 }
-                chai.request(BASE_URL)
+                chai.request()
                     .put(`/api/item/${TEST_ITEM_UPDATE_ID}`)
                     .send(update)
                     .end((err, res) => {
@@ -87,7 +87,7 @@ describe('Item API service', () => {
         "__v": 0
      */
     it('should delete an item', (done) => {
-        chai.request(BASE_URL)
+        chai.request()
             .post('/api/item')
             .send({
                 name: "test",
@@ -96,7 +96,7 @@ describe('Item API service', () => {
             })
             .end((err, res) => {
                 const itemId = res.body._id;
-                chai.request(BASE_URL)
+                chai.request()
                     .delete(`/api/item/${itemId}`)
                     .end((err, res) => {
                         expect(res.status).to.equal(200);

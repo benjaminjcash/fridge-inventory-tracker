@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import { BASE_URL, ADDED_DATA, UPDATED_DATA, DELETED_DATA, FETCHED_ITEMS, FETCHED_ALL_TYPES } from '../utils/constants';
+import { ADDED_DATA, UPDATED_DATA, DELETED_DATA, FETCHED_ITEMS, FETCHED_ALL_TYPES } from '../utils/constants';
 import { getStorage } from '../utils/storage';
 const ITEM_ENDPOINT = `/api/item`;
 

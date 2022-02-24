@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { getStorage } from '../utils/storage';
-import { BASE_URL, UPC_RESPONSE, ADDED_DATA } from '../utils/constants';
-// const BARCODE = '049000011340';
-// const UPC_ENDPOINT = `${BASE_URL}upc/${BARCODE}`;
+import { UPC_RESPONSE, ADDED_DATA } from '../utils/constants';
 
 export const searchUPC = (barcode) => {
     const accessToken = getStorage('access_token');

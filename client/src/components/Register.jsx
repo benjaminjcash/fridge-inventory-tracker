@@ -60,7 +60,7 @@ const Register = ({ error, dispatchError }) => {
                 name: formValues.name,
                 email: formValues.email
             }
-            axios.post('http://localhost:3001/api/auth/register', data).then((res) => {
+            axios.post('/api/auth/register', data).then((res) => {
                 if (res?.data?.success) {
                     setIsOpen(true);
                 } else {

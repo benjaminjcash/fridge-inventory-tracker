@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { BASE_URL, TEST_USER_ID } = require('../config');
+const { TEST_USER_ID } = require('../config');
 chai.use(chaiHttp);
 const expect = chai.expect;
 
@@ -12,7 +12,7 @@ describe('User API service', () => {
         "email": "admin"
      */
     it('should get a user', (done) => {
-        chai.request(BASE_URL)
+        chai.request()
             .get('/api/user/me')
             .end((err, res) => {
                 expect(res.status).to.be.equal(200);
