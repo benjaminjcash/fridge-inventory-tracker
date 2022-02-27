@@ -11,7 +11,7 @@ export const fetchUser = () => {
             }
         }).then((res) => {
             if(!res.data.success) {
-                console.error(res.data.message);
+                console.error(res.data);
             } else {
                 dispatch({
                     type: FETCHED_USER,
