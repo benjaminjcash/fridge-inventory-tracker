@@ -26,6 +26,8 @@ export const FETCHED_ALL_TYPES = 'fetched_all_types';
 
 /** Data */
 export const ADDED_DATA = 'added_data';
+export const ACTION_PRODUCT = 'product';
+export const ACTION_ITEM = 'item';
 export const UPDATED_DATA = 'updated_data';
 export const DELETED_DATA = 'deleted_data';
 export const CLEARED_DATA = 'cleared_data';

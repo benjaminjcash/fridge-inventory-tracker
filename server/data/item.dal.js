@@ -3,7 +3,7 @@ const Item = require("../models/item.model");
 exports.doCreateItem = async (req) => {
     const newItem = new Item({
         owner_id: req.auth.id,
-        product_id: '',
+        product_id: req.body.product_id,
         expiration_date: new Date(req.body.expiration_date),
     });
     return newItem.save()

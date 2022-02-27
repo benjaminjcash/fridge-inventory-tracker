@@ -22,8 +22,16 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setSca
           marginBottom: '-10px',
           marginTop: '-10px',
           color: 'orange'
-         })}><h4>Scan Item</h4></Block>
-        <FormControl label={() => "Barcode"}>
+         })}>
+           <h4 className={css({ marginBottom: '0px' })}>Scan Item</h4>
+           <p className={css({ fontSize: '12px', marginTop: '4px', marginBottom: '16px' })}>Click <em>Scan</em> to open your camera, or you can enter the barcode manually below.</p>
+          </Block>
+        <Button 
+          onClick={() => setScannerIsOpen(true)}
+          size={buttonSize.mini}
+          className={css({ backgroundColor: 'orange', color: 'black', marginBottom: '16px' })}
+        >Scan</Button>
+        <FormControl>
           <Input
             value={barcodeInput}
             onChange={event => setBarcodeInput(event.currentTarget.value)}
@@ -35,11 +43,6 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setSca
           size={buttonSize.mini}
           className={css({ backgroundColor: 'orange', color: 'black' })}
         >Search</Button>
-        <Button 
-          onClick={() => setScannerIsOpen(true)}
-          size={buttonSize.mini}
-          className={css({ backgroundColor: 'orange', color: 'black', marginLeft: '8px' })}
-        >Scan</Button>
       </StyledBody>
     </Card>
   );

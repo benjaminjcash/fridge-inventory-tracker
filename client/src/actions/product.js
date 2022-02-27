@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getStorage } from '../utils/storage';
-import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND } from '../utils/constants';
+import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND, PRODUCT_FOUND, ACTION_PRODUCT } from '../utils/constants';
 
 export const searchUPC = (barcode) => {
   const accessToken = getStorage('access_token');
@@ -38,7 +38,7 @@ export const searchProduct = (barcode) => {
       } else {
         dispatch({
           type: PRODUCT_FOUND,
-          data
+          data: data.data[0]
         });
       }
     }).catch((err) => {
@@ -62,6 +62,10 @@ export const createProduct = (product) => {
         dispatch({
           type: ADDED_DATA,
           data: res.data
+        });
+        dispatch({
+          type: PRODUCT_FOUND,
+          data: res.data.data
         });
       }
     }).catch((err) => {

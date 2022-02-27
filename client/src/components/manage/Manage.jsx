@@ -37,20 +37,17 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
   }
 
   const closeConfirmModal = () => {
-    setClearAddItem(true);
-    setClearDeleteItem(true);
     setClearUpdateItem(true);
-    setClearCreateProduct(true);
-    setClearSearchUPC(true);
+    setClearDeleteItem(true);
     clearData();
     setConfirmModalIsOpen(false);
   }
 
   React.useEffect(() => {
-    if(data.success) {
+    if(data.success && (data.action === 'update' || data.action === 'delete')) {
       setConfirmModalIsOpen(true);
     } else {
-      fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'build_list');
+      // fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'build_list');
     }
   }, [data])
 

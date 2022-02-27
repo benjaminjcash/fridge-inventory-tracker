@@ -20,8 +20,9 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
       name: valueName,
       type: valueType,
       image_url: valueImageUrl,
-      // shelf_life: valueShelfLife,
-      upc_data: valueUpcData
+      shelf_life: 0,
+      upc_data: valueUpcData,
+      upc_code: JSON.parse(valueUpcData).upc
     }
     doCreateProduct(product);
   }
@@ -37,7 +38,6 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
   }, [clearCreateProduct]);
 
   React.useEffect(() => {
-    console.log(upcData);
     if(typeof upcData === 'object' && !Array.isArray(upcData)) {
       setValueName(`${upcData[UPC_RESPONSE_KEY_BRAND]} ${upcData[UPC_RESPONSE_KEY_TITLE]}`);
       const category = upcData[UPC_RESPONSE_KEY_CATEGORY];
@@ -59,8 +59,11 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: 'blue'
-        })}><h4>Create Product</h4></Block>
+          color: '#0096FF'
+        })}>
+          <h4 className={css({ marginBottom: '0px' })}>Create Product</h4>
+          <p className={css({ fontSize: '12px', marginTop: '4px', marginBottom: '16px' })}>This product has not yet been added to our database, override any defaults below and click <em>Create</em> to do so.</p>
+        </Block>
         <FormControl label={() => "Name"}>
           <Input
             value={valueName}
@@ -101,7 +104,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
         <Button 
           onClick={() => handleCreateProduct()}
           size={buttonSize.mini}
-          className={css({ backgroundColor: 'Blue', color: 'white' })}
+          className={css({ backgroundColor: '#0096FF', color: 'black' })}
         >Create</Button>
       </StyledBody>
     </Card>
