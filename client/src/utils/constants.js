@@ -16,8 +16,10 @@ export const FETCHED_USER = 'fetched_user';
 export const DISPATCH_ERROR = 'dispatch_error';
 export const CLEAR_ERROR = 'clear_error';
 
-/** Item */
+/** Item/Product */
 export const FETCHED_ITEMS = 'fetched_items';
+export const NO_PRODUCT_FOUND = 'no_product_found';
+export const PRODUCT_FOUND = 'product_found';
 
 /** Type */
 export const FETCHED_ALL_TYPES = 'fetched_all_types';

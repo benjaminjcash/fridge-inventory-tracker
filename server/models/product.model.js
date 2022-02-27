@@ -22,6 +22,11 @@ const ProductSchema = new Schema({
         type: String,
         required: true
     },
+    upc_code: {
+      type: String,
+      required: true,
+      unquie: true
+    }
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

@@ -16,3 +16,17 @@ exports.doCreateProduct = async (req) => {
             throw err;
         });
 }
+
+exports.doSearchProduct = async (req) => {
+  const { barcode } = req.params;
+    let query = {
+      upc_code: barcode
+    };
+    return Product
+            .find(query)
+            .then((data) => {
+                return data;
+            }).catch((err) => {
+                throw err;
+            });
+}

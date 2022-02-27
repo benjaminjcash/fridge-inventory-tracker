@@ -6,6 +6,7 @@ import user from './user';
 import data from './data';
 import types from './types';
 import upc from './upc';
+import product from './product';
 
 const reducer = combineReducers({
     items: item,
@@ -14,7 +15,8 @@ const reducer = combineReducers({
     auth,
     error,
     user,
-    data
+    data,
+    product
 });
 
 export default reducer;

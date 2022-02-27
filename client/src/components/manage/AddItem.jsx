@@ -10,10 +10,11 @@ import ManuallyAddItem from './ManuallyAddItem';
 import Scanner from '../scanner/Scanner';
 import { useStyletron } from 'baseui';
 
-const AddItem = ({ upcData, searchProduct, searchUPC }) => {
+const AddItem = ({ upcData, searchProduct, searchUPC, productFound }) => {
   const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
   const [clearAddItem, setClearAddItem] = React.useState(false);
   const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
+  const [showCreateProduct, setShowCreateProduct] = React.useState(false);
   const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
   const [barcode, setBarcode] = React.useState('');
   const [css, theme] = useStyletron();
@@ -23,6 +24,15 @@ const AddItem = ({ upcData, searchProduct, searchUPC }) => {
       searchProduct(barcode);
     }
   }, [barcode]);
+
+  useEffect(() => {
+    if(productFound) {
+      console.log('product found');
+    } else {
+      searchUPC(barcode);
+      setShowCreateProduct(true);
+    }
+  }, [productFound]);
 
   const itemProps = {
     display: 'flex',
@@ -59,13 +69,22 @@ const AddItem = ({ upcData, searchProduct, searchUPC }) => {
       <FlexGridItem key={0} {...itemProps}>
         <ScanItem doSearchUPC={doSearchUPC} clearSearchUPC={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
       </FlexGridItem>
-      <FlexGridItem key={1} {...itemProps}>
-        <CreateProduct doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
-      </FlexGridItem>
-      <FlexGridItem key={2} {...itemProps}>
-        <ManuallyAddItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
-      </FlexGridItem>
-      {scannerIsOpen && <Scanner key={3} isOpen={scannerIsOpen} close={closeScannerModal} setBarcode={setBarcode}/>}
+      { 
+        showCreateProduct && 
+        <FlexGridItem key={1} {...itemProps}>
+          <CreateProduct doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
+        </FlexGridItem>
+      }
+      {/* {
+        barcode.length > 0 && 
+        <FlexGridItem key={2} {...itemProps}>
+          <ManuallyAddItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
+        </FlexGridItem>
+      } */}
+      { 
+        scannerIsOpen && 
+        <Scanner key={3} isOpen={scannerIsOpen} close={closeScannerModal} setBarcode={setBarcode}/>
+      }
     </FlexGrid>
   );
 }
@@ -73,7 +92,8 @@ const AddItem = ({ upcData, searchProduct, searchUPC }) => {
 const ConnectedAddItem = connect(
   (state) => {
     return {
-      upcData: state.upc
+      upcData: state.upc,
+      productFound: 'found' in state.product ? state.product.found : true
     }
   }, {
     createItem,

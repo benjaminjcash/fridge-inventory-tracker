@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { doCreateProduct } = require("../data/product.dal");
+const { doCreateProduct, doSearchProduct } = require("../data/product.dal");
 
 exports.searchUPC = async (req, res) => {
     try {
@@ -19,6 +19,30 @@ exports.searchUPC = async (req, res) => {
             error: err
         });
     }
+}
+
+exports.searchProduct = async (req, res) => {
+  try {
+      const product = await doSearchProduct(req);
+      if(!product.length > 0) {
+          return res.json({
+              success: false,
+              error: "product not found"
+          });
+      } else {
+          res.json({
+              success: true,
+              data: product
+          });
+      }
+  }
+  catch(err) {
+      console.error(err);
+      res.send({
+          success: false,
+          error: err
+      });
+  }
 }
 
 exports.createProduct = async (req, res) => {
