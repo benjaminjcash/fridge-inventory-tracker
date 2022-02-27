@@ -7,7 +7,7 @@ import { useStyletron } from 'baseui';
 import { updateItem, deleteItem, fetchAllItems } from '../../actions/item';
 import { clearData } from '../../actions/data';
 import AddItem from './AddItem';
-import UpdateItem from './UpdateItem';
+import UpdateProduct from './UpdateProduct';
 import DeleteItem from './DeleteItem';
 import ConfirmModal from '../shared/ConfirmModal';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../utils/constants';
@@ -16,7 +16,7 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
   const [css, theme] = useStyletron();
   const [confirmModalIsOpen, setConfirmModalIsOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(0);
-  const [clearUpdateItem, setClearUpdateItem] = React.useState(false);
+  const [clearUpdateProduct, setClearUpdateProduct] = React.useState(false);
   const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
 
   const itemProps = {
@@ -26,7 +26,7 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
     height: 'min-content'
   };
 
-  const doUpdateItem = (item) => {
+  const doUpdateProduct = (item) => {
     setClearUpdateItem(false);
     updateItem(item);
   }
@@ -37,7 +37,7 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
   }
 
   const closeConfirmModal = () => {
-    setClearUpdateItem(true);
+    setClearUpdateProduct(true);
     setClearDeleteItem(true);
     clearData();
     setConfirmModalIsOpen(false);
@@ -46,8 +46,6 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
   React.useEffect(() => {
     if(data.success && (data.action === 'update' || data.action === 'delete')) {
       setConfirmModalIsOpen(true);
-    } else {
-      // fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'build_list');
     }
   }, [data])
 
@@ -68,7 +66,7 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
           }}
         >
           <Button>Scan Item</Button>
-          <Button>Update Item</Button>
+          {/* <Button>Update Product</Button> */}
           <Button>Delete Item</Button>
         </ButtonGroup>
       </FlexGridItem>
@@ -77,12 +75,12 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
           <AddItem />
         </FlexGridItem>
       }
-      { selected === 1 && 
+      {/* { selected === 1 && 
         <FlexGridItem {...itemProps}>
-          <UpdateItem doUpdateItem={doUpdateItem} items={items} clearUpdateItem={clearUpdateItem}/>
+          <UpdateProduct doUpdateProduct={doUpdateProduct} products={products} clearUpdateProduct={clearUpdateProduct}/>
         </FlexGridItem>
-      }
-      { selected === 2 && 
+      } */}
+      { selected === 1 && 
         <FlexGridItem {...itemProps}>
           <DeleteItem doDeleteItem={doDeleteItem} items={items} clearDeleteItem={clearDeleteItem} />
         </FlexGridItem>

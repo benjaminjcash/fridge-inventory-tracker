@@ -9,7 +9,7 @@ import { Block } from "baseui/block";
 import { Select, SIZE as selectSize } from 'baseui/select';
 import parseISO from 'date-fns/parseISO'
 
-const UpdateItem = ({ items, doUpdateItem, clearUpdateItem }) => {
+const UpdateProduct = ({ items, doUpdateItem, clearUpdateItem }) => {
     const [css, theme] = useStyletron();
     const [itemList, setItemList] = React.useState([]);
     const [valueItemSelect, setValueItemSelect] = React.useState([]);
@@ -69,8 +69,8 @@ const UpdateItem = ({ items, doUpdateItem, clearUpdateItem }) => {
                     marginBottom: '-10px',
                     marginTop: '-10px',
                     color: 'yellow'
-                })}><h4>Update Item</h4></Block>
-                <FormControl label={() => "Choose an item to update"}>
+                })}><h4>Update Product</h4></Block>
+                <FormControl label={() => "Choose an product to update"}>
                     <Select
                         options={itemList}
                         labelKey="name"
@@ -128,4 +128,4 @@ const UpdateItem = ({ items, doUpdateItem, clearUpdateItem }) => {
     );
 }
 
-export default UpdateItem;
+export default UpdateProduct;
