@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const logger = require("./utils/logger");
 const cors = require('cors');
 const itemRoutes = require("./routes/item.routes");
 const authRoutes = require("./routes/auth.routes");
@@ -21,17 +22,17 @@ mongoose.connect(DB_URL, {
     useUnifiedTopology: true,
     useCreateIndex: true
 }).catch((err) => {
-    console.error(err);
+    logger.error(err);
 });
 
 const db = mongoose.connection;
 db.on('error', function(err) {
-    console.error("Unable to connect to Mongo..");
-    console.error(err);
-    db.close();
+  logger.error("Unable to connect to Mongo..");
+  logger.error(err);
+  db.close();
 });
 db.once('open', function() {
-    console.log(`Connection to Mongo was successful!`);
+    logger.info(`Connection to Mongo was successful!`);
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -52,5 +53,5 @@ app.use("/api/product", productRoutes);
 app.use(error404);
 
 app.listen(PORT, function() {
-    console.log(`Server listening on PORT ${PORT}...`);
+  logger.info(`Server listening on PORT ${PORT}...`);
 });

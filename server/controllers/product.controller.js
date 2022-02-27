@@ -1,18 +1,20 @@
 const axios = require("axios");
+const logger = require("../utils/logger");
 const { doCreateProduct, doSearchProduct } = require("../data/product.dal");
 
 exports.searchUPC = async (req, res) => {
+  logger.info('search UPC hit');
   try {
     const barcode = req.params.barcode;
-    console.log(`searching UPC with barcode: ${barcode}`);
+    logger.info(`searching UPC with barcode: ${barcode}`);
     const endpoint = `https://api.upcitemdb.com/prod/trial/lookup?upc=${barcode}`;
     axios.get(endpoint)
     .then(resp => {
-      console.log('found ' + resp.data.items[0].title);
+      logger.info('found ' + resp.data.items[0].title);
       res.send(resp.data);
     })
     .catch(error => {
-      console.error(error);
+      logger.error(error);
     });
   }
   catch(err) {
@@ -39,7 +41,7 @@ exports.searchProduct = async (req, res) => {
     }
   }
   catch(err) {
-    console.error(err);
+    logger.error(err);
     res.send({
       success: false,
       error: err
@@ -63,7 +65,7 @@ exports.createProduct = async (req, res) => {
     }
   }
   catch(err) {
-    console.error(err);
+    logger.error(err);
     res.send({
       success: false,
       error: err

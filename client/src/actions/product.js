@@ -3,6 +3,7 @@ import { getStorage } from '../utils/storage';
 import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND, PRODUCT_FOUND, ACTION_PRODUCT } from '../utils/constants';
 
 export const searchUPC = (barcode) => {
+  console.log('search upc sent');
   const accessToken = getStorage('access_token');
   return (dispatch) => {
     const UPC_ENDPOINT = `/api/product/upc/${barcode}`;
@@ -11,6 +12,7 @@ export const searchUPC = (barcode) => {
         Authorization: `Bearer ${accessToken}`
       }
     }).then((res) => {
+      console.log(res);
       dispatch({
         type: UPC_RESPONSE,
         data: res.data.items[0]

@@ -1,4 +1,5 @@
 const Item = require("../models/item.model");
+const logger = require('../utils/logger');
 const { doGetItem, doGetAllItems, doUpdateItem, doCreateItem } = require("../data/item.dal");
 
 exports.createItem = async (req, res) => {
@@ -17,7 +18,7 @@ exports.createItem = async (req, res) => {
         }
     }
     catch(err) {
-        console.error(err);
+        logger.error(err);
         res.send({
             success: false,
             error: err
@@ -41,7 +42,7 @@ exports.getAllItems = async (req, res) => {
         }
     }
     catch(err) {
-        console.error(err);
+        logger.error(err);
         res.send({
             success: false,
             error: err
@@ -65,7 +66,7 @@ exports.getItem = async (req, res)  => {
         }
     }
     catch(err) {
-        console.error(err);
+        logger.error(err);
         res.send({
             success: false,
             error: err
@@ -89,7 +90,7 @@ exports.updateItem = async (req, res) => {
         }
     }
     catch(err) {
-        console.error(err);
+        logger.error(err);
         res.send({
             success: false,
             error: err

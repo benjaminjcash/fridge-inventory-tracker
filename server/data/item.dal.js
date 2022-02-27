@@ -1,4 +1,5 @@
 const Item = require("../models/item.model");
+const logger = require("../utils/logger");
 
 exports.doCreateItem = async (req) => {
   const newItem = new Item({
@@ -10,7 +11,7 @@ exports.doCreateItem = async (req) => {
     .then((data) => {
       return data;
     }).catch(err => {
-      console.error(err);
+      logger.error(err);
       throw err;
     });
 }
