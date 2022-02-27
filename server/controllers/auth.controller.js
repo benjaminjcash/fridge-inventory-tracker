@@ -35,7 +35,6 @@ exports.registerUser = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-  logger.info('login hit');
   try {
     const user = await doGetUserWithPassword(req.body.username);
     if(!user) return res.status(400).send({ 

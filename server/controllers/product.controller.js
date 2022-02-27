@@ -3,14 +3,13 @@ const logger = require("../utils/logger");
 const { doCreateProduct, doSearchProduct } = require("../data/product.dal");
 
 exports.searchUPC = async (req, res) => {
-  logger.info('search UPC hit');
   try {
     const barcode = req.params.barcode;
     logger.info(`searching UPC with barcode: ${barcode}`);
     const endpoint = `https://api.upcitemdb.com/prod/trial/lookup?upc=${barcode}`;
     axios.get(endpoint)
     .then(resp => {
-      logger.info('found ' + resp.data.items[0].title);
+      logger.info(`found ${resp.data.total} item(s)`);
       res.send(resp.data);
     })
     .catch(error => {

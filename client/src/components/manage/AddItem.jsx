@@ -36,13 +36,15 @@ const AddItem = ({ upcData, searchProduct, createProduct, searchUPC, product, cl
     } else {
       if(barcode.length) {
         searchUPC(barcode);
-        setShowCreateProduct(true);
       } else if(barcodeInput.length) {
         searchUPC(barcodeInput);
-        setShowCreateProduct(true);
       }
     }
   }, [product]);
+
+  useEffect(() => {
+    if(Object.keys(upcData) > 0) setShowCreateProduct(true);
+  }, [upcData])
 
   const itemProps = {
     display: 'flex',
