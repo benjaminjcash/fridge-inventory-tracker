@@ -6,19 +6,14 @@ import { Block } from "baseui/block";
 import { Input, SIZE as inputSize } from 'baseui/input';
 import { Button, SIZE as buttonSize } from "baseui/button";
 
-const ScanItem = ({ doSearchUPC, clearSearchUPC, setScannerIsOpen }) => {
+const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setScannerIsOpen }) => {
   const [css, theme] = useStyletron();
-  const [valueBarcode, setValueBarcode] = React.useState([]);
-
-  const handleSearch = () => {
-    doSearchUPC(valueBarcode);
-  }
 
   React.useEffect(() => {
-    if (clearSearchUPC) {
-      setValueBarcode([]);
+    if (clearSearch) {
+      setBarcodeInput([]);
     }
-  }, [clearSearchUPC]);
+  }, [clearSearch]);
 
   return (
     <Card className={css({ height: 'auto', width: '100%' })} >
@@ -30,13 +25,13 @@ const ScanItem = ({ doSearchUPC, clearSearchUPC, setScannerIsOpen }) => {
          })}><h4>Scan Item</h4></Block>
         <FormControl label={() => "Barcode"}>
           <Input
-            value={valueBarcode}
-            onChange={event => setValueBarcode(event.currentTarget.value)}
+            value={barcodeInput}
+            onChange={event => setBarcodeInput(event.currentTarget.value)}
             size={inputSize.mini}
           />
         </FormControl>
         <Button 
-          onClick={() => handleSearch()}
+          onClick={doSearch}
           size={buttonSize.mini}
           className={css({ backgroundColor: 'orange', color: 'black' })}
         >Search</Button>

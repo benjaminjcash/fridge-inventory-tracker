@@ -2,14 +2,13 @@ const axios = require("axios");
 const { doCreateProduct, doSearchProduct } = require("../data/product.dal");
 
 exports.searchUPC = async (req, res) => {
-  console.log("TESTTTTTTTT");
   try {
     const barcode = req.params.barcode;
-    console.log(`searching UPC with barcode: ${barcode}...`);
+    console.log(`searching UPC with barcode: ${barcode}`);
     const endpoint = `https://api.upcitemdb.com/prod/trial/lookup?upc=${barcode}`;
     axios.get(endpoint)
     .then(resp => {
-      console.log(resp.data);
+      console.log('found ' + resp.data.items[0].title);
       res.send(resp.data);
     })
     .catch(error => {

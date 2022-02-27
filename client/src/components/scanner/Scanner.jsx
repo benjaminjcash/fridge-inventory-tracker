@@ -48,7 +48,9 @@ const Scanner = ({ isOpen, close, setBarcode }) => {
         locate: true
       },
         scan => {
-          if(scan.codeResult) {
+          if(!scan) {
+            alert('fail!');
+          } else if(scan.codeResult) {
             alert('success!');
             setBarcode(scan.codeResult.code);
           } else {

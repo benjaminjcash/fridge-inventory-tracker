@@ -17,6 +17,7 @@ const AddItem = ({ upcData, searchProduct, searchUPC, productFound }) => {
   const [showCreateProduct, setShowCreateProduct] = React.useState(false);
   const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
   const [barcode, setBarcode] = React.useState('');
+  const [barcodeInput, setBarcodeInput] = React.useState([]);
   const [css, theme] = useStyletron();
 
   useEffect(() => {
@@ -29,7 +30,11 @@ const AddItem = ({ upcData, searchProduct, searchUPC, productFound }) => {
     if(productFound) {
       console.log('product found');
     } else {
-      searchUPC(barcode);
+      if(barcode.length) {
+        searchUPC(barcode);
+      } else if(barcodeInput.length) {
+        searchUPC(barcodeInput);
+      }
       setShowCreateProduct(true);
     }
   }, [productFound]);
@@ -41,9 +46,9 @@ const AddItem = ({ upcData, searchProduct, searchUPC, productFound }) => {
     height: 'min-content'
   };
 
-  const doSearchUPC = (barcode) => {
+  const doSearch = () => {
+    searchProduct(barcodeInput);
     setClearSearchUPC(false);
-    searchUPC(barcode);
   }
 
   const doCreateItem = (item) => {
@@ -67,7 +72,7 @@ const AddItem = ({ upcData, searchProduct, searchUPC, productFound }) => {
       className={css({ width: '100%' })}
     >
       <FlexGridItem key={0} {...itemProps}>
-        <ScanItem doSearchUPC={doSearchUPC} clearSearchUPC={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
+        <ScanItem barcodeInput={barcodeInput} setBarcodeInput={setBarcodeInput} doSearch={doSearch} clearSearchUPC={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
       </FlexGridItem>
       { 
         showCreateProduct && 
