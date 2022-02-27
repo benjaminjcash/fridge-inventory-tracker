@@ -35,7 +35,7 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
           color: 'green'
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Add Item</h4>
-          <p className={css({ fontSize: '12px', marginTop: '4px', marginBottom: '16px' })}>The product was found in the database, set the expiration date and click <em>Add</em> to add the item to your Fridge.</p>
+          <p className={css({ fontSize: '14px', marginTop: '4px', marginBottom: '32px' })}>The product was found in the database, set the expiration date and click <em>Add</em> to add the item to your Fridge.</p>
         </Block>
         <p className={css({ fontSize: '16px', marginTop: '32px' })}><span className={css({ color: 'green'})}>Name: </span>{product.name}</p>
         <p className={css({ fontSize: '16px', marginTop: '-8px' })}><span className={css({ color: 'green'})}>Type: </span>{product.type}</p>

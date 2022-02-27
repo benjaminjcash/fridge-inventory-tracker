@@ -62,7 +62,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           color: '#0096FF'
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Create Product</h4>
-          <p className={css({ fontSize: '12px', marginTop: '4px', marginBottom: '16px' })}>This product has not yet been added to our database, override any defaults below and click <em>Create</em> to do so.</p>
+          <p className={css({ fontSize: '14px', marginTop: '4px', marginBottom: '32px' })}>This product has not yet been added to our database, override any defaults below and click <em>Create</em> to do so.</p>
         </Block>
         <FormControl label={() => "Name"}>
           <Input

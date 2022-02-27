@@ -24,7 +24,7 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setSca
           color: 'orange'
          })}>
            <h4 className={css({ marginBottom: '0px' })}>Scan Item</h4>
-           <p className={css({ fontSize: '12px', marginTop: '4px', marginBottom: '16px' })}>Click <em>Scan</em> to open your camera, or you can enter the barcode manually below.</p>
+           <p className={css({ fontSize: '14px', marginTop: '4px', marginBottom: '32px' })}>Click <em>Scan</em> to open your camera, or you can enter the barcode manually below.</p>
           </Block>
         <Button 
           onClick={() => setScannerIsOpen(true)}
