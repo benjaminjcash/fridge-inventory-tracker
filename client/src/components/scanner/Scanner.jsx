@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import Quagga from "quagga";
 import { useStyletron } from 'baseui';
 import { Modal, ModalBody, SIZE, ROLE } from "baseui/modal";
-import { searchUPC } from '../../actions/product';
 
-const Scanner = ({ isOpen, close, searchUPC }) => {
+const Scanner = ({ isOpen, close, setBarcode }) => {
   const [css] = useStyletron();
   const [barcodeImage, setBarcodeImage] = useState();
-  const [barcode, setBarcode] = useState('');
 
   const handleOnChange = e => {
     const reader = new FileReader();
@@ -26,42 +23,41 @@ const Scanner = ({ isOpen, close, searchUPC }) => {
     startQuagga();
   }, [barcodeImage]);
 
-  useEffect(() => {
-    if(barcode.length > 0) searchUPC(barcode);
-  }, [barcode]);
-
   const startQuagga = () => {
-    Quagga.decodeSingle({
-      src: barcodeImage,
-      inputStream: {
-        type: "ImageStream",
-        constraint: {
-          width: { "min": 350 },
-          height: { "min": 300 },
-          facingMode: "environment",
-          aspectRatio: { "min": 1, "max": 2 }
+    if(barcodeImage) {
+      Quagga.decodeSingle({
+        src: barcodeImage,
+        inputStream: {
+          type: "ImageStream",
+          constraint: {
+            width: { "min": 350 },
+            height: { "min": 300 },
+            facingMode: "environment",
+            aspectRatio: { "min": 1, "max": 2 }
+          }
+        },
+        locator: {
+          patchSize: "medium",
+          halfSample: true
+        },
+        numOfWorkers: 2,
+        frequency: 10,
+        decoder: {
+          readers: ["upc_reader", "upc_e_reader"]
+        },
+        locate: true
+      },
+        scan => {
+          if(scan.codeResult) {
+            alert('success!');
+            setBarcode(scan.codeResult.code);
+          } else {
+            alert('fail!');
+          }
+          close();
         }
-      },
-      locator: {
-        patchSize: "medium",
-        halfSample: true
-      },
-      numOfWorkers: 2,
-      frequency: 10,
-      decoder: {
-        readers: ["upc_reader", "upc_e_reader"]
-      },
-      locate: true
-    },
-      scan => {
-        if(scan.codeResult) {
-          alert('success! ' + scan.codeResult.code);
-          setBarcode(scan.codeResult.code);
-        } else {
-          alert('fail!');
-        }
-      }
-    );
+      );
+    }
   }
 
   return (
@@ -84,8 +80,4 @@ const Scanner = ({ isOpen, close, searchUPC }) => {
   );
 }
 
-const ConnectedScanner = connect(null, { 
-  searchUPC
-})(Scanner);
-
-export default ConnectedScanner;
+export default Scanner;

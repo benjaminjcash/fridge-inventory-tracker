@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { searchUPC, createProduct } from '../../actions/product';
+import { searchUPC, createProduct, searchProduct } from '../../actions/product';
 import { clearData } from '../../actions/data';
 import { createItem } from '../../actions/item';
 import ScanItem from './ScanItem';
@@ -10,12 +10,19 @@ import ManuallyAddItem from './ManuallyAddItem';
 import Scanner from '../scanner/Scanner';
 import { useStyletron } from 'baseui';
 
-const AddItem = ({ upcData }) => {
+const AddItem = ({ upcData, searchProduct, searchUPC }) => {
   const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
   const [clearAddItem, setClearAddItem] = React.useState(false);
   const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
   const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
+  const [barcode, setBarcode] = React.useState('');
   const [css, theme] = useStyletron();
+
+  useEffect(() => {
+    if(barcode.length) {
+      searchProduct(barcode);
+    }
+  }, [barcode]);
 
   const itemProps = {
     display: 'flex',
@@ -58,7 +65,7 @@ const AddItem = ({ upcData }) => {
       <FlexGridItem key={2} {...itemProps}>
         <ManuallyAddItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
       </FlexGridItem>
-      {scannerIsOpen && <Scanner key={3} isOpen={scannerIsOpen} close={closeScannerModal} />}
+      {scannerIsOpen && <Scanner key={3} isOpen={scannerIsOpen} close={closeScannerModal} setBarcode={setBarcode}/>}
     </FlexGrid>
   );
 }
@@ -72,7 +79,8 @@ const ConnectedAddItem = connect(
     createItem,
     clearData,
     searchUPC,
-    createProduct
+    createProduct,
+    searchProduct
   }
 )(AddItem);
 

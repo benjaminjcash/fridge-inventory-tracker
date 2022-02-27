@@ -5,8 +5,8 @@ import { UPC_RESPONSE, ADDED_DATA } from '../utils/constants';
 export const searchUPC = (barcode) => {
     const accessToken = getStorage('access_token');
     return (dispatch) => {
-        const PRODUCT_ENDPOINT = `/api/product/${barcode}`;
-        axios.get(`${PRODUCT_ENDPOINT}`, {
+        const UPC_ENDPOINT = `/api/product/upc/${barcode}`;
+        axios.get(`${UPC_ENDPOINT}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -18,6 +18,23 @@ export const searchUPC = (barcode) => {
         }).catch((err) => {
             console.error(err);
         });
+    }
+}
+
+export const searchProduct = (barcode) => {
+  console.log('searchproduct ' + barcode);
+  const accessToken = getStorage('access_token');
+    return (dispatch) => {
+        const PRODUCT_ENDPOINT = `/api/product/${barcode}`;
+        axios.get(`${PRODUCT_ENDPOINT}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.error(err);
+        })
     }
 }
 

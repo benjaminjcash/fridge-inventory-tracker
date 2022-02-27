@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { doCreateProduct } = require("../data/product.dal");
 
-exports.search = async (req, res) => {
+exports.searchUPC = async (req, res) => {
     try {
         const barcode = req.params.barcode;
         const endpoint = `https://api.upcitemdb.com/prod/trial/lookup?upc=${barcode}`;
