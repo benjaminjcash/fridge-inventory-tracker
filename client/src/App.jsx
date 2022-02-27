@@ -4,8 +4,8 @@ import { useStyletron } from 'baseui';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { checkLoggedIn } from './actions/auth';
 import { fetchUser } from './actions/user';
-import ConnectedLogin from './components/Login';
-import Register from './components/Register';
+import ConnectedLogin from './components/auth/Login';
+import Register from './components/auth/Register';
 import Main from './components/Main';
 
 function App({ auth, checkLoggedIn, user, fetchUser }) {

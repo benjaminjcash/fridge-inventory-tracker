@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { useStyletron } from 'baseui';
-import { createItem, updateItem, deleteItem, fetchAllItems } from '../actions/item';
-import { searchUPC, createProduct } from '../actions/product';
-import { clearData } from '../actions/data';
+import { createItem, updateItem, deleteItem, fetchAllItems } from '../../actions/item';
+import { searchUPC, createProduct } from '../../actions/product';
+import { clearData } from '../../actions/data';
 import AddItem from './AddItem';
 import UpdateItem from './UpdateItem';
 import DeleteItem from './DeleteItem';
 import ScanItem from './ScanItem';
 import CreateProduct from './CreateProduct';
-import ConfirmModal from './ConfirmModal';
-import Scanner from './scanner/Scanner';
-import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
+import ConfirmModal from '../shared/ConfirmModal';
+import Scanner from '../scanner/Scanner';
+import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../utils/constants';
 
 const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetchAllItems, clearData, searchUPC, createProduct }) => {
   const [css, theme] = useStyletron();

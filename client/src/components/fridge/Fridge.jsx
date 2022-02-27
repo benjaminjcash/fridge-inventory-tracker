@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { Button } from 'baseui/button';
 import { useStyletron } from 'baseui';
 import Controls from './Controls';
 import Dashboard from './Dashboard';
 import ItemList from './ItemList';
-import { fetchAllItems } from '../actions/item';
-import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
+import { fetchAllItems } from '../../actions/item';
+import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../utils/constants';
 
 const Fridge = ({ items, types, fetchAllItems }) => {
     const [css, theme] = useStyletron();

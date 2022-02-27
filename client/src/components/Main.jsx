@@ -5,8 +5,8 @@ import { H4 } from 'baseui/typography';
 import { ButtonGroup, SIZE, MODE } from "baseui/button-group";
 import { Button } from "baseui/button";
 import { clearStorage } from '../utils/storage';
-import Fridge from './Fridge';
-import Manage from './Manage';
+import Fridge from './fridge/Fridge';
+import Manage from './manage/Manage';
 
 function Main({ currentUser }) {
   const [css, $theme] = useStyletron();

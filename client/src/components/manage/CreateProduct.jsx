@@ -5,7 +5,7 @@ import { FormControl } from "baseui/form-control";
 import { Input, SIZE as inputSize } from 'baseui/input';
 import { Button, SIZE as buttonSize } from "baseui/button";
 import { Block } from "baseui/block";
-import { UPC_RESPONSE_KEY_TITLE, UPC_RESPONSE_KEY_BRAND, UPC_RESPONSE_KEY_CATEGORY, UPC_RESPONSE_KEY_IMAGES } from '../utils/constants';
+import { UPC_RESPONSE_KEY_TITLE, UPC_RESPONSE_KEY_BRAND, UPC_RESPONSE_KEY_CATEGORY, UPC_RESPONSE_KEY_IMAGES } from '../../utils/constants';
 
 const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
     const [css, theme] = useStyletron();

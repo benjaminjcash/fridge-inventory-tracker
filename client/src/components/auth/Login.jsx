@@ -6,9 +6,9 @@ import { Card } from 'baseui/card';
 import { Input, SIZE as inputSize } from 'baseui/input';
 import { FormControl } from 'baseui/form-control';
 import { Button, SIZE as buttonSize } from 'baseui/button';
-import { requestLogin } from '../actions/auth';
-import { dispatchError } from '../actions/error';
-import Error from './Error';
+import { requestLogin } from '../../actions/auth';
+import { dispatchError } from '../../actions/error';
+import Error from '../shared/Error';
 
 const Login = ({ error, requestLogin, dispatchError }) => {
   const [css, theme] = useStyletron();

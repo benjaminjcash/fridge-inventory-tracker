@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
 import { connect } from 'react-redux';
-import { clearError } from '../actions/error';
+import { clearError } from '../../actions/error';
 
 const Error = ({ error, clearError }) => {
   const [isOpen, setIsOpen] = React.useState(false);

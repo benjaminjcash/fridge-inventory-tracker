@@ -8,8 +8,8 @@ import axios from 'axios';
 import { Button, KIND, SIZE as buttonSize } from 'baseui/button';
 import { FormControl } from 'baseui/form-control';
 import { Modal, ModalHeader, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
-import { dispatchError } from '../actions/error';
-import Error from './Error';
+import { dispatchError } from '../../actions/error';
+import Error from '../shared/Error';
 
 const Register = ({ error, dispatchError }) => {
   const [css, theme] = useStyletron();
