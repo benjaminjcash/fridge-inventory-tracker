@@ -98,7 +98,7 @@ const Register = ({ error, dispatchError }) => {
   return (
     <>
       <Card
-        className={css({ width: '100%' })}
+        className={css({ width: '100%', height: '100%' })}
       >
         {
           <>
