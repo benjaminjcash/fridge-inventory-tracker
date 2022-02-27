@@ -1,28 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { ButtonGroup, SIZE, MODE } from "baseui/button-group";
+import { Button } from "baseui/button";
 import { useStyletron } from 'baseui';
-import { createItem, updateItem, deleteItem, fetchAllItems } from '../../actions/item';
-import { searchUPC, createProduct } from '../../actions/product';
+import { updateItem, deleteItem, fetchAllItems } from '../../actions/item';
 import { clearData } from '../../actions/data';
 import AddItem from './AddItem';
 import UpdateItem from './UpdateItem';
 import DeleteItem from './DeleteItem';
-import ScanItem from './ScanItem';
-import CreateProduct from './CreateProduct';
 import ConfirmModal from '../shared/ConfirmModal';
-import Scanner from '../scanner/Scanner';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../utils/constants';
 
-const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetchAllItems, clearData, searchUPC, createProduct }) => {
+const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData }) => {
   const [css, theme] = useStyletron();
   const [confirmModalIsOpen, setConfirmModalIsOpen] = React.useState(false);
-  const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
-  const [clearAddItem, setClearAddItem] = React.useState(false);
-  const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
+  const [selected, setSelected] = React.useState(0);
   const [clearUpdateItem, setClearUpdateItem] = React.useState(false);
   const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
-  const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
 
   const itemProps = {
     display: 'flex',
@@ -30,16 +25,6 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
     alignItems: 'top',
     height: 'min-content'
   };
-
-  const doCreateItem = (item) => {
-    setClearAddItem(false);
-    createItem(item);
-  }
-
-  const doSearchUPC = (barcode) => {
-    setClearSearchUPC(false);
-    searchUPC(barcode);
-  }
 
   const doUpdateItem = (item) => {
     setClearUpdateItem(false);
@@ -51,11 +36,6 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
     deleteItem(item);
   }
 
-  const doCreateProduct = (product) => {
-    setClearCreateProduct(false);
-    createProduct(product);
-  }
-
   const closeConfirmModal = () => {
     setClearAddItem(true);
     setClearDeleteItem(true);
@@ -64,10 +44,6 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
     setClearSearchUPC(true);
     clearData();
     setConfirmModalIsOpen(false);
-  }
-
-  const closeScannerModal = () => {
-    setScannerIsOpen(false);
   }
 
   React.useEffect(() => {
@@ -85,25 +61,38 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
       flexGridRowGap={theme.sizing.scale300}
       className={css({ width: '100%', marginTop: theme.sizing.scale300 })}
     >
-      <FlexGridItem {...itemProps}>
-        <AddItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
+      <FlexGridItem className={css({ height: 'auto', backgroundColor: '#141414' })}>
+        <ButtonGroup 
+          size={SIZE.mini} 
+          mode={MODE.radio}
+          selected={selected}
+          onClick={(event, index) => {
+            setSelected(index);
+          }}
+        >
+          <Button>Scan Item</Button>
+          <Button>Update Item</Button>
+          <Button>Delete Item</Button>
+        </ButtonGroup>
       </FlexGridItem>
-      <FlexGridItem {...itemProps}>
-        <UpdateItem doUpdateItem={doUpdateItem} items={items} clearUpdateItem={clearUpdateItem}/>
-      </FlexGridItem>
-      <FlexGridItem {...itemProps}>
-        <DeleteItem doDeleteItem={doDeleteItem} items={items} clearDeleteItem={clearDeleteItem} />
-      </FlexGridItem>
-      <FlexGridItem {...itemProps}>
-        <ScanItem doSearchUPC={doSearchUPC} clearSearchUPC={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
-      </FlexGridItem>
-      <FlexGridItem {...itemProps}>
-        <CreateProduct doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
-      </FlexGridItem>
+      { selected === 0 && 
+        <FlexGridItem {...itemProps}>
+          <AddItem />
+        </FlexGridItem>
+      }
+      { selected === 1 && 
+        <FlexGridItem {...itemProps}>
+          <UpdateItem doUpdateItem={doUpdateItem} items={items} clearUpdateItem={clearUpdateItem}/>
+        </FlexGridItem>
+      }
+      { selected === 2 && 
+        <FlexGridItem {...itemProps}>
+          <DeleteItem doDeleteItem={doDeleteItem} items={items} clearDeleteItem={clearDeleteItem} />
+        </FlexGridItem>
+      }
     </FlexGrid>
 
     {confirmModalIsOpen && <ConfirmModal isOpen={confirmModalIsOpen} closeModal={closeConfirmModal} />}
-    {scannerIsOpen && <Scanner isOpen={scannerIsOpen} close={closeScannerModal} />}
     </>
   );
 }
@@ -117,12 +106,9 @@ const ConnectedManage = connect(
     }
   }, {
     fetchAllItems,
-    createItem,
     updateItem,
     deleteItem,
     clearData,
-    searchUPC,
-    createProduct
   }
 )(Manage);
 

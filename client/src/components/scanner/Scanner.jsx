@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import Quagga from "quagga";
 import { useStyletron } from 'baseui';
 import { Modal, ModalBody, SIZE, ROLE } from "baseui/modal";
-import Quagga from "quagga";
+import { searchUPC } from '../../actions/product';
 
-const Scanner = ({ isOpen, close }) => {
+const Scanner = ({ isOpen, close, searchUPC }) => {
   const [css] = useStyletron();
   const [barcodeImage, setBarcodeImage] = useState();
   const [barcode, setBarcode] = useState('');
@@ -13,7 +15,6 @@ const Scanner = ({ isOpen, close }) => {
     reader.readAsDataURL(e.target.files[0]);
     let img = new Image;
     img.src = URL.createObjectURL(e.target.files[0]);
-
     reader.onload = async () => {
       img.onload = () => {
         setBarcodeImage(reader.result);
@@ -23,7 +24,11 @@ const Scanner = ({ isOpen, close }) => {
 
   useEffect(() => {
     startQuagga();
-  }, [barcodeImage])
+  }, [barcodeImage]);
+
+  useEffect(() => {
+    if(barcode.length > 0) searchUPC(barcode);
+  }, [barcode]);
 
   const startQuagga = () => {
     Quagga.decodeSingle({
@@ -79,4 +84,8 @@ const Scanner = ({ isOpen, close }) => {
   );
 }
 
-export default Scanner;
+const ConnectedScanner = connect(null, { 
+  searchUPC
+})(Scanner);
+
+export default ConnectedScanner;

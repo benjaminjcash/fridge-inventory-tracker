@@ -1,87 +1,79 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { searchUPC, createProduct } from '../../actions/product';
+import { clearData } from '../../actions/data';
+import { createItem } from '../../actions/item';
+import ScanItem from './ScanItem';
+import CreateProduct from './CreateProduct';
+import ManuallyAddItem from './ManuallyAddItem';
+import Scanner from '../scanner/Scanner';
 import { useStyletron } from 'baseui';
-import { Card, StyledBody } from "baseui/card";
-import { FormControl } from "baseui/form-control";
-import { Input, SIZE as inputSize } from 'baseui/input';
-import { DatePicker } from "baseui/datepicker";
-import { Button, SIZE as buttonSize } from "baseui/button";
-import { Block } from "baseui/block";
 
+const AddItem = ({ upcData }) => {
+  const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
+  const [clearAddItem, setClearAddItem] = React.useState(false);
+  const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
+  const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
+  const [css, theme] = useStyletron();
 
-const AddItem = ({ doCreateItem, clearAddItem }) => {
-    const [css, theme] = useStyletron();
-    const [valueType, setValueType] = React.useState([]);
-    const [valueName, setValueName] = React.useState([]);
-    const [valueExpirationDate, setValueExpirationDate] = React.useState([]);
-    const [valueImageUrl, setValueImageUrl] = React.useState([]);
+  const itemProps = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'top',
+    height: 'min-content'
+  };
 
-    const handleAddItem = () => {
-        const item = {
-            name: valueName,
-            type: valueType,
-            expiration_date: valueExpirationDate,
-            image_url: valueImageUrl
-        }
-        doCreateItem(item);
-    }
+  const doSearchUPC = (barcode) => {
+    setClearSearchUPC(false);
+    searchUPC(barcode);
+  }
 
-    React.useEffect(() => {
-        if (clearAddItem) {
-            setValueType([]);
-            setValueName([]);
-            setValueExpirationDate([]);
-            setValueImageUrl([]);
-        }
-    }, [clearAddItem]);
+  const doCreateItem = (item) => {
+    setClearAddItem(false);
+    createItem(item);
+  }
 
-    return (
-        <Card className={css({ height: 'auto', width: '100%' })} >
-            <StyledBody>
-                <Block className={css({
-                    marginBottom: '-10px',
-                    marginTop: '-10px',
-                    color: 'green'
-                })}><h4>Add Item</h4></Block>
-                <FormControl label={() => "Name"}>
-                    <Input
-                        value={valueName}
-                        onChange={event => setValueName(event.currentTarget.value)}
-                        size={inputSize.mini}
-                    />
-                </FormControl>
-                <FormControl label={() => "Type"}>
-                    <Input
-                        value={valueType}
-                        onChange={event => setValueType(event.currentTarget.value)}
-                        size={inputSize.mini}
-                    />
-                </FormControl>
-                <FormControl label={() => "Expiration Date"}>
-                    <DatePicker
-                        value={valueExpirationDate}
-                        onChange={({ date }) => {
-                            setValueExpirationDate(Array.isArray(date) ? date : [date]);
-                        }}
-                        formatString="MM/dd/yyyy"
-                        placeholder="mm/dd/yyyy"
-                        size={inputSize.mini}
-                    />
-                </FormControl>
-                <FormControl label={() => "Image URL"} caption={() => "use a square image"}>
-                    <Input
-                        value={valueImageUrl}
-                        onChange={event => setValueImageUrl(event.currentTarget.value)}
-                        size={inputSize.mini}
-                    />
-                </FormControl>
-                <Button 
-                    onClick={() => handleAddItem()}
-                    size={buttonSize.mini}
-                    className={css({ backgroundColor: 'green', color: 'white' })}
-                >Add</Button>
-            </StyledBody>
-        </Card>
-    );
+  const doCreateProduct = (product) => {
+    setClearCreateProduct(false);
+    createProduct(product);
+  }
+
+  const closeScannerModal = () => {
+    setScannerIsOpen(false);
+  }
+
+  return (
+    <FlexGrid
+      flexGridColumnCount={1}
+      flexGridRowGap={theme.sizing.scale300}
+      className={css({ width: '100%' })}
+    >
+      <FlexGridItem key={0} {...itemProps}>
+        <ScanItem doSearchUPC={doSearchUPC} clearSearchUPC={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
+      </FlexGridItem>
+      <FlexGridItem key={1} {...itemProps}>
+        <CreateProduct doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
+      </FlexGridItem>
+      <FlexGridItem key={2} {...itemProps}>
+        <ManuallyAddItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
+      </FlexGridItem>
+      {scannerIsOpen && <Scanner key={3} isOpen={scannerIsOpen} close={closeScannerModal} />}
+    </FlexGrid>
+  );
 }
 
-export default AddItem;
+const ConnectedAddItem = connect(
+  (state) => {
+    return {
+      upcData: state.upc
+    }
+  }, {
+    createItem,
+    clearData,
+    searchUPC,
+    createProduct
+  }
+)(AddItem);
+
+export default ConnectedAddItem;
