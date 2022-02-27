@@ -6,7 +6,7 @@ import { Block } from "baseui/block";
 import { Input, SIZE as inputSize } from 'baseui/input';
 import { Button, SIZE as buttonSize } from "baseui/button";
 
-const ScanItem = ({ doSearchUPC, clearSearchUPC, setScannerModalIsOpen }) => {
+const ScanItem = ({ doSearchUPC, clearSearchUPC, setScannerIsOpen }) => {
   const [css, theme] = useStyletron();
   const [valueBarcode, setValueBarcode] = React.useState([]);
 
@@ -41,7 +41,7 @@ const ScanItem = ({ doSearchUPC, clearSearchUPC, setScannerModalIsOpen }) => {
           className={css({ backgroundColor: 'orange', color: 'black' })}
         >Search</Button>
         <Button 
-          onClick={() => setScannerModalIsOpen(true)}
+          onClick={() => setScannerIsOpen(true)}
           size={buttonSize.mini}
           className={css({ backgroundColor: 'orange', color: 'black', marginLeft: '8px' })}
         >Scan</Button>

@@ -11,13 +11,13 @@ import DeleteItem from './DeleteItem';
 import ScanItem from './ScanItem';
 import CreateProduct from './CreateProduct';
 import ConfirmModal from './ConfirmModal';
-import ScannerModal from './scanner/ScannerModal';
+import Scanner from './scanner/Scanner';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
 const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetchAllItems, clearData, searchUPC, createProduct }) => {
   const [css, theme] = useStyletron();
   const [confirmModalIsOpen, setConfirmModalIsOpen] = React.useState(false);
-  const [scannerModalIsOpen, setScannerModalIsOpen] = React.useState(false);
+  const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
   const [clearAddItem, setClearAddItem] = React.useState(false);
   const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
   const [clearUpdateItem, setClearUpdateItem] = React.useState(false);
@@ -67,7 +67,7 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
   }
 
   const closeScannerModal = () => {
-    setScannerModalIsOpen(false);
+    setScannerIsOpen(false);
   }
 
   React.useEffect(() => {
@@ -95,7 +95,7 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
         <DeleteItem doDeleteItem={doDeleteItem} items={items} clearDeleteItem={clearDeleteItem} />
       </FlexGridItem>
       <FlexGridItem {...itemProps}>
-        <ScanItem doSearchUPC={doSearchUPC} clearSearchUPC={clearSearchUPC} setScannerModalIsOpen={setScannerModalIsOpen} />
+        <ScanItem doSearchUPC={doSearchUPC} clearSearchUPC={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
       </FlexGridItem>
       <FlexGridItem {...itemProps}>
         <CreateProduct doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
@@ -103,7 +103,7 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
     </FlexGrid>
 
     {confirmModalIsOpen && <ConfirmModal isOpen={confirmModalIsOpen} closeModal={closeConfirmModal} />}
-    {scannerModalIsOpen && <ScannerModal isOpen={scannerModalIsOpen} closeModal={closeScannerModal} />}
+    {scannerIsOpen && <Scanner isOpen={scannerIsOpen} close={closeScannerModal} />}
     </>
   );
 }
