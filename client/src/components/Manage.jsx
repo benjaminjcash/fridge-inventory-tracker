@@ -11,7 +11,7 @@ import DeleteItem from './DeleteItem';
 import ScanItem from './ScanItem';
 import CreateProduct from './CreateProduct';
 import ConfirmModal from './ConfirmModal';
-import ScannerModal from './ScannerModal';
+import ScannerModal from './scanner/ScannerModal';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
 const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetchAllItems, clearData, searchUPC, createProduct }) => {
