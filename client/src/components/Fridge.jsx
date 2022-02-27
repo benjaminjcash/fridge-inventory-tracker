@@ -23,7 +23,7 @@ const Fridge = ({ items, types, fetchAllItems }) => {
         overrides: {
             Block: {
                 style: () => ({
-                    width: theme.sizing.scale1000,
+                    width: '100%',
                     flexGrow: 0.4,
                 }),
             },
@@ -39,12 +39,12 @@ const Fridge = ({ items, types, fetchAllItems }) => {
     }, []);
 
     return (
+        <>
         <FlexGrid
-            flexGridColumnCount={2}
-            flexGridColumnGap={theme.sizing.scale300}
+            flexGridColumnCount={1}
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
-            <FlexGridItem {...narrowItemProps}>
+            <FlexGridItem>
                 <FlexGrid>
                     <FlexGridItem>
                         <Dashboard items={items}/>
@@ -61,6 +61,7 @@ const Fridge = ({ items, types, fetchAllItems }) => {
                 <ItemList items={items} />
             </FlexGridItem>
         </FlexGrid>
+        </>
     );
 }
 
