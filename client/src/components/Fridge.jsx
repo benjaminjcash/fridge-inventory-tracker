@@ -42,10 +42,14 @@ const Fridge = ({ items, types, fetchAllItems }) => {
         <>
         <FlexGrid
             flexGridColumnCount={1}
+            flexGridRowGap={theme.sizing.scale300}
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem>
-                <FlexGrid>
+                <FlexGrid
+                  flexGridColumnCount={1}
+                  flexGridRowGap={theme.sizing.scale300}
+                >
                     <FlexGridItem>
                         <Dashboard items={items}/>
                     </FlexGridItem>

@@ -43,7 +43,7 @@ const Dashboard = ({ items }) => {
     }, [items]);
 
     return (
-        <Card className={css({ height: 'auto', width: '100%' })} >
+        <Card className={css({ height: 'auto', width: 'auto' })} >
             <StyledBody>
                 <Block>
                     <h4>{getTodaysDate()}</h4>

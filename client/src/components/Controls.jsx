@@ -25,7 +25,7 @@ const Controls = ({ allTypes, buildList }) => {
     }, [valueType, valueName, valueAttribute, valueOrder]);
     
     return (
-        <Card className={css({ height: 'auto', width: '100%' })} >
+        <Card className={css({ height: 'auto', width: 'auto' })} >
             <StyledBody>
                 <Block className={css({
                     marginBottom: '-10px',

@@ -79,7 +79,7 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
         <FlexGrid
             flexGridColumnCount={1}
             flexGridRowGap={theme.sizing.scale300}
-            className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
+            className={css({ width: '100%', marginTop: theme.sizing.scale300 })}
         >
             <FlexGridItem {...itemProps}>
                 <AddItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>

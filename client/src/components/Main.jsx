@@ -21,8 +21,8 @@ function Main({ currentUser }) {
 
   return (
     <>
-    <FlexGrid className={css({ width: 'auto', height: '100%' })}>
-      <FlexGridItem className={css({ height: 'auto', backgroundColor: 'black' })}>
+    <FlexGrid className={css({ width: '100%', height: '100%' })}>
+      <FlexGridItem className={css({ height: 'auto', backgroundColor: '#141414' })}>
         <H4 className={css({ color: 'white' })}>{ selected == 0 ? "My Fridge" : "Manage" }</H4>
         <ButtonGroup 
           size={SIZE.mini} 
@@ -40,7 +40,7 @@ function Main({ currentUser }) {
       <FlexGridItem className={css({ justifyContent: 'center', height: 'auto' })}>
         { 
           selected == 0 ?
-          <Fridge /> :
+          <><Fridge /></> :
           <Manage />
         }
       </FlexGridItem>
