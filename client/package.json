@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ericblade/quagga2": "^1.4.2",
     "@reduxjs/toolkit": "^1.4.0",
     "axios": "^0.21.0",
     "baseui": "^9.105.0",
