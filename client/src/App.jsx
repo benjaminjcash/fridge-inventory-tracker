@@ -41,7 +41,7 @@ function App({ auth, checkLoggedIn, user, fetchUser }) {
         </Route>
         <Route path="/my/fridge">
           {loggedIn ? <Redirect to="/my/fridge" /> : <Redirect to="/login" />}
-          <Main currentUser={currentUser}/>
+          <Main />
         </Route>
       </Switch>
     </Router>

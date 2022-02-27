@@ -77,8 +77,8 @@ const Manage = ({ data, items, upcData, createItem, updateItem, deleteItem, fetc
     return (
         <> 
         <FlexGrid
-            flexGridColumnCount={3}
-            flexGridColumnGap={theme.sizing.scale300}
+            flexGridColumnCount={1}
+            flexGridRowGap={theme.sizing.scale300}
             className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
         >
             <FlexGridItem {...itemProps}>
