@@ -13,7 +13,6 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
   const [valueExpirationDate, setValueExpirationDate] = React.useState([]);
 
   const handleAddItem = () => {
-    console.log("TEST");
     const item = {
       product_id: product._id,
       expiration_date: valueExpirationDate,
@@ -34,7 +33,10 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
           marginBottom: '-10px',
           marginTop: '-10px',
           color: 'green'
-        })}><h4>Add Item</h4></Block>
+        })}>
+          <h4 className={css({ marginBottom: '0px' })}>Add Item</h4>
+          <p className={css({ fontSize: '12px', marginTop: '4px', marginBottom: '16px' })}>The product was found in the database, set the expiration date and click <em>Add</em> to add the item to your Fridge.</p>
+        </Block>
         <p className={css({ fontSize: '16px', marginTop: '32px' })}><span className={css({ color: 'green'})}>Name: </span>{product.name}</p>
         <p className={css({ fontSize: '16px', marginTop: '-8px' })}><span className={css({ color: 'green'})}>Type: </span>{product.type}</p>
         <img src={product.image_url} className={css({ height: '200px', width: '200px' })}/>

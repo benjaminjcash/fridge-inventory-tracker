@@ -9,73 +9,59 @@ import { fetchAllItems } from '../../actions/item';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../utils/constants';
 
 const Fridge = ({ items, types, fetchAllItems }) => {
-    const [css, theme] = useStyletron();
+  const [css, theme] = useStyletron();
 
-    const itemProps = {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'top',
-        height: 'min-content'
-    };
-    const narrowItemProps = {
-        ...itemProps,
-        overrides: {
-            Block: {
-                style: () => ({
-                    width: '100%',
-                    flexGrow: 0.4,
-                }),
-            },
-        },
-    };
+  const itemProps = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'top',
+    height: 'min-content'
+  };
+  const narrowItemProps = {
+    ...itemProps,
+    overrides: {
+      Block: {
+        style: () => ({
+          width: '100%',
+          flexGrow: 0.4,
+        }),
+      },
+    },
+  };
 
-    const buildList = (options) => {
-        fetchAllItems(options, 'build_list');
-    }
+  const buildList = (options) => {
+    fetchAllItems(options, 'build_list');
+  }
 
-    React.useEffect(() => {
-        fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'get_all_types');
-    }, []);
+  React.useEffect(() => {
+    fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'get_all_types');
+  }, []);
 
-    return (
-        <>
-        <FlexGrid
-            flexGridColumnCount={1}
-            flexGridRowGap={theme.sizing.scale300}
-            className={css({ marginTop: theme.sizing.scale300, width: '100%' })}
-        >
-            <FlexGridItem>
-                <FlexGrid
-                  flexGridColumnCount={1}
-                  flexGridRowGap={theme.sizing.scale300}
-                >
-                    <FlexGridItem>
-                        <Dashboard items={items}/>
-                    </FlexGridItem>
-                    <FlexGridItem>
-                        <Controls
-                            allTypes={types}
-                            buildList={buildList}
-                        />
-                    </FlexGridItem>
-                </FlexGrid>
-            </FlexGridItem>
-            <FlexGridItem {...itemProps}>
-                <ItemList items={items} />
-            </FlexGridItem>
-        </FlexGrid>
-        </>
-    );
+  return (
+    <>
+    <FlexGrid flexGridColumnCount={1} flexGridRowGap={theme.sizing.scale300} className={css({ marginTop: theme.sizing.scale300, width: '100%' })}>
+      <FlexGridItem>
+        <Dashboard items={items}/>
+      </FlexGridItem>
+      <FlexGridItem {...itemProps}>
+        <ItemList items={items} />
+      </FlexGridItem>
+      <FlexGridItem>
+        <Controls allTypes={types} buildList={buildList} />
+      </FlexGridItem>
+    </FlexGrid>
+    </>
+  );
 }
 
 const ConnectedFridge = connect(
-    (state) => {
-        return {
-            items: state.items,
-            types: state.types
-        }
-    }, {
-    fetchAllItems
+  (state) => {
+    return {
+      items: state.items,
+      types: state.types
+    }
+  }, {
+  fetchAllItems
 }
 )(Fridge);
 
