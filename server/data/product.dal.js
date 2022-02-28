@@ -32,3 +32,13 @@ exports.doSearchProduct = async (req) => {
         throw err;
       });
 }
+
+exports.doFetchAllProducts = async (req) => {
+  return Product
+      .find()
+      .then((data) => {
+        return data;
+      }).catch((err) => {
+        throw err;
+      });
+}

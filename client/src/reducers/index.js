@@ -7,6 +7,7 @@ import data from './data';
 import types from './types';
 import upc from './upc';
 import product from './product';
+import products from './products';
 
 const reducer = combineReducers({
     items: item,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
     error,
     user,
     data,
-    product
+    product,
+    products
 });
 
 export default reducer;
