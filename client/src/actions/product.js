@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getStorage } from '../utils/storage';
-import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND, PRODUCT_FOUND, CLEAR_UPC, CLEAR_PRODUCT } from '../utils/constants';
+import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND, PRODUCT_FOUND, CLEAR_UPC, CLEAR_PRODUCT, FETCHED_ALL_PRODUCTS } from '../utils/constants';
 
 export const searchUPC = (barcode) => {
   const accessToken = getStorage('access_token');
@@ -94,6 +94,29 @@ export const clearProduct = () => {
   return (dispatch) => {
     dispatch({
       type: CLEAR_PRODUCT
+    })
+  }
+}
+
+export const fetchAllProducts = () => {
+  const accessToken = getStorage('access_token');
+  return (dispatch) => {
+    const PRODUCT_ENDPOINT = `/api/product`;
+    axios.get(`${PRODUCT_ENDPOINT}/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      if(res.data.success) {
+        dispatch({
+          type: FETCHED_ALL_PRODUCTS,
+          data: res.data.data
+        });
+      } else {
+        console.error('error fetching products');
+      }
+    }).catch((err) => {
+      console.error(err);
     })
   }
 }

@@ -8,6 +8,7 @@ import { updateItem, deleteItem, fetchAllItems } from '../../actions/item';
 import { clearData } from '../../actions/data';
 import AddItem from './AddItem';
 import UpdateProduct from './UpdateProduct';
+import ProductList from './ProductList';
 import DeleteItem from './DeleteItem';
 import ConfirmModal from '../shared/ConfirmModal';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../utils/constants';
@@ -69,6 +70,7 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
           <Button>Scan Item</Button>
           {/* <Button>Update Product</Button> */}
           <Button>Delete Item</Button>
+          <Button>Products</Button>
         </ButtonGroup>
       </FlexGridItem>
       { selected === 0 && 
@@ -84,6 +86,11 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
       { selected === 1 && 
         <FlexGridItem {...itemProps}>
           <DeleteItem doDeleteItem={doDeleteItem} items={items} clearDeleteItem={clearDeleteItem} />
+        </FlexGridItem>
+      }
+      { selected === 2 && 
+        <FlexGridItem {...itemProps}>
+          <ProductList />
         </FlexGridItem>
       }
     </FlexGrid>

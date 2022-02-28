@@ -21,6 +21,7 @@ export const FETCHED_ITEMS = 'fetched_items';
 export const NO_PRODUCT_FOUND = 'no_product_found';
 export const PRODUCT_FOUND = 'product_found';
 export const CLEAR_PRODUCT = 'clear_product';
+export const FETCHED_ALL_PRODUCTS = 'fetched_all_products';
 
 /** Type */
 export const FETCHED_ALL_TYPES = 'fetched_all_types';
