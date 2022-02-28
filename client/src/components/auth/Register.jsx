@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useStyletron } from 'baseui';
 import { Card } from 'baseui/card';
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Input, SIZE as inputSize } from 'baseui/input';
 import axios from 'axios';
 import { Button, KIND, SIZE as buttonSize } from 'baseui/button';
@@ -96,108 +97,94 @@ const Register = ({ error, dispatchError }) => {
   }, [error]);
 
   return (
-    <>
-      <Card
-        className={css({ width: '100%', height: '100%' })}
-      >
-        {
-          <>
-            <FormControl label="Name">
-              <Input
-                value={formValues.name}
-                onChange={e => setFormValues({
-                  ...formValues,
-                  name: e.target.value
-                })}
-                placeholder="Name"
-                clearOnEscape
-                error={formErrors.name}
-                // size={inputSize.mini}
-              />
-            </FormControl>
-            <FormControl label="Email">
-              <Input
-                value={formValues.email}
-                onChange={e => setFormValues({
-                  ...formValues,
-                  email: e.target.value
-                })}
-                placeholder="Email"
-                clearOnEscape
-                error={formErrors.email}
-                // size={inputSize.mini}
-              />
-            </FormControl>
-            <FormControl label="Username">
-              <Input
-                value={formValues.username}
-                onChange={e => setFormValues({
-                  ...formValues,
-                  username: e.target.value
-                })}
-                placeholder="Username"
-                clearOnEscape
-                error={formErrors.username}
-                // size={inputSize.mini}
-              />
-            </FormControl>
-            <FormControl label="Password">
-              <Input
-                value={formValues.password}
-                onChange={e => setFormValues({
-                  ...formValues,
-                  password: e.target.value
-                })}
-                placeholder="Password"
-                clearOnEscape
-                error={formErrors.password}
-                // size={inputSize.mini}
-              />
-            </FormControl>
-            <Button
-              onClick={submitRegister}
-              // size={buttonSize.mini}
-              overrides={{
-                BaseButton: { 
-                  style: ({ $theme }) => ({ marginRight: '8px' })
-                }
-              }}
-            >Register</Button>
-            <Button
-              onClick={navigateLogin}
-              // size={buttonSize.mini}
-            >Back</Button>
-          </>
-        }
-      </Card>
-      <Error />
-      <Modal
-        onClose={closeModal}
-        closeable
-        isOpen={isOpen}
-        animate
-        autoFocus
-        // size={SIZE.default}
-        role={ROLE.dialog}
-        unstable_ModalBackdropScroll={true}
-      >
-        <ModalHeader>Success</ModalHeader>
-        <ModalFooter>
-          <ModalButton onClick={closeModal}>Okay</ModalButton>
-        </ModalFooter>
-      </Modal>
-    </>
+    <FlexGrid>
+      <FlexGridItem>
+        <h1>Fridge Inventory Tracker</h1>
+      </FlexGridItem>
+      <FlexGridItem>
+        <Card>
+          <FormControl label="Name">
+            <Input
+              value={formValues.name}
+              onChange={e => setFormValues({
+                ...formValues,
+                name: e.target.value
+              })}
+              placeholder="Name"
+              clearOnEscape
+              error={formErrors.name}
+              // size={inputSize.mini}
+            />
+          </FormControl>
+          <FormControl label="Email">
+            <Input
+              value={formValues.email}
+              onChange={e => setFormValues({
+                ...formValues,
+                email: e.target.value
+              })}
+              placeholder="Email"
+              clearOnEscape
+              error={formErrors.email}
+              // size={inputSize.mini}
+            />
+          </FormControl>
+          <FormControl label="Username">
+            <Input
+              value={formValues.username}
+              onChange={e => setFormValues({
+                ...formValues,
+                username: e.target.value
+              })}
+              placeholder="Username"
+              clearOnEscape
+              error={formErrors.username}
+              // size={inputSize.mini}
+            />
+          </FormControl>
+          <FormControl label="Password">
+            <Input
+              value={formValues.password}
+              onChange={e => setFormValues({
+                ...formValues,
+                password: e.target.value
+              })}
+              placeholder="Password"
+              clearOnEscape
+              error={formErrors.password}
+              // size={inputSize.mini}
+            />
+          </FormControl>
+          <Button
+            onClick={submitRegister}
+            // size={buttonSize.mini}
+            overrides={{
+            BaseButton: { 
+              style: ({ $theme }) => ({ marginRight: '8px' })
+            }
+            }}
+          >Register</Button>
+          <Button
+            onClick={navigateLogin}
+            // size={buttonSize.mini}
+          >Back</Button>
+        </Card>
+      </FlexGridItem>
+      <FlexGridItem>
+        <Error />
+      </FlexGridItem>
+    </FlexGrid>
   );
 }
 
 const ConnectedRegister = connect(
   (state) => {
-    return {
-      error: state.error
-    }
+  return {
+    error: state.error
+  }
   },
   {
-    dispatchError
+  dispatchError
   }
 )(Register);
 
