@@ -18,18 +18,26 @@ exports.registerUser = async (req, res) => {
     const user = await doGetUser(req.body.username);
     if(user) return res.status(200).send({
       success: false,
-      error: "a user already exists"
-    })
-    await doRegisterUser(newUser);
-    return res.json({
-      success: true,
-      message: "registered user"
+      error: 'a user already exists'
     });
+    let whiteListedEmails = process.env.ALLOWED_USERS.split(',');
+    if(whiteListedEmails.includes(req.body.email)) {
+      await doRegisterUser(newUser);
+      return res.json({
+        success: true,
+        message: 'registered user'
+      });
+    } else {
+      return res.json({
+        success: false,
+        error: 'not authorized, request access from ben first'
+      });
+    }
   }
   catch(err) {
     return res.send({
       success: false,
-      error: err
+      error: 'a user already exists'
     });
   }
 }

@@ -66,7 +66,7 @@ const Register = ({ error, dispatchError }) => {
         if (res?.data?.success) {
           setIsOpen(true);
         } else {
-          dispatchError("account already exists");
+          dispatchError(res?.data?.error);
         }
       }).catch((err) => {
         console.error(err);
