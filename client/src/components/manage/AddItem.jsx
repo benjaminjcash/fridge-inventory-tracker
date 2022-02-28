@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { searchUPC, createProduct, searchProduct } from '../../actions/product';
+import { searchUPC, clearUPC, createProduct, searchProduct, clearProduct } from '../../actions/product';
 import { clearData } from '../../actions/data';
 import { createItem } from '../../actions/item';
 import ScanItem from './ScanItem';
@@ -11,7 +11,7 @@ import CreateItem from './CreateItem';
 import Scanner from '../scanner/Scanner';
 import { useStyletron } from 'baseui';
 
-const AddItem = ({ upcData, searchProduct, createProduct, searchUPC, product, clearData, createItem }) => {
+const AddItem = ({ upcData, searchProduct, createProduct, clearProduct, searchUPC, clearUPC, product, clearData, createItem }) => {
   const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
   const [clearAddItem, setClearAddItem] = React.useState(false);
   const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
@@ -43,7 +43,7 @@ const AddItem = ({ upcData, searchProduct, createProduct, searchUPC, product, cl
   }, [product]);
 
   useEffect(() => {
-    if(Object.keys(upcData) > 0) setShowCreateProduct(true);
+    if(Object.keys(upcData).length > 0) setShowCreateProduct(true);
   }, [upcData])
 
   const itemProps = {
@@ -63,6 +63,7 @@ const AddItem = ({ upcData, searchProduct, createProduct, searchUPC, product, cl
     setClearAddItem(false);
     createItem(item);
     setConfirmModalIsOpen(true);
+    location.reload();
   }
 
   const doCreateProduct = (product) => {
@@ -132,8 +133,10 @@ const ConnectedAddItem = connect(
     createItem,
     clearData,
     searchUPC,
+    clearUPC,
     createProduct,
-    searchProduct
+    searchProduct,
+    clearProduct
   }
 )(AddItem);
 

@@ -20,6 +20,7 @@ export const CLEAR_ERROR = 'clear_error';
 export const FETCHED_ITEMS = 'fetched_items';
 export const NO_PRODUCT_FOUND = 'no_product_found';
 export const PRODUCT_FOUND = 'product_found';
+export const CLEAR_PRODUCT = 'clear_product';
 
 /** Type */
 export const FETCHED_ALL_TYPES = 'fetched_all_types';
@@ -38,3 +39,4 @@ export const UPC_RESPONSE_KEY_TITLE = 'title';
 export const UPC_RESPONSE_KEY_BRAND = 'brand';
 export const UPC_RESPONSE_KEY_CATEGORY = 'category';
 export const UPC_RESPONSE_KEY_IMAGES = 'images';
+export const CLEAR_UPC = 'clear_upc';

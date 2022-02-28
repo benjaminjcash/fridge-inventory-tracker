@@ -41,6 +41,7 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
     setClearDeleteItem(true);
     clearData();
     setConfirmModalIsOpen(false);
+    location.reload();
   }
 
   React.useEffect(() => {

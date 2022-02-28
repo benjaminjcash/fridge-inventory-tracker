@@ -1,8 +1,12 @@
 const axios = require("axios");
 const logger = require("../utils/logger");
 const { doCreateProduct, doSearchProduct } = require("../data/product.dal");
-const localKey = require("../utils/api-key");
-const UPC_API_KEY = process.env.UPC_API_KEY || localKey;
+let UPC_API_KEY;
+if(process.env.NODE_ENV === 'development') {
+  UPC_API_KEY = require("../utils/api-key");
+} else {
+  UPC_API_KEY = process.env.UPC_API_KEY;
+}
 
 exports.searchUPC = async (req, res) => {
   try {
