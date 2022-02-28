@@ -36,9 +36,9 @@ const ProductList = ({ products, fetchAllProducts }) => {
           <p>{row.type}</p>
         )}
       </TableBuilderColumn>
-      <TableBuilderColumn header="Type">
+      <TableBuilderColumn header="Image">
         {row => (
-          <img src={row.image_url} width="100%" height="auto" />
+          <img src={row.image_url} className={css({ width: '100%', maxWidth: '400px', height: 'auto%' })} />
         )}
       </TableBuilderColumn>
     </TableBuilder>

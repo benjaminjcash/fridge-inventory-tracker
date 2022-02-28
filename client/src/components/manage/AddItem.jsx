@@ -18,6 +18,7 @@ const AddItem = ({ upcData, searchProduct, createProduct, clearProduct, searchUP
   const [confirmModalIsOpen, setConfirmModalIsOpen] = React.useState(false);
   const [context, setContext] = React.useState('');
   const [showCreateProduct, setShowCreateProduct] = React.useState(false);
+  const [showScanItem, setShowScanItem] = React.useState(true);
   const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
   const [showCreateItem, setShowCreateItem] = React.useState(false);
   const [barcode, setBarcode] = React.useState('');
@@ -32,6 +33,7 @@ const AddItem = ({ upcData, searchProduct, createProduct, clearProduct, searchUP
 
   useEffect(() => {
     if(Object.keys(product).length > 0) {
+      setShowScanItem(false);
       setShowCreateItem(true);
     } else {
       if(barcode.length) {
@@ -43,7 +45,10 @@ const AddItem = ({ upcData, searchProduct, createProduct, clearProduct, searchUP
   }, [product]);
 
   useEffect(() => {
-    if(Object.keys(upcData).length > 0) setShowCreateProduct(true);
+    if(Object.keys(upcData).length > 0) {
+      setShowScanItem(false);
+      setShowCreateProduct(true);
+    } 
   }, [upcData])
 
   const itemProps = {
@@ -98,20 +103,20 @@ const AddItem = ({ upcData, searchProduct, createProduct, clearProduct, searchUP
       flexGridRowGap={theme.sizing.scale300}
       className={css({ width: '100%' })}
     >
-      <FlexGridItem key={0} {...itemProps}>
-        <ScanItem barcodeInput={barcodeInput} setBarcodeInput={setBarcodeInput} doSearch={doSearch} clearSearch={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
-      </FlexGridItem>
-      { 
-        showCreateProduct && 
-        <FlexGridItem key={1} {...itemProps}>
-          <CreateProductForm doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
-        </FlexGridItem>
-      }
       {
-        showCreateItem && 
+        showScanItem ?
+          <FlexGridItem key={0} {...itemProps}>
+            <ScanItem barcodeInput={barcodeInput} setBarcodeInput={setBarcodeInput} doSearch={doSearch} clearSearch={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
+          </FlexGridItem>
+        : showCreateProduct ?
+          <FlexGridItem key={1} {...itemProps}>
+            <CreateProductForm doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
+          </FlexGridItem>
+        : showCreateItem ?
         <FlexGridItem key={2} {...itemProps}>
           <CreateItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
         </FlexGridItem>
+        : <></>
       }
       { 
         scannerIsOpen && 

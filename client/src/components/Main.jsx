@@ -21,8 +21,9 @@ function Main({ currentUser }) {
 
   return (
     <>
-    <FlexGrid className={css({ width: '100%', height: '100%' })}>
+    <FlexGrid className={css({ width: '100%', maxWidth: '900px', height: '100%' })}>
       <FlexGridItem className={css({ height: 'auto', backgroundColor: '#141414' })}>
+        <Button className={css({ float: 'right' })} onClick={logout}>Logout</Button>
         <H4 className={css({ color: 'white' })}>{ selected == 0 ? "My Fridge" : "Manage" }</H4>
         <ButtonGroup 
           // size={SIZE.mini} 
@@ -34,7 +35,6 @@ function Main({ currentUser }) {
         >
           <Button>My Fridge</Button>
           <Button>Manage</Button>
-          <Button onClick={logout}>Logout</Button>
         </ButtonGroup>
       </FlexGridItem>
       <FlexGridItem className={css({ justifyContent: 'center', height: 'auto' })}>

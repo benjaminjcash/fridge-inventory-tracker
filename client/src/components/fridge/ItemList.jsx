@@ -25,15 +25,19 @@ const ItemList = ({ items }) => {
       flexGridRowGap={theme.sizing.scale400}
       width='100%'
       height='100%'
+      justifyContent='center'
     >
       {
-        items.map((item) => {
-          return (
-            <FlexGridItem key={item._id} {...itemProps}>
-              <Item key={item._id} item={item}/>
-            </FlexGridItem>
-          );
-        })
+        items.length > 0 ?
+          items.map((item) => {
+            return (
+              <FlexGridItem key={item._id} {...itemProps}>
+                <Item key={item._id} item={item}/>
+              </FlexGridItem>
+            );
+          })
+        :
+        <img src='/empty.png' width="200px"/>
       }
     </FlexGrid>
   )

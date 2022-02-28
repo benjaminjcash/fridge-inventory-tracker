@@ -19,13 +19,13 @@ const ConfirmModal = ({ isOpen, closeModal }) => {
     unstable_ModalBackdropScroll={true}
     >
     <ModalBody>
-    <Block className={css({
-      marginBottom: '-10px',
-      marginTop: '-10px'
-    })}><h4>Success!</h4></Block>
+      <Block className={css({
+        marginBottom: '-10px',
+        marginTop: '-10px'
+      })}><h4>Success!</h4></Block>
     </ModalBody>
     <ModalFooter>
-    <ModalButton onClick={closeModal} size={buttonSize.mini}>Okay</ModalButton>
+      <ModalButton onClick={closeModal}>OK</ModalButton>
     </ModalFooter>
   </Modal>
   );

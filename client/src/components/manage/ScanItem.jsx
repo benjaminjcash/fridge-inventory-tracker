@@ -38,11 +38,13 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setSca
             // size={inputSize.mini}
           />
         </FormControl>
-        <Button 
-          onClick={doSearch}
-          // size={buttonSize.mini}
-          className={css({ backgroundColor: 'orange', color: 'black' })}
-        >Search</Button>
+        { barcodeInput.length > 0 && 
+          <Button 
+            onClick={doSearch}
+             // size={buttonSize.mini}
+            className={css({ backgroundColor: 'orange', color: 'black' })}
+          >Search</Button>
+        }
       </StyledBody>
     </Card>
   );
