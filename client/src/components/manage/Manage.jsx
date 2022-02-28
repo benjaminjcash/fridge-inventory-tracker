@@ -59,7 +59,7 @@ const Manage = ({ data, items, updateItem, deleteItem, fetchAllItems, clearData 
     >
       <FlexGridItem className={css({ height: 'auto', backgroundColor: '#141414' })}>
         <ButtonGroup 
-          size={SIZE.mini} 
+          // size={SIZE.mini} 
           mode={MODE.radio}
           selected={selected}
           onClick={(event, index) => {

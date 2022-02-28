@@ -48,12 +48,12 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
             }}
             formatString="MM/dd/yyyy"
             placeholder="mm/dd/yyyy"
-            size={inputSize.mini}
+            // size={inputSize.mini}
           />
         </FormControl>
         <Button 
           onClick={() => handleAddItem()}
-          size={buttonSize.mini}
+          // size={buttonSize.mini}
           className={css({ backgroundColor: 'green', color: 'white' })}
         >Add</Button>
       </StyledBody>

@@ -68,21 +68,21 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           <Input
             value={valueName}
             onChange={event => setValueName(event.currentTarget.value)}
-            size={inputSize.mini}
+            // size={inputSize.mini}
           />
         </FormControl>
         <FormControl label={() => "Type"}>
           <Input
             value={valueType}
             onChange={event => setValueType(event.currentTarget.value)}
-            size={inputSize.mini}
+            // size={inputSize.mini}
           />
         </FormControl>
         <FormControl label={() => "Image URL"} caption={() => "use a square image"}>
           <Input
             value={valueImageUrl}
             onChange={event => setValueImageUrl(event.currentTarget.value)}
-            size={inputSize.mini}
+            // size={inputSize.mini}
           />
         </FormControl>
 
@@ -98,12 +98,12 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           <Input
             value={valueUpcData}
             onChange={event => setValueUpcData(event.currentTarget.value)}
-            size={inputSize.mini}
+            // size={inputSize.mini}
           />
         </FormControl>
         <Button 
           onClick={() => handleCreateProduct()}
-          size={buttonSize.mini}
+          // size={buttonSize.mini}
           className={css({ backgroundColor: '#0096FF', color: 'black' })}
         >Create</Button>
       </StyledBody>

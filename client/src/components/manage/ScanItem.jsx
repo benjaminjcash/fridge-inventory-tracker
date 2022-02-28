@@ -28,19 +28,19 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setSca
           </Block>
         <Button 
           onClick={() => setScannerIsOpen(true)}
-          size={buttonSize.mini}
+          // size={buttonSize.mini}
           className={css({ backgroundColor: 'orange', color: 'black', marginBottom: '16px' })}
         >Scan</Button>
         <FormControl>
           <Input
             value={barcodeInput}
             onChange={event => setBarcodeInput(event.currentTarget.value)}
-            size={inputSize.mini}
+            // size={inputSize.mini}
           />
         </FormControl>
         <Button 
           onClick={doSearch}
-          size={buttonSize.mini}
+          // size={buttonSize.mini}
           className={css({ backgroundColor: 'orange', color: 'black' })}
         >Search</Button>
       </StyledBody>

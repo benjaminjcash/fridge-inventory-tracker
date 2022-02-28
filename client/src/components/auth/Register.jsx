@@ -112,7 +112,7 @@ const Register = ({ error, dispatchError }) => {
                 placeholder="Name"
                 clearOnEscape
                 error={formErrors.name}
-                size={inputSize.mini}
+                // size={inputSize.mini}
               />
             </FormControl>
             <FormControl label="Email">
@@ -125,7 +125,7 @@ const Register = ({ error, dispatchError }) => {
                 placeholder="Email"
                 clearOnEscape
                 error={formErrors.email}
-                size={inputSize.mini}
+                // size={inputSize.mini}
               />
             </FormControl>
             <FormControl label="Username">
@@ -138,7 +138,7 @@ const Register = ({ error, dispatchError }) => {
                 placeholder="Username"
                 clearOnEscape
                 error={formErrors.username}
-                size={inputSize.mini}
+                // size={inputSize.mini}
               />
             </FormControl>
             <FormControl label="Password">
@@ -151,12 +151,12 @@ const Register = ({ error, dispatchError }) => {
                 placeholder="Password"
                 clearOnEscape
                 error={formErrors.password}
-                size={inputSize.mini}
+                // size={inputSize.mini}
               />
             </FormControl>
             <Button
               onClick={submitRegister}
-              size={buttonSize.mini}
+              // size={buttonSize.mini}
               overrides={{
                 BaseButton: { 
                   style: ({ $theme }) => ({ marginRight: '8px' })
@@ -165,7 +165,7 @@ const Register = ({ error, dispatchError }) => {
             >Register</Button>
             <Button
               onClick={navigateLogin}
-              size={buttonSize.mini}
+              // size={buttonSize.mini}
             >Back</Button>
           </>
         }
@@ -177,7 +177,7 @@ const Register = ({ error, dispatchError }) => {
         isOpen={isOpen}
         animate
         autoFocus
-        size={SIZE.default}
+        // size={SIZE.default}
         role={ROLE.dialog}
         unstable_ModalBackdropScroll={true}
       >

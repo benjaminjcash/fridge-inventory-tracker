@@ -25,7 +25,7 @@ function Main({ currentUser }) {
       <FlexGridItem className={css({ height: 'auto', backgroundColor: '#141414' })}>
         <H4 className={css({ color: 'white' })}>{ selected == 0 ? "My Fridge" : "Manage" }</H4>
         <ButtonGroup 
-          size={SIZE.mini} 
+          // size={SIZE.mini} 
           mode={MODE.radio}
           selected={selected}
           onClick={(event, index) => {

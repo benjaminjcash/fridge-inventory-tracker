@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { useStyletron } from 'baseui';
-import Controls from './Controls';
+import Controls from './controls/Controls';
 import Dashboard from './Dashboard';
 import ItemList from './ItemList';
 import { fetchAllItems } from '../../actions/item';

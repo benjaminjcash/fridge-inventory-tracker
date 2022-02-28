@@ -96,7 +96,7 @@ const Login = ({ error, requestLogin, dispatchError }) => {
               placeholder="Username"
               clearOnEscape
               error={formErrors.username}
-              size={inputSize.mini}
+              // size={inputSize.mini}
             />
           </FormControl>
           <FormControl label="Password">
@@ -110,12 +110,12 @@ const Login = ({ error, requestLogin, dispatchError }) => {
               type="password"
               clearOnEscape
               error={formErrors.password}
-              size={inputSize.mini}
+              // size={inputSize.mini}
             />
           </FormControl>
           <Button
             onClick={() => submitLogin()}
-            size={buttonSize.mini}
+            // size={buttonSize.mini}
             overrides={{
               BaseButton: { 
                 style: ({ $theme }) => ({ marginRight: '8px' })
@@ -124,7 +124,7 @@ const Login = ({ error, requestLogin, dispatchError }) => {
           >Login</Button>
           <Button
             onClick={() => navigateRegister()}
-            size={buttonSize.mini}
+            // size={buttonSize.mini}
           >Register</Button>
         </Card>
       }

@@ -43,11 +43,9 @@ const Dashboard = ({ items }) => {
     }, [items]);
 
     return (
-        <Card className={css({ height: 'auto', width: 'auto' })} >
+        <Card className={css({ height: 'auto', width: 'auto', paddingBottom: '16px' })} >
             <StyledBody>
-                <Block>
-                    <h4>{getTodaysDate()}</h4>
-                </Block>
+                <Block><h3>{getTodaysDate()}</h3></Block>
                 <Block className={css({ marginTop: '-15px' })}>
                 {
                     tagState?.bad?.show && <Tag

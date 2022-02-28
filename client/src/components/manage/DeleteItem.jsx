@@ -53,12 +53,12 @@ const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
             valueKey="id"
             onChange={({ value }) => setValueItemSelect(value)}
             value={valueItemSelect}
-            size={selectSize.mini}
+            // size={selectSize.mini}
           />
         </FormControl>
         <Button 
           onClick={() => handleDeleteItem()}
-          size={buttonSize.mini}
+          // size={buttonSize.mini}
           className={css({ backgroundColor: 'red', color: 'white' })}
         >Delete</Button>
       </StyledBody>
