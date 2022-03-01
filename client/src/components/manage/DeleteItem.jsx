@@ -2,12 +2,12 @@ import React from 'react';
 import { useStyletron } from 'baseui';
 import { Card, StyledBody } from "baseui/card";
 import { FormControl } from "baseui/form-control";
-import { Button, SIZE as buttonSize } from "baseui/button";
+import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { Select, SIZE as selectSize } from 'baseui/select';
+import { Select } from 'baseui/select';
 
 const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
-  const [css, theme] = useStyletron();
+  const [css] = useStyletron();
   const [itemList, setItemList] = React.useState([]);
   const [valueItemSelect, setValueItemSelect] = React.useState([]);
 
@@ -53,12 +53,10 @@ const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
             valueKey="id"
             onChange={({ value }) => setValueItemSelect(value)}
             value={valueItemSelect}
-            // size={selectSize.mini}
           />
         </FormControl>
         <Button 
           onClick={() => handleDeleteItem()}
-          // size={buttonSize.mini}
           className={css({ backgroundColor: 'red', color: 'white' })}
         >Delete</Button>
       </StyledBody>

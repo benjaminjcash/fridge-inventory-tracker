@@ -10,15 +10,15 @@ import product from './product';
 import products from './products';
 
 const reducer = combineReducers({
-    items: item,
-    types,
-    upc,
-    auth,
-    error,
-    user,
-    data,
-    product,
-    products
+  items: item,
+  types,
+  upc,
+  auth,
+  error,
+  user,
+  data,
+  product,
+  products
 });
 
 export default reducer;

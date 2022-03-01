@@ -4,11 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { useStyletron } from 'baseui';
 import { Card } from 'baseui/card';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { Input, SIZE as inputSize } from 'baseui/input';
+import { Input } from 'baseui/input';
 import axios from 'axios';
-import { Button, KIND, SIZE as buttonSize } from 'baseui/button';
+import { Button } from 'baseui/button';
 import { FormControl } from 'baseui/form-control';
-import { Modal, ModalHeader, ModalFooter, ModalButton, SIZE, ROLE } from "baseui/modal";
 import { dispatchError } from '../../actions/error';
 import Error from '../shared/Error';
 
@@ -113,7 +112,6 @@ const Register = ({ error, dispatchError }) => {
               placeholder="Name"
               clearOnEscape
               error={formErrors.name}
-              // size={inputSize.mini}
             />
           </FormControl>
           <FormControl label="Email">
@@ -126,7 +124,6 @@ const Register = ({ error, dispatchError }) => {
               placeholder="Email"
               clearOnEscape
               error={formErrors.email}
-              // size={inputSize.mini}
             />
           </FormControl>
           <FormControl label="Username">
@@ -139,7 +136,6 @@ const Register = ({ error, dispatchError }) => {
               placeholder="Username"
               clearOnEscape
               error={formErrors.username}
-              // size={inputSize.mini}
             />
           </FormControl>
           <FormControl label="Password">
@@ -152,12 +148,10 @@ const Register = ({ error, dispatchError }) => {
               placeholder="Password"
               clearOnEscape
               error={formErrors.password}
-              // size={inputSize.mini}
             />
           </FormControl>
           <Button
             onClick={submitRegister}
-            // size={buttonSize.mini}
             overrides={{
             BaseButton: { 
               style: ({ $theme }) => ({ marginRight: '8px' })
@@ -166,7 +160,6 @@ const Register = ({ error, dispatchError }) => {
           >Register</Button>
           <Button
             onClick={navigateLogin}
-            // size={buttonSize.mini}
           >Back</Button>
         </Card>
       </FlexGridItem>

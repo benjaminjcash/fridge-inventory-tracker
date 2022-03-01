@@ -2,8 +2,8 @@ import React from 'react';
 import { useStyletron } from 'baseui';
 import { Card, StyledBody } from "baseui/card";
 import { FormControl } from "baseui/form-control";
-import { Input, SIZE as inputSize } from 'baseui/input';
-import { Button, SIZE as buttonSize } from "baseui/button";
+import { Input } from 'baseui/input';
+import { Button } from "baseui/button";
 import { Block } from "baseui/block";
 import { UPC_RESPONSE_KEY_TITLE, UPC_RESPONSE_KEY_BRAND, UPC_RESPONSE_KEY_CATEGORY, UPC_RESPONSE_KEY_IMAGES } from '../../utils/constants';
 
@@ -12,7 +12,6 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
   const [valueName, setValueName] = React.useState([]);
   const [valueType, setValueType] = React.useState([]);
   const [valueImageUrl, setValueImageUrl] = React.useState([]);
-  // const [valueShelfLife, setValueShelfLife] = React.useState([]);
   const [valueUpcData, setValueUpcData] = React.useState([]);
 
   const handleCreateProduct = () => {
@@ -32,7 +31,6 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
       setValueName([]);
       setValueType([]);
       setValueImageUrl([]);
-      // setValueShelfLife([]);
       setValueUpcData({});
     }
   }, [clearCreateProduct]);
@@ -68,42 +66,29 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           <Input
             value={valueName}
             onChange={event => setValueName(event.currentTarget.value)}
-            // size={inputSize.mini}
           />
         </FormControl>
         <FormControl label={() => "Type"}>
           <Input
             value={valueType}
             onChange={event => setValueType(event.currentTarget.value)}
-            // size={inputSize.mini}
           />
         </FormControl>
         <FormControl label={() => "Image URL"} caption={() => "use a square image"}>
           <Input
             value={valueImageUrl}
             onChange={event => setValueImageUrl(event.currentTarget.value)}
-            // size={inputSize.mini}
           />
         </FormControl>
-
-        {/* <FormControl label={() => "Shelf Life"}>
-          <Input
-            value={valueShelfLife}
-            onChange={event => setValueShelfLife(event.currentTarget.value)}
-            size={inputSize.mini}
-          />
-        </FormControl> */}
         <img src={valueImageUrl} className={css({ height: '200px', width: '200px' })}/>
         <FormControl label={() => "UPC Data"}>
           <Input
             value={valueUpcData}
             onChange={event => setValueUpcData(event.currentTarget.value)}
-            // size={inputSize.mini}
           />
         </FormControl>
         <Button 
           onClick={() => handleCreateProduct()}
-          // size={buttonSize.mini}
           className={css({ backgroundColor: '#0096FF', color: 'black' })}
         >Create</Button>
       </StyledBody>

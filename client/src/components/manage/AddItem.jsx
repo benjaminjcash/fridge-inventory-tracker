@@ -11,7 +11,7 @@ import CreateItem from './CreateItem';
 import Scanner from '../scanner/Scanner';
 import { useStyletron } from 'baseui';
 
-const AddItem = ({ upcData, searchProduct, createProduct, clearProduct, searchUPC, clearUPC, product, clearData, createItem }) => {
+const AddItem = ({ upcData, searchProduct, createProduct, searchUPC, product, clearData, createItem }) => {
   const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
   const [clearAddItem, setClearAddItem] = React.useState(false);
   const [scannerIsOpen, setScannerIsOpen] = React.useState(false);

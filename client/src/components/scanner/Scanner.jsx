@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Quagga from "quagga";
-import { useStyletron } from 'baseui';
 import { Modal, ModalBody, SIZE, ROLE } from "baseui/modal";
 
 const Scanner = ({ isOpen, close, setBarcode }) => {
-  const [css] = useStyletron();
   const [barcodeImage, setBarcodeImage] = useState();
 
   const handleOnChange = e => {
@@ -63,22 +61,22 @@ const Scanner = ({ isOpen, close, setBarcode }) => {
   }
 
   return (
-  <Modal
-    onClose={close}
-    closeable
-    isOpen={isOpen}
-    animate
-    autoFocus
-    size={SIZE.default}
-    role={ROLE.dialog}
-    unstable_ModalBackdropScroll={true}
+    <Modal
+      onClose={close}
+      closeable
+      isOpen={isOpen}
+      animate
+      autoFocus
+      size={SIZE.default}
+      role={ROLE.dialog}
+      unstable_ModalBackdropScroll={true}
     >
-    <ModalBody>
-      <div>
-        <input type="file" accept="image/*" capture="camera" onChange={handleOnChange} />
-      </div>
-    </ModalBody>
-  </Modal>
+      <ModalBody>
+        <div>
+          <input type="file" accept="image/*" capture="camera" onChange={handleOnChange} />
+        </div>
+      </ModalBody>
+    </Modal>
   );
 }
 

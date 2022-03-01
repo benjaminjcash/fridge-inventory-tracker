@@ -90,13 +90,12 @@ exports.fetchAllProducts = async (req, res) => {
           success: false,
           error: "no records found"
       });
-  } else {
+    } else {
       res.json({
           success: true,
           data: products
       });
-  }
-    logger.info(products);
+    }
   }
   catch(err) {
     logger.error(err);

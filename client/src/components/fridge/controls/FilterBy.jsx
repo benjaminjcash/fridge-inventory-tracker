@@ -2,9 +2,8 @@ import React from 'react';
 import { useStyletron } from 'baseui';
 import { Card, StyledBody } from "baseui/card";
 import { FormControl } from "baseui/form-control";
-import { Block } from "baseui/block";
-import { Select, SIZE as selectSize } from 'baseui/select';
-import { Input, SIZE as inputSize } from 'baseui/input';
+import { Select } from 'baseui/select';
+import { Input } from 'baseui/input';
 
 const FilterBy = ({ allTypes, valueType, setValueType, valueName, setValueName }) => {
   const [css, $theme] = useStyletron();
@@ -12,10 +11,6 @@ const FilterBy = ({ allTypes, valueType, setValueType, valueName, setValueName }
   return (
     <Card className={css({ height: 'auto', width: 'auto' })} >
       <StyledBody>
-        {/* <Block className={css({
-          marginBottom: '-10px',
-          marginTop: '-10px'
-        })}><h4>Filter</h4></Block> */}
         <FormControl label={'Type'}>
           <Select
             creatable
@@ -30,7 +25,6 @@ const FilterBy = ({ allTypes, valueType, setValueType, valueName, setValueName }
             valueKey="id"
             onChange={({ value }) => setValueType(value)}
             value={valueType}
-            // size={selectSize.mini}
             overrides={{
               DropdownListItem: {
                 style: ({ $theme }) => ({
@@ -60,7 +54,6 @@ const FilterBy = ({ allTypes, valueType, setValueType, valueName, setValueName }
           <Input
             value={valueName}
             onChange={event => setValueName(event.currentTarget.value)}
-            // size={inputSize.mini}
           />
         </FormControl>
       </StyledBody>

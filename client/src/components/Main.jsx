@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
 import { H4 } from 'baseui/typography';
-import { ButtonGroup, SIZE, MODE } from "baseui/button-group";
+import { ButtonGroup, MODE } from "baseui/button-group";
 import { Button } from "baseui/button";
 import { clearStorage } from '../utils/storage';
 import Fridge from './fridge/Fridge';
 import Manage from './manage/Manage';
 
-function Main({ currentUser }) {
-  const [css, $theme] = useStyletron();
+function Main() {
+  const [css] = useStyletron();
   const [selected, setSelected] = React.useState(0);
 
   const logout = () => {
@@ -25,8 +25,7 @@ function Main({ currentUser }) {
       <FlexGridItem className={css({ height: 'auto', backgroundColor: '#141414' })}>
         <Button className={css({ float: 'right' })} onClick={logout}>Logout</Button>
         <H4 className={css({ color: 'white' })}>{ selected == 0 ? "My Fridge" : "Manage" }</H4>
-        <ButtonGroup 
-          // size={SIZE.mini} 
+        <ButtonGroup
           mode={MODE.radio}
           selected={selected}
           onClick={(event, index) => {

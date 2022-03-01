@@ -4,9 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { useStyletron } from 'baseui';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Card } from 'baseui/card';
-import { Input, SIZE as inputSize } from 'baseui/input';
+import { Input } from 'baseui/input';
 import { FormControl } from 'baseui/form-control';
-import { Button, SIZE as buttonSize } from 'baseui/button';
+import { Button } from 'baseui/button';
 import { requestLogin } from '../../actions/auth';
 import { dispatchError } from '../../actions/error';
 import Error from '../shared/Error';
@@ -25,7 +25,7 @@ const Login = ({ error, requestLogin, dispatchError }) => {
   });
 
   const navigateRegister = () => {
-  history.push('/register');
+    history.push('/register');
   }
 
   const submitLogin = () => {
@@ -99,7 +99,6 @@ const Login = ({ error, requestLogin, dispatchError }) => {
         placeholder="Username"
         clearOnEscape
         error={formErrors.username}
-        // size={inputSize.mini}
       />
       </FormControl>
       <FormControl label="Password">
@@ -113,12 +112,10 @@ const Login = ({ error, requestLogin, dispatchError }) => {
         type="password"
         clearOnEscape
         error={formErrors.password}
-        // size={inputSize.mini}
       />
       </FormControl>
       <Button
         onClick={() => submitLogin()}
-        // size={buttonSize.mini}
         overrides={{
           BaseButton: { 
             style: ({ $theme }) => ({ marginRight: '8px' })
@@ -127,7 +124,6 @@ const Login = ({ error, requestLogin, dispatchError }) => {
       >Login</Button>
       <Button
         onClick={() => navigateRegister()}
-        // size={buttonSize.mini}
       >Register</Button>
       </Card>
     </FlexGridItem>
