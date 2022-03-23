@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { searchUPC, clearUPC, createProduct, searchProduct, clearProduct } from '../../actions/product';
+import { lookupUPC, clearUPC, createProduct, searchProduct, clearProduct } from '../../actions/product';
 import { clearData } from '../../actions/data';
 import { createItem } from '../../actions/item';
 import ScanItem from './ScanItem';
@@ -11,7 +11,7 @@ import CreateItem from './CreateItem';
 import Scanner from '../scanner/Scanner';
 import { useStyletron } from 'baseui';
 
-const AddItem = ({ upcData, searchProduct, createProduct, searchUPC, product, clearData, createItem }) => {
+const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, clearData, createItem }) => {
   const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
   const [clearAddItem, setClearAddItem] = React.useState(false);
   const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
@@ -37,9 +37,9 @@ const AddItem = ({ upcData, searchProduct, createProduct, searchUPC, product, cl
       setShowCreateItem(true);
     } else {
       if(barcode.length) {
-        searchUPC(barcode);
+        lookupUPC(barcode);
       } else if(barcodeInput.length) {
-        searchUPC(barcodeInput);
+        lookupUPC(barcodeInput);
       }
     }
   }, [product]);
@@ -137,7 +137,7 @@ const ConnectedAddItem = connect(
   }, {
     createItem,
     clearData,
-    searchUPC,
+    lookupUPC,
     clearUPC,
     createProduct,
     searchProduct,

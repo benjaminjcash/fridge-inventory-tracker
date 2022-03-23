@@ -8,10 +8,10 @@ if(process.env.NODE_ENV === 'development') {
   UPC_API_KEY = process.env.UPC_API_KEY;
 }
 
-exports.searchUPC = async (req, res) => {
+exports.lookupUPC = async (req, res) => {
   try {
     const barcode = req.params.barcode;
-    logger.info(`searching UPC with barcode: ${barcode}`);
+    logger.info(`lookup UPC with barcode: ${barcode}`);
     const endpoint = `https://api.upcitemdb.com/prod/v1/lookup?upc=${barcode}`;
     axios.get(endpoint, {
       headers: {

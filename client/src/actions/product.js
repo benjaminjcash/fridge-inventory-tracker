@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getStorage } from '../utils/storage';
 import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND, PRODUCT_FOUND, CLEAR_UPC, CLEAR_PRODUCT, FETCHED_ALL_PRODUCTS } from '../utils/constants';
 
-export const searchUPC = (barcode) => {
+export const lookupUPC = (barcode) => {
   const accessToken = getStorage('access_token');
   return (dispatch) => {
     const UPC_ENDPOINT = `/api/product/upc/${barcode}`;
