@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getStorage } from '../utils/storage';
 import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND, PRODUCT_FOUND, CLEAR_UPC, CLEAR_PRODUCT, FETCHED_ALL_PRODUCTS } from '../utils/constants';
 
-export const searchUPC = (barcode) => {
+export const lookupUPC = (barcode) => {
   const accessToken = getStorage('access_token');
   return (dispatch) => {
     const UPC_ENDPOINT = `/api/product/upc/${barcode}`;
@@ -23,6 +23,59 @@ export const searchUPC = (barcode) => {
           data: {}
         });
       }
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+}
+
+/**
+ * 
+ * @param {*} SearchRequest 
+    SearchRequest {
+      s (string, optional),
+      type (string, optional),
+      offset (number, optional),
+      match_mode (number, optional),
+      filter (Inline Model 1, optional)
+    }
+    Inline Model 1 {
+      brand (string, optional),
+      category (string, optional),
+      title (string, optional),
+      model (string, optional)
+    }
+ * @returns 
+ */
+
+/**
+ {
+  "s": "iphone 6",
+  "type": "product",
+  "offset": 0,
+  "match_mode": 1,
+  "filter": {
+    "brand": "apple",
+    "category": "phones",
+    "title": "64gb",
+    "model": "mg5a2ll"
+    }
+  }
+*/
+
+export const searchUPC = (query) => {
+  const accessToken = getStorage('access_token');
+  return (dispatch) => {
+    const UPC_ENDPOINT = `/api/product/upc/search`;
+    axios.post(`${UPC_ENDPOINT}`, query, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      dispatch({
+        type: UPC_RESPONSE,
+        data: res.data
+      });
     }).catch((err) => {
       console.error(err);
     });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
 import { H4 } from 'baseui/typography';
@@ -7,8 +8,10 @@ import { Button } from "baseui/button";
 import { clearStorage } from '../utils/storage';
 import Fridge from './fridge/Fridge';
 import Manage from './manage/Manage';
+import SearchUPC from './search/SearchUPC';
+import { clearUPC } from '../actions/product';
 
-function Main() {
+function Main({ clearUPC }) {
   const [css] = useStyletron();
   const [selected, setSelected] = React.useState(0);
 
@@ -29,18 +32,22 @@ function Main() {
           mode={MODE.radio}
           selected={selected}
           onClick={(event, index) => {
+            clearUPC();
             setSelected(index);
           }}
         >
           <Button>My Fridge</Button>
           <Button>Manage</Button>
+          <Button>Search</Button>
         </ButtonGroup>
       </FlexGridItem>
       <FlexGridItem className={css({ justifyContent: 'center', height: 'auto' })}>
         { 
           selected == 0 ?
-          <><Fridge /></> :
+          <><Fridge /></> 
+          : selected == 1 ?
           <Manage />
+          : <SearchUPC />
         }
       </FlexGridItem>
     </FlexGrid>
@@ -48,4 +55,10 @@ function Main() {
   );
 }
 
-export default Main;
+const ConnectedMain = connect(null, 
+  {
+    clearUPC
+  }
+)(Main);
+
+export default ConnectedMain;
