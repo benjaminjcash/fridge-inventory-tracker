@@ -29,6 +29,27 @@ export const lookupUPC = (barcode) => {
   }
 }
 
+export const searchUPC = (query) => {
+  console.log(query)
+  const accessToken = getStorage('access_token');
+  return (dispatch) => {
+    const UPC_ENDPOINT = `/api/product/upc/search`;
+    axios.post(`${UPC_ENDPOINT}`, query, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      console.log(res);
+      dispatch({
+        type: UPC_RESPONSE,
+        data: res.data
+      });
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+}
+
 export const searchProduct = (barcode) => {
   const accessToken = getStorage('access_token');
   return (dispatch) => {

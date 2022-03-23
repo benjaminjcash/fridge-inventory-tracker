@@ -34,6 +34,13 @@ exports.lookupUPC = async (req, res) => {
   }
 }
 
+exports.searchUPC = async (req, res) => {
+  console.log(req.body);
+  res.send({
+    success: true
+  });
+}
+
 exports.searchProduct = async (req, res) => {
   try {
     const product = await doSearchProduct(req);

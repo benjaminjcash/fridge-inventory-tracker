@@ -7,6 +7,7 @@ import { Button } from "baseui/button";
 import { clearStorage } from '../utils/storage';
 import Fridge from './fridge/Fridge';
 import Manage from './manage/Manage';
+import SearchUPC from './search/SearchUPC';
 
 function Main() {
   const [css] = useStyletron();
@@ -34,13 +35,16 @@ function Main() {
         >
           <Button>My Fridge</Button>
           <Button>Manage</Button>
+          <Button>Search UPC</Button>
         </ButtonGroup>
       </FlexGridItem>
       <FlexGridItem className={css({ justifyContent: 'center', height: 'auto' })}>
         { 
           selected == 0 ?
-          <><Fridge /></> :
+          <><Fridge /></> 
+          : selected == 1 ?
           <Manage />
+          : <SearchUPC />
         }
       </FlexGridItem>
     </FlexGrid>
