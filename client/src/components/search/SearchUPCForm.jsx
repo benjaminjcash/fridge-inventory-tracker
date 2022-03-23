@@ -6,7 +6,10 @@ import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 
 const SearchUPCForm = ({ doSearchUPC }) => {
   const [css, theme] = useStyletron();
-  const [value, setValue] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [offset, setOffset] = React.useState('');
+  const [matchMode, setMatchMode] = React.useState('');
+
   const itemProps = {
     display: 'flex',
     flexDirection: 'row',
@@ -15,27 +18,19 @@ const SearchUPCForm = ({ doSearchUPC }) => {
   };
 
   const buildQuery = () => {
-    const query = {
-      name: value
-    }
+    let query = { name: name };
+    if(offset) query.offset = offset;
+    if(matchMode) query.matchMode = matchMode;
     doSearchUPC(query);
   }
 
   return (
     <>
-    <FlexGrid
-      flexGridColumnCount={1}
-      flexGridRowGap={theme.sizing.scale300}
-      className={css({ width: '100%' })}
-    >
-      <FlexGridItem key={0} {...itemProps}>
-        <Input
-          value={value}
-          onChange={e => setValue(e.target.value)}
-          clearOnEscape
-        />
-        <Button onClick={buildQuery}>Search</Button>
-      </FlexGridItem>
+    <FlexGrid flexGridColumnCount={1} flexGridRowGap={theme.sizing.scale300} className={css({ width: '100%' })}>
+      <FlexGridItem {...itemProps}><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/></FlexGridItem>
+      <FlexGridItem {...itemProps}><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/></FlexGridItem>
+      <FlexGridItem {...itemProps}><Input key={3} value={matchMode} placeholder="Match Mode" onChange={e => setMatchMode(e.target.value)} clearOnEscape/></FlexGridItem>
+      <FlexGridItem key={0} {...itemProps}><Button onClick={buildQuery}>Search</Button></FlexGridItem>
     </FlexGrid>
     </>
   );

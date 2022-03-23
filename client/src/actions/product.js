@@ -29,8 +29,41 @@ export const lookupUPC = (barcode) => {
   }
 }
 
+/**
+ * 
+ * @param {*} SearchRequest 
+    SearchRequest {
+      s (string, optional),
+      type (string, optional),
+      offset (number, optional),
+      match_mode (number, optional),
+      filter (Inline Model 1, optional)
+    }
+    Inline Model 1 {
+      brand (string, optional),
+      category (string, optional),
+      title (string, optional),
+      model (string, optional)
+    }
+ * @returns 
+ */
+
+/**
+ {
+  "s": "iphone 6",
+  "type": "product",
+  "offset": 0,
+  "match_mode": 1,
+  "filter": {
+    "brand": "apple",
+    "category": "phones",
+    "title": "64gb",
+    "model": "mg5a2ll"
+    }
+  }
+*/
+
 export const searchUPC = (query) => {
-  console.log(query)
   const accessToken = getStorage('access_token');
   return (dispatch) => {
     const UPC_ENDPOINT = `/api/product/upc/search`;
@@ -39,7 +72,6 @@ export const searchUPC = (query) => {
         Authorization: `Bearer ${accessToken}`
       }
     }).then((res) => {
-      console.log(res);
       dispatch({
         type: UPC_RESPONSE,
         data: res.data

@@ -35,10 +35,44 @@ exports.lookupUPC = async (req, res) => {
 }
 
 exports.searchUPC = async (req, res) => {
-  console.log(req.body);
-  res.send({
-    success: true
-  });
+  try {
+    const query = req.body;
+    logger.info(`search UPC with query: ${JSON.stringify(query)}`);
+    const endpoint = `https://api.upcitemdb.com/prod/v1/search`;
+    const searchBody = _buildSearchBody(query);
+    axios.post(endpoint, searchBody, {
+      headers: {
+        user_key: UPC_API_KEY
+      }
+    })
+    .then(resp => {
+      logger.info(resp);
+      logger.info(`found ${resp.data.total} item(s)`);
+      res.send(resp.data);
+    })
+    .catch(resp => {
+      const error = resp.response.data;
+      res.send({
+        success: false,
+        error: error
+      });
+    });
+  }
+  catch(err) {
+    res.send({
+      success: false,
+      error: err
+    });
+  }
+}
+
+const _buildSearchBody = (query) => {
+  let body = { s: query.name };
+  if(query.type) body.type = query.type;
+  if(query.offset) body.offset = query.offset;
+  if(query.match_mode) body.match_mode = query.match_mode;
+  if(query.filter) body.filter = query.filter;
+  return body;
 }
 
 exports.searchProduct = async (req, res) => {
