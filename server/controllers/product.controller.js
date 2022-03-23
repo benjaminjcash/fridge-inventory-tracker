@@ -46,7 +46,6 @@ exports.searchUPC = async (req, res) => {
       }
     })
     .then(resp => {
-      logger.info(resp);
       logger.info(`found ${resp.data.total} item(s)`);
       res.send(resp.data);
     })

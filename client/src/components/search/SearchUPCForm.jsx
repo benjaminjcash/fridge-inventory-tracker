@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStyletron } from 'baseui';
 import { Input } from "baseui/input";
+import { Card, StyledBody } from "baseui/card";
 import { Button } from "baseui/button";
-import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { FormControl } from "baseui/form-control";
+import { Block } from "baseui/block";
 
 const SearchUPCForm = ({ doSearchUPC }) => {
   const [css, theme] = useStyletron();
   const [name, setName] = React.useState('');
-  const [offset, setOffset] = React.useState('');
-  const [matchMode, setMatchMode] = React.useState('');
+  const [offset, setOffset] = React.useState('0');
+  const [matchMode, setMatchMode] = React.useState('10');
 
   const itemProps = {
     display: 'flex',
@@ -26,12 +28,22 @@ const SearchUPCForm = ({ doSearchUPC }) => {
 
   return (
     <>
-    <FlexGrid flexGridColumnCount={1} flexGridRowGap={theme.sizing.scale300} className={css({ width: '100%' })}>
-      <FlexGridItem {...itemProps}><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/></FlexGridItem>
-      <FlexGridItem {...itemProps}><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/></FlexGridItem>
-      <FlexGridItem {...itemProps}><Input key={3} value={matchMode} placeholder="Match Mode" onChange={e => setMatchMode(e.target.value)} clearOnEscape/></FlexGridItem>
-      <FlexGridItem key={0} {...itemProps}><Button onClick={buildQuery}>Search</Button></FlexGridItem>
-    </FlexGrid>
+    <Card className={css({ height: 'auto', width: '100%', marginTop: '8px' })} >
+      <StyledBody>
+        <Block className={css({
+            marginBottom: '-10px',
+            marginTop: '-10px',
+            color: 'yellow'
+          })}>
+            <h4 className={css({ marginBottom: '0px' })}>Search UPC</h4>
+            <p className={css({ fontSize: '14px', marginBottom: '32px' })}>Search the UPC database.</p>
+        </Block>
+        <FormControl label={() => "Name"}><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/></FormControl>
+        <FormControl label={() => "Offset"}><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/></FormControl>
+        <FormControl label={() => "Match Mode"}><Input key={3} value={matchMode} placeholder="Match Mode" onChange={e => setMatchMode(e.target.value)} clearOnEscape/></FormControl>
+        <Button className={css({ backgroundColor: 'yellow', color: 'black', marginTop: '16px' })} onClick={buildQuery}>Search</Button>
+      </StyledBody>
+    </Card>
     </>
   );
 }
