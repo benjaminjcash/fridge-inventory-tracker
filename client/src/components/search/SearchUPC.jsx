@@ -39,7 +39,10 @@ const SearchUPC = ({ searchUPC, upcData }) => {
       className={css({ width: '100%' })}
     >
       <FlexGridItem {...itemProps}>
-        {showUPCProductList ? <UPCProductList products={upcData.items} onProductSelect={onProductSelect} /> : <SearchUPCForm doSearchUPC={doSearchUPC} />}
+        <SearchUPCForm doSearchUPC={doSearchUPC} />
+      </FlexGridItem>
+      <FlexGridItem {...itemProps}>
+        {showUPCProductList && <UPCProductList products={upcData.items} onProductSelect={onProductSelect} />}
       </FlexGridItem>
     </FlexGrid>
     </>
