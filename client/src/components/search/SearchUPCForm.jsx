@@ -30,7 +30,10 @@ const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMe
         <FormControl label={() => "Name"}><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/></FormControl>
         <FormControl label={() => "Offset"}><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/></FormControl>
         <Button className={css({ backgroundColor: 'yellow', color: 'black', marginTop: '16px' })} onClick={buildQuery}>Search</Button>
-        {resultMessage && <p style={{ color: 'yellow', fontSize: '14px' }}>{resultMessage}</p>}
+        {resultMessage && <div>
+          <p style={{ color: 'white', fontSize: '16px' }}>{resultMessage}</p>
+          <p style={{ color: 'white', fontSize: '16px' }}>Click the image to add the item to your Fridge.</p>
+        </div>}
       </StyledBody>
     </Card>
     </>

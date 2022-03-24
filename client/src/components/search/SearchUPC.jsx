@@ -2,16 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useStyletron } from 'baseui';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { searchUPC } from '../../actions/product';
+import { searchUPC, searchProduct, setUPC, createProduct } from '../../actions/product';
+import { createItem } from '../../actions/item';
 import SearchUPCForm from './SearchUPCForm';
 import UPCProductList from './UPCProductList';
+import CreateProductForm from '../manage/CreateProduct';
+import CreateItem from '../manage/CreateItem';
 
-const SearchUPC = ({ searchUPC, upcData }) => {
+const SearchUPC = ({ searchUPC, upcData, setUPC, searchProduct, product, createProduct, createItem }) => {
   const [css, theme] = useStyletron();
+  const [showSearchUPCForm, setShowSearchUPCForm] = React.useState(true);
+  const [showUPCProductList, setShowUPCProductList] = useState(false);
+  const [showCreateItem, setShowCreateItem] = useState(false);
+  const [showCreateProduct, setShowCreateProduct] = useState(false);
   const [name, setName] = React.useState('');
   const [offset, setOffset] = React.useState('0');
-  const [showUPCProductList, setShowUPCProductList] = useState(false);
   const [resultMessage, setResultMessage] = useState('');
+  const [selectedUPCProduct, setSelectedUPCProduct] = useState({});
+  const [clearAddItem, setClearAddItem] = React.useState(false);
+  const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
 
   const itemProps = {
     display: 'flex',
@@ -40,7 +49,37 @@ const SearchUPC = ({ searchUPC, upcData }) => {
   }, [upcData]);
 
   const onProductSelect = (index) => {
-    
+    setShowSearchUPCForm(false);
+    const selectedProduct = upcData.items[index];
+    setSelectedUPCProduct(selectedProduct);
+    searchProduct(selectedProduct.upc);
+  }
+
+  useEffect(() => {
+    if(Object.keys(selectedUPCProduct).length > 0) {
+      setUPC(selectedUPCProduct);
+      if(Object.keys(product).length > 0) {
+        setShowUPCProductList(false);
+        setShowCreateItem(true);
+      } else {
+        setShowUPCProductList(false);
+        setShowCreateProduct(true);
+      }
+    }
+  }, [product]);
+
+  const doCreateItem = (item) => {
+    setClearAddItem(false);
+    createItem(item);
+    alert('Successfully added item to your Fridge.')
+    location.reload();
+  }
+
+  const doCreateProduct = (product) => {
+    setClearCreateProduct(false);
+    createProduct(product);
+    alert('Successfully added product to the database.')
+    setShowCreateProduct(false);
   }
 
   return (
@@ -50,12 +89,30 @@ const SearchUPC = ({ searchUPC, upcData }) => {
       flexGridRowGap={theme.sizing.scale300}
       className={css({ width: '100%' })}
     >
-      <FlexGridItem {...itemProps}>
-        <SearchUPCForm name={name} setName={setName} offset={offset} setOffset={setOffset} doSearchUPC={doSearchUPC} resultMessage={resultMessage} />
-      </FlexGridItem>
-      <FlexGridItem {...itemProps}>
-        {showUPCProductList && <UPCProductList products={upcData.items} onProductSelect={onProductSelect} />}
-      </FlexGridItem>
+      {
+        showSearchUPCForm &&
+        <FlexGridItem {...itemProps}>
+          <SearchUPCForm name={name} setName={setName} offset={offset} setOffset={setOffset} doSearchUPC={doSearchUPC} resultMessage={resultMessage} />
+        </FlexGridItem>
+      }
+      {
+        showUPCProductList &&
+        <FlexGridItem {...itemProps}>
+          <UPCProductList products={upcData.items} onProductSelect={onProductSelect} />
+        </FlexGridItem>
+      }
+      {
+        showCreateItem &&
+        <FlexGridItem {...itemProps}>
+          <CreateItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
+        </FlexGridItem>
+      }
+      {
+        showCreateProduct &&
+        <FlexGridItem {...itemProps}>
+          <CreateProductForm doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
+        </FlexGridItem>
+      }
     </FlexGrid>
     </>
   );
@@ -63,10 +120,15 @@ const SearchUPC = ({ searchUPC, upcData }) => {
 
 const ConnectedSearchUPC = connect((state) => {
     return {
-      upcData: state.upc
+      upcData: state.upc,
+      product: state.product
     }
   }, {
-    searchUPC
+    searchUPC,
+    setUPC,
+    searchProduct,
+    createProduct,
+    createItem
   }
 )(SearchUPC);
 
