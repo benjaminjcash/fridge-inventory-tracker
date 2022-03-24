@@ -6,10 +6,8 @@ import { Button } from "baseui/button";
 import { FormControl } from "baseui/form-control";
 import { Block } from "baseui/block";
 
-const SearchUPCForm = ({ doSearchUPC }) => {
+const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMessage }) => {
   const [css, theme] = useStyletron();
-  const [name, setName] = React.useState('');
-  const [offset, setOffset] = React.useState('0');
 
   const buildQuery = () => {
     let query = { name: name };
@@ -32,6 +30,7 @@ const SearchUPCForm = ({ doSearchUPC }) => {
         <FormControl label={() => "Name"}><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/></FormControl>
         <FormControl label={() => "Offset"}><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/></FormControl>
         <Button className={css({ backgroundColor: 'yellow', color: 'black', marginTop: '16px' })} onClick={buildQuery}>Search</Button>
+        {resultMessage && <p style={{ color: 'yellow', fontSize: '14px' }}>{resultMessage}</p>}
       </StyledBody>
     </Card>
     </>

@@ -8,7 +8,10 @@ import UPCProductList from './UPCProductList';
 
 const SearchUPC = ({ searchUPC, upcData }) => {
   const [css, theme] = useStyletron();
+  const [name, setName] = React.useState('');
+  const [offset, setOffset] = React.useState('0');
   const [showUPCProductList, setShowUPCProductList] = useState(false);
+  const [resultMessage, setResultMessage] = useState('');
 
   const itemProps = {
     display: 'flex',
@@ -22,9 +25,18 @@ const SearchUPC = ({ searchUPC, upcData }) => {
   }
 
   useEffect(() => {
-    if(upcData.error) alert(upcData.error.message);
-    if(upcData.code === 'OK') setShowUPCProductList(true);
-    if(Object.keys(upcData).length === 0) setShowUPCProductList(false);
+    if(upcData.error) {
+      alert(upcData.error.message);
+      setResultMessage('');
+    }
+    if(upcData.code === 'OK') {
+      setShowUPCProductList(true);
+      setResultMessage(`Showing items ${offset ? offset : '0'}-${upcData.offset} of ${upcData.total}.`);
+    }
+    if(Object.keys(upcData).length === 0) {
+      setShowUPCProductList(false);
+      setResultMessage('');
+    }
   }, [upcData]);
 
   const onProductSelect = (index) => {
@@ -39,7 +51,7 @@ const SearchUPC = ({ searchUPC, upcData }) => {
       className={css({ width: '100%' })}
     >
       <FlexGridItem {...itemProps}>
-        <SearchUPCForm doSearchUPC={doSearchUPC} />
+        <SearchUPCForm name={name} setName={setName} offset={offset} setOffset={setOffset} doSearchUPC={doSearchUPC} resultMessage={resultMessage} />
       </FlexGridItem>
       <FlexGridItem {...itemProps}>
         {showUPCProductList && <UPCProductList products={upcData.items} onProductSelect={onProductSelect} />}
