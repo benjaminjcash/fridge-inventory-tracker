@@ -5,7 +5,7 @@ import Item from './Item';
 const ItemList = ({ items }) => {
   const [css, theme] = useStyletron();
   const [columnCount, setColumnCount] = useState(1);
-  const itemProps = {
+  const itemStyles = {
     backgroundColor: 'mono400',
     display: 'flex',
     alignItems: 'center',
@@ -31,13 +31,12 @@ const ItemList = ({ items }) => {
         items.length > 0 ?
           items.map((item) => {
             return (
-              <FlexGridItem key={item._id} {...itemProps}>
+              <FlexGridItem key={item._id} style={itemStyles}>
                 <Item key={item._id} item={item}/>
               </FlexGridItem>
             );
           })
-        :
-        <img src='/empty.png' width="200px"/>
+        : <></>
       }
     </FlexGrid>
   )
