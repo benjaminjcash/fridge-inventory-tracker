@@ -24,8 +24,8 @@ const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMe
             marginTop: '-10px',
             color: 'yellow'
           })}>
-            <h4 className={css({ marginBottom: '0px' })}>Search UPC</h4>
-            <p className={css({ fontSize: '14px', marginBottom: '32px' })}>Search the UPC database. Increase the offset to see more results.</p>
+            <h4 className={css({ marginBottom: '0px' })}>Search</h4>
+            <p className={css({ fontSize: '16px', marginBottom: '32px', marginTop: '4px', color: 'white' })}>Search the UPC database for a product. You can increase the offset to see more results.</p>
         </Block>
         <FormControl label={() => "Name"}><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/></FormControl>
         <FormControl label={() => "Offset"}><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/></FormControl>

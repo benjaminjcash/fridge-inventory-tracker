@@ -6,15 +6,13 @@ import { Button } from "baseui/button";
 import { useStyletron } from 'baseui';
 import { updateItem, deleteItem, fetchAllItems } from '../../actions/item';
 import { clearData } from '../../actions/data';
-import { fetchAllProducts } from '../../actions/product';
+import { fetchAllProducts, clearUPC } from '../../actions/product';
 import AddItem from './AddItem';
 import ProductList from './ProductList';
 import DeleteItem from './DeleteItem';
-import ConfirmModal from '../shared/ConfirmModal';
 
-const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData }) => {
+const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData, clearUPC }) => {
   const [css, theme] = useStyletron();
-  const [confirmModalIsOpen, setConfirmModalIsOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(0);
   const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
 
@@ -30,20 +28,16 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
     deleteItem(item);
   }
 
-  const closeConfirmModal = () => {
-    setClearDeleteItem(true);
-    clearData();
-    setConfirmModalIsOpen(false);
-    location.reload();
-  }
-
   React.useEffect(() => {
     fetchAllProducts();
   }, []);
 
   React.useEffect(() => {
-    if(data.success && (data.action === 'update' || data.action === 'delete')) {
-      setConfirmModalIsOpen(true);
+    if(data.success & data.action === 'delete') {
+      setClearDeleteItem(true);
+      clearData();
+      alert('Successfully removed item from your Fridge.')
+      location.reload();
     }
   }, [data]);
 
@@ -59,6 +53,7 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
           mode={MODE.radio}
           selected={selected}
           onClick={(event, index) => {
+            clearUPC();
             setSelected(index);
           }}
         >
@@ -83,8 +78,6 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
         </FlexGridItem>
       }
     </FlexGrid>
-
-    {confirmModalIsOpen && <ConfirmModal isOpen={confirmModalIsOpen} closeModal={closeConfirmModal} />}
     </>
   );
 }
@@ -102,7 +95,8 @@ const ConnectedManage = connect(
     updateItem,
     deleteItem,
     clearData,
-    fetchAllProducts
+    fetchAllProducts,
+    clearUPC
   }
 )(Manage);
 

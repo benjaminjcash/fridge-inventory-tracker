@@ -39,7 +39,7 @@ const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
           color: 'red'
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Delete Item</h4>
-          <p className={css({ fontSize: '14px', marginBottom: '32px' })}>Choose an item to remove from your Fridge. This will <b>not</b> delete the <em>product</em> from the database.</p>
+          <p className={css({ fontSize: '16px', marginBottom: '32px', marginTop: '4px', color: 'white' })}>Choose an item to remove from your Fridge.</p>
         </Block>
         <FormControl>
           <Select
