@@ -67,7 +67,7 @@ const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, cl
     setContext('create_item');
     setClearAddItem(false);
     createItem(item);
-    setConfirmModalIsOpen(true);
+    alert('Successfully added item to your Fridge.')
     location.reload();
   }
 

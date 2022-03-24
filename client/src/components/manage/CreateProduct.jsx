@@ -36,7 +36,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
   }, [clearCreateProduct]);
 
   React.useEffect(() => {
-    if(typeof upcData === 'object' && !Array.isArray(upcData)) {
+    if(typeof upcData === 'object' && Object.keys(upcData).length > 0) {
       setValueName(`${upcData[UPC_RESPONSE_KEY_BRAND]} ${upcData[UPC_RESPONSE_KEY_TITLE]}`);
       const category = upcData[UPC_RESPONSE_KEY_CATEGORY];
       const exp = />(?:.(?!> ))+$/;
@@ -60,7 +60,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           color: '#0096FF'
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Create Product</h4>
-          <p className={css({ fontSize: '14px', marginTop: '4px', marginBottom: '32px' })}>This product has not yet been added to our database, override any defaults below and click <em>Create</em> to do so.</p>
+          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: 'white' })}>This product has not yet been added to our database, override any defaults below and click Create.</p>
         </Block>
         <FormControl label={() => "Name"}>
           <Input
@@ -80,13 +80,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
             onChange={event => setValueImageUrl(event.currentTarget.value)}
           />
         </FormControl>
-        <img src={valueImageUrl} className={css({ height: '200px', width: '200px' })}/>
-        <FormControl label={() => "UPC Data"}>
-          <Input
-            value={valueUpcData}
-            onChange={event => setValueUpcData(event.currentTarget.value)}
-          />
-        </FormControl>
+        <img src={valueImageUrl} className={css({ height: '200px', width: '200px', display: 'block', marginBottom: '16px' })}/>
         <Button 
           onClick={() => handleCreateProduct()}
           className={css({ backgroundColor: '#0096FF', color: 'black' })}

@@ -6,23 +6,12 @@ import { Button } from "baseui/button";
 import { FormControl } from "baseui/form-control";
 import { Block } from "baseui/block";
 
-const SearchUPCForm = ({ doSearchUPC }) => {
+const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMessage }) => {
   const [css, theme] = useStyletron();
-  const [name, setName] = React.useState('');
-  const [offset, setOffset] = React.useState('0');
-  const [matchMode, setMatchMode] = React.useState('10');
-
-  const itemProps = {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'top',
-    height: 'min-content'
-  };
 
   const buildQuery = () => {
     let query = { name: name };
     if(offset) query.offset = offset;
-    if(matchMode) query.matchMode = matchMode;
     doSearchUPC(query);
   }
 
@@ -35,13 +24,16 @@ const SearchUPCForm = ({ doSearchUPC }) => {
             marginTop: '-10px',
             color: 'yellow'
           })}>
-            <h4 className={css({ marginBottom: '0px' })}>Search UPC</h4>
-            <p className={css({ fontSize: '14px', marginBottom: '32px' })}>Search the UPC database.</p>
+            <h4 className={css({ marginBottom: '0px' })}>Search</h4>
+            <p className={css({ fontSize: '16px', marginBottom: '32px', marginTop: '4px', color: 'white' })}>Search the UPC database for a product. You can increase the offset to see more results.</p>
         </Block>
         <FormControl label={() => "Name"}><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/></FormControl>
         <FormControl label={() => "Offset"}><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/></FormControl>
-        <FormControl label={() => "Match Mode"}><Input key={3} value={matchMode} placeholder="Match Mode" onChange={e => setMatchMode(e.target.value)} clearOnEscape/></FormControl>
         <Button className={css({ backgroundColor: 'yellow', color: 'black', marginTop: '16px' })} onClick={buildQuery}>Search</Button>
+        {resultMessage && <div>
+          <p style={{ color: 'white', fontSize: '16px' }}>{resultMessage}</p>
+          <p style={{ color: 'white', fontSize: '16px' }}>Click the image to add the item to your Fridge.</p>
+        </div>}
       </StyledBody>
     </Card>
     </>

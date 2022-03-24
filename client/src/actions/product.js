@@ -135,6 +135,15 @@ export const createProduct = (product) => {
   }
 }
 
+export const setUPC = (upcProduct) => {
+  return (dispatch) => {
+    dispatch({
+      type: UPC_RESPONSE,
+      data: upcProduct
+    });
+  }
+}
+
 export const clearUPC = () => {
   return (dispatch) => {
     dispatch({
