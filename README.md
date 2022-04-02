@@ -30,7 +30,7 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
 - Machine learning / AI could be utilized here by analyzing historical data on which foods you buy and when. After time, a shopping list could be automatically generated each week.
 
 ## Technologies
-- The application will use the MERN stack:
+- The application will use the MERN stack, and is a *single page application*:
     - web server built with Node.js and Express
     - Barcode Scanner: Quagga
     - UPC API: UPC Item Database
@@ -41,10 +41,11 @@ The **Fridge Inventory Tracker** provides an “inventory dashboard” that disp
 
 ## Installation Instructions
 1. You must have the *latest* version of *Node* installed, as well as *MongoDB* and *Mongo Shell*
+- You cannot access the UPC Database locally, as it requires an API token. There is a free version of the API available (limited to 100 requests/day) but the app isn't setup to use it yet.
 2. Naviagate to root folder and run `npm install`
 3. Navigate to the `client` folder and run `npm install`
 4. Start mongo shell by running `mongo` then run `use fridge-inventory-tracker` to create database 
 5. Start database server at port `27017` by running `mongod` (should be standard port chosen at installation)
-6. Start express server by running `npm start` in root folder
+6. Start express dev server by running `npm run start-dev` in root folder
 7. Start react dev server by running `npm start` in client folder
 8. Navtigate to `localhost:3000` in your browser to view the app
