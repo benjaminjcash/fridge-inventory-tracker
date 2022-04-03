@@ -30,6 +30,8 @@ export const ACTION_PRODUCT = 'product';
 /** Data */
 export const ADDED_DATA = 'added_data';
 export const UPDATED_DATA = 'updated_data';
+export const UPDATED_PRODUCT = 'updated_product';
+export const DELETED_PRODUCT = 'deleted_product';
 export const DELETED_DATA = 'deleted_data';
 export const CLEARED_DATA = 'cleared_data';
 
