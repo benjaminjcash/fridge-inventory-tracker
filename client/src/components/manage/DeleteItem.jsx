@@ -5,6 +5,7 @@ import { FormControl } from "baseui/form-control";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
 import { Select } from 'baseui/select';
+import { RED, WHITE } from '../../styles/colors';
 
 const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
   const [css] = useStyletron();
@@ -36,10 +37,10 @@ const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: 'red'
+          color: RED
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Delete Item</h4>
-          <p className={css({ fontSize: '16px', marginBottom: '32px', marginTop: '4px', color: 'white' })}>Choose an item to remove from your Fridge.</p>
+          <p className={css({ fontSize: '16px', marginBottom: '32px', marginTop: '4px', color: WHITE })}>Choose an item to remove from your Fridge.</p>
         </Block>
         <FormControl>
           <Select
@@ -57,7 +58,7 @@ const DeleteItem = ({ items, doDeleteItem, clearDeleteItem }) => {
         </FormControl>
         <Button 
           onClick={() => handleDeleteItem()}
-          className={css({ backgroundColor: 'red', color: 'white' })}
+          className={css({ backgroundColor: RED, color: WHITE })}
         >Delete</Button>
       </StyledBody>
     </Card>

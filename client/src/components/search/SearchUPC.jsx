@@ -109,7 +109,7 @@ const SearchUPC = ({ searchUPC, upcData, setUPC, searchProduct, product, createP
       }
       {
         showCreateProduct &&
-        <FlexGridItem {...itemProps}>
+        <FlexGridItem style={{...itemProps, marginTop: '8px' }}>
           <CreateProductForm doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
         </FlexGridItem>
       }

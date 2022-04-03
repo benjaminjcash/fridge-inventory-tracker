@@ -59,7 +59,7 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
         >
           <Button>Scan Item</Button>
           <Button>Delete Item</Button>
-          <Button>Products</Button>
+          <Button>View Products</Button>
         </ButtonGroup>
       </FlexGridItem>
       { selected === 0 && 

@@ -6,6 +6,7 @@ import { Input } from 'baseui/input';
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
 import { UPC_RESPONSE_KEY_TITLE, UPC_RESPONSE_KEY_BRAND, UPC_RESPONSE_KEY_CATEGORY, UPC_RESPONSE_KEY_IMAGES } from '../../utils/constants';
+import { BLUE, WHITE, BLACK } from '../../styles/colors';
 
 const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
   const [css, theme] = useStyletron();
@@ -52,29 +53,62 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
   }, [upcData]);
 
   return (
-    <Card className={css({ height: 'auto', width: '100%' })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: WHITE })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: '#0096FF'
+          color: BLUE
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Create Product</h4>
-          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: 'white' })}>This product has not yet been added to our database, override any defaults below and click Create.</p>
+          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: BLACK })}>This product has not yet been added to our database, override any defaults below and click Create.</p>
         </Block>
-        <FormControl label={() => "Name"}>
+        <FormControl 
+          label={() => "Name"}
+          overrides={{
+            Label: {
+              style: ({ $theme }) => ({
+                color: BLACK
+              })
+            }
+          }}
+        >
           <Input
             value={valueName}
             onChange={event => setValueName(event.currentTarget.value)}
           />
         </FormControl>
-        <FormControl label={() => "Type"}>
+        <FormControl 
+          label={() => "Type"}
+          overrides={{
+            Label: {
+              style: ({ $theme }) => ({
+                color: BLACK
+              })
+            }
+          }}
+        >
           <Input
             value={valueType}
             onChange={event => setValueType(event.currentTarget.value)}
           />
         </FormControl>
-        <FormControl label={() => "Image URL"} caption={() => "use a square image"}>
+        <FormControl 
+          label={() => "Image URL"}
+          caption={() => "use a square image"}
+          overrides={{
+            Label: {
+              style: ({ $theme }) => ({
+                color: BLACK
+              })
+            },
+            Caption: {
+              style: ({ $theme }) => ({
+                color: BLACK
+              })
+            }
+          }}
+        >
           <Input
             value={valueImageUrl}
             onChange={event => setValueImageUrl(event.currentTarget.value)}
@@ -83,7 +117,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
         <img src={valueImageUrl} className={css({ height: '200px', width: '200px', display: 'block', marginBottom: '16px' })}/>
         <Button 
           onClick={() => handleCreateProduct()}
-          className={css({ backgroundColor: '#0096FF', color: 'black' })}
+          className={css({ backgroundColor: BLUE, color: WHITE })}
         >Create</Button>
       </StyledBody>
     </Card>

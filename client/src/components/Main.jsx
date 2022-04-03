@@ -27,7 +27,7 @@ function Main({ clearUPC }) {
     <FlexGrid className={css({ width: '100%', maxWidth: '900px', height: '100%' })}>
       <FlexGridItem className={css({ height: 'auto', backgroundColor: '#141414' })}>
         <Button className={css({ float: 'right' })} onClick={logout}>Logout</Button>
-        <H4 className={css({ color: 'white' })}>{ selected == 0 ? "My Fridge" : "Manage" }</H4>
+        <H4 className={css({ color: 'white', marginLeft: '16px' })}>{ selected == 0 ? "My Fridge" : selected == 1 ? "Manage" : "Search" }</H4>
         <ButtonGroup
           mode={MODE.radio}
           selected={selected}

@@ -6,6 +6,7 @@ import { FormControl } from "baseui/form-control";
 import { DatePicker } from "baseui/datepicker";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
+import { GREEN, WHITE, BLACK } from '../../styles/colors';
 
 const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
   const [css, theme] = useStyletron();
@@ -35,13 +36,13 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: 'green'
+          color: GREEN
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Add Item</h4>
-          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: 'white' })}>Set the expiration date and click Add to add the item to your Fridge.</p>
+          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: WHITE })}>Set the expiration date and click Add to add the item to your Fridge.</p>
         </Block>
-        <p className={css({ fontSize: '16px', marginTop: '32px' })}><span className={css({ color: 'green'})}>Name: </span>{product.name}</p>
-        <p className={css({ fontSize: '16px', marginTop: '-8px' })}><span className={css({ color: 'green'})}>Type: </span>{product.type}</p>
+        <p className={css({ fontSize: '16px', marginTop: '32px' })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
+        <p className={css({ fontSize: '16px', marginTop: '-8px' })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
         <img src={product.image_url} className={css({ height: '200px', width: '200px' })}/>
         <FormControl label={() => "Expiration Date"}>
           <DatePicker
@@ -55,7 +56,7 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
         </FormControl>
         <Button 
           onClick={() => handleAddItem()}
-          className={css({ backgroundColor: 'green', color: 'white' })}
+          className={css({ backgroundColor: GREEN, color: BLACK })}
         >Add</Button>
       </StyledBody>
     </Card>

@@ -5,6 +5,7 @@ import { FormControl } from "baseui/form-control";
 import { Block } from "baseui/block";
 import { Input, SIZE as inputSize } from 'baseui/input';
 import { Button, SIZE as buttonSize } from "baseui/button";
+import { ORANGE, WHITE, BLACK } from '../../styles/colors';
 
 const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setScannerIsOpen }) => {
   const [css, theme] = useStyletron();
@@ -21,15 +22,15 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setSca
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: 'orange'
+          color: ORANGE
          })}>
            <h4 className={css({ marginBottom: '0px' })}>Scan Item</h4>
-           <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: 'white' })}>Click Scan to open your camera, or you can enter the barcode manually below.</p>
+           <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: WHITE })}>Click Scan to open your camera, or you can enter the barcode manually below.</p>
           </Block>
         <Button 
           onClick={() => setScannerIsOpen(true)}
           // size={buttonSize.mini}
-          className={css({ backgroundColor: 'orange', color: 'black', marginBottom: '16px' })}
+          className={css({ backgroundColor: ORANGE, color: BLACK, marginBottom: '16px' })}
         >Scan</Button>
         <FormControl>
           <Input
@@ -42,7 +43,7 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setSca
           <Button 
             onClick={doSearch}
              // size={buttonSize.mini}
-            className={css({ backgroundColor: 'orange', color: 'black' })}
+            className={css({ backgroundColor: ORANGE, color: BLACK })}
           >Search</Button>
         }
       </StyledBody>
