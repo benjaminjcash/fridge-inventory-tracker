@@ -8,26 +8,6 @@ const Item = ({ item }) => {
   const [css, theme] = useStyletron();
   return (
     <>
-      <StatefulTooltip
-        content={() => (
-          <>
-            <h4>{item.product_id.name}</h4>
-            <Block className={css({ fontStyle: 'italic' })}>
-              <p>{item.product_id.type}</p>
-
-              <p>exp. {formatDate(item.expiration_date)}</p>
-              <p >pur. {formatDate(item.created_date)}</p>
-            </Block>
-            <Block className={css({ fontWeight: 'bold', fontStyle: 'normal' })} >
-              <p>{item.expiration_health.toUpperCase()}</p>
-            </Block>
-          </>
-        )}
-        returnFocus
-        showArrow
-        popoverMargin={0}
-        placement={PLACEMENT.bottom}
-      >
         <div>
           <Card
             className={css({ height: 'auto', width: 'auto' })}
@@ -72,7 +52,6 @@ const Item = ({ item }) => {
             }}
           ></Card>
         </div>
-      </StatefulTooltip>
     </>
   );
 }

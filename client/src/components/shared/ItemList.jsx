@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
-import Item from './Item';
+import Item from '../fridge/Item';
 import DeleteItem from '../manage/deleteItems/Item';
 
 const ItemList = ({ items, isDeleteItem }) => {

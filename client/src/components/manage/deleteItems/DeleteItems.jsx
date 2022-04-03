@@ -6,7 +6,7 @@ import { Button } from "baseui/button";
 import { Block } from "baseui/block";
 import { fetchAllItems } from '../../../actions/item';
 import { useStyletron } from 'baseui';
-import ItemList from '../../fridge/ItemList'
+import ItemList from '../../shared/ItemList'
 import { RED, WHITE, BLACK } from '../../../styles/colors';
 
 const DeleteItems = ({ fetchAllItems, items }) => {

@@ -4,7 +4,7 @@ import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { useStyletron } from 'baseui';
 import Controls from './controls/Controls';
 import Dashboard from './Dashboard';
-import ItemList from './ItemList';
+import ItemList from '../shared/ItemList';
 import { fetchAllItems } from '../../actions/item';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../utils/constants';
 
