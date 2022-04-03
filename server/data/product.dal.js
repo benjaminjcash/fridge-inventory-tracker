@@ -52,3 +52,16 @@ exports.doUpdateProduct = async (id, body) => {
       throw err;
     });
 }
+
+exports.doDeleteProduct = async (res, id) => {
+  console.log(JSON.stringify(id));
+  Product.findByIdAndDelete(id)
+  .then(() => {
+      res.json({
+          success: true,
+          message: "deleted successfully"
+      });
+  }).catch(err => {
+      res.send(err);
+  });
+}

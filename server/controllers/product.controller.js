@@ -1,6 +1,6 @@
 const axios = require("axios");
 const logger = require("../utils/logger");
-const { doCreateProduct, doSearchProduct, doFetchAllProducts, doUpdateProduct } = require("../data/product.dal");
+const { doCreateProduct, doSearchProduct, doFetchAllProducts, doUpdateProduct, doDeleteProduct } = require("../data/product.dal");
 let UPC_API_KEY;
 if(process.env.NODE_ENV === 'development') {
   UPC_API_KEY = require("../utils/api-key");
@@ -168,4 +168,9 @@ exports.updateProduct = async (req, res) => {
           error: err
       });
   }
+}
+
+exports.deleteProduct = (req, res) => {
+  console.log(req.params);
+  doDeleteProduct(res, req.params.productId);
 }

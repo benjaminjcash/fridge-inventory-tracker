@@ -99,7 +99,7 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
           className={css({ backgroundColor: PURPLE, color: WHITE, marginTop: '32px' })}
         >Save Changes</Button>
         <Button 
-          onClick={() => handleDeleteProduct()}
+          onClick={() => handleDeleteProduct(product._id)}
           className={css({ backgroundColor: RED, color: WHITE, float: 'right', marginTop: '32px' })}
         >Delete</Button>
       </StyledBody>

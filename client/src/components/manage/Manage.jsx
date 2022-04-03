@@ -6,12 +6,12 @@ import { Button } from "baseui/button";
 import { useStyletron } from 'baseui';
 import { updateItem, deleteItem, fetchAllItems } from '../../actions/item';
 import { clearData } from '../../actions/data';
-import { fetchAllProducts, clearUPC } from '../../actions/product';
+import { fetchAllProducts, clearUPC, clearProduct } from '../../actions/product';
 import AddItem from './AddItem';
 import ProductList from './ProductList';
 import DeleteItem from './DeleteItem';
 
-const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData, clearUPC }) => {
+const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData, clearUPC, clearProduct }) => {
   const [css, theme] = useStyletron();
   const [selected, setSelected] = React.useState(0);
   const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
@@ -33,12 +33,12 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
   }, []);
 
   React.useEffect(() => {
-    if(data.success & data.action === 'delete') {
-      setClearDeleteItem(true);
-      clearData();
-      alert('Successfully removed item from your Fridge.')
-      location.reload();
-    }
+    // if(data.success & data.action === 'delete') {
+    //   setClearDeleteItem(true);
+    //   clearData();
+    //   alert('Successfully removed item from your Fridge.')
+    //   location.reload();
+    // }
   }, [data]);
 
   return (
@@ -54,6 +54,8 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
           selected={selected}
           onClick={(event, index) => {
             clearUPC();
+            clearData();
+            clearProduct();
             setSelected(index);
           }}
         >
@@ -96,7 +98,8 @@ const ConnectedManage = connect(
     deleteItem,
     clearData,
     fetchAllProducts,
-    clearUPC
+    clearUPC,
+    clearProduct
   }
 )(Manage);
 
