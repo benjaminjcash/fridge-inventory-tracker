@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { lookupUPC, clearUPC, createProduct, searchProduct, clearProduct } from '../../../actions/product';
 import { clearData } from '../../../actions/data';
-import { createItem } from '../../../actions/item';
+import { createItem, fetchAllItems } from '../../../actions/item';
 import ScanItem from '../addData/ScanItem';
 import CreateProductForm from './CreateProduct';
 import ConfirmModal from '../../shared/ConfirmModal';
@@ -11,7 +11,7 @@ import CreateItem from '../addData/CreateItem';
 import Scanner from '../../shared/Scanner';
 import { useStyletron } from 'baseui';
 
-const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, clearData, createItem }) => {
+const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, clearData, createItem, fetchAllItems }) => {
   const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
   const [clearAddItem, setClearAddItem] = React.useState(false);
   const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
@@ -68,6 +68,7 @@ const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, cl
     setClearAddItem(false);
     createItem(item);
     alert('Successfully added item to your Fridge.');
+    fetchAllItems();
     setShowCreateItem(false);
     setShowScanItem(true);
     setBarcode('');
@@ -144,7 +145,8 @@ const ConnectedAddItem = connect(
     clearUPC,
     createProduct,
     searchProduct,
-    clearProduct
+    clearProduct,
+    fetchAllItems
   }
 )(AddItem);
 

@@ -44,10 +44,10 @@ const Fridge = ({ items, types, fetchAllItems }) => {
         <Dashboard items={items}/>
       </FlexGridItem>
       <FlexGridItem {...itemProps}>
-        <ItemList items={items} />
+        { items.length > 0 && <ItemList items={items} /> }
       </FlexGridItem>
       <FlexGridItem>
-        <Controls allTypes={types} buildList={buildList} />
+      { items.length > 0 && <Controls allTypes={types} buildList={buildList} /> }
       </FlexGridItem>
     </FlexGrid>
     </>
