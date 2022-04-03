@@ -4,17 +4,14 @@ import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { ButtonGroup, MODE } from "baseui/button-group";
 import { Button } from "baseui/button";
 import { useStyletron } from 'baseui';
-import { updateItem, deleteItem, fetchAllItems } from '../../actions/item';
 import { clearData } from '../../actions/data';
 import { fetchAllProducts, clearUPC, clearProduct } from '../../actions/product';
 import AddItem from './AddItem';
 import ProductList from './ProductList';
-import DeleteItem from './DeleteItem';
 
-const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData, clearUPC, clearProduct }) => {
+const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct }) => {
   const [css, theme] = useStyletron();
   const [selected, setSelected] = React.useState(0);
-  const [clearDeleteItem, setClearDeleteItem] = React.useState(false);
 
   const itemProps = {
     display: 'flex',
@@ -23,23 +20,9 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
     height: 'min-content'
   };
 
-  const doDeleteItem = (item) => {
-    setClearDeleteItem(false);
-    deleteItem(item);
-  }
-
   React.useEffect(() => {
     fetchAllProducts();
   }, []);
-
-  React.useEffect(() => {
-    // if(data.success & data.action === 'delete') {
-    //   setClearDeleteItem(true);
-    //   clearData();
-    //   alert('Successfully removed item from your Fridge.')
-    //   location.reload();
-    // }
-  }, [data]);
 
   return (
     <> 
@@ -60,7 +43,6 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
           }}
         >
           <Button>Scan Item</Button>
-          <Button>Delete Item</Button>
           <Button>View Products</Button>
         </ButtonGroup>
       </FlexGridItem>
@@ -70,11 +52,6 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
         </FlexGridItem>
       }
       { selected === 1 && 
-        <FlexGridItem {...itemProps}>
-          <DeleteItem doDeleteItem={doDeleteItem} items={items} clearDeleteItem={clearDeleteItem} />
-        </FlexGridItem>
-      }
-      { selected === 2 && 
         <FlexGridItem {...itemProps}>
           <ProductList products={products} />
         </FlexGridItem>
@@ -87,15 +64,10 @@ const Manage = ({ data, items, deleteItem, fetchAllProducts, products, clearData
 const ConnectedManage = connect(
   (state) => {
     return {
-      data: state.data,
-      items: state.items,
       upcData: state.upc,
       products: state.products
     }
   }, {
-    fetchAllItems,
-    updateItem,
-    deleteItem,
     clearData,
     fetchAllProducts,
     clearUPC,
