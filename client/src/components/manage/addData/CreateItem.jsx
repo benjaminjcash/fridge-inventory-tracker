@@ -31,7 +31,7 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
   }, [clearAddItem]);
 
   return (
-    <Card className={css({ height: 'auto', width: '100%' })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: WHITE })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
@@ -39,12 +39,21 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
           color: GREEN
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Add Item</h4>
-          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: WHITE })}>Set the expiration date and click Add to add the item to your Fridge.</p>
+          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: BLACK })}>Set the expiration date and click Add to add the item to your Fridge.</p>
         </Block>
-        <p className={css({ fontSize: '16px', marginTop: '32px' })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
-        <p className={css({ fontSize: '16px', marginTop: '-8px' })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
+        <p className={css({ fontSize: '16px', marginTop: '32px', color: BLACK })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
+        <p className={css({ fontSize: '16px', marginTop: '-8px', color: BLACK })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
         <img src={product.image_url} className={css({ height: '200px', width: '200px' })}/>
-        <FormControl label={() => "Expiration Date"}>
+        <FormControl 
+          label={() => "Expiration Date"}
+          overrides={{
+            Label: {
+              style: ({ $theme }) => ({
+                color: BLACK
+              })
+            }
+          }}
+        >
           <DatePicker
             value={valueExpirationDate}
             onChange={({ date }) => {

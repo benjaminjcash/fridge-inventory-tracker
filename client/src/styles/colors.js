@@ -1,5 +1,5 @@
 
-export const GREEN = '#00FF00';
+export const GREEN = '#006400';
 export const RED = '#FF0000';
 export const ORANGE = '#FFA500';
 export const YELLOW = '#FFFF00';
