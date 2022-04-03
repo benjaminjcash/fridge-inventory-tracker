@@ -15,18 +15,7 @@ const Fridge = ({ items, types, fetchAllItems }) => {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'top',
-    height: 'min-content'
-  };
-  const narrowItemProps = {
-    ...itemProps,
-    overrides: {
-      Block: {
-        style: () => ({
-          width: '100%',
-          flexGrow: 0.4,
-        }),
-      },
-    },
+    height: 'min-content',
   };
 
   const buildList = (options) => {
@@ -44,7 +33,7 @@ const Fridge = ({ items, types, fetchAllItems }) => {
         <Dashboard items={items}/>
       </FlexGridItem>
       <FlexGridItem {...itemProps}>
-        { items.length > 0 && <ItemList items={items} /> }
+        { items.length > 0 && <div style={{ marginBottom: '-8px', width: '100%' }}><ItemList items={items} /></div> }
       </FlexGridItem>
       <FlexGridItem>
       { items.length > 0 && <Controls allTypes={types} buildList={buildList} /> }

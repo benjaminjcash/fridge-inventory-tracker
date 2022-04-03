@@ -20,7 +20,7 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
   }, [selectedItems]);
 
   useEffect(() => {
-    fetchAllItems();
+    fetchAllItems(null, 'build_list');
   }, []);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
               marginTop: '-10px',
               color: RED
             })}>
-              <h4 className={css({ marginBottom: '0px' })}>Delete Items</h4>
+              <h4 className={css({ marginBottom: '-12px' })}>Delete Items</h4>
               <p className={css({ fontSize: '16px', marginTop: '16px', marginBottom: '32px', color: WHITE })}>Highlight all the Items you wish to remove from your Fridge and click Delete.</p>
             </Block>
             <Button 
@@ -73,7 +73,7 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
                 <Button 
                   onClick={() => {
                     deleteItems(selectedItems);
-                    fetchAllItems();
+                    fetchAllItems(null, 'build_list');
                     setShowConfirm(false);
                   }}
                   className={css({ backgroundColor: RED, color: BLACK, marginRight: '8px' })}
@@ -90,7 +90,7 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
           </StyledBody>
         </Card>
       </FlexGridItem>
-      <FlexGridItem className={css({ marginTop: '16px' })}>
+      <FlexGridItem className={css({ marginTop: '8px' })}>
         <ItemList items={toggleItemList()} isDeleteItem={true} />
       </FlexGridItem>
     </FlexGrid>

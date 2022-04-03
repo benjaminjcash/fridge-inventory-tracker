@@ -6,13 +6,10 @@ import { Button, SIZE } from "baseui/button";
 import { useStyletron } from 'baseui';
 import { clearData } from '../../actions/data';
 import { fetchAllProducts, clearUPC, clearProduct } from '../../actions/product';
-import AddItem from './addData/AddItem';
-import ProductList from '../manageDatabase/productList/ProductList';
-import DeleteItems from './deleteItems/DeleteItems';
-import SearchUPC from './search/SearchUPC';
+import ProductList from './productList/ProductList';
 import { clearSelectedItems, fetchAllItems } from '../../actions/item';
 
-const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
+const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
   const [css, theme] = useStyletron();
   const [selected, setSelected] = React.useState(0);
 
@@ -48,30 +45,18 @@ const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct,
           }}
           size={SIZE.compact}
         >
-          <Button>Search Products</Button>
-          <Button>Scan Item</Button>
-          <Button>Add Produce</Button>
-          <Button>Delete Items</Button>
+          <Button>View Products</Button>
+          <Button>View Produce</Button>
         </ButtonGroup>
       </FlexGridItem>
       { selected === 0 && 
-        <FlexGridItem {...itemProps} style={{ marginTop: '-8px' }}>
-          <SearchUPC />
+        <FlexGridItem {...itemProps}>
+          <ProductList products={products} />
         </FlexGridItem>
       }
       { selected === 1 && 
         <FlexGridItem {...itemProps}>
-          <AddItem />
-        </FlexGridItem>
-      }
-      { selected === 2 && 
-        <FlexGridItem {...itemProps}>
           
-        </FlexGridItem>
-      }
-      { selected === 3 && 
-        <FlexGridItem {...itemProps}>
-          <DeleteItems />
         </FlexGridItem>
       }
     </FlexGrid>
@@ -79,7 +64,7 @@ const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct,
   );
 }
 
-const ConnectedManage = connect(
+const ConnectedManageDatabase = connect(
   (state) => {
     return {
       upcData: state.upc,
@@ -93,6 +78,6 @@ const ConnectedManage = connect(
     clearSelectedItems,
     fetchAllItems
   }
-)(Manage);
+)(ManageDatabase);
 
-export default ConnectedManage;
+export default ConnectedManageDatabase;

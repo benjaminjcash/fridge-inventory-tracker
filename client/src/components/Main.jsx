@@ -4,16 +4,16 @@ import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
 import { H4 } from 'baseui/typography';
 import { ButtonGroup, MODE } from "baseui/button-group";
-import { Button } from "baseui/button";
+import { Button, SIZE } from "baseui/button";
 import { clearStorage } from '../utils/storage';
 import Fridge from './fridge/Fridge';
 import Manage from './manage/Manage';
-import SearchUPC from './search/SearchUPC';
-import { clearUPC } from '../actions/product';
+import ManageDatabase from './manageDatabase/ManageDatabase';
+import { clearUPC, clearProduct } from '../actions/product';
 import { fetchAllItems } from '../actions/item';
 import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
-function Main({ clearUPC, fetchAllItems }) {
+function Main({ clearUPC, fetchAllItems, clearProduct }) {
   const [css] = useStyletron();
   const [selected, setSelected] = React.useState(0);
 
@@ -39,12 +39,14 @@ function Main({ clearUPC, fetchAllItems }) {
           selected={selected}
           onClick={(event, index) => {
             clearUPC();
+            clearProduct();
             setSelected(index);
           }}
+          size={SIZE.compact}
         >
           <Button>My Fridge</Button>
           <Button>Manage Inventory</Button>
-          <Button>Search</Button>
+          <Button>Manage Database</Button>
         </ButtonGroup>
       </FlexGridItem>
       <FlexGridItem className={css({ justifyContent: 'center', height: 'auto' })}>
@@ -53,7 +55,7 @@ function Main({ clearUPC, fetchAllItems }) {
           <><Fridge /></> 
           : selected == 1 ?
           <Manage />
-          : <SearchUPC />
+          : <ManageDatabase />
         }
       </FlexGridItem>
     </FlexGrid>
@@ -64,7 +66,8 @@ function Main({ clearUPC, fetchAllItems }) {
 const ConnectedMain = connect(null, 
   {
     clearUPC,
-    fetchAllItems
+    fetchAllItems,
+    clearProduct
   }
 )(Main);
 

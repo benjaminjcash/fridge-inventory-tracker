@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useStyletron } from 'baseui';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { searchUPC, searchProduct, setUPC, createProduct, clearProduct } from '../../actions/product';
-import { createItem, fetchAllItems } from '../../actions/item';
+import { searchUPC, searchProduct, setUPC, createProduct, clearProduct } from '../../../actions/product';
+import { createItem, fetchAllItems } from '../../../actions/item';
 import SearchUPCForm from './SearchUPCForm';
 import UPCProductList from './UPCProductList';
-import CreateProductForm from '../manage/addData/CreateProduct';
-import CreateItem from '../manage/addData/CreateItem';
+import CreateProductForm from '../addData/CreateProduct';
+import CreateItem from '../addData/CreateItem';
 
 const SearchUPC = ({ searchUPC, upcData, setUPC, searchProduct, product, createProduct, createItem, fetchAllItems, clearProduct }) => {
   const [css, theme] = useStyletron();

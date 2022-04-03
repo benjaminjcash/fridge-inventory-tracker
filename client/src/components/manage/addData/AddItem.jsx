@@ -68,7 +68,7 @@ const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, cl
     setClearAddItem(false);
     createItem(item);
     alert('Successfully added item to your Fridge.');
-    fetchAllItems();
+    fetchAllItems(null, 'build_list');
     setShowCreateItem(false);
     setShowScanItem(true);
     setBarcode('');
