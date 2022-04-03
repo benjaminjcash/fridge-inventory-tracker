@@ -6,8 +6,8 @@ import { searchUPC, searchProduct, setUPC, createProduct } from '../../actions/p
 import { createItem } from '../../actions/item';
 import SearchUPCForm from './SearchUPCForm';
 import UPCProductList from './UPCProductList';
-import CreateProductForm from '../manage/CreateProduct';
-import CreateItem from '../manage/CreateItem';
+import CreateProductForm from '../manage/addData/CreateProduct';
+import CreateItem from '../manage/addData/CreateItem';
 
 const SearchUPC = ({ searchUPC, upcData, setUPC, searchProduct, product, createProduct, createItem }) => {
   const [css, theme] = useStyletron();

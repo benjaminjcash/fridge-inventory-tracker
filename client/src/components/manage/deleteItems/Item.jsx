@@ -1,10 +1,10 @@
 import { useStyletron } from 'baseui';
 import { StatefulTooltip, PLACEMENT } from 'baseui/tooltip';
 import { Block } from 'baseui/block';
-import { formatDate, calculateBorderColor } from '../../utils/helpers';
+import { formatDate, calculateBorderColor } from '../../../utils/helpers';
 import { Card } from 'baseui/card';
 
-export const DeleteItem = ({ item }) => {
+const Item = ({ item }) => {
   const [css, theme] = useStyletron();
   return (
     <>
@@ -76,3 +76,5 @@ export const DeleteItem = ({ item }) => {
     </>
   );
 }
+
+export default Item;

@@ -5,7 +5,7 @@ import { FormControl } from "baseui/form-control";
 import { Block } from "baseui/block";
 import { Input, SIZE as inputSize } from 'baseui/input';
 import { Button, SIZE as buttonSize } from "baseui/button";
-import { ORANGE, WHITE, BLACK } from '../../styles/colors';
+import { ORANGE, WHITE, BLACK } from '../../../styles/colors';
 
 const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setScannerIsOpen }) => {
   const [css, theme] = useStyletron();

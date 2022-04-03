@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { useStyletron } from 'baseui';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import ProductDetail from './ProductDetail';
-import { fetchAllProducts } from '../../actions/product';
-import { clearData } from '../../actions/data';
-import { UPDATED_PRODUCT, DELETED_PRODUCT } from '../../utils/constants';
+import { fetchAllProducts } from '../../../actions/product';
+import { clearData } from '../../../actions/data';
+import { UPDATED_PRODUCT, DELETED_PRODUCT } from '../../../utils/constants';
 
 const ProductList = ({ products, data, fetchAllProducts, clearData }) => {
   const [css, theme] = useStyletron();

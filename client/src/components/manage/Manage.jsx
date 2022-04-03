@@ -6,9 +6,9 @@ import { Button } from "baseui/button";
 import { useStyletron } from 'baseui';
 import { clearData } from '../../actions/data';
 import { fetchAllProducts, clearUPC, clearProduct } from '../../actions/product';
-import AddItem from './AddItem';
-import ProductList from './ProductList';
-import DeleteItems from './DeleteItems';
+import AddItem from './addData/AddItem';
+import ProductList from './productList/ProductList';
+import DeleteItems from './deleteItems/DeleteItems';
 
 const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct }) => {
   const [css, theme] = useStyletron();

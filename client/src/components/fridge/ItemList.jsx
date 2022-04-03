@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
 import Item from './Item';
-import { DeleteItem } from '../manage/DeleteItem';
+import DeleteItem from '../manage/deleteItems/Item';
 
 const ItemList = ({ items, isDeleteItem }) => {
   const [css, theme] = useStyletron();
@@ -45,7 +45,3 @@ const ItemList = ({ items, isDeleteItem }) => {
 }
 
 export default ItemList;
-
-export const DeleteItemList = ({ items }) => {
-  return <ItemList items={items} isDeleteItem={true} />
-}

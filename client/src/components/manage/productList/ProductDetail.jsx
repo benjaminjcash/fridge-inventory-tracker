@@ -6,8 +6,8 @@ import { FormControl } from "baseui/form-control";
 import { Input } from 'baseui/input';
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { PURPLE, WHITE, BLACK, RED } from '../../styles/colors';
-import { updateProduct, deleteProduct } from '../../actions/product';
+import { PURPLE, WHITE, BLACK, RED } from '../../../styles/colors';
+import { updateProduct, deleteProduct } from '../../../actions/product';
 
 const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
   const [css, theme] = useStyletron();

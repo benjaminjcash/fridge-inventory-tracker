@@ -4,10 +4,10 @@ import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Card, StyledBody } from "baseui/card";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { fetchAllItems } from '../../actions/item';
+import { fetchAllItems } from '../../../actions/item';
 import { useStyletron } from 'baseui';
-import { DeleteItemList } from '../fridge/ItemList';
-import { RED, WHITE, BLACK } from '../../styles/colors';
+import ItemList from '../../fridge/ItemList'
+import { RED, WHITE, BLACK } from '../../../styles/colors';
 
 const DeleteItems = ({ fetchAllItems, items }) => {
   const [css, theme] = useStyletron();
@@ -38,7 +38,7 @@ const DeleteItems = ({ fetchAllItems, items }) => {
         </Card>
       </FlexGridItem>
       <FlexGridItem className={css({ marginTop: '16px' })}>
-        <DeleteItemList items={items} />
+        <ItemList items={items} isDeleteItem={true} />
       </FlexGridItem>
     </FlexGrid>
     </>
