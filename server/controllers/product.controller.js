@@ -1,6 +1,6 @@
 const axios = require("axios");
 const logger = require("../utils/logger");
-const { doCreateProduct, doSearchProduct, doFetchAllProducts } = require("../data/product.dal");
+const { doCreateProduct, doSearchProduct, doFetchAllProducts, doUpdateProduct } = require("../data/product.dal");
 let UPC_API_KEY;
 if(process.env.NODE_ENV === 'development') {
   UPC_API_KEY = require("../utils/api-key");
@@ -143,5 +143,29 @@ exports.fetchAllProducts = async (req, res) => {
       success: false,
       error: err
     });
+  }
+}
+
+exports.updateProduct = async (req, res) => {
+  try {
+      const product = await doUpdateProduct(req.params.productId, req.body);
+      if(product == null) {
+          return res.json({
+              success: false,
+              error: "no record found"
+          });
+      } else {
+          res.json({
+              success: true,
+              data: product
+          });
+      }
+  }
+  catch(err) {
+      logger.error(err);
+      res.send({
+          success: false,
+          error: err
+      });
   }
 }

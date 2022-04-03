@@ -42,3 +42,13 @@ exports.doFetchAllProducts = async (req) => {
         throw err;
       });
 }
+
+exports.doUpdateProduct = async (id, body) => {
+  return Product
+    .findOneAndUpdate({ _id: id }, body)
+    .then((data) => {
+      return data;
+    }).catch((err) => {
+      throw err;
+    });
+}

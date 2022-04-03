@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getStorage } from '../utils/storage';
-import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND, PRODUCT_FOUND, CLEAR_UPC, CLEAR_PRODUCT, FETCHED_ALL_PRODUCTS } from '../utils/constants';
+import { UPC_RESPONSE, ADDED_DATA, NO_PRODUCT_FOUND, PRODUCT_FOUND, CLEAR_UPC, CLEAR_PRODUCT, FETCHED_ALL_PRODUCTS, UPDATED_DATA } from '../utils/constants';
 
 export const lookupUPC = (barcode) => {
   const accessToken = getStorage('access_token');
@@ -181,4 +181,51 @@ export const fetchAllProducts = () => {
       console.error(err);
     })
   }
+}
+
+export const updateProduct = (id, product) => {
+  const PRODUCT_ENDPOINT = `/api/product`;
+  const accessToken = getStorage('access_token');
+  return (dispatch) => {
+    axios.put(`${PRODUCT_ENDPOINT}/${id}`, product, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      if(!res.data.success) {
+        console.error(res.data.error);
+      } else {
+        dispatch({
+          type: UPDATED_DATA
+        });
+      }
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+}
+
+export const deleteProduct = (product) => {
+  console.log('delete product');
+  console.log(product)
+  // const accessToken = getStorage('access_token');
+  // return (dispatch) => {
+  //   const PRODUCT_ENDPOINT = `/api/product`;
+  //   axios.get(`${PRODUCT_ENDPOINT}/`, {
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`
+  //     }
+  //   }).then((res) => {
+  //     if(res.data.success) {
+  //       dispatch({
+  //         type: FETCHED_ALL_PRODUCTS,
+  //         data: res.data.data
+  //       });
+  //     } else {
+  //       console.error('error fetching products');
+  //     }
+  //   }).catch((err) => {
+  //     console.error(err);
+  //   })
+  // }
 }

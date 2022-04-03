@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useStyletron } from 'baseui';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import ProductDetail from './ProductDetail';
+import { fetchAllProducts } from '../../actions/product';
+import { clearData } from '../../actions/data';
 
-const ProductList = ({ products }) => {
+const ProductList = ({ products, data, fetchAllProducts, clearData }) => {
   const [css, theme] = useStyletron();
   const [selectedProduct, setSelectedProduct] = useState({});
+
+  useEffect(() => {
+    if(data.success) {
+      if(data.action == 'update') alert('Sucessfully updated the Product');
+      clearData();
+      fetchAllProducts();
+      setSelectedProduct({});
+    }
+  }, [data]);
 
   return (
     Object.keys(selectedProduct).length === 0 ?
@@ -35,4 +47,15 @@ const ProductList = ({ products }) => {
   );
 }
 
-export default ProductList;
+const ConnectedProductList = connect(
+  (state) => {
+    return {
+      data: state.data
+    }
+  }, {
+    fetchAllProducts,
+    clearData
+  }
+)(ProductList);
+
+export default ConnectedProductList;
