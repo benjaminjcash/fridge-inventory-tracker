@@ -1,5 +1,5 @@
 const express = require("express");
-const { createItem, getAllItems, getItem, updateItem, deleteItem } = require("../controllers/item.controller");
+const { createItem, getAllItems, getItem, updateItem, deleteItems } = require("../controllers/item.controller");
 const validateToken = require('../middleware/auth.middleware');
 
 const itemRoutes = express.Router();
@@ -9,6 +9,6 @@ itemRoutes
     .get("/", validateToken, getAllItems)
     .get("/:itemId", validateToken, getItem)
     .put("/:itemId", validateToken, updateItem)
-    .delete("/:itemId", validateToken, deleteItem);
+    .post("/delete", validateToken, deleteItems);
 
 module.exports = itemRoutes;

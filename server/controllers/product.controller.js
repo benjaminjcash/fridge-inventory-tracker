@@ -171,6 +171,5 @@ exports.updateProduct = async (req, res) => {
 }
 
 exports.deleteProduct = (req, res) => {
-  console.log(req.params);
   doDeleteProduct(res, req.params.productId);
 }

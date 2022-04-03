@@ -5,8 +5,8 @@ import { FormControl } from "baseui/form-control";
 import { Input } from 'baseui/input';
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { UPC_RESPONSE_KEY_TITLE, UPC_RESPONSE_KEY_BRAND, UPC_RESPONSE_KEY_CATEGORY, UPC_RESPONSE_KEY_IMAGES } from '../../utils/constants';
-import { BLUE, WHITE, BLACK } from '../../styles/colors';
+import { UPC_RESPONSE_KEY_TITLE, UPC_RESPONSE_KEY_BRAND, UPC_RESPONSE_KEY_CATEGORY, UPC_RESPONSE_KEY_IMAGES } from '../../../utils/constants';
+import { BLUE, WHITE, BLACK } from '../../../styles/colors';
 
 const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
   const [css, theme] = useStyletron();

@@ -1,4 +1,4 @@
-import { ADDED_DATA, UPDATED_DATA, DELETED_DATA, CLEARED_DATA, UPDATED_PRODUCT, DELETED_PRODUCT } from '../utils/constants';
+import { ADDED_DATA, UPDATED_DATA, DELETED_ITEM, CLEARED_DATA, UPDATED_PRODUCT, DELETED_PRODUCT } from '../utils/constants';
 
 const data = (state = { success: false }, action) => {
   switch(action.type) {
@@ -15,10 +15,10 @@ const data = (state = { success: false }, action) => {
         action: 'update'
       });
     return updatedData;
-    case DELETED_DATA:
+    case DELETED_ITEM:
       const deletedData = Object.assign({
         success: true,
-        action: 'delete'
+        action: DELETED_ITEM
       });
     return deletedData;
     case CLEARED_DATA:

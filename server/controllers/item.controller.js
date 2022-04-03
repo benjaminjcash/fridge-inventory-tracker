@@ -1,6 +1,6 @@
 const Item = require("../models/item.model");
 const logger = require('../utils/logger');
-const { doGetItem, doGetAllItems, doUpdateItem, doCreateItem } = require("../data/item.dal");
+const { doGetItem, doGetAllItems, doUpdateItem, doCreateItem, doDeleteItems } = require("../data/item.dal");
 
 exports.createItem = async (req, res) => {
     try {
@@ -98,14 +98,27 @@ exports.updateItem = async (req, res) => {
     }
 }
 
-exports.deleteItem = (req, res) => {
-    Item.findByIdAndDelete( req.params.itemId )
-        .then(() => {
-            res.json({
-                success: true,
-                message: "deleted successfully"
-            });
-        }).catch(err => {
-            res.send(err);
-        });
+exports.deleteItems = async (req, res) => {
+  try {
+    const result = await doDeleteItems(req.body);
+    if(!result.deletedCount < 0) {
+      return res.json({
+        success: false,
+        error: "no record(s) found"
+      });
+    } else {
+      res.json({
+        success: true,
+        deletedCount: result.deletedCount
+      });
+    }
+  }
+  catch(err) {
+    logger.error(err);
+    res.json({
+      success: false,
+      error: err
+    })
+  }
+  
 }

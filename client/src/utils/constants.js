@@ -19,6 +19,10 @@ export const DEFAULT_FETCH_ALL_ITEMS_OPTIONS = {
   attribute: "expiration_date",
   order: "1"
 }
+export const SET_SELECTED_ITEM = 'set_selected_item';
+export const REMOVE_SELECTED_ITEM = 'remove_selected_item';
+export const CLEAR_SELECTED_ITEMS = 'clear_selected_items';
+export const SELECT_ALL_ITEMS = 'select_all_items';
 
 /** Product */
 export const NO_PRODUCT_FOUND = 'no_product_found';
@@ -34,6 +38,7 @@ export const UPDATED_PRODUCT = 'updated_product';
 export const DELETED_PRODUCT = 'deleted_product';
 export const DELETED_DATA = 'deleted_data';
 export const CLEARED_DATA = 'cleared_data';
+export const DELETED_ITEM = 'deleted_item';
 
 /** Upc */
 export const UPC_RESPONSE = 'upc_response';

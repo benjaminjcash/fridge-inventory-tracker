@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
-import Item from './Item';
-const ItemList = ({ items }) => {
+import Item from '../fridge/Item';
+import DeleteItem from '../manage/deleteItems/Item';
+
+const ItemList = ({ items, isDeleteItem }) => {
   const [css, theme] = useStyletron();
   const [columnCount, setColumnCount] = useState(1);
   const itemStyles = {
@@ -32,7 +34,7 @@ const ItemList = ({ items }) => {
           items.map((item) => {
             return (
               <FlexGridItem key={item._id} style={itemStyles}>
-                <Item key={item._id} item={item}/>
+                { isDeleteItem ? <DeleteItem key={item._id} item={item}/> : <Item key={item._id} item={item}/> }
               </FlexGridItem>
             );
           })

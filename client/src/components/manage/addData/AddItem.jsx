@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { lookupUPC, clearUPC, createProduct, searchProduct, clearProduct } from '../../actions/product';
-import { clearData } from '../../actions/data';
-import { createItem } from '../../actions/item';
-import ScanItem from './ScanItem';
+import { lookupUPC, clearUPC, createProduct, searchProduct, clearProduct } from '../../../actions/product';
+import { clearData } from '../../../actions/data';
+import { createItem } from '../../../actions/item';
+import ScanItem from '../addData/ScanItem';
 import CreateProductForm from './CreateProduct';
-import ConfirmModal from '../shared/ConfirmModal';
-import CreateItem from './CreateItem';
-import Scanner from '../scanner/Scanner';
+import ConfirmModal from '../../shared/ConfirmModal';
+import CreateItem from '../addData/CreateItem';
+import Scanner from '../../shared/Scanner';
 import { useStyletron } from 'baseui';
 
 const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, clearData, createItem }) => {
@@ -67,8 +67,11 @@ const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, cl
     setContext('create_item');
     setClearAddItem(false);
     createItem(item);
-    alert('Successfully added item to your Fridge.')
-    location.reload();
+    alert('Successfully added item to your Fridge.');
+    setShowCreateItem(false);
+    setShowScanItem(true);
+    setBarcode('');
+    setBarcodeInput([]);
   }
 
   const doCreateProduct = (product) => {

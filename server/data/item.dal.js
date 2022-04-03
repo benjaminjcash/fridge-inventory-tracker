@@ -92,3 +92,7 @@ exports.doUpdateItem = async (id, body) => {
         throw err;
       });
 }
+
+exports.doDeleteItems = async (items) => {
+  return Item.deleteMany({ _id: { $in: items}});
+}

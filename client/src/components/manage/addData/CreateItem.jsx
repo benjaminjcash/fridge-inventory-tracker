@@ -6,11 +6,11 @@ import { FormControl } from "baseui/form-control";
 import { DatePicker } from "baseui/datepicker";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { GREEN, WHITE, BLACK } from '../../styles/colors';
+import { GREEN, WHITE, BLACK } from '../../../styles/colors';
 
 const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
   const [css, theme] = useStyletron();
-  const [valueExpirationDate, setValueExpirationDate] = React.useState([]);
+  const [valueExpirationDate, setValueExpirationDate] = React.useState(new Date());
 
   const handleAddItem = () => {
     if(valueExpirationDate.length === 0) {
