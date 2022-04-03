@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import { ADDED_DATA, UPDATED_DATA, DELETED_DATA, FETCHED_ITEMS, FETCHED_ALL_TYPES } from '../utils/constants';
+import { ADDED_DATA, UPDATED_DATA, DELETED_DATA, FETCHED_ITEMS, FETCHED_ALL_TYPES, SET_SELECTED_ITEM, REMOVE_SELECTED_ITEM, CLEAR_SELECTED_ITEMS } from '../utils/constants';
 import { getStorage } from '../utils/storage';
 const ITEM_ENDPOINT = `/api/item`;
 
@@ -95,25 +95,51 @@ export const updateItem = (item) => {
     }
 }
 
-export const deleteItem = (item) => {
-    const accessToken = getStorage('access_token');
-    return (dispatch) => {
-        axios.delete(`${ITEM_ENDPOINT}/${item.id}`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
-        }).then((res) => {
-            if(!res.data.success) {
-                console.error(res.data.message);
-            } else {
-                dispatch({
-                    type: DELETED_DATA
-                });
-            }
-        }).catch((err) => {
-            console.error(err);
-        })
-    }
+export const deleteItems = (items) => {
+  const accessToken = getStorage('access_token');
+  return (dispatch) => {
+    axios.post(`${ITEM_ENDPOINT}/delete`, items, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      if(!res.data.success) {
+        console.error(res.data.message);
+      } else {
+        dispatch({
+          type: DELETED_DATA
+        });
+      }
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+}
+
+export const setSelectedItem = (id) => {
+  return (dispatch) => { 
+    dispatch({
+      type: SET_SELECTED_ITEM,
+      data: id
+    });
+  }
+}
+
+export const removeSelectedItem = (id) => {
+  return (dispatch) => { 
+    dispatch({
+      type: REMOVE_SELECTED_ITEM,
+      data: id
+    });
+  }
+}
+
+export const clearSelectedItems = () => {
+  return (dispatch) => { 
+    dispatch({
+      type: CLEAR_SELECTED_ITEMS
+    });
+  }
 }
 
 const calculateExpirationHealth = (item) => {

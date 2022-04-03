@@ -4,17 +4,26 @@ import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Card, StyledBody } from "baseui/card";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { fetchAllItems } from '../../../actions/item';
+import { fetchAllItems, clearSelectedItems, deleteItems } from '../../../actions/item';
 import { useStyletron } from 'baseui';
 import ItemList from '../../shared/ItemList'
 import { RED, WHITE, BLACK } from '../../../styles/colors';
 
-const DeleteItems = ({ fetchAllItems, items }) => {
+const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, deleteItems }) => {
   const [css, theme] = useStyletron();
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    setShowError(false);
+  }, [selectedItems]);
 
   useEffect(() => {
     fetchAllItems();
   }, []);
+
+  const buildItemList = () => items.filter(item => selectedItems.includes(item._id));
+  const toggleItemList = () => showConfirm ? buildItemList() : items;
 
   return (
     <>
@@ -31,14 +40,45 @@ const DeleteItems = ({ fetchAllItems, items }) => {
               <p className={css({ fontSize: '16px', marginTop: '16px', marginBottom: '32px', color: WHITE })}>Highlight all the Items you wish to remove from your Fridge and click Delete.</p>
             </Block>
             <Button 
-              onClick={() => {}}
+              onClick={() => {
+                if(!selectedItems.length > 0) {
+                  setShowError(true);
+                } else {
+                  setShowConfirm(true);
+                }
+              }}
               className={css({ backgroundColor: RED, color: BLACK })}
             >Delete</Button>
+            {
+              showError &&
+              <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>You must select at least one item to delete.</p>
+            }
+            {
+              showConfirm &&
+              <>
+                <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>Are you sure you want to delete these {selectedItems.length} item(s)?</p>
+                <Button 
+                  onClick={() => {
+                    deleteItems(selectedItems);
+                    clearSelectedItems();
+                    setShowConfirm(false);
+                  }}
+                  className={css({ backgroundColor: RED, color: BLACK, marginRight: '8px' })}
+                >Yes</Button>
+                <Button 
+                  onClick={() => {
+                    clearSelectedItems();
+                    setShowConfirm(false);
+                  }}
+                  className={css({ backgroundColor: WHITE, color: BLACK })}
+                >No</Button>
+              </>
+            }
           </StyledBody>
         </Card>
       </FlexGridItem>
       <FlexGridItem className={css({ marginTop: '16px' })}>
-        <ItemList items={items} isDeleteItem={true} />
+        <ItemList items={toggleItemList()} isDeleteItem={true} />
       </FlexGridItem>
     </FlexGrid>
     </>
@@ -48,10 +88,13 @@ const DeleteItems = ({ fetchAllItems, items }) => {
 const ConnectedDeleteItems = connect(
   (state) => {
     return {
-      items: state.items
+      items: state.items,
+      selectedItems: state.selectedItems
     }
   }, {
-    fetchAllItems
+    fetchAllItems,
+    clearSelectedItems,
+    deleteItems
   }
 )(DeleteItems);
 

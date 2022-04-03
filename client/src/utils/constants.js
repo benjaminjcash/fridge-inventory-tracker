@@ -19,6 +19,9 @@ export const DEFAULT_FETCH_ALL_ITEMS_OPTIONS = {
   attribute: "expiration_date",
   order: "1"
 }
+export const SET_SELECTED_ITEM = 'set_selected_item';
+export const REMOVE_SELECTED_ITEM = 'remove_selected_item';
+export const CLEAR_SELECTED_ITEMS = 'clear_selected_items';
 
 /** Product */
 export const NO_PRODUCT_FOUND = 'no_product_found';
