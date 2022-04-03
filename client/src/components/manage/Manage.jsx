@@ -8,6 +8,7 @@ import { clearData } from '../../actions/data';
 import { fetchAllProducts, clearUPC, clearProduct } from '../../actions/product';
 import AddItem from './AddItem';
 import ProductList from './ProductList';
+import DeleteItems from './DeleteItems';
 
 const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct }) => {
   const [css, theme] = useStyletron();
@@ -43,6 +44,7 @@ const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct 
           }}
         >
           <Button>Scan Item</Button>
+          <Button>Delete Items</Button>
           <Button>View Products</Button>
         </ButtonGroup>
       </FlexGridItem>
@@ -52,6 +54,11 @@ const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct 
         </FlexGridItem>
       }
       { selected === 1 && 
+        <FlexGridItem {...itemProps}>
+          <DeleteItems />
+        </FlexGridItem>
+      }
+      { selected === 2 && 
         <FlexGridItem {...itemProps}>
           <ProductList products={products} />
         </FlexGridItem>

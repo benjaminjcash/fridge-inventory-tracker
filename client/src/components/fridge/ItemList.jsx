@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
 import Item from './Item';
+
 const ItemList = ({ items }) => {
   const [css, theme] = useStyletron();
   const [columnCount, setColumnCount] = useState(1);
@@ -43,3 +44,7 @@ const ItemList = ({ items }) => {
 }
 
 export default ItemList;
+
+export const DeleteItemList = ({ items }) => {
+  return <ItemList items={items} />
+}

@@ -37,7 +37,7 @@ function Main({ clearUPC }) {
           }}
         >
           <Button>My Fridge</Button>
-          <Button>Manage</Button>
+          <Button>Manage Inventory</Button>
           <Button>Search</Button>
         </ButtonGroup>
       </FlexGridItem>
