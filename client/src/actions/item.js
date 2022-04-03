@@ -44,8 +44,9 @@ export const fetchAllItems = (options, context) => {
             type: FETCHED_ALL_TYPES,
             data: [... new Set(res.data.data.map(item => item.product_id.type))]
           });
+        } else {
+          console.error('context undefined for fetchAllItems');
         }
-        
       }
     }).catch((err) => {
       console.error(err);

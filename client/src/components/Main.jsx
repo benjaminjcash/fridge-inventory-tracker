@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {useStyletron} from 'baseui';
@@ -10,8 +10,10 @@ import Fridge from './fridge/Fridge';
 import Manage from './manage/Manage';
 import SearchUPC from './search/SearchUPC';
 import { clearUPC } from '../actions/product';
+import { fetchAllItems } from '../actions/item';
+import { DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../utils/constants';
 
-function Main({ clearUPC }) {
+function Main({ clearUPC, fetchAllItems }) {
   const [css] = useStyletron();
   const [selected, setSelected] = React.useState(0);
 
@@ -21,6 +23,10 @@ function Main({ clearUPC }) {
     clearStorage('refresh_token');
     window.location.href = '/';
   }
+
+  useEffect(() => {
+    fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'build_list');
+  }, []);
 
   return (
     <>
@@ -57,7 +63,8 @@ function Main({ clearUPC }) {
 
 const ConnectedMain = connect(null, 
   {
-    clearUPC
+    clearUPC,
+    fetchAllItems
   }
 )(Main);
 

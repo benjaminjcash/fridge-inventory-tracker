@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { useStyletron } from 'baseui';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { searchUPC, searchProduct, setUPC, createProduct } from '../../actions/product';
-import { createItem } from '../../actions/item';
+import { createItem, fetchAllItems } from '../../actions/item';
 import SearchUPCForm from './SearchUPCForm';
 import UPCProductList from './UPCProductList';
 import CreateProductForm from '../manage/addData/CreateProduct';
 import CreateItem from '../manage/addData/CreateItem';
 
-const SearchUPC = ({ searchUPC, upcData, setUPC, searchProduct, product, createProduct, createItem }) => {
+const SearchUPC = ({ searchUPC, upcData, setUPC, searchProduct, product, createProduct, createItem, fetchAllItems }) => {
   const [css, theme] = useStyletron();
   const [showSearchUPCForm, setShowSearchUPCForm] = React.useState(true);
   const [showUPCProductList, setShowUPCProductList] = useState(false);
@@ -71,8 +71,10 @@ const SearchUPC = ({ searchUPC, upcData, setUPC, searchProduct, product, createP
   const doCreateItem = (item) => {
     setClearAddItem(false);
     createItem(item);
-    alert('Successfully added item to your Fridge.')
-    location.reload();
+    alert('Successfully added item to your Fridge.');
+    fetchAllItems(null, 'build_list');
+    setShowCreateItem(false);
+    setShowSearchUPCForm(true);
   }
 
   const doCreateProduct = (product) => {
@@ -103,7 +105,7 @@ const SearchUPC = ({ searchUPC, upcData, setUPC, searchProduct, product, createP
       }
       {
         showCreateItem &&
-        <FlexGridItem {...itemProps}>
+        <FlexGridItem {...itemProps} style={{ marginTop: '8px' }}>
           <CreateItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
         </FlexGridItem>
       }
@@ -128,7 +130,8 @@ const ConnectedSearchUPC = connect((state) => {
     setUPC,
     searchProduct,
     createProduct,
-    createItem
+    createItem,
+    fetchAllItems
   }
 )(SearchUPC);
 
