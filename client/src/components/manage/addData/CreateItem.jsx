@@ -10,7 +10,7 @@ import { GREEN, WHITE, BLACK } from '../../../styles/colors';
 
 const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
   const [css, theme] = useStyletron();
-  const [valueExpirationDate, setValueExpirationDate] = React.useState([]);
+  const [valueExpirationDate, setValueExpirationDate] = React.useState(new Date());
 
   const handleAddItem = () => {
     if(valueExpirationDate.length === 0) {

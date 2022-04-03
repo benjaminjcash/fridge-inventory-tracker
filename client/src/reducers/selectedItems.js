@@ -1,4 +1,4 @@
-import { SET_SELECTED_ITEM, REMOVE_SELECTED_ITEM, CLEAR_SELECTED_ITEMS } from "../utils/constants";
+import { SET_SELECTED_ITEM, REMOVE_SELECTED_ITEM, CLEAR_SELECTED_ITEMS, SELECT_ALL_ITEMS } from "../utils/constants";
 
 const selectedItems = (state = [], action) => {
   switch(action.type) {
@@ -8,6 +8,8 @@ const selectedItems = (state = [], action) => {
       return state.filter(item => item != action.data);
     case CLEAR_SELECTED_ITEMS:
       return [];
+    case SELECT_ALL_ITEMS:
+      return action.data
     default:
       return state;
   }

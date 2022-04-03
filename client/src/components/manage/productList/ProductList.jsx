@@ -47,8 +47,10 @@ const ProductList = ({ products, data, fetchAllProducts, clearData }) => {
           {(row, i) => (
             <img 
               src={row.image_url} 
-              className={css({ width: '100%', height: 'auto%' })} 
-              onClick={() => setSelectedProduct(products[i])}
+              className={css({ maxWidth: '150px', float: 'right', height: 'auto%' })} 
+              onClick={() => {
+                setSelectedProduct(products[i])
+              }}
             />
           )}
         </TableBuilderColumn>

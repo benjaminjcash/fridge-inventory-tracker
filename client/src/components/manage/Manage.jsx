@@ -9,9 +9,9 @@ import { fetchAllProducts, clearUPC, clearProduct } from '../../actions/product'
 import AddItem from './addData/AddItem';
 import ProductList from './productList/ProductList';
 import DeleteItems from './deleteItems/DeleteItems';
-import { clearSelectedItems } from '../../actions/item';
+import { clearSelectedItems, fetchAllItems } from '../../actions/item';
 
-const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct, clearSelectedItems }) => {
+const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
   const [css, theme] = useStyletron();
   const [selected, setSelected] = React.useState(0);
 
@@ -43,6 +43,7 @@ const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct,
             clearProduct();
             setSelected(index);
             clearSelectedItems();
+            fetchAllItems(null, 'build_list');
           }}
         >
           <Button>Scan Item</Button>
@@ -81,7 +82,8 @@ const ConnectedManage = connect(
     fetchAllProducts,
     clearUPC,
     clearProduct,
-    clearSelectedItems
+    clearSelectedItems,
+    fetchAllItems
   }
 )(Manage);
 

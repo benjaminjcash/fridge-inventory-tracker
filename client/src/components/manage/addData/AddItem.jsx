@@ -67,8 +67,11 @@ const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, cl
     setContext('create_item');
     setClearAddItem(false);
     createItem(item);
-    alert('Successfully added item to your Fridge.')
-    location.reload();
+    alert('Successfully added item to your Fridge.');
+    setShowCreateItem(false);
+    setShowScanItem(true);
+    setBarcode('');
+    setBarcodeInput([]);
   }
 
   const doCreateProduct = (product) => {

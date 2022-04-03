@@ -1,11 +1,10 @@
 import axios from 'axios';
 import qs from 'qs';
-import { ADDED_DATA, UPDATED_DATA, DELETED_ITEM, FETCHED_ITEMS, FETCHED_ALL_TYPES, SET_SELECTED_ITEM, REMOVE_SELECTED_ITEM, CLEAR_SELECTED_ITEMS } from '../utils/constants';
+import { ADDED_DATA, UPDATED_DATA, DELETED_ITEM, FETCHED_ITEMS, FETCHED_ALL_TYPES, SET_SELECTED_ITEM, REMOVE_SELECTED_ITEM, CLEAR_SELECTED_ITEMS, SELECT_ALL_ITEMS } from '../utils/constants';
 import { getStorage } from '../utils/storage';
 const ITEM_ENDPOINT = `/api/item`;
 
 export const fetchAllItems = (options, context) => {
-  console.log("TEST")
   const accessToken = getStorage('access_token');
   return (dispatch) => {
     axios.get(`${ITEM_ENDPOINT}`, {
@@ -22,8 +21,6 @@ export const fetchAllItems = (options, context) => {
         return qs.stringify(params)
       }
     }).then((res) => {
-      console.log("TEST2");
-      console.log(res);
       if(!res.data.success) {
         dispatch({
           type: FETCHED_ITEMS,
@@ -142,6 +139,15 @@ export const clearSelectedItems = () => {
   dispatch({
     type: CLEAR_SELECTED_ITEMS
   });
+  }
+}
+
+export const selectAllItems = (items) => {
+  return (dispatch) => {
+    dispatch({
+      type: SELECT_ALL_ITEMS,
+      data: items.map(item => item._id)
+    });
   }
 }
 

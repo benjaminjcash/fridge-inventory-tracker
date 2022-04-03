@@ -4,13 +4,13 @@ import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Card, StyledBody } from "baseui/card";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { fetchAllItems, clearSelectedItems, deleteItems } from '../../../actions/item';
+import { fetchAllItems, clearSelectedItems, deleteItems, selectAllItems } from '../../../actions/item';
 import { useStyletron } from 'baseui';
 import ItemList from '../../shared/ItemList'
 import { RED, WHITE, BLACK } from '../../../styles/colors';
 import { DELETED_ITEM } from '../../../utils/constants';
 
-const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, deleteItems, data }) => {
+const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, deleteItems, selectAllItems, data }) => {
   const [css, theme] = useStyletron();
   const [showConfirm, setShowConfirm] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -24,8 +24,9 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
   }, []);
 
   useEffect(() => {
-    console.log(data);
     if(data.success && data.action === DELETED_ITEM) {
+      alert(`Successfully removed ${selectedItems.length} item(s) from your Fridge.`)
+      clearSelectedItems();
       fetchAllItems(null, 'build_list');
     }
   }, [data]);
@@ -57,6 +58,10 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
               }}
               className={css({ backgroundColor: RED, color: BLACK })}
             >Delete</Button>
+            <Button 
+              onClick={() => selectAllItems(items)}
+              className={css({ backgroundColor: WHITE, color: BLACK, marginLeft: '8px' })}
+            >Select All</Button>
             {
               showError &&
               <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>You must select at least one item to delete.</p>
@@ -68,7 +73,6 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
                 <Button 
                   onClick={() => {
                     deleteItems(selectedItems);
-                    clearSelectedItems();
                     fetchAllItems();
                     setShowConfirm(false);
                   }}
@@ -104,7 +108,8 @@ const ConnectedDeleteItems = connect(
   }, {
     fetchAllItems,
     clearSelectedItems,
-    deleteItems
+    deleteItems,
+    selectAllItems
   }
 )(DeleteItems);
 

@@ -35,11 +35,11 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
           marginTop: '-10px',
           color: PURPLE
         })}>
-          <h4 className={css({ marginBottom: '0px' })}>Product Detail</h4>
+          <h4 className={css({  })}>Product Detail</h4>
+          <h4 className={css({ color: PURPLE, float: 'right', marginTop: '-48px' })}>{product.upc_code}</h4>
           <p className={css({ fontSize: '16px', marginTop: '16px', color: BLACK })}>View and Edit Product Details.</p>
           <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: BLACK })}>WARNING: These changes may affect other user's Fridges.</p>
         </Block>
-        <p className={css({ fontSize: '16px', marginTop: '-8px', color: BLACK })}><span className={css({ color: PURPLE })}>UPC Code: </span>{product.upc_code}</p>
         <FormControl 
           label={() => "Name"}
           overrides={{
