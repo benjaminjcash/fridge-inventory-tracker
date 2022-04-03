@@ -37,6 +37,7 @@ export const UPDATED_PRODUCT = 'updated_product';
 export const DELETED_PRODUCT = 'deleted_product';
 export const DELETED_DATA = 'deleted_data';
 export const CLEARED_DATA = 'cleared_data';
+export const DELETED_ITEM = 'deleted_item';
 
 /** Upc */
 export const UPC_RESPONSE = 'upc_response';

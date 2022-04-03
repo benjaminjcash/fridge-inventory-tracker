@@ -8,8 +8,9 @@ import { fetchAllItems, clearSelectedItems, deleteItems } from '../../../actions
 import { useStyletron } from 'baseui';
 import ItemList from '../../shared/ItemList'
 import { RED, WHITE, BLACK } from '../../../styles/colors';
+import { DELETED_ITEM } from '../../../utils/constants';
 
-const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, deleteItems }) => {
+const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, deleteItems, data }) => {
   const [css, theme] = useStyletron();
   const [showConfirm, setShowConfirm] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -21,6 +22,13 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
   useEffect(() => {
     fetchAllItems();
   }, []);
+
+  useEffect(() => {
+    console.log(data);
+    if(data.success && data.action === DELETED_ITEM) {
+      fetchAllItems(null, 'build_list');
+    }
+  }, [data]);
 
   const buildItemList = () => items.filter(item => selectedItems.includes(item._id));
   const toggleItemList = () => showConfirm ? buildItemList() : items;
@@ -61,6 +69,7 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
                   onClick={() => {
                     deleteItems(selectedItems);
                     clearSelectedItems();
+                    fetchAllItems();
                     setShowConfirm(false);
                   }}
                   className={css({ backgroundColor: RED, color: BLACK, marginRight: '8px' })}
@@ -89,7 +98,8 @@ const ConnectedDeleteItems = connect(
   (state) => {
     return {
       items: state.items,
-      selectedItems: state.selectedItems
+      selectedItems: state.selectedItems,
+      data: state.data
     }
   }, {
     fetchAllItems,
