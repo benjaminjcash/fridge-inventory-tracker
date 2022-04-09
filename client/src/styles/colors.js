@@ -6,4 +6,5 @@ export const YELLOW = '#FFFF00';
 export const BLUE = '#0000FF';
 export const WHITE = '#FFFFFF';
 export const BLACK = '#000000';
-export const PURPLE = '#6A0DAD'
+export const PURPLE = '#6A0DAD';
+export const PINK = '#FFC0CB';

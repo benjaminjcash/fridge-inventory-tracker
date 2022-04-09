@@ -9,6 +9,7 @@ import { clearUPC, clearProduct } from '../../actions/product';
 import AddItem from './addData/AddItem';
 import DeleteItems from './deleteItems/DeleteItems';
 import SearchUPC from './search/SearchUPC';
+import AddProduce from './addProduce/AddProduce';
 import { clearSelectedItems, fetchAllItems } from '../../actions/item';
 
 const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
@@ -61,7 +62,7 @@ const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems
       }
       { selected === 2 && 
         <FlexGridItem {...itemProps}>
-          
+          <AddProduce />
         </FlexGridItem>
       }
       { selected === 3 && 

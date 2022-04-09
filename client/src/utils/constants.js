@@ -31,6 +31,9 @@ export const CLEAR_PRODUCT = 'clear_product';
 export const FETCHED_ALL_PRODUCTS = 'fetched_all_products';
 export const ACTION_PRODUCT = 'product';
 
+/** Produce */
+export const PRODUCE_FOUND = 'produce_found';
+
 /** Data */
 export const ADDED_DATA = 'added_data';
 export const UPDATED_DATA = 'updated_data';
