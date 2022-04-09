@@ -8,6 +8,7 @@ const itemRoutes = require("./routes/item.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const productRoutes = require("./routes/product.routes");
+const produceRoutes = require("./routes/produce.routes");
 const { error404 } = require("./middleware/errors.middleware");
 const PORT = process.env.PORT || 3001;
 const dbUrls = require("./config/mongo.config");
@@ -42,6 +43,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/item", itemRoutes);
 app.use("/api/product", productRoutes);
+app.use("/api/produce", produceRoutes);
 
 if(process.env.NODE_ENV === "production") {
   app.use(express.static(path.resolve(__dirname, "../client/build")));
