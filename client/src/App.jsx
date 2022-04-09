@@ -1,32 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useStyletron } from 'baseui';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { ThemeProvider } from 'baseui';
+import { DarkTheme } from 'baseui';
 import { checkLoggedIn } from './actions/auth';
 import { fetchUser } from './actions/user';
 import ConnectedLogin from './components/auth/Login';
 import Register from './components/auth/Register';
 import Main from './components/Main';
 
-function App({ auth, checkLoggedIn, user, fetchUser }) {
-  const [css, theme] = useStyletron();
-  const [loggedIn, setLoggedIn] = React.useState(auth?.loggedIn);
-  const [currentUser, setCurrentUser] = React.useState(user);
+function App({ auth, checkLoggedIn, fetchUser, theme }) {
+  const [loggedIn, setLoggedIn] = useState(auth?.loggedIn);
+  const [currentTheme, setCurrentTheme] = useState(DarkTheme);
 
-  React.useEffect(() => {
-    checkLoggedIn();
-  }, []);
-
-  React.useEffect(() => {
+  useEffect(() => setCurrentTheme({ 
+    ...DarkTheme, 
+    name: theme.name,
+    ...theme.colors 
+  }), [theme]);
+  useEffect(() => checkLoggedIn(), []);
+  useEffect(() => {
     setLoggedIn(auth?.loggedIn);
     if(auth?.loggedIn) fetchUser();
   }, [auth]);
 
-  React.useEffect(() => {
-    setCurrentUser(user);
-  }, [user])
-
   return (
+    <ThemeProvider theme={currentTheme}>
     <Router>
       <Switch>
         <Route exact path="/">
@@ -45,6 +44,7 @@ function App({ auth, checkLoggedIn, user, fetchUser }) {
         </Route>
       </Switch>
     </Router>
+    </ThemeProvider>
   );
 }
 
@@ -52,7 +52,7 @@ const ConnectedApp = connect(
   (state) => {
     return {
       auth: state.auth,
-      user: state.user
+      theme: state.theme
     }
   }, {
     checkLoggedIn,

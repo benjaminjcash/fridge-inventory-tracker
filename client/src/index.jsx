@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { Client as Styletron } from 'styletron-engine-atomic';
 import { Provider as StyletronProvider } from 'styletron-react';
-import { DarkTheme, LightTheme, BaseProvider, styled } from 'baseui';
+import { BaseProvider, styled } from 'baseui';
 import reducer from './reducers';
 import ConnectedApp from './App';
 const useLogger = true;
@@ -33,7 +33,7 @@ const store = configureStore({
 ReactDOM.render(
   <Provider store={store}>
     <StyletronProvider value={engine}>
-      <BaseProvider theme={DarkTheme}>
+      <BaseProvider>
         <Centered>
           <ConnectedApp />
         </Centered>

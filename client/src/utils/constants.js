@@ -57,3 +57,6 @@ export const UPC_RESPONSE_KEY_BRAND = 'brand';
 export const UPC_RESPONSE_KEY_CATEGORY = 'category';
 export const UPC_RESPONSE_KEY_IMAGES = 'images';
 export const CLEAR_UPC = 'clear_upc';
+
+/** Theme */
+export const TOGGLE_THEME = 'toggle_theme';

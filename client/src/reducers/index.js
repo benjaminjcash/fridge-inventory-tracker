@@ -11,6 +11,7 @@ import products from './products';
 import produce from './produce';
 import produces from './produces';
 import selectedItems from './selectedItems';
+import theme from './theme';
 
 const reducer = combineReducers({
   items: item,
@@ -24,7 +25,8 @@ const reducer = combineReducers({
   products,
   selectedItems,
   produce,
-  produces
+  produces,
+  theme
 });
 
 export default reducer;
