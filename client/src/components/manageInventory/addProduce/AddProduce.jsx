@@ -21,6 +21,7 @@ const AddProduce = ({ createProduce, searchProduce, data, produces, clearProduce
   const [showCreateProduce, setShowCreateProduce] = useState(false);
   const [showCreateItem, setShowCreateItem] = useState(false);
   const [showProduceList, setShowProduceList] = useState(false);
+  const [context, setContext] = useState('');
 
   const itemProps = {
     display: 'flex',
@@ -30,11 +31,12 @@ const AddProduce = ({ createProduce, searchProduce, data, produces, clearProduce
   };
 
   const doCreateProduce = (produce) => {
-     createProduce(produce);
+    setContext('create_produce');
+    createProduce(produce);
   }
 
   const doCreateItem = (item) => {
-    console.log(item);
+    setContext('create_item');
     createItem(item);
   }
 
@@ -50,9 +52,15 @@ const AddProduce = ({ createProduce, searchProduce, data, produces, clearProduce
   }, [produces]);
 
   useEffect(() => {
-    if(data.success) {
+    if(data.success && context == 'create_produce') {
+      alert('Successfully added the Produce to the Database.');
       setShowCreateProduce(false);
       setShowCreateItem(true);
+    } else if(data.success && context == 'create_item') {
+      alert('Successfully added the Item to your Fridge.');
+      setShowCreateItem(false);
+      setShowAddProduce(true);
+      setProduceSearchTerm('');
     }
   }, [data]);
 

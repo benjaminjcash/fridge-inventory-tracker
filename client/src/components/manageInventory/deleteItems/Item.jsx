@@ -15,7 +15,7 @@ const Item = ({ item, setSelectedItem, removeSelectedItem, selectedItems }) => {
   return (
     <Card
       className={css({ height: 'auto', width: 'auto' })}
-      headerImage={item.product_id.image_url}
+      headerImage={item.product_id ? item.product_id.image_url : item.produce_id.image_url}
       onClick={() => {
         if(isSelected) {
           removeSelectedItem(item._id);

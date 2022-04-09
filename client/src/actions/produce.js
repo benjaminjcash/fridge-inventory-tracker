@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getStorage } from '../utils/storage';
-import { ADDED_DATA, PRODUCE_FOUND, NO_PRODUCE_FOUND, PRODUCES_FOUND, CLEAR_PRODUCE, CLEAR_PRODUCES } from '../utils/constants';
+import { ADDED_DATA, PRODUCE_FOUND, NO_PRODUCE_FOUND, PRODUCES_FOUND, CLEAR_PRODUCE, CLEAR_PRODUCES, FETCHED_ALL_PRODUCES, UPDATED_PRODUCE, DELETED_PRODUCE } from '../utils/constants';
 
 export const createProduce = (produce) => {
   const accessToken = getStorage('access_token');
@@ -77,5 +77,72 @@ export const setProduce = (produce) => {
       type: PRODUCE_FOUND,
       data: produce
     });
+  }
+}
+
+export const fetchAllProduces = () => {
+  const accessToken = getStorage('access_token');
+  return (dispatch) => {
+    const PRODUCE_ENDPOINT = `/api/produce`;
+    axios.get(`${PRODUCE_ENDPOINT}/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      if(res.data.success) {
+        dispatch({
+          type: FETCHED_ALL_PRODUCES,
+          data: res.data.data
+        });
+      } else {
+        console.error('error fetching produces');
+      }
+    }).catch((err) => {
+      console.error(err);
+    })
+  }
+}
+
+export const updateProduce = (id, produce) => {
+  const PRODUCE_ENDPOINT = `/api/produce`;
+  const accessToken = getStorage('access_token');
+  return (dispatch) => {
+    axios.put(`${PRODUCE_ENDPOINT}/${id}`, produce, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      if(!res.data.success) {
+        console.error(res.data.error);
+      } else {
+        dispatch({
+          type: UPDATED_PRODUCE
+        });
+      }
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+}
+
+export const deleteProduce = (produce) => {
+  const PRODUCE_ENDPOINT = `/api/produce`;
+  const accessToken = getStorage('access_token');
+  return (dispatch) => {
+      axios.delete(`${PRODUCE_ENDPOINT}/${produce._id}`, {
+          headers: {
+              Authorization: `Bearer ${accessToken}`
+          }
+      }).then((res) => {
+          if(!res.data.success) {
+              console.error(res.data.message);
+          } else {
+              dispatch({
+                  type: DELETED_PRODUCE
+              });
+          }
+      }).catch((err) => {
+          console.error(err);
+      })
   }
 }

@@ -32,4 +32,36 @@ exports.doSearchProduce = async (req) => {
       });
 }
 
+exports.doFetchAllProduces = async (req) => {
+  return Produce
+      .find()
+      .then((data) => {
+        return data;
+      }).catch((err) => {
+        throw err;
+      });
+}
+
+exports.doUpdateProduce = async (id, body) => {
+  return Produce
+    .findOneAndUpdate({ _id: id }, body)
+    .then((data) => {
+      return data;
+    }).catch((err) => {
+      throw err;
+    });
+}
+
+exports.doDeleteProduce = async (res, id) => {
+  Produce.findByIdAndDelete(id)
+  .then(() => {
+      res.json({
+          success: true,
+          message: "deleted successfully"
+      });
+  }).catch(err => {
+      res.send(err);
+  });
+}
+
 const escapeRegex = str => str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');

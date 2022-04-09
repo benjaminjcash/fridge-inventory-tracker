@@ -54,7 +54,6 @@ exports.doUpdateProduct = async (id, body) => {
 }
 
 exports.doDeleteProduct = async (res, id) => {
-  console.log(JSON.stringify(id));
   Product.findByIdAndDelete(id)
   .then(() => {
       res.json({

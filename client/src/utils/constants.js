@@ -37,12 +37,15 @@ export const NO_PRODUCE_FOUND = 'no_produce_found';
 export const PRODUCES_FOUND = 'produces_found';
 export const CLEAR_PRODUCE = 'clear_produce';
 export const CLEAR_PRODUCES = 'clear_produces';
+export const FETCHED_ALL_PRODUCES = 'fetched_all_produces';
 
 /** Data */
 export const ADDED_DATA = 'added_data';
 export const UPDATED_DATA = 'updated_data';
 export const UPDATED_PRODUCT = 'updated_product';
 export const DELETED_PRODUCT = 'deleted_product';
+export const UPDATED_PRODUCE = 'updated_produce';
+export const DELETED_PRODUCE = 'deleted_produce';
 export const DELETED_DATA = 'deleted_data';
 export const CLEARED_DATA = 'cleared_data';
 export const DELETED_ITEM = 'deleted_item';

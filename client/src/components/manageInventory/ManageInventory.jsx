@@ -44,25 +44,25 @@ const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems
           }}
           size={SIZE.compact}
         >
-          <Button>Search Products</Button>
           <Button>Scan Item</Button>
           <Button>Add Produce</Button>
+          <Button>Search Products</Button>
           <Button>Delete Items</Button>
         </ButtonGroup>
       </FlexGridItem>
       { selected === 0 && 
-        <FlexGridItem {...itemProps} style={{ marginTop: '-8px' }}>
-          <SearchUPC />
-        </FlexGridItem>
-      }
-      { selected === 1 && 
         <FlexGridItem {...itemProps}>
           <AddItem />
         </FlexGridItem>
       }
-      { selected === 2 && 
+      { selected === 1 && 
         <FlexGridItem {...itemProps}>
           <AddProduce />
+        </FlexGridItem>
+      }
+      { selected === 2 && 
+        <FlexGridItem {...itemProps} style={{ marginTop: '-8px' }}>
+          <SearchUPC />
         </FlexGridItem>
       }
       { selected === 3 && 

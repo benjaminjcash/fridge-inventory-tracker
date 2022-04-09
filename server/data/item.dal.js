@@ -62,6 +62,7 @@ exports.doGetAllItems = async (req) => {
   return Item
       .find(query)
       .populate('product_id')
+      .populate('produce_id')
       .sort({[sortby]: direction})
       .then((data) => {
         if(filterbyname || filterbytype) {
@@ -76,14 +77,26 @@ exports.doGetAllItems = async (req) => {
 const _filterItemList = (data, name, types) => {
   if(name) {
     const re = new RegExp(name.toUpperCase());
-    data = data.filter(item => re.test(item.product_id.name.toUpperCase()));
+    data = data.filter(item => {
+      if(item.product_id) {
+        return re.test(item.product_id.name.toUpperCase());
+      } else if(item.produce_id) {
+        return re.test(item.produce_id.name.toUpperCase());
+      }
+    });
   }
   if(types) {
     let filtered = [];
     types.forEach(type => {
       data.forEach(item => {
-        if(item.product_id.type === type.id) {
-          filtered.push(item);
+        if(item.product_id) {
+          if(item.product_id.type === type.id) {
+            filtered.push(item);
+          }
+        } else if(item.produce_id) {
+          if(item.produce_id.type === type.id) {
+            filtered.push(item);
+          }
         }
       });
     });

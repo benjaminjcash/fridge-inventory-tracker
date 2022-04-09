@@ -42,7 +42,7 @@ export const fetchAllItems = (options, context) => {
         } else if(context == 'get_all_types') {
           dispatch({
             type: FETCHED_ALL_TYPES,
-            data: [... new Set(res.data.data.map(item => item.product_id.type))]
+            data: [... new Set(res.data.data.map(item => item.product_id ? item.product_id.type : item.produce_id.type))]
           });
         } else {
           console.error('context undefined for fetchAllItems');
