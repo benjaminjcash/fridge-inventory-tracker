@@ -67,14 +67,14 @@ const CreateItem = ({ doCreateItem, product, produce }) => {
           <>
           <p className={css({ fontSize: '16px', marginTop: '32px', color: WHITE })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
           <p className={css({ fontSize: '16px', marginTop: '-8px', color: WHITE })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
-          <img src={product.image_url} className={css({ height: '200px', width: '200px' })}/>
+          <img src={product.image_url} className={css({ height: '75px', width: 'auto' })}/>
           </>
         }
         { context == 'produce' && 
           <>
           <p className={css({ fontSize: '16px', marginTop: '32px', color: WHITE })}><span className={css({ color: GREEN})}>Name: </span>{produce.name}</p>
           <p className={css({ fontSize: '16px', marginTop: '-8px', color: WHITE })}><span className={css({ color: GREEN})}>Type: </span>{produce.type}</p>
-          <img src={produce.image_url} className={css({ height: '200px', width: '200px' })}/>
+          <img src={produce.image_url} className={css({ height: '75px', width: 'auto' })}/>
           </>
         }
         <FormControl 

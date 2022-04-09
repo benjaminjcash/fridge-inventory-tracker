@@ -1,3 +1,5 @@
+import { RED, YELLOW, GREEN, WHITE } from '../styles/colors';
+
 export const formatDate = (date) => {
   let dateObj = new Date(date);
   return dateObj.toLocaleDateString("en-US");
@@ -7,19 +9,19 @@ export const calculateBorderColor = (item) => {
   let borderColor = '';
   switch (item.expiration_health) {
     case "bad":
-      borderColor = 'red';
+      borderColor = RED;
       break;
     case "close":
-      borderColor = 'yellow';
+      borderColor = YELLOW;
       break;
     case "fine":
-      borderColor = 'green';
+      borderColor = GREEN;
       break;
     case "fresh":
-      borderColor = 'white';
+      borderColor = WHITE;
       break;
     default:
-      borderColor = 'white';
+      borderColor = WHITE;
       break
   }
   return borderColor;

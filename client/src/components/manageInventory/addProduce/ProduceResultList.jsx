@@ -2,11 +2,26 @@ import React from 'react';
 import { useStyletron } from 'baseui';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import ProduceImage from './ProduceImage';
+import { PINK } from '../../../styles/colors';
 
 const ProduceResultList = ({ produces, onProduceSelect }) => {
   const [css, theme] = useStyletron();
   return (
-    <TableBuilder data={produces} style={{ width: '100%' }}>
+    <TableBuilder 
+      data={produces} 
+      overrides={{
+        Root: {
+          style: ({ $theme }) => ({
+            width: '100%'
+          })
+        },
+        TableHeadCell: {
+          style: ({ $theme }) => ({
+            color: PINK
+          })
+        }
+      }}
+    >
       <TableBuilderColumn header="Name">
         {(row) => {
           return <p>{row.name}</p>
@@ -19,7 +34,7 @@ const ProduceResultList = ({ produces, onProduceSelect }) => {
       </TableBuilderColumn>
       <TableBuilderColumn header="Shelf Life">
         {(row) => {
-          return <p>{row.shelf_life}</p>
+          return <p>{row.shelf_life} days</p>
         }}
       </TableBuilderColumn>
       <TableBuilderColumn header="Image">

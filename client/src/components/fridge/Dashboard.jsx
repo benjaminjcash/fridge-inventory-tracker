@@ -3,6 +3,7 @@ import { useStyletron } from 'baseui';
 import { Card, StyledBody } from "baseui/card";
 import { Tag, KIND } from 'baseui/tag';
 import { Block } from 'baseui/block';
+import { RED, YELLOW, GREEN } from '../../styles/colors';
 
 const Dashboard = ({ items }) => {
   const [css] = useStyletron();
@@ -50,7 +51,7 @@ const Dashboard = ({ items }) => {
         {
           tagState?.bad?.show && 
           <Tag
-            color="red"
+            color={RED}
             kind={KIND.custom}
             onActionClick={() => {
               setTagState({
@@ -65,7 +66,7 @@ const Dashboard = ({ items }) => {
         {
           tagState?.close?.show && 
           <Tag
-            color="yellow"
+            color={YELLOW}
             kind={KIND.custom}
             onActionClick={() => {
               setTagState({
@@ -80,7 +81,7 @@ const Dashboard = ({ items }) => {
         {
           tagState?.fine?.show && 
           <Tag
-            color="green"
+            color={GREEN}
             kind={KIND.custom}
             onActionClick={() => {
               setTagState({

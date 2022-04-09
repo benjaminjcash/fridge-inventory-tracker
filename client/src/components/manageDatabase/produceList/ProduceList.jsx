@@ -7,6 +7,7 @@ import { fetchAllProduces } from '../../../actions/produce';
 import { clearData } from '../../../actions/data';
 import { fetchAllItems } from '../../../actions/item';
 import { UPDATED_PRODUCE, DELETED_PRODUCE, DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../../utils/constants';
+import { BLUE_GREEN } from '../../../styles/colors';
 
 const ProduceList = ({ produces, data, fetchAllProduces, fetchAllItems, clearData }) => {
   const [css, theme] = useStyletron();
@@ -31,6 +32,11 @@ const ProduceList = ({ produces, data, fetchAllProduces, fetchAllItems, clearDat
           Root: {
             style: ({ $theme }) => ({
               width: '100%'
+            })
+          },
+          TableHeadCell: {
+            style: ({ $theme }) => ({
+              color: BLUE_GREEN
             })
           }
         }}

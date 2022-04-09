@@ -11,6 +11,7 @@ import DeleteItems from './deleteItems/DeleteItems';
 import SearchUPC from './search/SearchUPC';
 import AddProduce from './addProduce/AddProduce';
 import { clearSelectedItems, fetchAllItems } from '../../actions/item';
+import { ORANGE, PINK, YELLOW, RED } from '../../styles/colors';
 
 const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
   const [css, theme] = useStyletron();
@@ -22,6 +23,11 @@ const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems
     alignItems: 'top',
     height: 'min-content'
   };
+
+  const colorsByIndex = [ORANGE, PINK, YELLOW, RED];
+  const buildButtonStyles = (i) => {
+    return selected == i ? { backgroundColor: colorsByIndex[i] } : {};
+  }
 
   return (
     <> 
@@ -38,38 +44,22 @@ const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems
             clearUPC();
             clearData();
             clearProduct();
-            setSelected(index);
             clearSelectedItems();
+            setSelected(index);
             fetchAllItems(null, 'build_list');
           }}
           size={SIZE.compact}
         >
-          <Button>Scan Item</Button>
-          <Button>Add Produce</Button>
-          <Button>Search Products</Button>
-          <Button>Delete Items</Button>
+          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(0) }}}>Scan Item</Button>
+          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(1) }}}>Add Produce</Button>
+          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(2) }}}>Search Products</Button>
+          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(3) }}}>Delete Items</Button>
         </ButtonGroup>
       </FlexGridItem>
-      { selected === 0 && 
-        <FlexGridItem {...itemProps}>
-          <AddItem />
-        </FlexGridItem>
-      }
-      { selected === 1 && 
-        <FlexGridItem {...itemProps}>
-          <AddProduce />
-        </FlexGridItem>
-      }
-      { selected === 2 && 
-        <FlexGridItem {...itemProps} style={{ marginTop: '-8px' }}>
-          <SearchUPC />
-        </FlexGridItem>
-      }
-      { selected === 3 && 
-        <FlexGridItem {...itemProps}>
-          <DeleteItems />
-        </FlexGridItem>
-      }
+      { selected === 0 && <FlexGridItem {...itemProps}><AddItem /></FlexGridItem>}
+      { selected === 1 && <FlexGridItem {...itemProps}><AddProduce /></FlexGridItem>}
+      { selected === 2 && <FlexGridItem {...itemProps} style={{ marginTop: '-8px' }}><SearchUPC /></FlexGridItem>}
+      { selected === 3 && <FlexGridItem {...itemProps}><DeleteItems /></FlexGridItem>}
     </FlexGrid>
     </>
   );

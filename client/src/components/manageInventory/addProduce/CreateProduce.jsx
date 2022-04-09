@@ -89,7 +89,7 @@ const CreateProduce = ({ doCreateProduce }) => {
             onChange={event => setImageUrl(event.currentTarget.value)}
           />
         </FormControl>
-        { imageUrl && <img src={imageUrl} className={css({ height: '200px', width: '200px', display: 'flex' })}/> }
+        { imageUrl && <img src={imageUrl} className={css({ height: '75px', width: 'auto', display: 'flex' })}/> }
         <Button 
           onClick={() => handleCreateProduce()}
           className={css({ backgroundColor: PINK, color: BLACK, marginTop: '17px' })}

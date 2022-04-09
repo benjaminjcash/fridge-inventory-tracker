@@ -4,9 +4,9 @@ import { useStyletron } from 'baseui';
 import { Card, StyledBody } from "baseui/card";
 import { FormControl } from "baseui/form-control";
 import { Input } from 'baseui/input';
-import { Button } from "baseui/button";
+import { Button, KIND } from "baseui/button";
 import { Block } from "baseui/block";
-import { PURPLE, WHITE, BLACK, RED } from '../../../styles/colors';
+import { PURPLE, WHITE, BLACK } from '../../../styles/colors';
 import { updateProduct, deleteProduct } from '../../../actions/product';
 
 const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
@@ -92,7 +92,7 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
           />
         </FormControl>
         <Block>
-          <img src={imageUrl} className={css({ height: '200px', width: 'auto' })}/>
+          <img src={imageUrl} className={css({ height: '75px', width: 'auto' })}/>
         </Block>
         <Button 
           onClick={() => updateProduct(product._id, { name, type, image_url: imageUrl})}
@@ -101,6 +101,7 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
         <Button 
           onClick={() => handleDeleteProduct(product._id)}
           className={css({ backgroundColor: WHITE, color: BLACK, float: 'right', marginTop: '32px' })}
+          kind={KIND.secondary}
         >Delete</Button>
       </StyledBody>
     </Card>

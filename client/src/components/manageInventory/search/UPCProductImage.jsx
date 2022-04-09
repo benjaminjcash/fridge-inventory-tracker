@@ -19,7 +19,7 @@ const UPCProductImage = ({ src, onProductSelect, index }) => {
       onClick={() => onProductSelect(index)}
       onLoad={onLoad}
       onError={()=>setImageSrc('../images/image-not-found.png')}
-      className={css({ width: '100%', maxWidth: '400px', height: 'auto%' })}
+      className={css({ width: '100%', maxWidth: '75px', height: 'auto%', float: 'right' })}
     />
   );
 }

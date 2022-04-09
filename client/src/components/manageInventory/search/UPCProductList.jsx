@@ -2,11 +2,26 @@ import React from 'react';
 import { useStyletron } from 'baseui';
 import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import UPCProductImage from './UPCProductImage';
+import { YELLOW } from '../../../styles/colors';
 
 const UPCProductList = ({ products, onProductSelect }) => {
   const [css, theme] = useStyletron();
   return (
-    <TableBuilder data={products}>
+    <TableBuilder 
+      data={products}
+      overrides={{
+        Root: {
+          style: ({ $theme }) => ({
+            width: '100%'
+          })
+        },
+        TableHeadCell: {
+          style: ({ $theme }) => ({
+            color: YELLOW
+          })
+        }
+      }}
+    >
       <TableBuilderColumn header="Title">
         {(row) => {
           return <p>{row.title}</p>

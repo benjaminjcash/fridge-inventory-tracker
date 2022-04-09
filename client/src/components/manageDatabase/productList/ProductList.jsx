@@ -6,6 +6,7 @@ import ProductDetail from './ProductDetail';
 import { fetchAllProducts } from '../../../actions/product';
 import { clearData } from '../../../actions/data';
 import { UPDATED_PRODUCT, DELETED_PRODUCT } from '../../../utils/constants';
+import { PURPLE } from '../../../styles/colors';
 
 const ProductList = ({ products, data, fetchAllProducts, clearData }) => {
   const [css, theme] = useStyletron();
@@ -29,6 +30,11 @@ const ProductList = ({ products, data, fetchAllProducts, clearData }) => {
           Root: {
             style: ({ $theme }) => ({
               width: '100%'
+            })
+          },
+          TableHeadCell: {
+            style: ({ $theme }) => ({
+              color: PURPLE
             })
           }
         }}

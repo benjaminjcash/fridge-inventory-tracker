@@ -48,5 +48,6 @@ export const BLUE = currentTheme.blue;
 export const BLUE_GREEN = currentTheme.blueGreen;
 export const PURPLE = currentTheme.purple;
 export const PINK = currentTheme.pink;
+
 export const WHITE = '#FFFFFF';
 export const BLACK = '#000000';

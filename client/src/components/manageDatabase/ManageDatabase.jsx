@@ -10,6 +10,7 @@ import ProductList from './productList/ProductList';
 import ProduceList from './produceList/ProduceList';
 import { clearSelectedItems, fetchAllItems } from '../../actions/item';
 import { fetchAllProduces } from '../../actions/produce';
+import { PURPLE, BLUE_GREEN } from '../../styles/colors';
 
 const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems, fetchAllProduces, produces }) => {
   const [css, theme] = useStyletron();
@@ -21,6 +22,11 @@ const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clear
     alignItems: 'top',
     height: 'min-content'
   };
+
+  const colorsByIndex = [PURPLE, BLUE_GREEN];
+  const buildButtonStyles = (i) => {
+    return selected == i ? { backgroundColor: colorsByIndex[i] } : {};
+  }
 
   React.useEffect(() => {
     fetchAllProducts();
@@ -48,20 +54,12 @@ const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clear
           }}
           size={SIZE.compact}
         >
-          <Button>View Products</Button>
-          <Button>View Produce</Button>
+          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(0) }}}>View Products</Button>
+          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(1) }}}>View Produce</Button>
         </ButtonGroup>
       </FlexGridItem>
-      { selected === 0 && 
-        <FlexGridItem {...itemProps}>
-          <ProductList products={products} />
-        </FlexGridItem>
-      }
-      { selected === 1 && 
-        <FlexGridItem {...itemProps}>
-          <ProduceList produces={produces} />
-        </FlexGridItem>
-      }
+      { selected === 0 && <FlexGridItem {...itemProps}><ProductList products={products} /></FlexGridItem>}
+      { selected === 1 && <FlexGridItem {...itemProps}><ProduceList produces={produces} /></FlexGridItem>}
     </FlexGrid>
     </>
   );
