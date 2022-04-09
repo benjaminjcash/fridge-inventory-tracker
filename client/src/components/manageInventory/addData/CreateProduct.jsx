@@ -52,7 +52,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
   }, [upcData]);
 
   return (
-    <Card className={css({ height: 'auto', width: '100%', backgroundColor: WHITE })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: BLACK })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
@@ -60,14 +60,14 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           color: BLUE
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Create Product</h4>
-          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: BLACK })}>This product has not yet been added to our database, override any defaults below and click Create.</p>
+          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: WHITE })}>This product has not yet been added to our database, override any defaults below and click Create.</p>
         </Block>
         <FormControl 
           label={() => "Name"}
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: BLUE
               })
             }
           }}
@@ -82,7 +82,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: BLUE
               })
             }
           }}
@@ -98,12 +98,12 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: BLUE
               })
             },
             Caption: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: BLUE
               })
             }
           }}
@@ -116,7 +116,7 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
         <img src={valueImageUrl} className={css({ height: '200px', width: '200px', display: 'block', marginBottom: '16px' })}/>
         <Button 
           onClick={() => handleCreateProduct()}
-          className={css({ backgroundColor: BLUE, color: WHITE })}
+          className={css({ backgroundColor: BLUE, color: BLACK })}
         >Create</Button>
       </StyledBody>
     </Card>

@@ -6,7 +6,7 @@ import { FormControl } from "baseui/form-control";
 import { Input } from 'baseui/input';
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { DARK_PINK, WHITE, BLACK, RED } from '../../../styles/colors';
+import { BLUE_GREEN, WHITE, BLACK, RED } from '../../../styles/colors';
 import { updateProduce, deleteProduce } from '../../../actions/produce';
 
 const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
@@ -30,23 +30,23 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
   }
 
   return (
-    <Card className={css({ height: 'auto', width: '100%', backgroundColor: WHITE })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: BLACK })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: DARK_PINK
+          color: BLUE_GREEN
         })}>
           <h4 className={css({  })}>Produce Detail</h4>
-          <p className={css({ fontSize: '16px', marginTop: '16px', color: BLACK })}>View and Edit Produce Details.</p>
-          <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: BLACK })}>WARNING: These changes may affect other user's Fridges.</p>
+          <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>View and Edit Produce Details.</p>
+          <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: WHITE })}>WARNING: These changes may affect other user's Fridges.</p>
         </Block>
         <FormControl 
           label={() => "Name"}
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: DARK_PINK
+                color: BLUE_GREEN
               })
             }
           }}
@@ -61,7 +61,7 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: DARK_PINK
+                color: BLUE_GREEN
               })
             }
           }}
@@ -76,7 +76,7 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: DARK_PINK
+                color: BLUE_GREEN
               })
             }
           }}
@@ -92,12 +92,12 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: DARK_PINK
+                color: BLUE_GREEN
               })
             },
             Caption: {
               style: ({ $theme }) => ({
-                color: DARK_PINK
+                color: BLUE_GREEN
               })
             }
           }}
@@ -112,11 +112,11 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
         </Block>
         <Button 
           onClick={() => updateProduce(produce._id, { name, type, shelf_life: shelfLife, image_url: imageUrl})}
-          className={css({ backgroundColor: DARK_PINK, color: WHITE, marginTop: '32px' })}
+          className={css({ backgroundColor: BLUE_GREEN, color: BLACK, marginTop: '32px' })}
         >Save Changes</Button>
         <Button 
           onClick={() => handleDeleteProduce(produce._id)}
-          className={css({ backgroundColor: RED, color: WHITE, float: 'right', marginTop: '32px' })}
+          className={css({ backgroundColor: WHITE, color: BLACK, float: 'right', marginTop: '32px' })}
         >Delete</Button>
       </StyledBody>
     </Card>

@@ -28,7 +28,7 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
   }
 
   return (
-    <Card className={css({ height: 'auto', width: '100%', backgroundColor: WHITE })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: BLACK })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
@@ -37,8 +37,8 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
         })}>
           <h4 className={css({  })}>Product Detail</h4>
           <h4 className={css({ color: PURPLE, float: 'right', marginTop: '-48px' })}>{product.upc_code}</h4>
-          <p className={css({ fontSize: '16px', marginTop: '16px', color: BLACK })}>View and Edit Product Details.</p>
-          <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: BLACK })}>WARNING: These changes may affect other user's Fridges.</p>
+          <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>View and Edit Product Details.</p>
+          <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: WHITE })}>WARNING: These changes may affect other user's Fridges.</p>
         </Block>
         <FormControl 
           label={() => "Name"}
@@ -96,11 +96,11 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
         </Block>
         <Button 
           onClick={() => updateProduct(product._id, { name, type, image_url: imageUrl})}
-          className={css({ backgroundColor: PURPLE, color: WHITE, marginTop: '32px' })}
+          className={css({ backgroundColor: PURPLE, color: BLACK, marginTop: '32px' })}
         >Save Changes</Button>
         <Button 
           onClick={() => handleDeleteProduct(product._id)}
-          className={css({ backgroundColor: RED, color: WHITE, float: 'right', marginTop: '32px' })}
+          className={css({ backgroundColor: WHITE, color: BLACK, float: 'right', marginTop: '32px' })}
         >Delete</Button>
       </StyledBody>
     </Card>

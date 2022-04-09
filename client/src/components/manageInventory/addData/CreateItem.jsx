@@ -57,7 +57,7 @@ const CreateItem = ({ doCreateItem, clearAddItem, product, produce }) => {
   }, [clearAddItem]);
 
   return (
-    <Card className={css({ height: 'auto', width: '100%', backgroundColor: WHITE })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: BLACK })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
@@ -66,19 +66,19 @@ const CreateItem = ({ doCreateItem, clearAddItem, product, produce }) => {
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Add Item</h4>
           { context == '' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: RED })}>There was an error</p> }
-          { context == 'product' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: BLACK })}>Set the expiration date and click Add to add the item to your Fridge.</p> }
-          { context == 'produce' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: BLACK })}>The expiration date has been set automatically set based on this Produce's shelf life. Click Add to add the item to your Fridge.</p> }
+          { context == 'product' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: WHITE })}>Set the expiration date and click Add to add the item to your Fridge.</p> }
+          { context == 'produce' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: WHITE })}>The expiration date has been set automatically set based on this Produce's shelf life. Click Add to add the item to your Fridge.</p> }
         </Block>
         { context == 'product' && 
           <>
-          <p className={css({ fontSize: '16px', marginTop: '32px', color: BLACK })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
-          <p className={css({ fontSize: '16px', marginTop: '-8px', color: BLACK })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
+          <p className={css({ fontSize: '16px', marginTop: '32px', color: WHITE })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
+          <p className={css({ fontSize: '16px', marginTop: '-8px', color: WHITE })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
           </>
         }
         { context == 'produce' && 
           <>
-          <p className={css({ fontSize: '16px', marginTop: '32px', color: BLACK })}><span className={css({ color: GREEN})}>Name: </span>{produce.name}</p>
-          <p className={css({ fontSize: '16px', marginTop: '-8px', color: BLACK })}><span className={css({ color: GREEN})}>Type: </span>{produce.type}</p>
+          <p className={css({ fontSize: '16px', marginTop: '32px', color: WHITE })}><span className={css({ color: GREEN})}>Name: </span>{produce.name}</p>
+          <p className={css({ fontSize: '16px', marginTop: '-8px', color: WHITE })}><span className={css({ color: GREEN})}>Type: </span>{produce.type}</p>
           </>
         }
         {
@@ -92,7 +92,7 @@ const CreateItem = ({ doCreateItem, clearAddItem, product, produce }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: GREEN
               })
             }
           }}

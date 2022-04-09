@@ -19,7 +19,7 @@ const CreateProduce = ({ doCreateProduce }) => {
   }
 
   return (
-    <Card className={css({ height: 'auto', width: '100%', backgroundColor: WHITE })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: BLACK })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
@@ -27,14 +27,14 @@ const CreateProduce = ({ doCreateProduce }) => {
           color: PINK
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Create Produce</h4>
-          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: BLACK })}>Enter new produce details.</p>
+          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: WHITE })}>Enter new produce details.</p>
         </Block>
         <FormControl 
           label={() => "Name"}
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: WHITE
               })
             }
           }}
@@ -49,7 +49,7 @@ const CreateProduce = ({ doCreateProduce }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: WHITE
               })
             }
           }}
@@ -64,7 +64,7 @@ const CreateProduce = ({ doCreateProduce }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: WHITE
               })
             }
           }}
@@ -79,7 +79,7 @@ const CreateProduce = ({ doCreateProduce }) => {
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: BLACK
+                color: WHITE
               })
             }
           }}
@@ -92,7 +92,7 @@ const CreateProduce = ({ doCreateProduce }) => {
         { imageUrl && <img src={imageUrl} className={css({ height: '200px', width: '200px', display: 'flex' })}/> }
         <Button 
           onClick={() => handleCreateProduce()}
-          className={css({ backgroundColor: PINK, color: BLACK, marginTop: '16px' })}
+          className={css({ backgroundColor: PINK, color: BLACK, marginTop: '17px' })}
         >Create</Button>
       </StyledBody>
     </Card>

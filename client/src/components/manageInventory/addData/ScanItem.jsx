@@ -29,20 +29,26 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, clearSearch, setSca
           </Block>
         <Button 
           onClick={() => setScannerIsOpen(true)}
-          // size={buttonSize.mini}
           className={css({ backgroundColor: ORANGE, color: BLACK, marginBottom: '16px' })}
         >Scan</Button>
-        <FormControl>
+        <FormControl 
+          label={'Enter Barcode'}
+          overrides={{
+            Label: {
+              style: ({ $theme }) => ({
+                color: ORANGE
+              })
+            }
+          }}
+        >
           <Input
             value={barcodeInput}
             onChange={event => setBarcodeInput(event.currentTarget.value)}
-            // size={inputSize.mini}
           />
         </FormControl>
         { barcodeInput.length > 0 && 
           <Button 
             onClick={doSearch}
-             // size={buttonSize.mini}
             className={css({ backgroundColor: ORANGE, color: BLACK })}
           >Search</Button>
         }

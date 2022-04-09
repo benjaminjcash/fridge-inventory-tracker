@@ -105,7 +105,16 @@ const AddProduce = ({ createProduce, searchProduce, data, produces, clearProduce
               }}
               className={css({ backgroundColor: PINK, color: BLACK, marginBottom: '16px' })}
             >Create New</Button>
-            <FormControl label={'Search Produce'}>
+            <FormControl 
+              label={'Search Produce'}
+              overrides={{
+                Label: {
+                  style: ({ $theme }) => ({
+                    color: PINK
+                  })
+                }
+              }}
+            >
               <Input
                 value={produceSearchTerm}
                 onChange={event => setProduceSearchTerm(event.currentTarget.value)}
