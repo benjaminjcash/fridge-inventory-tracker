@@ -1,7 +1,7 @@
 import { TOGGLE_THEME } from '../utils/constants';
-import { NEON, BASIC } from '../styles/colors';
+import { COLOR_THEMES } from '../styles/colors';
 
-const theme = (state = NEON, action) => {
+const theme = (state = COLOR_THEMES[0], action) => {
   switch(action.type) {
     case TOGGLE_THEME:
       return action.data;

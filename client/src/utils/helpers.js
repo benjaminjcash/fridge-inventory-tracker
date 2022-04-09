@@ -5,23 +5,23 @@ export const formatDate = (date) => {
   return dateObj.toLocaleDateString("en-US");
 }
 
-export const calculateBorderColor = (item) => {
+export const calculateBorderColor = (item, theme) => {
   let borderColor = '';
   switch (item.expiration_health) {
     case "bad":
-      borderColor = RED;
+      borderColor = theme[RED];
       break;
     case "close":
-      borderColor = YELLOW;
+      borderColor = theme[YELLOW];
       break;
     case "fine":
-      borderColor = GREEN;
+      borderColor = theme[GREEN];
       break;
     case "fresh":
-      borderColor = WHITE;
+      borderColor = theme[WHITE];
       break;
     default:
-      borderColor = WHITE;
+      borderColor = theme[WHITE];
       break
   }
   return borderColor;

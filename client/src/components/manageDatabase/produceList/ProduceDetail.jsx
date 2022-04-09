@@ -30,23 +30,23 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
   }
 
   return (
-    <Card className={css({ height: 'auto', width: '100%', backgroundColor: BLACK })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: theme[BLACK] })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: BLUE_GREEN
+          color: theme[BLUE_GREEN]
         })}>
           <h4 className={css({  })}>Produce Detail</h4>
-          <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>View and Edit Produce Details.</p>
-          <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: WHITE })}>WARNING: These changes may affect other user's Fridges.</p>
+          <p className={css({ fontSize: '16px', marginTop: '16px', color: theme[WHITE] })}>View and Edit Produce Details.</p>
+          <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: theme[WHITE] })}>WARNING: These changes may affect other user's Fridges.</p>
         </Block>
         <FormControl 
           label={() => "Name"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: BLUE_GREEN
+              style: () => ({
+                color: theme[BLUE_GREEN]
               })
             }
           }}
@@ -60,8 +60,8 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
           label={() => "Type"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: BLUE_GREEN
+              style: () => ({
+                color: theme[BLUE_GREEN]
               })
             }
           }}
@@ -75,8 +75,8 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
           label={() => "Shelf Life"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: BLUE_GREEN
+              style: () => ({
+                color: theme[BLUE_GREEN]
               })
             }
           }}
@@ -91,13 +91,13 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
           caption={() => "use a square image"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: BLUE_GREEN
+              style: () => ({
+                color: theme[BLUE_GREEN]
               })
             },
             Caption: {
-              style: ({ $theme }) => ({
-                color: BLUE_GREEN
+              style: () => ({
+                color: theme[BLUE_GREEN]
               })
             }
           }}
@@ -112,7 +112,7 @@ const ProduceDetail = ({ produce, updateProduce, deleteProduce }) => {
         </Block>
         <Button 
           onClick={() => updateProduce(produce._id, { name, type, shelf_life: shelfLife, image_url: imageUrl})}
-          className={css({ backgroundColor: BLUE_GREEN, color: BLACK, marginTop: '32px' })}
+          className={css({ backgroundColor: theme[BLUE_GREEN], color: theme[BLACK], marginTop: '32px' })}
         >Save Changes</Button>
         <Button 
           onClick={() => handleDeleteProduce(produce._id)}

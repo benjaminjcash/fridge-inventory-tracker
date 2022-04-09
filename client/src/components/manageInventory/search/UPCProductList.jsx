@@ -11,13 +11,13 @@ const UPCProductList = ({ products, onProductSelect }) => {
       data={products}
       overrides={{
         Root: {
-          style: ({ $theme }) => ({
+          style: () => ({
             width: '100%'
           })
         },
         TableHeadCell: {
-          style: ({ $theme }) => ({
-            color: YELLOW
+          style: () => ({
+            color: theme[YELLOW]
           })
         }
       }}

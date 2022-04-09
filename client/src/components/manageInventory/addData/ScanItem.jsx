@@ -15,21 +15,21 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, setScannerIsOpen })
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: ORANGE
+          color: theme[ORANGE]
          })}>
            <h4 className={css({ marginBottom: '0px' })}>Scan Item</h4>
-           <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: WHITE })}>Click Scan to open your camera, or you can enter the barcode manually below.</p>
+           <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: theme[WHITE] })}>Click Scan to open your camera, or you can enter the barcode manually below.</p>
           </Block>
         <Button 
           onClick={() => setScannerIsOpen(true)}
-          className={css({ backgroundColor: ORANGE, color: BLACK, marginBottom: '16px' })}
+          className={css({ backgroundColor: theme[ORANGE], color: theme[BLACK], marginBottom: '16px' })}
         >Scan</Button>
         <FormControl 
           label={'Enter Barcode'}
           overrides={{
             Label: {
               style: ({ $theme }) => ({
-                color: ORANGE
+                color: theme[ORANGE]
               })
             }
           }}
@@ -42,7 +42,7 @@ const ScanItem = ({ barcodeInput, setBarcodeInput, doSearch, setScannerIsOpen })
         { barcodeInput.length > 0 && 
           <Button 
             onClick={doSearch}
-            className={css({ backgroundColor: ORANGE, color: BLACK })}
+            className={css({ backgroundColor: theme[ORANGE], color: theme[BLACK] })}
           >Search</Button>
         }
       </StyledBody>

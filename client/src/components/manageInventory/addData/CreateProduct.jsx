@@ -56,17 +56,17 @@ const CreateProduct = ({ doCreateProduct, upcData }) => {
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: BLUE
+          color: theme[BLUE]
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Create Product</h4>
-          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: WHITE })}>This product has not yet been added to our database, override any defaults below and click Create.</p>
+          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: theme[WHITE] })}>This product has not yet been added to our database, override any defaults below and click Create.</p>
         </Block>
         <FormControl 
           label={() => "Name"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: BLUE
+              style: () => ({
+                color: theme[BLUE]
               })
             }
           }}
@@ -80,8 +80,8 @@ const CreateProduct = ({ doCreateProduct, upcData }) => {
           label={() => "Type"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: BLUE
+              style: () => ({
+                color: theme[BLUE]
               })
             }
           }}
@@ -96,13 +96,13 @@ const CreateProduct = ({ doCreateProduct, upcData }) => {
           caption={() => "use a square image"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: BLUE
+              style: () => ({
+                color: theme[BLUE]
               })
             },
             Caption: {
-              style: ({ $theme }) => ({
-                color: BLUE
+              style: () => ({
+                color: theme[BLUE]
               })
             }
           }}
@@ -115,7 +115,7 @@ const CreateProduct = ({ doCreateProduct, upcData }) => {
         <img src={imageUrl} className={css({ height: '75px', width: 'auto', display: 'block', marginBottom: '16px' })}/>
         <Button 
           onClick={() => handleCreateProduct()}
-          className={css({ backgroundColor: BLUE, color: BLACK })}
+          className={css({ backgroundColor: theme[BLUE], color: theme[BLACK] })}
         >Create</Button>
       </StyledBody>
     </Card>

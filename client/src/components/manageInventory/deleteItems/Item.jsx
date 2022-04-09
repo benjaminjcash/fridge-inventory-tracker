@@ -26,11 +26,11 @@ const Item = ({ item, setSelectedItem, removeSelectedItem, selectedItems }) => {
       overrides={{
         Root: {
           style: ({ $theme }) => ({
-            backgroundColor: WHITE,
-            borderBottomColor: calculateBorderColor(item),
+            backgroundColor: theme[WHITE],
+            borderBottomColor: calculateBorderColor(item, theme),
             borderBottomWidth: '5px',
             borderBottomStyle: 'solid',
-            borderLeftColor: calculateBorderColor(item),
+            borderLeftColor: calculateBorderColor(item, theme),
             borderLeftWidth: '5px',
             borderLeftStyle: 'solid',
             borderTopStyle: 'none',
@@ -39,7 +39,7 @@ const Item = ({ item, setSelectedItem, removeSelectedItem, selectedItems }) => {
         },
         Body: {
           style: ({ $theme }) => ({
-            backgroundColor: WHITE,
+            backgroundColor: theme[WHITE],
             marginTop: '0px',
             marginBottom: '0px',
             marginLeft: '0px',

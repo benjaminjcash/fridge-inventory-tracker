@@ -24,7 +24,7 @@ const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems
     height: 'min-content'
   };
 
-  const colorsByIndex = [ORANGE, PINK, YELLOW, RED];
+  const colorsByIndex = [theme[ORANGE], theme[PINK], theme[YELLOW], theme[RED]];
   const buildButtonStyles = (i) => {
     return selected == i ? { backgroundColor: colorsByIndex[i] } : {};
   }
@@ -50,10 +50,10 @@ const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems
           }}
           size={SIZE.compact}
         >
-          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(0) }}}>Scan Item</Button>
-          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(1) }}}>Add Produce</Button>
-          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(2) }}}>Search Products</Button>
-          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(3) }}}>Delete Items</Button>
+          <Button overrides={{ BaseButton: { style: () => buildButtonStyles(0) }}}>Scan Item</Button>
+          <Button overrides={{ BaseButton: { style: () => buildButtonStyles(1) }}}>Add Produce</Button>
+          <Button overrides={{ BaseButton: { style: () => buildButtonStyles(2) }}}>Search Products</Button>
+          <Button overrides={{ BaseButton: { style: () => buildButtonStyles(3) }}}>Delete Items</Button>
         </ButtonGroup>
       </FlexGridItem>
       { selected === 0 && <FlexGridItem {...itemProps}><AddItem /></FlexGridItem>}

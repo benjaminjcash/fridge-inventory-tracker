@@ -92,10 +92,10 @@ const AddProduce = ({ createProduce, searchProduce, data, produces, clearProduce
             <Block className={css({
               marginBottom: '-10px',
               marginTop: '-10px',
-              color: PINK
+              color: theme[PINK]
             })}>
               <h4 className={css({ marginBottom: '0px' })}>Add Produce</h4>
-              <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: WHITE })}>Create a new produce type or search for an existing one.</p>
+              <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: theme[WHITE] })}>Create a new produce type or search for an existing one.</p>
               </Block>
             <Button 
               onClick={() => {
@@ -103,14 +103,14 @@ const AddProduce = ({ createProduce, searchProduce, data, produces, clearProduce
                 setShowAddProduce(false);
                 setShowProduceList(false);
               }}
-              className={css({ backgroundColor: PINK, color: BLACK, marginBottom: '16px' })}
+              className={css({ backgroundColor: theme[PINK], color: theme[BLACK], marginBottom: '16px' })}
             >Create New</Button>
             <FormControl 
               label={'Search Produce'}
               overrides={{
                 Label: {
                   style: ({ $theme }) => ({
-                    color: PINK
+                    color: theme[PINK]
                   })
                 }
               }}
@@ -125,7 +125,7 @@ const AddProduce = ({ createProduce, searchProduce, data, produces, clearProduce
                 onClick={() => {
                   doSearchProduce(produceSearchTerm);
                 }}
-                className={css({ backgroundColor: PINK, color: BLACK })}
+                className={css({ backgroundColor: theme[PINK], color: theme[BLACK] })}
               >Search</Button>
             }
           </StyledBody>

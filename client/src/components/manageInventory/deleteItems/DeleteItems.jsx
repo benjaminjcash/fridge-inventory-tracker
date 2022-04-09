@@ -43,10 +43,10 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
             <Block className={css({
               marginBottom: '-10px',
               marginTop: '-10px',
-              color: RED
+              color: theme[RED]
             })}>
               <h4 className={css({ marginBottom: '-12px' })}>Delete Items</h4>
-              <p className={css({ fontSize: '16px', marginTop: '16px', marginBottom: '32px', color: WHITE })}>Highlight all the Items you wish to remove from your Fridge and click Delete.</p>
+              <p className={css({ fontSize: '16px', marginTop: '16px', marginBottom: '32px', color: theme[WHITE] })}>Highlight all the Items you wish to remove from your Fridge and click Delete.</p>
             </Block>
             <Button 
               onClick={() => {
@@ -56,34 +56,34 @@ const DeleteItems = ({ fetchAllItems, items, selectedItems, clearSelectedItems, 
                   setShowConfirm(true);
                 }
               }}
-              className={css({ backgroundColor: RED, color: BLACK })}
+              className={css({ backgroundColor: theme[RED], color: theme[BLACK] })}
             >Delete</Button>
             <Button 
               onClick={() => selectAllItems(items)}
-              className={css({ backgroundColor: WHITE, color: BLACK, marginLeft: '8px' })}
+              className={css({ backgroundColor: theme[WHITE], color: theme[BLACK], marginLeft: '8px' })}
             >Select All</Button>
             {
               showError &&
-              <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>You must select at least one item to delete.</p>
+              <p className={css({ fontSize: '16px', marginTop: '16px', color: theme[WHITE] })}>You must select at least one item to delete.</p>
             }
             {
               showConfirm &&
               <>
-                <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>Are you sure you want to delete these {selectedItems.length} item(s)?</p>
+                <p className={css({ fontSize: '16px', marginTop: '16px', color: theme[WHITE] })}>Are you sure you want to delete these {selectedItems.length} item(s)?</p>
                 <Button 
                   onClick={() => {
                     deleteItems(selectedItems);
                     fetchAllItems(null, 'build_list');
                     setShowConfirm(false);
                   }}
-                  className={css({ backgroundColor: RED, color: BLACK, marginRight: '8px' })}
+                  className={css({ backgroundColor: theme[RED], color: theme[BLACK], marginRight: '8px' })}
                 >Yes</Button>
                 <Button 
                   onClick={() => {
                     clearSelectedItems();
                     setShowConfirm(false);
                   }}
-                  className={css({ backgroundColor: WHITE, color: BLACK })}
+                  className={css({ backgroundColor: theme[WHITE], color: theme[BLACK] })}
                 >No</Button>
               </>
             }

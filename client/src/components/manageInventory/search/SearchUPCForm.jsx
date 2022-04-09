@@ -5,7 +5,7 @@ import { Card, StyledBody } from "baseui/card";
 import { Button } from "baseui/button";
 import { FormControl } from "baseui/form-control";
 import { Block } from "baseui/block";
-import { YELLOW } from '../../../styles/colors';
+import { YELLOW, WHITE, BLACK } from '../../../styles/colors';
 
 const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMessage }) => {
   const [css, theme] = useStyletron();
@@ -23,17 +23,17 @@ const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMe
         <Block className={css({
             marginBottom: '-10px',
             marginTop: '-10px',
-            color: 'yellow'
+            color: theme[YELLOW]
           })}>
             <h4 className={css({ marginBottom: '0px' })}>Search Products</h4>
-            <p className={css({ fontSize: '16px', marginBottom: '32px', marginTop: '4px', color: 'white' })}>Search the UPC database for a product. You can increase the offset to see more results.</p>
+            <p className={css({ fontSize: '16px', marginBottom: '32px', marginTop: '4px', color: theme[WHITE] })}>Search the UPC database for a product. You can increase the offset to see more results.</p>
         </Block>
         <FormControl 
           label={() => "Name"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: YELLOW
+              style: () => ({
+                color: theme[YELLOW]
               })
             }
           }}
@@ -43,17 +43,17 @@ const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMe
           label={() => "Offset"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: YELLOW
+              style: () => ({
+                color: theme[YELLOW]
               })
             }
           }}
         ><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/>
         </FormControl>
-        <Button className={css({ backgroundColor: 'yellow', color: 'black', marginTop: '16px' })} onClick={buildQuery}>Search</Button>
+        <Button className={css({ backgroundColor: theme[YELLOW], color: theme[BLACK], marginTop: '16px' })} onClick={buildQuery}>Search</Button>
         {resultMessage && <div>
-          <p style={{ color: 'white', fontSize: '16px' }}>{resultMessage}</p>
-          <p style={{ color: 'white', fontSize: '16px' }}>Click the image to add the item to your Fridge.</p>
+          <p style={{ color: theme[WHITE], fontSize: '16px' }}>{resultMessage}</p>
+          <p style={{ color: theme[WHITE], fontSize: '16px' }}>Click the image to add the item to your Fridge.</p>
         </div>}
       </StyledBody>
     </Card>

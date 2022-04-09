@@ -28,24 +28,24 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
   }
 
   return (
-    <Card className={css({ height: 'auto', width: '100%', backgroundColor: BLACK })} >
+    <Card className={css({ height: 'auto', width: '100%', backgroundColor: theme[BLACK] })} >
       <StyledBody>
         <Block className={css({
           marginBottom: '-10px',
           marginTop: '-10px',
-          color: PURPLE
+          color: theme[PURPLE]
         })}>
           <h4 className={css({  })}>Product Detail</h4>
-          <h4 className={css({ color: PURPLE, float: 'right', marginTop: '-48px' })}>{product.upc_code}</h4>
-          <p className={css({ fontSize: '16px', marginTop: '16px', color: WHITE })}>View and Edit Product Details.</p>
-          <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: WHITE })}>WARNING: These changes may affect other user's Fridges.</p>
+          <h4 className={css({ color: theme[PURPLE], float: 'right', marginTop: '-48px' })}>{product.upc_code}</h4>
+          <p className={css({ fontSize: '16px', marginTop: '16px', color: theme[WHITE] })}>View and Edit Product Details.</p>
+          <p className={css({ fontSize: '16px',  marginTop: '-12px', marginBottom: '32px', color: theme[WHITE] })}>WARNING: These changes may affect other user's Fridges.</p>
         </Block>
         <FormControl 
           label={() => "Name"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: PURPLE
+              style: () => ({
+                color: theme[PURPLE]
               })
             }
           }}
@@ -59,8 +59,8 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
           label={() => "Type"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: PURPLE
+              style: () => ({
+                color: theme[PURPLE]
               })
             }
           }}
@@ -75,13 +75,13 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
           caption={() => "use a square image"}
           overrides={{
             Label: {
-              style: ({ $theme }) => ({
-                color: PURPLE
+              style: () => ({
+                color: theme[PURPLE]
               })
             },
             Caption: {
-              style: ({ $theme }) => ({
-                color: PURPLE
+              style: () => ({
+                color: theme[PURPLE]
               })
             }
           }}
@@ -96,11 +96,11 @@ const ProductDetail = ({ product, updateProduct, deleteProduct }) => {
         </Block>
         <Button 
           onClick={() => updateProduct(product._id, { name, type, image_url: imageUrl})}
-          className={css({ backgroundColor: PURPLE, color: BLACK, marginTop: '32px' })}
+          className={css({ backgroundColor: theme[PURPLE], color: theme[BLACK], marginTop: '32px' })}
         >Save Changes</Button>
         <Button 
           onClick={() => handleDeleteProduct(product._id)}
-          className={css({ backgroundColor: WHITE, color: BLACK, float: 'right', marginTop: '32px' })}
+          className={css({ backgroundColor: theme[WHITE], color: theme[BLACK], float: 'right', marginTop: '32px' })}
           kind={KIND.secondary}
         >Delete</Button>
       </StyledBody>

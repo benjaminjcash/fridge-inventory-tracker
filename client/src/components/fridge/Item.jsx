@@ -36,10 +36,10 @@ const Item = ({ item }) => {
               Root: {
                 style: ({ $theme }) => ({
                   backgroundColor: 'white',
-                  borderBottomColor: calculateBorderColor(item),
+                  borderBottomColor: calculateBorderColor(item, theme),
                   borderBottomWidth: '5px',
                   borderBottomStyle: 'solid',
-                  borderLeftColor: calculateBorderColor(item),
+                  borderLeftColor: calculateBorderColor(item, theme),
                   borderLeftWidth: '5px',
                   borderLeftStyle: 'solid',
                   borderTopStyle: 'none',

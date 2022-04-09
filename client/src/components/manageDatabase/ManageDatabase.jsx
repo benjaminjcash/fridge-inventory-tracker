@@ -23,7 +23,7 @@ const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clear
     height: 'min-content'
   };
 
-  const colorsByIndex = [PURPLE, BLUE_GREEN];
+  const colorsByIndex = [theme[PURPLE], theme[BLUE_GREEN]];
   const buildButtonStyles = (i) => {
     return selected == i ? { backgroundColor: colorsByIndex[i] } : {};
   }
@@ -54,8 +54,8 @@ const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clear
           }}
           size={SIZE.compact}
         >
-          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(0) }}}>View Products</Button>
-          <Button overrides={{ BaseButton: { style: ({ $theme }) => buildButtonStyles(1) }}}>View Produce</Button>
+          <Button overrides={{ BaseButton: { style: () => buildButtonStyles(0) }}}>View Products</Button>
+          <Button overrides={{ BaseButton: { style: () => buildButtonStyles(1) }}}>View Produce</Button>
         </ButtonGroup>
       </FlexGridItem>
       { selected === 0 && <FlexGridItem {...itemProps}><ProductList products={products} /></FlexGridItem>}

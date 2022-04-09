@@ -11,13 +11,13 @@ const ProduceResultList = ({ produces, onProduceSelect }) => {
       data={produces} 
       overrides={{
         Root: {
-          style: ({ $theme }) => ({
+          style: () => ({
             width: '100%'
           })
         },
         TableHeadCell: {
-          style: ({ $theme }) => ({
-            color: PINK
+          style: () => ({
+            color: theme[PINK]
           })
         }
       }}

@@ -30,13 +30,13 @@ const ProduceList = ({ produces, data, fetchAllProduces, fetchAllItems, clearDat
         data={produces}
         overrides={{
           Root: {
-            style: ({ $theme }) => ({
+            style: () => ({
               width: '100%'
             })
           },
           TableHeadCell: {
-            style: ({ $theme }) => ({
-              color: BLUE_GREEN
+            style: () => ({
+              color: theme[BLUE_GREEN]
             })
           }
         }}

@@ -28,13 +28,13 @@ const ProductList = ({ products, data, fetchAllProducts, clearData }) => {
         data={products}
         overrides={{
           Root: {
-            style: ({ $theme }) => ({
+            style: () => ({
               width: '100%'
             })
           },
           TableHeadCell: {
-            style: ({ $theme }) => ({
-              color: PURPLE
+            style: () => ({
+              color: theme[PURPLE]
             })
           }
         }}

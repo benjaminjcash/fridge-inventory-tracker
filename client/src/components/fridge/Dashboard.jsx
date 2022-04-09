@@ -6,7 +6,7 @@ import { Block } from 'baseui/block';
 import { RED, YELLOW, GREEN } from '../../styles/colors';
 
 const Dashboard = ({ items }) => {
-  const [css] = useStyletron();
+  const [css, theme] = useStyletron();
   const [tagState, setTagState] = React.useState({});
 
   const getTodaysDate = () => {
@@ -51,7 +51,7 @@ const Dashboard = ({ items }) => {
         {
           tagState?.bad?.show && 
           <Tag
-            color={RED}
+            color={theme[RED]}
             kind={KIND.custom}
             onActionClick={() => {
               setTagState({
@@ -66,7 +66,7 @@ const Dashboard = ({ items }) => {
         {
           tagState?.close?.show && 
           <Tag
-            color={YELLOW}
+            color={theme[YELLOW]}
             kind={KIND.custom}
             onActionClick={() => {
               setTagState({
@@ -81,7 +81,7 @@ const Dashboard = ({ items }) => {
         {
           tagState?.fine?.show && 
           <Tag
-            color={GREEN}
+            color={theme[GREEN]}
             kind={KIND.custom}
             onActionClick={() => {
               setTagState({
