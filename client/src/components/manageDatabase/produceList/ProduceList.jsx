@@ -5,9 +5,10 @@ import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic';
 import ProduceDetail from './ProduceDetail';
 import { fetchAllProduces } from '../../../actions/produce';
 import { clearData } from '../../../actions/data';
-import { UPDATED_PRODUCE, DELETED_PRODUCE } from '../../../utils/constants';
+import { fetchAllItems } from '../../../actions/item';
+import { UPDATED_PRODUCE, DELETED_PRODUCE, DEFAULT_FETCH_ALL_ITEMS_OPTIONS } from '../../../utils/constants';
 
-const ProduceList = ({ produces, data, fetchAllProduces, clearData }) => {
+const ProduceList = ({ produces, data, fetchAllProduces, fetchAllItems, clearData }) => {
   const [css, theme] = useStyletron();
   const [selectedProduce, setSelectedProduce] = useState({});
 
@@ -18,6 +19,7 @@ const ProduceList = ({ produces, data, fetchAllProduces, clearData }) => {
       clearData();
       fetchAllProduces();
       setSelectedProduce({});
+      fetchAllItems(DEFAULT_FETCH_ALL_ITEMS_OPTIONS, 'build_list');
     }
   }, [data]);
 
@@ -72,7 +74,8 @@ const ConnectedProduceList = connect(
     }
   }, {
     fetchAllProduces,
-    clearData
+    clearData,
+    fetchAllItems
   }
 )(ProduceList);
 

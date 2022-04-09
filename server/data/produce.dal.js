@@ -53,7 +53,10 @@ exports.doUpdateProduce = async (id, body) => {
 }
 
 exports.doDeleteProduce = async (res, id) => {
-  Produce.findByIdAndDelete(id)
+  const produce = new Produce({
+    _id: id
+  });
+  produce.remove()
   .then(() => {
       res.json({
           success: true,

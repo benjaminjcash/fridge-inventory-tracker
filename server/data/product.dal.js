@@ -54,7 +54,10 @@ exports.doUpdateProduct = async (id, body) => {
 }
 
 exports.doDeleteProduct = async (res, id) => {
-  Product.findByIdAndDelete(id)
+  const product = new Product({
+    _id: id
+  });
+  product.remove()
   .then(() => {
       res.json({
           success: true,

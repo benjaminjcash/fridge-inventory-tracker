@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Item = require('./item.model');
 
 const Schema = mongoose.Schema;
 
@@ -24,5 +25,10 @@ const ProductSchema = new Schema({
       unquie: true
     }
 });
+
+ProductSchema.pre('remove', function(next) {
+  Item.remove({ product_id: this._id }).exec();
+  next();
+})
 
 module.exports = mongoose.model('Product', ProductSchema);
