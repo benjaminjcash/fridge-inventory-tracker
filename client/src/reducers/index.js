@@ -8,6 +8,8 @@ import types from './types';
 import upc from './upc';
 import product from './product';
 import products from './products';
+import produce from './produce';
+import produces from './produces';
 import selectedItems from './selectedItems';
 
 const reducer = combineReducers({
@@ -20,7 +22,9 @@ const reducer = combineReducers({
   data,
   product,
   products,
-  selectedItems
+  selectedItems,
+  produce,
+  produces
 });
 
 export default reducer;

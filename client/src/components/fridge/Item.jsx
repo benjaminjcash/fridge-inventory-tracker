@@ -11,9 +11,9 @@ const Item = ({ item }) => {
       <StatefulTooltip
         content={() => (
           <>
-            <h4>{item.product_id.name}</h4>
+            <h4>{item.product_id ? item.product_id.name : item.produce_id.name}</h4>
             <Block className={css({ fontStyle: 'italic' })}>
-              <p>{item.product_id.type}</p>
+              <p>{item.product_id ? item.product_id.type : item.produce_id.type}</p>
 
               <p>exp. {formatDate(item.expiration_date)}</p>
               <p >pur. {formatDate(item.created_date)}</p>
@@ -31,7 +31,7 @@ const Item = ({ item }) => {
         <div>
           <Card
             className={css({ height: 'auto', width: 'auto' })}
-            headerImage={item.product_id.image_url}
+            headerImage={item.product_id ? item.product_id.image_url : item.produce_id.image_url}
             overrides={{
               Root: {
                 style: ({ $theme }) => ({

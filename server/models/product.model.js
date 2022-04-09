@@ -14,10 +14,6 @@ const ProductSchema = new Schema({
     image_url: {
         type: String
     },
-    shelf_life : {
-        type: Number,
-        required: true
-    },
     upc_data: {
         type: String,
         required: true

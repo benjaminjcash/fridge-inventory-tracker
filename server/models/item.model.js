@@ -11,8 +11,13 @@ const ItemSchema = new Schema({
     product_id: {
         type: Schema.Types.ObjectId,
         ref: 'Product',
-        required: true
+        required: false
     },
+    produce_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'Produce',
+      required: false
+  },
     expiration_date: {
         type: Date,
         required: true

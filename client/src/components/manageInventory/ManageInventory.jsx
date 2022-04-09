@@ -9,6 +9,7 @@ import { clearUPC, clearProduct } from '../../actions/product';
 import AddItem from './addData/AddItem';
 import DeleteItems from './deleteItems/DeleteItems';
 import SearchUPC from './search/SearchUPC';
+import AddProduce from './addProduce/AddProduce';
 import { clearSelectedItems, fetchAllItems } from '../../actions/item';
 
 const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
@@ -43,25 +44,25 @@ const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems
           }}
           size={SIZE.compact}
         >
-          <Button>Search Products</Button>
           <Button>Scan Item</Button>
           <Button>Add Produce</Button>
+          <Button>Search Products</Button>
           <Button>Delete Items</Button>
         </ButtonGroup>
       </FlexGridItem>
       { selected === 0 && 
-        <FlexGridItem {...itemProps} style={{ marginTop: '-8px' }}>
-          <SearchUPC />
-        </FlexGridItem>
-      }
-      { selected === 1 && 
         <FlexGridItem {...itemProps}>
           <AddItem />
         </FlexGridItem>
       }
-      { selected === 2 && 
+      { selected === 1 && 
         <FlexGridItem {...itemProps}>
-          
+          <AddProduce />
+        </FlexGridItem>
+      }
+      { selected === 2 && 
+        <FlexGridItem {...itemProps} style={{ marginTop: '-8px' }}>
+          <SearchUPC />
         </FlexGridItem>
       }
       { selected === 3 && 

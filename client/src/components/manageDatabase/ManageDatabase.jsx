@@ -7,9 +7,11 @@ import { useStyletron } from 'baseui';
 import { clearData } from '../../actions/data';
 import { fetchAllProducts, clearUPC, clearProduct } from '../../actions/product';
 import ProductList from './productList/ProductList';
+import ProduceList from './produceList/ProduceList';
 import { clearSelectedItems, fetchAllItems } from '../../actions/item';
+import { fetchAllProduces } from '../../actions/produce';
 
-const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
+const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems, fetchAllProduces, produces }) => {
   const [css, theme] = useStyletron();
   const [selected, setSelected] = React.useState(0);
 
@@ -22,6 +24,7 @@ const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clear
 
   React.useEffect(() => {
     fetchAllProducts();
+    fetchAllProduces();
   }, []);
 
   return (
@@ -56,7 +59,7 @@ const ManageDatabase = ({ fetchAllProducts, products, clearData, clearUPC, clear
       }
       { selected === 1 && 
         <FlexGridItem {...itemProps}>
-          
+          <ProduceList produces={produces} />
         </FlexGridItem>
       }
     </FlexGrid>
@@ -68,7 +71,8 @@ const ConnectedManageDatabase = connect(
   (state) => {
     return {
       upcData: state.upc,
-      products: state.products
+      products: state.products,
+      produces: state.produces
     }
   }, {
     clearData,
@@ -76,7 +80,8 @@ const ConnectedManageDatabase = connect(
     clearUPC,
     clearProduct,
     clearSelectedItems,
-    fetchAllItems
+    fetchAllItems,
+    fetchAllProduces
   }
 )(ManageDatabase);
 

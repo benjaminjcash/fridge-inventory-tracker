@@ -1,16 +1,14 @@
-const Product = require("../models/product.model");
+const Produce = require("../models/produce.model");
 const logger = require("../utils/logger");
 
-exports.doCreateProduct = async (req) => {
-  const newProduct = new Product({
+exports.doCreateProduce = async (req) => {
+  const newProduce = new Produce({
     name: req.body.name,
     type: req.body.type,
-    image_url: req.body.image_url,
-    shelf_life : req.body.shelf_life,
-    upc_data: req.body.upc_data,
-    upc_code: req.body.upc_code
+    image_url: req.body.imageUrl,
+    shelf_life : req.body.shelfLife
   });
-  return newProduct.save()
+  return newProduce.save()
     .then((data) => {
       return data;
     }).catch(err => {
@@ -19,12 +17,13 @@ exports.doCreateProduct = async (req) => {
     });
 }
 
-exports.doSearchProduct = async (req) => {
-  const { barcode } = req.params;
+exports.doSearchProduce = async (req) => {
+  const { name } = req.params;
+  const regex = new RegExp(`${escapeRegex(name)}`);
   let query = {
-    upc_code: barcode
+    name: regex
   };
-  return Product
+  return Produce
       .find(query)
       .then((data) => {
         return data;
@@ -33,8 +32,8 @@ exports.doSearchProduct = async (req) => {
       });
 }
 
-exports.doFetchAllProducts = async (req) => {
-  return Product
+exports.doFetchAllProduces = async (req) => {
+  return Produce
       .find()
       .then((data) => {
         return data;
@@ -43,8 +42,8 @@ exports.doFetchAllProducts = async (req) => {
       });
 }
 
-exports.doUpdateProduct = async (id, body) => {
-  return Product
+exports.doUpdateProduce = async (id, body) => {
+  return Produce
     .findOneAndUpdate({ _id: id }, body)
     .then((data) => {
       return data;
@@ -53,8 +52,8 @@ exports.doUpdateProduct = async (id, body) => {
     });
 }
 
-exports.doDeleteProduct = async (res, id) => {
-  Product.findByIdAndDelete(id)
+exports.doDeleteProduce = async (res, id) => {
+  Produce.findByIdAndDelete(id)
   .then(() => {
       res.json({
           success: true,
@@ -64,3 +63,5 @@ exports.doDeleteProduct = async (res, id) => {
       res.send(err);
   });
 }
+
+const escapeRegex = str => str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');

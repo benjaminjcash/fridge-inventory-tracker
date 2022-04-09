@@ -2,11 +2,20 @@ const Item = require("../models/item.model");
 const logger = require("../utils/logger");
 
 exports.doCreateItem = async (req) => {
-  const newItem = new Item({
-    owner_id: req.auth.id,
-    product_id: req.body.product_id,
-    expiration_date: new Date(req.body.expiration_date),
-  });
+  let newItem;
+  if(req.body.product_id) {
+    newItem = new Item({
+      owner_id: req.auth.id,
+      product_id: req.body.product_id,
+      expiration_date: new Date(req.body.expiration_date),
+    });
+  } else if(req.body.produce_id) {
+    newItem = new Item({
+      owner_id: req.auth.id,
+      produce_id: req.body.produce_id,
+      expiration_date: new Date(req.body.expiration_date),
+    });
+  }
   return newItem.save()
     .then((data) => {
       return data;
@@ -53,6 +62,7 @@ exports.doGetAllItems = async (req) => {
   return Item
       .find(query)
       .populate('product_id')
+      .populate('produce_id')
       .sort({[sortby]: direction})
       .then((data) => {
         if(filterbyname || filterbytype) {
@@ -67,14 +77,26 @@ exports.doGetAllItems = async (req) => {
 const _filterItemList = (data, name, types) => {
   if(name) {
     const re = new RegExp(name.toUpperCase());
-    data = data.filter(item => re.test(item.product_id.name.toUpperCase()));
+    data = data.filter(item => {
+      if(item.product_id) {
+        return re.test(item.product_id.name.toUpperCase());
+      } else if(item.produce_id) {
+        return re.test(item.produce_id.name.toUpperCase());
+      }
+    });
   }
   if(types) {
     let filtered = [];
     types.forEach(type => {
       data.forEach(item => {
-        if(item.product_id.type === type.id) {
-          filtered.push(item);
+        if(item.product_id) {
+          if(item.product_id.type === type.id) {
+            filtered.push(item);
+          }
+        } else if(item.produce_id) {
+          if(item.produce_id.type === type.id) {
+            filtered.push(item);
+          }
         }
       });
     });
