@@ -8,44 +8,43 @@ import { Block } from "baseui/block";
 import { UPC_RESPONSE_KEY_TITLE, UPC_RESPONSE_KEY_BRAND, UPC_RESPONSE_KEY_CATEGORY, UPC_RESPONSE_KEY_IMAGES } from '../../../utils/constants';
 import { BLUE, WHITE, BLACK } from '../../../styles/colors';
 
-const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
+const CreateProduct = ({ doCreateProduct, upcData }) => {
   const [css, theme] = useStyletron();
-  const [valueName, setValueName] = React.useState([]);
-  const [valueType, setValueType] = React.useState([]);
-  const [valueImageUrl, setValueImageUrl] = React.useState([]);
+  const [name, setName] = React.useState([]);
+  const [type, setType] = React.useState([]);
+  const [imageUrl, setImageUrl] = React.useState([]);
   const [valueUpcData, setValueUpcData] = React.useState([]);
 
   const handleCreateProduct = () => {
     const product = {
-      name: valueName,
-      type: valueType,
-      image_url: valueImageUrl,
+      name: name,
+      type: type,
+      image_url: imageUrl,
       upc_data: valueUpcData,
       upc_code: JSON.parse(valueUpcData).upc
     }
     doCreateProduct(product);
+    clearForm();
+  }
+
+  const clearForm = () => {
+    setName([]);
+    setType([]);
+    setImageUrl([]);
+    setValueUpcData({});
   }
 
   React.useEffect(() => {
-    if (clearCreateProduct) {
-      setValueName([]);
-      setValueType([]);
-      setValueImageUrl([]);
-      setValueUpcData({});
-    }
-  }, [clearCreateProduct]);
-
-  React.useEffect(() => {
     if(typeof upcData === 'object' && Object.keys(upcData).length > 0) {
-      setValueName(`${upcData[UPC_RESPONSE_KEY_BRAND]} ${upcData[UPC_RESPONSE_KEY_TITLE]}`);
+      setName(`${upcData[UPC_RESPONSE_KEY_BRAND]} ${upcData[UPC_RESPONSE_KEY_TITLE]}`);
       const category = upcData[UPC_RESPONSE_KEY_CATEGORY];
       const exp = />(?:.(?!> ))+$/;
       const res = exp.exec(category)[0];
       const type = res.substring(2, res.length)
-      setValueType(type);
+      setType(type);
       const images = upcData[UPC_RESPONSE_KEY_IMAGES];
       if(images.length > 0) {
-        setValueImageUrl(images[0]);
+        setImageUrl(images[0]);
       }
       setValueUpcData(JSON.stringify(upcData));
     }
@@ -73,8 +72,8 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           }}
         >
           <Input
-            value={valueName}
-            onChange={event => setValueName(event.currentTarget.value)}
+            value={name}
+            onChange={event => setName(event.currentTarget.value)}
           />
         </FormControl>
         <FormControl 
@@ -88,8 +87,8 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           }}
         >
           <Input
-            value={valueType}
-            onChange={event => setValueType(event.currentTarget.value)}
+            value={type}
+            onChange={event => setType(event.currentTarget.value)}
           />
         </FormControl>
         <FormControl 
@@ -109,11 +108,11 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
           }}
         >
           <Input
-            value={valueImageUrl}
-            onChange={event => setValueImageUrl(event.currentTarget.value)}
+            value={imageUrl}
+            onChange={event => setImageUrl(event.currentTarget.value)}
           />
         </FormControl>
-        <img src={valueImageUrl} className={css({ height: '200px', width: '200px', display: 'block', marginBottom: '16px' })}/>
+        <img src={imageUrl} className={css({ height: '200px', width: '200px', display: 'block', marginBottom: '16px' })}/>
         <Button 
           onClick={() => handleCreateProduct()}
           className={css({ backgroundColor: BLUE, color: BLACK })}

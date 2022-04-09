@@ -1,29 +1,25 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { useStyletron } from 'baseui';
 import { lookupUPC, clearUPC, createProduct, searchProduct, clearProduct } from '../../../actions/product';
 import { clearData } from '../../../actions/data';
 import { createItem, fetchAllItems } from '../../../actions/item';
 import ScanItem from '../addData/ScanItem';
-import CreateProductForm from './CreateProduct';
-import ConfirmModal from '../../shared/ConfirmModal';
+import CreateProduct from './CreateProduct';
 import CreateItem from '../addData/CreateItem';
 import Scanner from '../../shared/Scanner';
-import { useStyletron } from 'baseui';
 
 const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, clearData, createItem, fetchAllItems }) => {
-  const [clearSearchUPC, setClearSearchUPC] = React.useState(false);
-  const [clearAddItem, setClearAddItem] = React.useState(false);
+  const [css, theme] = useStyletron();
+
   const [scannerIsOpen, setScannerIsOpen] = React.useState(false);
-  const [confirmModalIsOpen, setConfirmModalIsOpen] = React.useState(false);
-  const [context, setContext] = React.useState('');
   const [showCreateProduct, setShowCreateProduct] = React.useState(false);
   const [showScanItem, setShowScanItem] = React.useState(true);
-  const [clearCreateProduct, setClearCreateProduct] = React.useState(false);
   const [showCreateItem, setShowCreateItem] = React.useState(false);
+
   const [barcode, setBarcode] = React.useState('');
   const [barcodeInput, setBarcodeInput] = React.useState([]);
-  const [css, theme] = useStyletron();
 
   useEffect(() => {
     if(barcode.length) {
@@ -60,44 +56,33 @@ const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, cl
 
   const doSearch = () => {
     searchProduct(barcodeInput);
-    setClearSearchUPC(false);
   }
 
   const doCreateItem = (item) => {
-    setContext('create_item');
-    setClearAddItem(false);
     createItem(item);
     alert('Successfully added item to your Fridge.');
     fetchAllItems(null, 'build_list');
     setShowCreateItem(false);
     setShowScanItem(true);
-    setBarcode('');
-    setBarcodeInput([]);
+    resetState();
   }
 
   const doCreateProduct = (product) => {
-    setContext('create_product');
-    setClearCreateProduct(false);
     createProduct(product);
-    setConfirmModalIsOpen(true);
+    alert("Successfully added product to the Database.");
+    setShowCreateProduct(false);
+    setShowCreateItem(true);
+    resetState();
   }
 
   const closeScannerModal = () => {
     setScannerIsOpen(false);
   }
 
-  const closeConfirmModal = () => {
-    if(context === 'create_product') {
-      setClearCreateProduct(true);
-      setShowCreateProduct(false);
-      setShowCreateItem(true);
-    }
-    if(context === 'create_item') {
-      setClearSearchUPC(true);
-      setShowCreateItem(false);
-    }
+  const resetState = () => {
     clearData();
-    setConfirmModalIsOpen(false);
+    setBarcode('');
+    setBarcodeInput([]);
   }
 
   return (
@@ -110,15 +95,15 @@ const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, cl
       {
         showScanItem ?
           <FlexGridItem key={0} {...itemProps}>
-            <ScanItem barcodeInput={barcodeInput} setBarcodeInput={setBarcodeInput} doSearch={doSearch} clearSearch={clearSearchUPC} setScannerIsOpen={setScannerIsOpen} />
+            <ScanItem barcodeInput={barcodeInput} setBarcodeInput={setBarcodeInput} doSearch={doSearch} setScannerIsOpen={setScannerIsOpen} />
           </FlexGridItem>
         : showCreateProduct ?
           <FlexGridItem key={1} {...itemProps}>
-            <CreateProductForm doCreateProduct={doCreateProduct} clearCreateProduct={clearCreateProduct} upcData={upcData} />
+            <CreateProduct doCreateProduct={doCreateProduct} upcData={upcData} />
           </FlexGridItem>
         : showCreateItem ?
         <FlexGridItem key={2} {...itemProps}>
-          <CreateItem doCreateItem={doCreateItem} clearAddItem={clearAddItem}/>
+          <CreateItem doCreateItem={doCreateItem} />
         </FlexGridItem>
         : <></>
       }
@@ -127,7 +112,6 @@ const AddItem = ({ upcData, searchProduct, createProduct, lookupUPC, product, cl
         <Scanner key={3} isOpen={scannerIsOpen} close={closeScannerModal} setBarcode={setBarcode}/>
       }
     </FlexGrid>
-    {confirmModalIsOpen && <ConfirmModal isOpen={confirmModalIsOpen} closeModal={closeConfirmModal} />}
     </>
   );
 }

@@ -47,12 +47,12 @@ const Scanner = ({ isOpen, close, setBarcode }) => {
       },
         scan => {
           if(!scan) {
-            alert('fail!');
+            alert('Failed to scan barcode.');
           } else if(scan.codeResult) {
-            alert('success!');
+            alert('Successfully scanned barcode.');
             setBarcode(scan.codeResult.code);
           } else {
-            alert('fail!');
+            alert('Failed to scan barcode.');
           }
           close();
         }

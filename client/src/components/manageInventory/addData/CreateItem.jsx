@@ -6,9 +6,9 @@ import { FormControl } from "baseui/form-control";
 import { DatePicker } from "baseui/datepicker";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { GREEN, WHITE, BLACK, RED } from '../../../styles/colors';
+import { GREEN, WHITE, BLACK } from '../../../styles/colors';
 
-const CreateItem = ({ doCreateItem, clearAddItem, product, produce }) => {
+const CreateItem = ({ doCreateItem, product, produce }) => {
   const [css, theme] = useStyletron();
   const [valueExpirationDate, setValueExpirationDate] = React.useState();
   const [context, setContext] = React.useState('');
@@ -48,13 +48,8 @@ const CreateItem = ({ doCreateItem, clearAddItem, product, produce }) => {
       expiration_date: valueExpirationDate,
     }
     doCreateItem(item);
+    setValueExpirationDate([]);
   }
-
-  React.useEffect(() => {
-    if (clearAddItem) {
-      setValueExpirationDate([]);
-    }
-  }, [clearAddItem]);
 
   return (
     <Card className={css({ height: 'auto', width: '100%', backgroundColor: BLACK })} >
@@ -65,7 +60,6 @@ const CreateItem = ({ doCreateItem, clearAddItem, product, produce }) => {
           color: GREEN
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Add Item</h4>
-          { context == '' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: RED })}>There was an error</p> }
           { context == 'product' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: WHITE })}>Set the expiration date and click Add to add the item to your Fridge.</p> }
           { context == 'produce' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: WHITE })}>The expiration date has been set automatically set based on this Produce's shelf life. Click Add to add the item to your Fridge.</p> }
         </Block>
@@ -73,19 +67,15 @@ const CreateItem = ({ doCreateItem, clearAddItem, product, produce }) => {
           <>
           <p className={css({ fontSize: '16px', marginTop: '32px', color: WHITE })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
           <p className={css({ fontSize: '16px', marginTop: '-8px', color: WHITE })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
+          <img src={product.image_url} className={css({ height: '200px', width: '200px' })}/>
           </>
         }
         { context == 'produce' && 
           <>
           <p className={css({ fontSize: '16px', marginTop: '32px', color: WHITE })}><span className={css({ color: GREEN})}>Name: </span>{produce.name}</p>
           <p className={css({ fontSize: '16px', marginTop: '-8px', color: WHITE })}><span className={css({ color: GREEN})}>Type: </span>{produce.type}</p>
+          <img src={produce.image_url} className={css({ height: '200px', width: '200px' })}/>
           </>
-        }
-        {
-          context == 'product' && <img src={product.image_url} className={css({ height: '200px', width: '200px' })}/>
-        } 
-        {
-          context == 'produce' && <img src={produce.image_url} className={css({ height: '200px', width: '200px' })}/>
         }
         <FormControl 
           label={() => "Expiration Date"}
