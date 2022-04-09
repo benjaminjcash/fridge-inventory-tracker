@@ -5,6 +5,7 @@ import { Card, StyledBody } from "baseui/card";
 import { Button } from "baseui/button";
 import { FormControl } from "baseui/form-control";
 import { Block } from "baseui/block";
+import { YELLOW } from '../../../styles/colors';
 
 const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMessage }) => {
   const [css, theme] = useStyletron();
@@ -27,8 +28,28 @@ const SearchUPCForm = ({ name, setName, offset, setOffset, doSearchUPC, resultMe
             <h4 className={css({ marginBottom: '0px' })}>Search Products</h4>
             <p className={css({ fontSize: '16px', marginBottom: '32px', marginTop: '4px', color: 'white' })}>Search the UPC database for a product. You can increase the offset to see more results.</p>
         </Block>
-        <FormControl label={() => "Name"}><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/></FormControl>
-        <FormControl label={() => "Offset"}><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/></FormControl>
+        <FormControl 
+          label={() => "Name"}
+          overrides={{
+            Label: {
+              style: ({ $theme }) => ({
+                color: YELLOW
+              })
+            }
+          }}
+        ><Input key={0} value={name} placeholder="Name" onChange={e => setName(e.target.value)} clearOnEscape/>
+        </FormControl>
+        <FormControl 
+          label={() => "Offset"}
+          overrides={{
+            Label: {
+              style: ({ $theme }) => ({
+                color: YELLOW
+              })
+            }
+          }}
+        ><Input key={2} value={offset} placeholder="Offset" onChange={e => setOffset(e.target.value)} clearOnEscape/>
+        </FormControl>
         <Button className={css({ backgroundColor: 'yellow', color: 'black', marginTop: '16px' })} onClick={buildQuery}>Search</Button>
         {resultMessage && <div>
           <p style={{ color: 'white', fontSize: '16px' }}>{resultMessage}</p>
