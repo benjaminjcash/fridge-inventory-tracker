@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useStyletron } from 'baseui';
 import { Card, StyledBody } from "baseui/card";
@@ -6,19 +6,45 @@ import { FormControl } from "baseui/form-control";
 import { DatePicker } from "baseui/datepicker";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
-import { GREEN, WHITE, BLACK } from '../../../styles/colors';
+import { GREEN, WHITE, BLACK, RED } from '../../../styles/colors';
 
-const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
+const CreateItem = ({ doCreateItem, clearAddItem, product, produce }) => {
   const [css, theme] = useStyletron();
-  const [valueExpirationDate, setValueExpirationDate] = React.useState(new Date());
+  const [valueExpirationDate, setValueExpirationDate] = React.useState();
+  const [context, setContext] = React.useState('');
+
+  useEffect(() => {
+    if(Object.keys(product).length > 0) {
+      setValueExpirationDate(new Date());
+      setContext('product');
+    } else if(Object.keys(produce).length > 0) {
+      setValueExpirationDate(calculateExpirationDateForProduce())
+      setContext('produce');
+    }
+  }, [product, produce]);
+
+  const calculateExpirationDateForProduce = () => {
+    const expDate = new Date();
+    expDate.setDate(expDate.getDate() + produce.shelf_life);
+    return expDate;
+  }
 
   const handleAddItem = () => {
     if(valueExpirationDate.length === 0) {
       alert('You must enter an expiration date to save an item.');
       return;
     }
+    let lookupKey, lookupValue;
+    if(context == 'product') {
+      lookupKey = 'product_id';
+      lookupValue = product._id;
+    } else if(context == 'produce') {
+      lookupKey = 'produce_id';
+      lookupValue = produce._id;
+    }
+
     const item = {
-      product_id: product._id,
+      [lookupKey]: lookupValue,
       expiration_date: valueExpirationDate,
     }
     doCreateItem(item);
@@ -39,11 +65,28 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
           color: GREEN
         })}>
           <h4 className={css({ marginBottom: '0px' })}>Add Item</h4>
-          <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '32px', color: BLACK })}>Set the expiration date and click Add to add the item to your Fridge.</p>
+          { context == '' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: RED })}>There was an error</p> }
+          { context == 'product' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: BLACK })}>Set the expiration date and click Add to add the item to your Fridge.</p> }
+          { context == 'produce' && <p className={css({ fontSize: '16px', marginTop: '4px', marginBottom: '-8px', color: BLACK })}>The expiration date has been set automatically set based on this Produce's shelf life. Click Add to add the item to your Fridge.</p> }
         </Block>
-        <p className={css({ fontSize: '16px', marginTop: '32px', color: BLACK })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
-        <p className={css({ fontSize: '16px', marginTop: '-8px', color: BLACK })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
-        <img src={product.image_url} className={css({ height: '200px', width: '200px' })}/>
+        { context == 'product' && 
+          <>
+          <p className={css({ fontSize: '16px', marginTop: '32px', color: BLACK })}><span className={css({ color: GREEN})}>Name: </span>{product.name}</p>
+          <p className={css({ fontSize: '16px', marginTop: '-8px', color: BLACK })}><span className={css({ color: GREEN})}>Type: </span>{product.type}</p>
+          </>
+        }
+        { context == 'produce' && 
+          <>
+          <p className={css({ fontSize: '16px', marginTop: '32px', color: BLACK })}><span className={css({ color: GREEN})}>Name: </span>{produce.name}</p>
+          <p className={css({ fontSize: '16px', marginTop: '-8px', color: BLACK })}><span className={css({ color: GREEN})}>Type: </span>{produce.type}</p>
+          </>
+        }
+        {
+          context == 'product' && <img src={product.image_url} className={css({ height: '200px', width: '200px' })}/>
+        } 
+        {
+          context == 'produce' && <img src={produce.image_url} className={css({ height: '200px', width: '200px' })}/>
+        }
         <FormControl 
           label={() => "Expiration Date"}
           overrides={{
@@ -75,7 +118,8 @@ const CreateItem = ({ doCreateItem, clearAddItem, product }) => {
 const ConnectedCreateItem = connect(
   (state) => {
     return {
-      product: state.product
+      product: state.product,
+      produce: state.produce
     }
   }
 )(CreateItem);

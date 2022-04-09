@@ -2,11 +2,20 @@ const Item = require("../models/item.model");
 const logger = require("../utils/logger");
 
 exports.doCreateItem = async (req) => {
-  const newItem = new Item({
-    owner_id: req.auth.id,
-    product_id: req.body.product_id,
-    expiration_date: new Date(req.body.expiration_date),
-  });
+  let newItem;
+  if(req.body.product_id) {
+    newItem = new Item({
+      owner_id: req.auth.id,
+      product_id: req.body.product_id,
+      expiration_date: new Date(req.body.expiration_date),
+    });
+  } else if(req.body.produce_id) {
+    newItem = new Item({
+      owner_id: req.auth.id,
+      produce_id: req.body.produce_id,
+      expiration_date: new Date(req.body.expiration_date),
+    });
+  }
   return newItem.save()
     .then((data) => {
       return data;

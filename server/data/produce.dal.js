@@ -16,3 +16,20 @@ exports.doCreateProduce = async (req) => {
       throw err;
     });
 }
+
+exports.doSearchProduce = async (req) => {
+  const { name } = req.params;
+  const regex = new RegExp(`${escapeRegex(name)}`);
+  let query = {
+    name: regex
+  };
+  return Produce
+      .find(query)
+      .then((data) => {
+        return data;
+      }).catch((err) => {
+        throw err;
+      });
+}
+
+const escapeRegex = str => str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');

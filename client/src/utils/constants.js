@@ -33,6 +33,10 @@ export const ACTION_PRODUCT = 'product';
 
 /** Produce */
 export const PRODUCE_FOUND = 'produce_found';
+export const NO_PRODUCE_FOUND = 'no_produce_found';
+export const PRODUCES_FOUND = 'produces_found';
+export const CLEAR_PRODUCE = 'clear_produce';
+export const CLEAR_PRODUCES = 'clear_produces';
 
 /** Data */
 export const ADDED_DATA = 'added_data';

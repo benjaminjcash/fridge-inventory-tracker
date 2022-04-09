@@ -1,29 +1,84 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useStyletron } from 'baseui';
 import { Card, StyledBody } from "baseui/card";
 import { FormControl } from "baseui/form-control";
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Block } from "baseui/block";
 import { Input } from 'baseui/input';
 import { Button } from "baseui/button";
 import { WHITE, BLACK, PINK } from '../../../styles/colors';
 import CreateProduce from './CreateProduce';
-import { createProduce } from '../../../actions/produce';
+import CreateItem from '../addData/CreateItem';
+import ProduceResultList from './ProduceResultList';
+import { createProduce, searchProduce, clearProduce, clearProduces, setProduce } from '../../../actions/produce';
+import { createItem } from '../../../actions/item';
 
-const AddProduce = ({ createProduce }) => {
+const AddProduce = ({ createProduce, searchProduce, data, produces, clearProduce, clearProduces, setProduce, createItem }) => {
   const [css, theme] = useStyletron();
   const [produceSearchTerm, setProduceSearchTerm] = useState('');
   const [showAddProduce, setShowAddProduce] = useState(true);
   const [showCreateProduce, setShowCreateProduce] = useState(false);
+  const [showCreateItem, setShowCreateItem] = useState(false);
+  const [showProduceList, setShowProduceList] = useState(false);
 
-  const doCreateProduce = (data) => {
-     createProduce(data);
+  const itemProps = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'top',
+    height: 'min-content'
+  };
+
+  const doCreateProduce = (produce) => {
+     createProduce(produce);
+  }
+
+  const doCreateItem = (item) => {
+    console.log(item);
+    createItem(item);
+  }
+
+  const doSearchProduce = (name) => {
+    clearProduces();
+    searchProduce(name);
+  }
+
+  useEffect(() => {
+    if(produces.length > 0) {
+      setShowProduceList(true);
+    }
+  }, [produces]);
+
+  useEffect(() => {
+    if(data.success) {
+      setShowCreateProduce(false);
+      setShowCreateItem(true);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    setShowProduceList(false);
+  }, [produceSearchTerm]);
+
+  const onProduceSelect = (index) => {
+    const selected = produces[index];
+    setProduce(selected);
+    clearProduces();
+    setShowProduceList(false);
+    setShowAddProduce(false);
+    setShowCreateItem(true);
   }
 
   return (
     <>
+    <FlexGrid
+      flexGridColumnCount={1}
+      flexGridRowGap={theme.sizing.scale300}
+      className={css({ width: '100%' })}
+    >
     {
       showAddProduce &&
+      <FlexGridItem key={0} {...itemProps}>
         <Card className={css({ height: 'auto', width: '100%' })} >
           <StyledBody>
             <Block className={css({
@@ -38,6 +93,7 @@ const AddProduce = ({ createProduce }) => {
               onClick={() => {
                 setShowCreateProduce(true);
                 setShowAddProduce(false);
+                setShowProduceList(false);
               }}
               className={css({ backgroundColor: PINK, color: BLACK, marginBottom: '16px' })}
             >Create New</Button>
@@ -49,26 +105,52 @@ const AddProduce = ({ createProduce }) => {
             </FormControl>
             { produceSearchTerm.length > 0 && 
               <Button 
-                onClick={() => console.log('search')}
+                onClick={() => {
+                  doSearchProduce(produceSearchTerm);
+                }}
                 className={css({ backgroundColor: PINK, color: BLACK })}
               >Search</Button>
             }
           </StyledBody>
         </Card>
+      </FlexGridItem>
     }
     {
       showCreateProduce &&
-      <CreateProduce doCreateProduce={doCreateProduce} />
+      <FlexGridItem key={1} {...itemProps}>
+        <CreateProduce doCreateProduce={doCreateProduce} data={data} />
+      </FlexGridItem>
     }
+    {
+      showCreateItem &&
+      <FlexGridItem key={2} {...itemProps}>
+        <CreateItem doCreateItem={doCreateItem} />
+      </FlexGridItem>
+    }
+    {
+      showProduceList &&
+      <FlexGridItem key={3} style={{...itemProps, width: '100%'}}>
+        <ProduceResultList produces={produces} onProduceSelect={onProduceSelect} />
+      </FlexGridItem>
+    }
+    </FlexGrid>
     </>
   );
 }
 
 const ConnectedAddProduce = connect(
   (state) => {
-    return {}
+    return {
+      data: state.data,
+      produces: state.produces
+    }
   }, {
-    createProduce
+    createProduce,
+    searchProduce,
+    clearProduce,
+    clearProduces,
+    setProduce,
+    createItem
   }
 )(AddProduce);
 

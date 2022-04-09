@@ -20,7 +20,6 @@ const CreateProduct = ({ doCreateProduct, clearCreateProduct, upcData }) => {
       name: valueName,
       type: valueType,
       image_url: valueImageUrl,
-      shelf_life: 0,
       upc_data: valueUpcData,
       upc_code: JSON.parse(valueUpcData).upc
     }
