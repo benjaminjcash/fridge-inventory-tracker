@@ -5,14 +5,13 @@ import { ButtonGroup, MODE } from "baseui/button-group";
 import { Button, SIZE } from "baseui/button";
 import { useStyletron } from 'baseui';
 import { clearData } from '../../actions/data';
-import { fetchAllProducts, clearUPC, clearProduct } from '../../actions/product';
+import { clearUPC, clearProduct } from '../../actions/product';
 import AddItem from './addData/AddItem';
-import ProductList from '../manageDatabase/productList/ProductList';
 import DeleteItems from './deleteItems/DeleteItems';
 import SearchUPC from './search/SearchUPC';
 import { clearSelectedItems, fetchAllItems } from '../../actions/item';
 
-const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
+const ManageInventory = ({ clearData, clearUPC, clearProduct, clearSelectedItems, fetchAllItems }) => {
   const [css, theme] = useStyletron();
   const [selected, setSelected] = React.useState(0);
 
@@ -22,10 +21,6 @@ const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct,
     alignItems: 'top',
     height: 'min-content'
   };
-
-  React.useEffect(() => {
-    fetchAllProducts();
-  }, []);
 
   return (
     <> 
@@ -79,20 +74,18 @@ const Manage = ({ fetchAllProducts, products, clearData, clearUPC, clearProduct,
   );
 }
 
-const ConnectedManage = connect(
+const ConnectedManageInventory = connect(
   (state) => {
     return {
-      upcData: state.upc,
-      products: state.products
+      upcData: state.upc
     }
   }, {
     clearData,
-    fetchAllProducts,
     clearUPC,
     clearProduct,
     clearSelectedItems,
     fetchAllItems
   }
-)(Manage);
+)(ManageInventory);
 
-export default ConnectedManage;
+export default ConnectedManageInventory;

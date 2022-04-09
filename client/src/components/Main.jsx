@@ -7,7 +7,7 @@ import { ButtonGroup, MODE } from "baseui/button-group";
 import { Button, SIZE } from "baseui/button";
 import { clearStorage } from '../utils/storage';
 import Fridge from './fridge/Fridge';
-import Manage from './manage/Manage';
+import ManageInventory from './manageInventory/ManageInventory';
 import ManageDatabase from './manageDatabase/ManageDatabase';
 import { clearUPC, clearProduct } from '../actions/product';
 import { fetchAllItems } from '../actions/item';
@@ -54,7 +54,7 @@ function Main({ clearUPC, fetchAllItems, clearProduct }) {
           selected == 0 ?
           <><Fridge /></> 
           : selected == 1 ?
-          <Manage />
+          <ManageInventory />
           : <ManageDatabase />
         }
       </FlexGridItem>
