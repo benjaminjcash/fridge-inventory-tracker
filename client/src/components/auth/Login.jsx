@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useStyletron } from 'baseui';
@@ -6,7 +6,7 @@ import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Card } from 'baseui/card';
 import { Input } from 'baseui/input';
 import { FormControl } from 'baseui/form-control';
-import { Button } from 'baseui/button';
+import { Button, SIZE, SHAPE } from 'baseui/button';
 import { requestLogin } from '../../actions/auth';
 import { dispatchError } from '../../actions/error';
 import Error from '../shared/Error';
@@ -116,6 +116,8 @@ const Login = ({ error, requestLogin, dispatchError }) => {
       </FormControl>
       <Button
         onClick={() => submitLogin()}
+        size={SIZE.compact}
+        shape={SHAPE.pill}
         overrides={{
           BaseButton: { 
             style: ({ $theme }) => ({ marginRight: '8px' })
@@ -123,6 +125,8 @@ const Login = ({ error, requestLogin, dispatchError }) => {
         }}
       >Login</Button>
       <Button
+        size={SIZE.compact}
+        shape={SHAPE.pill}
         onClick={() => navigateRegister()}
       >Register</Button>
       </Card>

@@ -6,7 +6,7 @@ import { Card } from 'baseui/card';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Input } from 'baseui/input';
 import axios from 'axios';
-import { Button } from 'baseui/button';
+import { Button, SIZE, SHAPE } from 'baseui/button';
 import { FormControl } from 'baseui/form-control';
 import { dispatchError } from '../../actions/error';
 import Error from '../shared/Error';
@@ -101,7 +101,7 @@ const Register = ({ error, dispatchError }) => {
         <h1>Fridge Inventory Tracker</h1>
       </FlexGridItem>
       <FlexGridItem>
-        <Card>
+        <Card className={css({ width: '100%', height: '100%' })}>
           <FormControl label="Name">
             <Input
               value={formValues.name}
@@ -152,6 +152,8 @@ const Register = ({ error, dispatchError }) => {
           </FormControl>
           <Button
             onClick={submitRegister}
+            size={SIZE.compact}
+            shape={SHAPE.pill}
             overrides={{
             BaseButton: { 
               style: ({ $theme }) => ({ marginRight: '8px' })
@@ -159,6 +161,8 @@ const Register = ({ error, dispatchError }) => {
             }}
           >Register</Button>
           <Button
+            size={SIZE.compact}
+            shape={SHAPE.pill}
             onClick={navigateLogin}
           >Back</Button>
         </Card>
