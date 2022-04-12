@@ -18,26 +18,26 @@ exports.registerUser = async (req, res) => {
     const user = await doGetUser(req.body.username);
     if(user) return res.status(200).send({
       success: false,
-      error: 'a user already exists'
+      error: 'A user already exists with that username'
     });
     let whiteListedEmails = process.env.ALLOWED_USERS.split(',');
     if(whiteListedEmails.includes(req.body.email)) {
       await doRegisterUser(newUser);
       return res.json({
         success: true,
-        message: 'registered user'
+        message: 'Successfully registered new user'
       });
     } else {
       return res.json({
         success: false,
-        error: 'not authorized, request access from ben first'
+        error: 'You are not authorized to access the Fridge Inventory Tracker, please request access from Ben first'
       });
     }
   }
   catch(err) {
     return res.send({
       success: false,
-      error: 'a user already exists'
+      error: err
     });
   }
 }
@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
     const user = await doGetUserWithPassword(req.body.username);
     if(!user) return res.status(400).send({ 
       success: false,
-      error: 'no user found' 
+      error: 'No user found with that username' 
     });
     const validPass = await bcrypt
                   .compare(req.body.password, user.password)
@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
     if(!validPass) {
       return res.status(400).send({
         success: false,
-        error: "wrong password"
+        error: "Invalid password, please try again"
       });
     }
     const accessToken = generateAccessToken(user._id, { expiresIn: 86400 });
@@ -91,12 +91,12 @@ exports.token = (req, res) => {
 
   if(!refreshToken) return res.status(401).send({
     success: false,
-    message: 'no token provided'
+    message: 'No token provided'
   });
   if(!refreshTokens.includes(refreshToken)) {
     res.status(403).send({
       success: false,
-      message: 'invalid refresh token'
+      message: 'Invalid refresh token'
     });
   }
   
@@ -105,7 +105,7 @@ exports.token = (req, res) => {
     const accessToken = generateAccessToken(req.body._id, { expiresIn: 86400 });
     res.header('access_token', accessToken).send({
       success: true,
-      message: 'logged in successfully',
+      message: 'Logged in successfully',
       token_type: 'bearer',
       expires_in: 2000,
       refresh_token: refreshToken
@@ -118,6 +118,6 @@ exports.logout = (req, res) => {
   refreshTokens = refreshTokens.filter((t) => t != token);
   res.send({
     success: true,
-    message: 'logout successful'
+    message: 'Logout was successful'
   });
 }

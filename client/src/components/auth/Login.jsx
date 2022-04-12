@@ -53,7 +53,7 @@ const Login = ({ error, requestLogin, dispatchError }) => {
   }
 
   React.useEffect(() => {
-  if (error.message == "wrong password") {
+  if (error.message == "Invalid password, please try again") {
     setFormValues({
       ...formValues,
       password: ''
@@ -63,7 +63,7 @@ const Login = ({ error, requestLogin, dispatchError }) => {
       password: true
     });
   }
-  if (error.message == "no user found") {
+  if (error.message == "No user found with that username") {
     setFormValues({
       username: '',
       password: ''
