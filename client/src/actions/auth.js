@@ -27,13 +27,47 @@ export const requestLogin = (credentials) => {
 }
 
 export const checkLoggedIn = () => {
-    return (dispatch) => {
-        const loggedIn = storageHasData() ? getStorage('loggedIn') : false;
-        dispatch({
-            type: CHECK_LOGGED_IN,
-            data: {
-                loggedIn
-            }
-        });
+  return (dispatch) => {
+    if(!storageHasData()) {
+      return dispatch({
+        type: CHECK_LOGGED_IN,
+        data: {
+          loggedIn: false
+        }
+      });
     }
+    if(storageHasData() && !getStorage('loggedIn')) {
+      return dispatch({
+        type: CHECK_LOGGED_IN,
+        data: {
+          loggedIn: false
+        }
+      });
+    }
+    const accessToken = getStorage('access_token');
+    axios.get('/api/user/me', { 
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      if(!res.data.success && res.data.message == 'invalid token') {
+        alert('Your session has expired, please log in again.');
+        dispatch({
+          type: CHECK_LOGGED_IN,
+          data: {
+            loggedIn: false
+          }
+        });
+      } else {
+        dispatch({
+          type: CHECK_LOGGED_IN,
+          data: {
+            loggedIn: true
+          }
+        });
+      }
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
 }
