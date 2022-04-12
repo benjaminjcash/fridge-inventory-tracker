@@ -5,8 +5,7 @@
     "start": "node ./server/server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "start-dev": "NODE_ENV='development' ALLOWED_USERS='ben@benjamincash.com' nodemon ./server/server.js",
-    "start-test": "__TEST__='true' nodemon ./server/server.js",
-    "test": "mocha ./server/tests/*"
+    "test": ""
   },
   "repository": {
     "type": "git",
