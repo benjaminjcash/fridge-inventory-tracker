@@ -6,7 +6,7 @@ import DeleteItem from '../manageInventory/deleteItems/Item';
 
 const ItemList = ({ items, isDeleteItem }) => {
   const [css, theme] = useStyletron();
-  const [columnCount, setColumnCount] = useState(1);
+  const [columnCount, setColumnCount] = useState(6);
   const itemStyles = {
     backgroundColor: 'mono400',
     display: 'flex',
@@ -15,14 +15,14 @@ const ItemList = ({ items, isDeleteItem }) => {
     height: 'auto'
   };
 
-  useEffect(() => {
-    const { innerWidth } = window;
-    setColumnCount(innerWidth <= 400 ? 3 : 6);
-  }, [])
+  // useEffect(() => {
+  //   const { innerWidth } = window;
+  //   setColumnCount(innerWidth <= 400 ? 3 : 6);
+  // }, [])
 
   return (
     <FlexGrid
-      flexGridColumnCount={columnCount}
+      flexGridColumnCount={6}
       flexGridColumnGap={theme.sizing.scale300}
       flexGridRowGap={theme.sizing.scale400}
       width='100%'
